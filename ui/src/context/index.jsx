@@ -1,8 +1,13 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-const initialState = {};
+import { createContext, useContext, useReducer } from "react";
+import { AppReducer } from "./reducer";
+
+const initialState = {
+	context: "testing context",
+};
 
 export const ContextGlobal = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const ContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
