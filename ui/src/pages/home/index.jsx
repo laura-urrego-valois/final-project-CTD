@@ -1,5 +1,13 @@
+import { Category } from "../../components/Category"
+import { Container } from "../../components/Container"
+import { Recommendations } from "../../components/Recommendations"
+import { Search } from "../../components/Search"
 export const Home = () => {
   return (
-    <h1>Welcome Equipo 10</h1>
+    <Container>
+      <Search />
+      <Category />
+      <Recommendations />
+    </Container>
   )
 }
