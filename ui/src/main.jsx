@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
-import "./theme/index.css"
+import "./theme/theme.css"
 import { ContextProvider } from "./context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
