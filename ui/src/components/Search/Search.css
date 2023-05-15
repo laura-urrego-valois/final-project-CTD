@@ -4,9 +4,6 @@
   padding-inline: 1rem;
   color: var(--color-primary);
 }
-.search__title{
-  font-size: 3rem;
-}
 .search-form{
   display: grid;
   grid-template-areas:

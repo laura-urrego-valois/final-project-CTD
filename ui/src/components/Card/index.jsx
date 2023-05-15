@@ -7,14 +7,14 @@ import "./Card.css";
  * @param {string} title - El título de la tarjeta.
  * @param {string} imageSrc - La URL de la imagen de la tarjeta.
  */
-export const SimpleCard = ({ title, imageSrc }) => {
+export const SimpleCard = ({ title, imageSrc, description }) => {
   return (
     <>
       <article className="card">
         <img src={imageSrc} alt={title} className="card__image" />
         <div className="card__container">
           <h2 className="card__title">{title}</h2>
-          <p className="card__description">807.105 hoteles</p>
+          <p className="card__description">{description}</p>
         </div>
       </article>
     </>

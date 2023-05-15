@@ -28,17 +28,20 @@ h1, h2, h3, h4{
   font-style: normal;
   font-weight: 700;
 }
-h1{
-  line-height: 28px;
+h1 {
+  font-size: calc(3rem + (3.6 - 3) * ((100vw - 320px) / (3840 - 320)));
 }
-h2{
-  line-height: 23px;
+
+h2 {
+  font-size: calc(2.3rem + (2.8 - 2.3) * ((100vw - 320px) / (3840 - 320)));
 }
-h3{
-  line-height: 19px;
+
+h3 {
+  font-size: calc(2rem + (2.5 - 2) * ((100vw - 320px) / (3840 - 320)));
 }
-h4{
-  line-height: 16px;
+
+h4 {
+  font-size: calc(1.8rem + (2 - 1.8) * ((100vw - 320px) / (3840 - 320)));
 }
 p, span, button, label, input{
   font-family: var(--font-family-text);
