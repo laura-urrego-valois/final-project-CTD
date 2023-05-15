@@ -1,0 +1,9 @@
+.container{
+  height: 100vh;
+  box-sizing: border-box;
+}
+@media (min-width: 414px) {
+}
+@media (min-width: 768px) {
+
+}
