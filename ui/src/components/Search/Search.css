@@ -1,0 +1,23 @@
+.search{
+  height: 26.3rem;
+  padding-block: 2rem;
+  background-color: var(--color-secondary);
+}
+.search-form{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 414px) {
+  .search {
+    height: 13.9rem;
+    color: var(--color-tertary);
+  }
+}
+
+@media (min-width: 768px) {
+  .search {
+    height: 15.1rem;
+    color: var(--color-primary);
+  }
+}

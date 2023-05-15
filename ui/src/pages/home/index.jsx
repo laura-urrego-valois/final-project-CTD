@@ -1,13 +1,10 @@
-import { Category } from "../../components/Category"
+import { Body } from "../../components/Body"
 import { Container } from "../../components/Container"
-import { Recommendations } from "../../components/Recommendations"
-import { Search } from "../../components/Search"
+
 export const Home = () => {
   return (
     <Container>
-      <Search />
-      <Category />
-      <Recommendations />
+      <Body />
     </Container>
   )
 }
