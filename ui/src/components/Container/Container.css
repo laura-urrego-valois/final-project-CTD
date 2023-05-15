@@ -3,12 +3,7 @@
   box-sizing: border-box;
 }
 @media (min-width: 414px) {
-  .container {
-      color: var(--color-tertary);
-    }
 }
 @media (min-width: 768px) {
-  .container {
-      color: var(--color-primary);
-    }
+
 }

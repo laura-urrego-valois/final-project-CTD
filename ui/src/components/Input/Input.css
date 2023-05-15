@@ -1,6 +1,5 @@
 .input {
   position: relative;
-  min-width: 25.4rem;
   margin-block-start: 1rem;
 }
 
@@ -32,6 +31,7 @@
 }
 
 .input__label {
+  width: 100%;
   display: block;
   color: var(--color-font);
   font-size: 1.4rem;
