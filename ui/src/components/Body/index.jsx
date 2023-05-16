@@ -1,4 +1,4 @@
-import { Category } from "../Category"
+import { Product } from "../Product"
 import { Recommendations } from "../Recommendations"
 import { Search } from "../Search"
 
@@ -6,7 +6,7 @@ export const Body = () => {
   return (
     <main className="body">
       <Search />
-      <Category />
+      <Product />
       <Recommendations />
     </main>
   )
