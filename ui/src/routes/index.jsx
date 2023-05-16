@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom";
+
 import { Home } from "../pages/home";
 import { NotFound } from "../pages/notFound";
 import { AdminPanel } from "../pages/admin";
+import Detail from "../pages/Detail";
 
 export const AppRoutes = () => {
 	return (
@@ -11,12 +13,16 @@ export const AppRoutes = () => {
 				element={<Home />}
 			/>
 			<Route
-				path="*"
-				element={<NotFound />}
+				path="/detalle/:id"
+				element={<Detail />}
 			/>
 			<Route
 				path="/admin"
 				element={<AdminPanel />}
+			/>
+			<Route
+				path="*"
+				element={<NotFound />}
 			/>
 		</Routes>
 	);

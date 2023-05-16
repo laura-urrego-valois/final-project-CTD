@@ -12,6 +12,7 @@ export const Recommendations = () => {
 				{state?.tours?.map((tour) => (
 					<DetailedCard
 						key={tour.id_tour}
+						id={tour.id_tour}
 						title={tour.nombre}
 						description={tour.descripcion}
 						imageSrc={tour.imagen_url}
