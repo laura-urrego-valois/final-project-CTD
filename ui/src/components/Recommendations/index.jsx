@@ -1,28 +1,27 @@
-import { DetailedCard } from "../Card"
-import { dataRecommendations } from "../Data/dataCategory"
-import './Recommendations.css'
-DetailedCard
+import { useGlobalState } from "../../context";
+import { DetailedCard } from "../Card";
+import "./Recommendations.css";
+DetailedCard;
 export const Recommendations = () => {
-  return (
-    <section>
-      <h1>Recomendaciones</h1>
-      <div className='recommendations__content'>
-        {
-          dataRecommendations.map((data, i) => {
-            return (
-              <DetailedCard key={i}
-                imageSrc={data.img}
-                title={data.category}
-                description={data.description}
-                rating={data.rating}
-                category={data.category_description}
-                classification={data.classification}
-                score={data.score}
-              />
-            )
-          })
-        }
-      </div>
-    </section>
-  )
-}
+	const { state } = useGlobalState();
+
+	return (
+		<section>
+			<h1>Tours</h1>
+			<div className="recommendations__content">
+				{state?.tours?.map((tour) => (
+					<DetailedCard
+						key={tour.id_tour}
+						title={tour.nombre}
+						description={tour.descripcion}
+						imageSrc={tour.imagen_url}
+						rating={tour.calificacion_promedio}
+						classification={tour.capacidad}
+						category={tour.id_categoria}
+						score={tour.precio_persona}
+					/>
+				))}
+			</div>
+		</section>
+	);
+};
