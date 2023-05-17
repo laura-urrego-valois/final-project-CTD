@@ -6,6 +6,7 @@ export const BASE_URL = "http://localhost:3000";
 
 const initialState = {
 	context: "testing context",
+	selectedCategory: null
 };
 
 export const ContextGlobal = createContext();
@@ -39,6 +40,8 @@ export const ContextProvider = ({ children }) => {
 	const value = {
 		state,
 		dispatch,
+		setSelectedCategory: (category) =>
+			dispatch({ type: actions.SET_SELECTED_CATEGORY, payload: category })
 	};
 	return (
 		<ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

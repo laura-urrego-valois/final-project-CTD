@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { SimpleCard, DetailedCard } from '../Card'
+import { SimpleCard } from '../Card'
 import './Product.css'
-import { dataCategory } from '../Data/dataCategory'
-import { useState } from "react";
+import { useGlobalState } from "../../context";
 
 export const Product = () => {
+  const { state, setSelectedCategory, } = useGlobalState();
 
-  const [selectedCategory, setSelectedCategory] = useState(Math.floor(Math.random() * dataCategory.length));
-  const datafilter = dataCategory.find((data) => data.id === selectedCategory)
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
 
   return (
     <>
@@ -15,33 +16,17 @@ export const Product = () => {
         <h1>Buscar por categorias</h1>
         <div className='product__content'>
           {
-            dataCategory.map((data, i) => (
-              <Link className="product_link" key={i}
+            state?.categories?.map((data) => (
+              <Link className="product_link" key={data.id_categoria}
                 to={"/"}
-                onClick={() => setSelectedCategory(data.id)}>
+                onClick={() => handleCategoryClick(data.id_categoria)}>
                 <SimpleCard
-                  imageSrc={data.img}
-                  title={data.name}
-                  description={data.description}
+                  imageSrc={data.imagen_url}
+                  title={data.nombre}
+                  description={data.descripcion}
                 />
               </Link>
             ))}
-        </div>
-      </section>
-      <section>
-        <h1>Recomendaciones</h1>
-        <div className='recommendations__content'>
-          {datafilter.tour.map((data, i) => (
-            <DetailedCard key={i}
-              imageSrc={data.img}
-              title={data.category}
-              description={data.description}
-              rating={data.rating}
-              category={data.category_description}
-              classification={data.classification}
-              score={data.score}
-            />
-          ))}
         </div>
       </section>
     </>

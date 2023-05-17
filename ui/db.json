@@ -52,25 +52,25 @@
   "categorias": [
     {
       "id_categoria": 1,
-      "nombre": "Historicos",
+      "nombre": "Playa",
       "descripcion": "descripcion categoria 1 - Historicos",
-      "imagen_url": "https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+      "imagen_url": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       "id_categoria": 2,
-      "nombre": "Arte",
+      "nombre": "Ciudades",
       "descripcion": "descripcion categoria 2 - Historicos",
-      "imagen_url": "https://images.unsplash.com/photo-1572953109213-3be62398eb95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+      "imagen_url": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1096&q=80"
     },
     {
       "id_categoria": 3,
-      "nombre": "Religiosos",
+      "nombre": "Trekking",
       "descripcion": "descripcion categoria 3 - Religiosos",
       "imagen_url": "https://images.unsplash.com/photo-1504894109846-7b54dec7d6d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
     {
       "id_categoria": 4,
-      "nombre": "Deportivos",
+      "nombre": "Nieve",
       "descripcion": "descripcion categoria 4 - Deportivos",
       "imagen_url": "https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=803&q=80"
     }
@@ -104,60 +104,72 @@
       "id_tour": 3,
       "nombre": "Comuna 13 Graffiti Tour",
       "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
-      "imagen_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/4a/ce/bd.jpg",
+      "imagen_url": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "calificacion_promedio": 4,
       "capacidad": 10,
       "disponibilidad": true,
       "precio_persona": 120636,
-      "id_categoria": 1,
+      "id_categoria": 2,
       "id_ciudad": 1
     },
     {
       "id_tour": 4,
       "nombre": "Comuna 13 Graffiti Tour",
       "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
-      "imagen_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/4a/ce/bd.jpg",
+      "imagen_url": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "calificacion_promedio": 4,
       "capacidad": 10,
       "disponibilidad": true,
       "precio_persona": 120636,
-      "id_categoria": 1,
+      "id_categoria": 2,
       "id_ciudad": 1
     },
     {
       "id_tour": 5,
       "nombre": "Comuna 13 Graffiti Tour",
       "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
-      "imagen_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/4a/ce/bd.jpg",
+      "imagen_url": "https://images.unsplash.com/photo-1683154164280-751a589af953?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1529&q=80",
       "calificacion_promedio": 4,
       "capacidad": 10,
       "disponibilidad": true,
       "precio_persona": 120636,
-      "id_categoria": 1,
+      "id_categoria": 3,
       "id_ciudad": 1
     },
     {
       "id_tour": 6,
       "nombre": "Comuna 13 Graffiti Tour",
       "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
-      "imagen_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/4a/ce/bd.jpg",
+      "imagen_url": "https://images.unsplash.com/photo-1683154164280-751a589af953?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1529&q=80",
       "calificacion_promedio": 4,
       "capacidad": 10,
       "disponibilidad": true,
       "precio_persona": 120636,
-      "id_categoria": 1,
+      "id_categoria": 3,
       "id_ciudad": 1
     },
     {
       "id_tour": 7,
       "nombre": "Comuna 13 Graffiti Tour",
       "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
-      "imagen_url": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/4a/ce/bd.jpg",
+      "imagen_url": "https://images.unsplash.com/photo-1622432866666-26f106904a19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
       "calificacion_promedio": 4,
       "capacidad": 10,
       "disponibilidad": true,
       "precio_persona": 120636,
-      "id_categoria": 1,
+      "id_categoria": 4,
+      "id_ciudad": 1
+    },
+    {
+      "id_tour": 8,
+      "nombre": "Comuna 13 Graffiti Tour",
+      "descripcion": "Vea el arte callejero del barrio de la Comuna 13 de Medellín con un guía local al reservar este tour grupal. Aprenderá cómo el vecindario se transformó de uno de los lugares más peligrosos de la ciudad a una próspera atracción turística mientras camina por el área. También verá todo tipo de arte callejero y tendrá la oportunidad de interactuar con artistas locales y vendedores de bocadillos.",
+      "imagen_url": "https://images.unsplash.com/photo-1622432866666-26f106904a19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
+      "calificacion_promedio": 4,
+      "capacidad": 10,
+      "disponibilidad": true,
+      "precio_persona": 120636,
+      "id_categoria": 4,
       "id_ciudad": 1
     }
   ]
