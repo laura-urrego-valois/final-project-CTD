@@ -1,0 +1,7 @@
+.product__content{
+  display: flex;
+  justify-content:space-evenly;
+}
+.product_link{
+  text-decoration: none;
+}
