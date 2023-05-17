@@ -37,7 +37,7 @@ public class Tour {
     private Integer tourScore;
 
     @ManyToOne
-    @JoinColumn(name="id_category")
+    @JoinColumn(name="id")
     private Category tourCategory;
 
 }
