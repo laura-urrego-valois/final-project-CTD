@@ -1,11 +1,17 @@
-.recommendations__content{
-display: grid;
-grid-template-columns: 1fr;
-justify-items: center;
-gap: 2rem;
+.recommendations__content {
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-items: center;
+	gap: 2rem;
+}
+
+.recommendations__buttons {
+	display: flex;
+	max-width: 200px;
+	margin-top: 10px;
 }
 @media (min-width: 768px) {
-  .recommendations__content {
-    grid-template-columns: 1fr 1fr;
-  }
+	.recommendations__content {
+		grid-template-columns: 1fr 1fr;
+	}
 }

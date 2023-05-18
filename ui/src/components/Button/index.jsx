@@ -7,10 +7,12 @@ import "../Button/Button.css"
  * @param {ReactNode} props.children - El contenido del botón. Requerido.
  */
 
-export const Button = ({ type, children }) => {
+export const Button = ({ type, children, onClick }) => {
   const classNames = `btn${type === 'primary' ? ' btn__primary' : ' btn__secondary'}`;
   return (
-    <button className={classNames}>
+    <button className={classNames}
+      onClick={onClick}
+    >
       {children}
     </button>
   )
