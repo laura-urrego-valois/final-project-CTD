@@ -6,6 +6,18 @@ import { AdminPanel } from "../pages/admin";
 import Detail from "../pages/Detail";
 
 export const AppRoutes = () => {
+<<<<<<< HEAD
+  return (
+    <>
+        <Header />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
+    </>
+  )
+}
+=======
 	return (
 		<Routes>
 			<Route
@@ -27,3 +39,4 @@ export const AppRoutes = () => {
 		</Routes>
 	);
 };
+>>>>>>> a59cef66a43cd719c8e359891ce31a24ef791e06
