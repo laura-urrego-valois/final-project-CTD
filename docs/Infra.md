@@ -3,4 +3,4 @@
 
 ### Diagrama de redes
 
-![](https://postimg.cc/NKZRgjQx)
+![](https://i.postimg.cc/5t2gSXGD/disen-odered.jpg)
