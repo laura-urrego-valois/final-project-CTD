@@ -14,10 +14,15 @@
     font-size: 1.2rem;
     position: fixed;
     bottom: 0;
-    padding: 1em 2em;
+    padding: 1rem 2rem;
     box-sizing: border-box;
   }
-
+  .footer p{
+    margin-block: .5rem;
+  }
+  .footer_logo{
+    width: 35%;
+  }
   .footer-container{
     display: flex;
     flex-direction: column;
@@ -35,9 +40,9 @@
     gap:2rem;
   }
 
-  .icon{
-    width: 2.5rem;
-    height: 2.5rem;
+  .footer__icon{
+    width: 2rem;
+    height: 2rem;
   }
 
   @media (min-width: 768px) {
@@ -45,6 +50,10 @@
     .footer{
         flex-direction: row;
         justify-content: space-between;
+    }
+    .icon{
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
   }
