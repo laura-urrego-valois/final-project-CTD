@@ -19,17 +19,28 @@ public class TourService {
     @Autowired
     ICategoryRepository categoryRepository;
 
-    public ArrayList<Tour> getTours(){
+    public ArrayList<Tour> getTours() {
         return (ArrayList<Tour>) productRepository.findAll();
     }
 
-    public Tour saveTour(Tour tour){
+    public Tour saveTour(Tour tour) {
         tour.setTourCategory(categoryRepository.findById(tour.getTourCategory().getId_category()).get());
         return productRepository.save(tour);
     }
 
-    public Optional<Tour> getById(Long id){
+    public Optional<Tour> getById(Long id) {
         return productRepository.findById(id);
+    }
+
+    public Optional<Tour> deleteTourById(Long id) {
+        Optional<Tour> tourOptional = productRepository.findById(id);
+
+        if (tourOptional.isPresent()) {
+            Tour tour = tourOptional.get();
+            productRepository.delete(tour);
+        }
+
+        return tourOptional;
     }
 
 

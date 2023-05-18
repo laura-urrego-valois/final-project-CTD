@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class Category {
     @Column(name="image_url")
     private String categoryImageURL;
 
+    @JsonIgnore
     @OneToMany(mappedBy="id_tour")
     private List<Tour> tours;
 
