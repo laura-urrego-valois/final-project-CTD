@@ -1,7 +1,17 @@
 .product__content{
-  display: flex;
-  justify-content:space-evenly;
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 2rem;
 }
 .product_link{
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 414px) {
+  .product__content{
+    flex-direction: row;
+  }
 }

@@ -1,9 +1,8 @@
-import React from 'react'
 import './BurgerButton.css'
 function BurgerButton(props) {
   return (
     <>
-      <div  onClick={props.handleClick} 
+      <div  onClick={props.handleClick}
             className={`icon nav-icon-5 ${props.clicked ? 'open' : ''}`}
       >
         <span></span>

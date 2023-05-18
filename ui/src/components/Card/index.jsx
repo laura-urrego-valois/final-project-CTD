@@ -66,7 +66,7 @@ export const DetailedCard = ({
 					alt={title}
 					className="card__image"
 				/>
-				<span className="card__like">♥</span>
+				{/* <span className="card__like">♥</span> */}
 			</div>
 			<div className="card__content">
 				<div className="card__details">
@@ -84,9 +84,8 @@ export const DetailedCard = ({
 					{isExpanded ? description : truncatedDescription}
 					{shouldTruncate && (
 						<span
-							className={`card__expand card__expand--${
-								isExpanded ? "less" : "more"
-							}`}
+							className={`card__expand card__expand--${isExpanded ? "less" : "more"
+								}`}
 							onClick={toggleExpansion}
 						/>
 					)}

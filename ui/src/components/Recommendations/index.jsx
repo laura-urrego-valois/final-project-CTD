@@ -4,10 +4,15 @@ import "./Recommendations.css";
 DetailedCard;
 export const Recommendations = () => {
 	const { state } = useGlobalState();
-	const { selectedCategory, tours } = state;
+	const { selectedCategory, tours, categories } = state;
 
 	const filteredTours = tours?.filter((tour) => tour.id_categoria === selectedCategory);
 	const shuffledTours = tours?.sort(() => Math.random() - 0.5);
+
+	const getCategoryName = (categoryId) => {
+		const category = categories?.find((cat) => cat.id_categoria === categoryId);
+		return category ? category.nombre : "";
+	};
 
 	return (
 		<section>
@@ -17,29 +22,27 @@ export const Recommendations = () => {
 					filteredTours?.length > 0 ? (
 						filteredTours.map((tour) => (
 							<DetailedCard
-								key={tour.id_tour}
-								id={tour.id_tour}
-								title={tour.nombre}
-								description={tour.descripcion}
-								imageSrc={tour.imagen_url}
-								rating={tour.calificacion_promedio}
-								classification={tour.capacidad}
-								category={tour.id_categoria}
-								score={tour.precio_persona}
+								key={tour.id}
+								id={tour.id}
+								title={tour.title}
+								description={tour.description}
+								imageSrc={tour.img}
+								classification={tour.classification}
+								category={getCategoryName(tour.id_categoria)}
+								score={tour.score}
 							/>
 						))
 					) : (
 						shuffledTours?.map((tour) => (
-							<DetailedCard
-								key={tour.id_tour}
-								id={tour.id_tour}
-								title={tour.nombre}
-								description={tour.descripcion}
-								imageSrc={tour.imagen_url}
-								rating={tour.calificacion_promedio}
-								classification={tour.capacidad}
-								category={tour.id_categoria}
-								score={tour.precio_persona}
+							< DetailedCard
+								key={tour.id}
+								id={tour.id}
+								title={tour.title}
+								description={tour.description}
+								imageSrc={tour.img}
+								classification={tour.classification}
+								category={getCategoryName(tour.id_categoria)}
+								score={tour.score}
 							/>
 						)))}
 			</div>
