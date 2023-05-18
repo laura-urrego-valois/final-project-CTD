@@ -8,9 +8,8 @@ import lombok.Data;
 @Table(name = "tour")
 public class Tour {
     @Id
-    @Column(name="id_tour")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_tour;
 
     @Column(name="imageurl")
     private String tourImageURL;
@@ -37,7 +36,7 @@ public class Tour {
     private Integer tourScore;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="id_category")
     private Category tourCategory;
 
 }

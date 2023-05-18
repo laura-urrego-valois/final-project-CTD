@@ -10,9 +10,8 @@ import java.util.List;
 @Table(name="category")
 public class Category {
     @Id
-    @Column(name="id_category")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_category;
 
     @Column(name="name")
     private String categoryName;
@@ -23,7 +22,7 @@ public class Category {
     @Column(name="image_url")
     private String categoryImageURL;
 
-    @OneToMany(mappedBy="id")
+    @OneToMany(mappedBy="id_tour")
     private List<Tour> tours;
 
 }
