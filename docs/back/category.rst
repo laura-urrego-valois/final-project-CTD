@@ -8,7 +8,7 @@ POST resource
 
     .. http:post:: /category
 
-    Create a tour
+    Create a category
 
     * **Petition example**
 
@@ -65,7 +65,7 @@ GET Resource
 -----------
     .. http:get:: /category
 
-    Get the list of all categories
+    Get categorie by id
 
     * **Petition example**
 
