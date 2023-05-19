@@ -7,7 +7,7 @@ export const Tours = () => {
     const { state } = useGlobalState();
     const { tours, categories, selectedCategory } = state;
     const [currentPage, setCurrentPage] = useState(0)
-    const ITEMS_PER_PAGE = 3
+    const ITEMS_PER_PAGE = 10
 
 
     const nextPage = () => {
@@ -29,8 +29,8 @@ export const Tours = () => {
         if (!selectedCategory) {
             return tours?.slice(currentPage, currentPage + ITEMS_PER_PAGE)
         }
-        const filtered = tours.filter(tour => tour.id_categoria === selectedCategory)
-        return filtered.slice(currentPage, currentPage + ITEMS_PER_PAGE)
+        const filtered = tours?.filter(tour => tour.id_categoria === selectedCategory)
+        return filtered?.slice(currentPage, currentPage + ITEMS_PER_PAGE)
     }
 
     return (

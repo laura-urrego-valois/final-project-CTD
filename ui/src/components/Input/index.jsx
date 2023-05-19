@@ -16,7 +16,7 @@ export const Input = ({ iconSrc, label, errorMessage, ...props }) => {
     <label htmlFor={label} className={`input__label ${hasError ? 'error' : ''}`}>
       {label}
       <div className='input'>
-        <input {...props} id={label} className={`input__field ${hasImageSrc} ${hasError && "error"}`} />
+        <input {...props} id={label} name={label} className={`input__field ${hasImageSrc} ${hasError && "error"}`} />
         <img src={iconSrc} alt="" className="input__image" onClick={() => document.getElementById(label).focus()} />
       </div>
       {hasError && <p className="input--error">{errorMessage}</p>}

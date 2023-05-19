@@ -747,6 +747,30 @@
       "id_categoria": 4,
       "id_ciudad": 1,
       "id_tour": 1
+    },
+    {
+      "id": 1684454295495,
+      "nombre": "hola",
+      "descripcion": "como estas",
+      "imagen_url": "https://images.unsplash.com/photo-1484712401471-05c7215830eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "calificacion_promedio": "1",
+      "capacidad": "10",
+      "disponibilidad": true,
+      "precio_persona": "1000000",
+      "id_categoria": "1",
+      "id_ciudad": "1"
+    },
+    {
+      "id": 1684454396878,
+      "nombre": "hola",
+      "descripcion": "hola prueba",
+      "imagen_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80",
+      "calificacion_promedio": "2",
+      "capacidad": "12",
+      "disponibilidad": true,
+      "precio_persona": "0100000",
+      "id_categoria": "1",
+      "id_ciudad": "1"
     }
   ]
 }

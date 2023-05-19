@@ -41,7 +41,10 @@ export const ContextProvider = ({ children }) => {
 		state,
 		dispatch,
 		setSelectedCategory: (category) =>
-			dispatch({ type: actions.SET_SELECTED_CATEGORY, payload: category })
+			dispatch({
+				type: actions.SET_SELECTED_CATEGORY,
+				payload: category
+			})
 	};
 	return (
 		<ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

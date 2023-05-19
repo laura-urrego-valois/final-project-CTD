@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const initialState = {
-	id: 0,
+	id: Date.now(),
 	nombre: "",
 	descripcion: "",
 	imagen_url: "",
