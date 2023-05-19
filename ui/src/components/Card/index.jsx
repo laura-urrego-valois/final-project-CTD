@@ -10,17 +10,19 @@ import { useNavigate } from "react-router-dom";
  */
 export const SimpleCard = ({ title, imageSrc, description }) => {
 	return (
-		<article className="card">
-			<img
-				src={imageSrc}
-				alt={title}
-				className="card__image"
-			/>
-			<div className="card__container">
-				<h2 className="card__title">{title}</h2>
-				<p className="card__description">{description}</p>
-			</div>
-		</article>
+		<>
+			<article className="card">
+				<img
+					src={imageSrc}
+					alt={title}
+					className="card__image"
+				/>
+				<div className="card__container">
+					<h2 className="card__title">{title}</h2>
+					<p className="card__description">{description}</p>
+				</div>
+			</article>
+		</>
 	);
 };
 

@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { SimpleCard } from "../Card";
-import "./Product.css";
+import { SimpleCard } from '../Card'
+import './Product.css'
 import { useGlobalState } from "../../context";
 
 export const Product = () => {
-	const { state, setSelectedCategory } = useGlobalState();
-	const { categories } = state
+  const { state, setSelectedCategory, } = useGlobalState();
 
-	const handleCategoryClick = (categoryId) => {
-		setSelectedCategory(categoryId);
-	};
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
+  console.log("state", state)
 
   return (
     <>
