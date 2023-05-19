@@ -12,7 +12,10 @@ const Header = () => {
   }
   return (
     <header>
-      <Link to='/' className='link'><img src={logo2} alt="Logo" /></Link>
+      <div className='header_logo'>
+        <Link to='/' className='link'><img src={logo2} alt="Logo" /></Link>
+        <span>Vive la aventura</span>
+      </div>
       <nav>
         <Button type="secondary">Iniciar Sesión</Button>
         <Button type="secondary">Crear Cuenta</Button>
