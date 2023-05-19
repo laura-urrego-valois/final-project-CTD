@@ -3,8 +3,14 @@ display: grid;
 grid-template-columns: 1fr;
 justify-items: center;
 gap: 2rem;
+padding-inline: 2rem;
 }
 @media (min-width: 768px) {
+  .recommendations__content {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 990px) {
   .recommendations__content {
     grid-template-columns: 1fr 1fr;
   }

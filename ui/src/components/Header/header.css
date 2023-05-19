@@ -1,6 +1,7 @@
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
     z-index: 4;
     display: flex;
     max-width: 1280px;
@@ -9,6 +10,7 @@ header {
     justify-content: space-between;
     padding-inline: 1rem;
     border-bottom: 1px solid #00000050;
+    box-sizing: border-box;
 }
 
 nav {
@@ -27,7 +29,19 @@ button {
     white-space: nowrap;
     margin-right: 10px;
 }
-
+.header_logo{
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+}
+.header_logo img{
+    width: 10rem;
+}
+.header_logo span{
+    display: block;
+    margin-block: 1rem;
+    font-size: 1rem;
+}
 
 #bgDiv {
     background-color:var(--color-primary);
@@ -76,6 +90,9 @@ button {
     .bgDiv__content a{
         text-decoration: none;
         color: var(--color-tertiary);
+    }
+    .header_logo span{
+        display: none;
     }
 }
 @media (max-width: 480px) {

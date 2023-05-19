@@ -53,25 +53,25 @@
     {
       "id_category": 1,
       "name": "Ciudades Emblemáticas",
-      "description": "Explora la majestuosidad y el encanto de las ciudades más turísticas del mundo, sumérgete en la riqueza cultural y la historia fascinante mientras te adentras en las icónicas atracciones que han cautivado a viajeros de todas partes. Tendrás la oportunidad de probar la deliciosa gastronomía local en auténticos restaurantes.",
+      "description": "Explora la majestuosidad y el encanto de las ciudades más turísticas del mundo, sumérgete en la riqueza cultural y la historia fascinante mientras te adentras en las icónicas atracciones que han cautivado a viajeros de todas partes.",
       "image_url": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
     {
       "id_category": 2,
       "name": "Tropical Paradise Expedition",
-      "description": "Un tour de playas es una experiencia turística que te lleva a visitar y explorar diversas playas y costas de una región o área específica. Durante el tour, tendrás la oportunidad de disfrutar de hermosos paisajes costeros, aguas cristalinas, arena suave y muchas actividades relacionadas con el mar y el sol.",
+      "description": "Un tour de playas es una experiencia turística que te lleva a visitar y explorar diversas playas y costas de una región o área específica.",
       "image_url": "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80"
     },
     {
       "id_category": 3,
       "name": "Magia Invernal",
-      "description": "Un tour de nieve es una experiencia emocionante que permite a los participantes disfrutar de las maravillas del invierno en entornos nevados. Este tipo de tours generalmente se llevan a cabo en áreas montañosas o en estaciones de esquí, donde la nieve es abundante.",
+      "description": "Un tour de nieve es una experiencia emocionante que permite a los participantes disfrutar de las maravillas del invierno en entornos nevados.",
       "image_url": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
     {
       "id_category": 4,
       "name": "Caminos perdidos",
-      "description": "Un tour de trekking es una aventura de senderismo que te permite explorar paisajes naturales y descubrir lugares remotos a pie. Este tipo de tour se realiza generalmente en áreas montañosas, como cadenas montañosas, selvas, parques nacionales o rutas de senderismo establecidas.",
+      "description": "Un tour de trekking es una aventura de senderismo que te permite explorar paisajes naturales y descubrir lugares remotos a pie.",
       "image_url": "https://images.unsplash.com/photo-1523341139367-9de570b874ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     }
   ],
