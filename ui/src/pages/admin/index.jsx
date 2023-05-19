@@ -39,6 +39,7 @@ export const AdminPanel = () => {
 
 	};
 	return <Container>
+		<h1>Agregar Paquete</h1>
 		<form className="admin__form" onSubmit={handleSubmit}>
 			<Input label="nombre" type="text" onChange={handleChange} value={data?.nombre} required />
 			<Input label="descripcion" type="textarea" onChange={handleChange} value={data?.descripcion} required />
