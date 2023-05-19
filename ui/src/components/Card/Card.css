@@ -51,7 +51,12 @@
   justify-content: space-between;
 }
 .card__category{
+  background-color: var(--color-primary);
+  padding-inline: .5rem;
+  padding-block: .5rem;
+  border-radius: .5rem;
   font-size: 1.2rem;
+  color: var(--color-tertiary);
   opacity: .5;
 }
 .card__rating{

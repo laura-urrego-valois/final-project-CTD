@@ -9,6 +9,7 @@ export const Product = () => {
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
   };
+  console.log("state", state)
 
   return (
     <>
@@ -17,13 +18,13 @@ export const Product = () => {
         <div className='product__content'>
           {
             state?.categories?.map((data) => (
-              <Link className="product_link" key={data.id_categoria}
+              <Link className="product_link" key={data.id_category}
                 to={"/"}
-                onClick={() => handleCategoryClick(data.id_categoria)}>
+                onClick={() => handleCategoryClick(data.id_category)}>
                 <SimpleCard
-                  imageSrc={data.imagen_url}
-                  title={data.nombre}
-                  description={data.descripcion}
+                  imageSrc={data.image_url}
+                  title={data.name}
+                  description={data.description}
                 />
               </Link>
             ))}
