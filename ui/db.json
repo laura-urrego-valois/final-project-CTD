@@ -75,7 +75,7 @@
       "image_url": "https://images.unsplash.com/photo-1523341139367-9de570b874ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     }
   ],
-   "tours": [
+  "tours": [
     {
       "id_tour": 1,
       "image_url": "https://images.unsplash.com/photo-1602385676570-ca41945dcf69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
@@ -641,16 +641,18 @@
       "id_category": 4
     },
     {
-      "id_tour": 48,
-      "image_url": "https://images.unsplash.com/photo-1543858393-d5307eb2cdc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      "name": "Tour Parque de los Glaciares, Estados Unidos",
-      "description": "Embárcate en una emocionante aventura de trekking en el Parque Nacional de los Glaciares en Montana, Estados Unidos, y descubre la majestuosidad de este impresionante paisaje natural. Camina por senderos serpenteantes que te llevarán a través de exuberantes bosques, praderas alpinas y valles glaciares. Disfruta de vistas panorámicas espectaculares mientras te maravillas con los imponentes picos montañosos, los glaciares resplandecientes y los cristalinos lagos de montaña. Durante tu recorrido, podrás observar una rica fauna silvestre, como osos, alces y cabras de montaña, en su hábitat natural. Sumérgete en la tranquilidad de la naturaleza mientras respiras el aire puro y sientes la conexión con el entorno. Prepárate para desafiar tus límites, superar obstáculos y vivir una experiencia de trekking inolvidable en el Parque Nacional de los Glaciares. ¡No te pierdas la oportunidad de explorar esta maravilla natural y crear recuerdos duraderos en uno de los destinos más impresionantes de Estados Unidos!",
-      "classification": "Excelente",
-      "capacity": 8,
-      "availability": true,
-      "price": 18.7,
-      "score": 10,
-      "id_category": 4
+      "id": 48,
+      "img": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "title": "Amsterdam, Paises Bajos - 48",
+      "description": "Belleza y arquitectura: Ámsterdam es conocida por su impresionante arquitectura histórica. Los canales, los edificios con fachadas estrechas y las casas flotantes crean un entorno visualmente atractivo.",
+      "classification": "Bueno",
+      "capacity": 10,
+      "availability": false,
+      "price": 50.3,
+      "score": 8,
+      "id_categoria": 4,
+      "id_ciudad": 1,
+      "id_tour": 1
     }
   ]
 }
