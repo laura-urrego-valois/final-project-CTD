@@ -15,7 +15,7 @@ export const ContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
 	const fetchCategories = async () => {
-		await axios.get(`${BASE_URL}/categorias`).then((response) => {
+		await axios.get(`${BASE_URL}/categories`).then((response) => {
 			dispatch({
 				type: actions.GET_CATEGORIES,
 				payload: response.data,
