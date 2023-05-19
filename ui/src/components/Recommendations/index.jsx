@@ -2,6 +2,7 @@ import { useGlobalState } from "../../context";
 import { DetailedCard } from "../Card";
 import "./Recommendations.css";
 DetailedCard;
+
 export const Recommendations = () => {
 	const { state } = useGlobalState();
 	const { selectedCategory, tours, categories } = state;
@@ -16,7 +17,7 @@ export const Recommendations = () => {
 
 	return (
 		<section>
-			<h1>Tours</h1>
+			<h1>Recomendados</h1>
 			<div className="recommendations__content">
 				{
 					filteredTours?.length > 0 ? (

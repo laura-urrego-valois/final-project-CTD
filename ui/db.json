@@ -1,39 +1,39 @@
 {
   "paises": [
     {
-      "id_pais": 1,
+      "id": 1,
       "nombre": "Colombia"
     },
     {
-      "id_pais": 2,
+      "id": 2,
       "nombre": "Argentina"
     }
   ],
   "ciudades": [
     {
-      "id_ciudad": 1,
+      "id": 1,
       "id_pais": 1,
       "nombre": "Medellin"
     },
     {
-      "id_ciudad": 2,
+      "id": 2,
       "id_pais": 2,
       "nombre": "Buenos Aires"
     }
   ],
   "roles": [
     {
-      "id_role": 1,
+      "id": 1,
       "rol_usuario": "Cliente"
     },
     {
-      "id_role": 2,
+      "id": 2,
       "rol_usuario": "Administrador"
     }
   ],
   "usuarios": [
     {
-      "id_usuario": 1,
+      "id": 1,
       "nombre": "Karina",
       "apellido": "Vargas",
       "correo": "vargasriosk@gmail.com",
@@ -41,7 +41,7 @@
       "id_role": 2
     },
     {
-      "id_usuario": 2,
+      "id": 2,
       "nombre": "Pepito",
       "apellido": "Perezz",
       "correo": "pepito@gmail.com",
@@ -557,10 +557,10 @@
       "id_category": 4
     },
     {
-      "id_tour": 41,
-      "image_url": "https://images.unsplash.com/photo-1575527048208-6475b441e0a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
-      "name": "Tour Gran Cañón, Estados Unidos",
-      "description": "Embárcate en un emocionante tour de trekking en el Gran Cañón de Estados Unidos y descubre la majestuosidad de este icónico destino. Explora los senderos que serpentean a lo largo de las impresionantes paredes del cañón, disfruta de vistas panorámicas y conéctate con la naturaleza en su estado más salvaje. Desafía tus límites y déjate maravillar por la grandeza del Gran Cañón en esta aventura inolvidable. Sumérgete en la tranquilidad del entorno natural y siente la energía revitalizante mientras te adentras en este espectacular paisaje.",
+      "id": 4,
+      "img": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "title": "Amsterdam, Paises Bajos",
+      "description": "Belleza y arquitectura: Ámsterdam es conocida por su impresionante arquitectura histórica. Los canales, los edificios con fachadas estrechas y las casas flotantes crean un entorno visualmente atractivo.",
       "classification": "Bueno",
       "capacity": 12,
       "availability": false,
