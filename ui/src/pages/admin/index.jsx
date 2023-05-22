@@ -33,22 +33,22 @@ export const AdminPanel = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await createItem(data)
-		Swal.fire("Successfully Created");
+		Swal.fire("Creado con éxito");
 		setData({});
 		// navigate("/");
 
 	};
 	return <Container>
-		<h1>Agregar Paquete</h1>
+		<h1 className='form_title'>Agregar Paquete</h1>
 		<form className="admin__form" onSubmit={handleSubmit}>
-			<Input label="nombre" type="text" onChange={handleChange} value={data?.nombre} required />
-			<Input label="descripcion" type="textarea" onChange={handleChange} value={data?.descripcion} required />
-			<Input label="imagen_url" type="text" onChange={handleChange} value={data?.imagen_url} required />
-			<Input label="calificacion_promedio" type="number" onChange={handleChange} value={data?.calificacion_promedio} required />
-			<Input label="capacidad" type="number" onChange={handleChange} value={data?.capacidad} required />
-			<Input label="precio_persona" type="number" onChange={handleChange} value={data?.precio_persona} required />
-			<Input label="id_categoria" type="text" onChange={handleChange} value={data?.id_categoria} required />
-			<Input label="id_ciudad" type="text" onChange={handleChange} value={data?.id_ciudad} required />
+			<Input label="name" type="text" onChange={handleChange} value={data?.name} required />
+			<Input label="description" type="textarea" onChange={handleChange} value={data?.description} required />
+			<Input label="image_url" type="text" onChange={handleChange} value={data?.image_url} required />
+			<Input label="score" type="number" onChange={handleChange} value={data?.score} required />
+			{/* 	<Input label="capacity" type="number" onChange={handleChange} value={data?.capacity} required /> */}
+			<Input label="price" type="number" onChange={handleChange} value={data?.price} required />
+			<Input label="id_category" type="number" onChange={handleChange} value={parseInt(data?.id_category)} required />
+			{/* <Input label="id_ciudad" type="text" onChange={handleChange} value={data?.id_ciudad} required /> */}
 
 			<Button type="primary">Agregar</Button>
 		</form>

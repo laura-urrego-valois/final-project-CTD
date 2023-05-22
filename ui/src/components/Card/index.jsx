@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Button } from "../Button";
 import "./Card.css";
+import "./SimpleCard.css"
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -10,19 +10,17 @@ import { useNavigate } from "react-router-dom";
  */
 export const SimpleCard = ({ title, imageSrc, description }) => {
 	return (
-		<>
-			<article className="card">
-				<img
-					src={imageSrc}
-					alt={title}
-					className="card__image"
-				/>
-				<div className="card__container">
-					<h2 className="card__title">{title}</h2>
-					<p className="card__description">{description}</p>
-				</div>
-			</article>
-		</>
+		<figure className="simpleCard">
+			<img
+				src={imageSrc}
+				alt={title}
+				className="simpleCard__image"
+			/>
+			<figcaption className="simpleCard__container">
+				<h4 className="simpleCard__title">{title}</h4>
+				<p className="simpleCard__description">{description}</p>
+			</figcaption>
+		</figure>
 	);
 };
 
@@ -46,52 +44,32 @@ export const DetailedCard = ({
 	classification,
 	score,
 }) => {
-	const [isExpanded, setIsExpanded] = useState(false);
 	const navigate = useNavigate();
 
-	const truncatedDescription = description.slice(0, 100);
-	const shouldTruncate = description.length > 100;
-
-	const toggleExpansion = () => {
-		setIsExpanded(!isExpanded);
-	};
-
 	return (
-		<article
-			className="card card__query"
+		<figure
+			className="card"
 			onClick={() => navigate(`/detalle/${id}`)}>
-			<div className="card--liked">
-				<img
-					src={imageSrc}
-					alt={title}
-					className="card__image"
-				/>
-				{/* <span className="card__like">♥</span> */}
-			</div>
-			<div className="card__content">
+			<img
+				src={imageSrc}
+				alt={title}
+				className="card__image"
+			/>
+			<figcaption className="card__content">
+				<span className="card__category">{category}</span>
 				<div className="card__details">
-					<div className="card__header">
-						<span className="card__category">{category}</span>
-						<span className="card__rating">{rating}</span>
-						<h2 className="card__title">{title}</h2>
-					</div>
+					<span className="card__rating">{rating}</span>
 					<div className="card__info">
 						<p className="card__score">{score}</p>
 						<p className="card__classification">{classification}</p>
 					</div>
 				</div>
-				<p className="card__description">
-					{isExpanded ? description : truncatedDescription}
-					{shouldTruncate && (
-						<span
-							className={`card__expand card__expand--${isExpanded ? "less" : "more"
-								}`}
-							onClick={toggleExpansion}
-						/>
-					)}
-				</p>
-				<Button type="primary">Ver más</Button>
-			</div>
-		</article>
+				<div className="card__info">
+					<h4 className="card__title">{title}</h4>
+					<p className="card__description">{description}</p>
+					<Button type="primary">Ver más</Button>
+				</div>
+			</figcaption>
+		</figure>
 	);
 };

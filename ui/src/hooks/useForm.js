@@ -2,14 +2,14 @@ import { useState } from "react";
 
 const initialState = {
 	id: Date.now(),
-	nombre: "",
-	descripcion: "",
-	imagen_url: "",
-	calificacion_promedio: 0,
-	capacidad: 0,
-	disponibilidad: true,
-	precio_persona: 0,
-	id_categoria: 0,
+	name: "",
+	description: "",
+	image_url: "",
+	score: 0,
+	capacity: 0,
+	availability: true,
+	price: 0,
+	id_category: 0,
 	id_ciudad: 0,
 };
 

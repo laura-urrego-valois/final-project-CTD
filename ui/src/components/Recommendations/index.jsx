@@ -1,7 +1,8 @@
 import { useGlobalState } from "../../context";
+import { Button } from "../Button";
 import { DetailedCard } from "../Card";
 import "./Recommendations.css";
-DetailedCard;
+
 export const Recommendations = () => {
 	const { state } = useGlobalState();
 	const { selectedCategory, tours, categories } = state;
@@ -13,14 +14,14 @@ export const Recommendations = () => {
 		const category = categories?.find((cat) => cat.id_category === categoryId);
 		return category ? category.name : "";
 	};
-
+	console.log("hi", filteredTours, "oi", shuffledTours)
 	return (
 		<section>
-			<h1>Tours</h1>
+			<h2>Tours</h2>
 			<div className="recommendations__content">
 				{
 					filteredTours?.length > 0 ? (
-						filteredTours.map((tour) => (
+						filteredTours.slice(0, 6).map((tour) => (
 							<DetailedCard
 								key={tour.id_tour}
 								id={tour.id_tour}
@@ -35,7 +36,7 @@ export const Recommendations = () => {
 					) : (
 						shuffledTours?.map((tour) => (
 							< DetailedCard
-								key={tour.id_tour}
+								key={tour.id}
 								id={tour.id_tour}
 								title={tour.name}
 								description={tour.description}
@@ -45,6 +46,15 @@ export const Recommendations = () => {
 								score={tour.score}
 							/>
 						)))}
+
+			</div>
+			<div className="recommendations__buttons">
+				<p>
+					<Button type="primary" >Antes</Button>
+				</p>
+				<p>
+					<Button type="primary" >Siguiente</Button>
+				</p>
 			</div>
 		</section>
 	);

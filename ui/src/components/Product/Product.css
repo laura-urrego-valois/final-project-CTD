@@ -1,8 +1,8 @@
 .product__content{
-display: flex;
-flex-direction: column;
-justify-content: center;
-gap: 2rem;
+display: grid;
+grid-gap: 1rem;
+padding-inline: 1rem;
+margin: 0 auto;
 }
 .product_link{
   text-decoration: none;
@@ -12,14 +12,11 @@ gap: 2rem;
 
 @media (min-width: 414px) {
   .product__content{
-    flex-direction: column;
-  }
-  .product__content{
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 768px) {
   .product__content{
-    flex-direction: row;
+    grid-template-columns: repeat(4, 1fr);
   }
 }

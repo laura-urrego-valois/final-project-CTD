@@ -1,5 +1,7 @@
 .detail__container{
   padding-inline: 2rem;
+  margin-bottom: 8rem;
+  margin-top: 4rem;
 }
 .detail{
   display: flex;

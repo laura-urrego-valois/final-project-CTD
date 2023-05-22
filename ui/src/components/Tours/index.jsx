@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useGlobalState } from "../../context";
 import { DetailedCard } from "../Card";
 import { Button } from "../Button";
+import './Tour.css'
 
 export const Tours = () => {
     const { state } = useGlobalState();
     const { tours, categories, selectedCategory } = state;
     const [currentPage, setCurrentPage] = useState(0)
     const ITEMS_PER_PAGE = 10
+
 
 
     const nextPage = () => {
@@ -21,15 +23,15 @@ export const Tours = () => {
 
 
     const getCategoryName = (categoryId) => {
-        const category = categories?.find((cat) => cat.id === categoryId);
-        return category ? category.nombre : "";
+        const category = categories?.find((cat) => cat.id_category === categoryId);
+        return category ? category.name : "";
     };
 
     const filteredTours = () => {
         if (!selectedCategory) {
             return tours?.slice(currentPage, currentPage + ITEMS_PER_PAGE)
         }
-        const filtered = tours?.filter(tour => tour.id_categoria === selectedCategory)
+        const filtered = tours?.filter(tour => tour.id_category === selectedCategory)
         return filtered?.slice(currentPage, currentPage + ITEMS_PER_PAGE)
     }
 
@@ -43,11 +45,11 @@ export const Tours = () => {
                         <DetailedCard
                             key={tour.id}
                             id={tour.id}
-                            title={tour.title}
+                            title={tour.name}
                             description={tour.description}
-                            imageSrc={tour.img}
+                            imageSrc={tour.image_url}
                             classification={tour.classification}
-                            category={getCategoryName(tour.id_categoria)}
+                            category={getCategoryName(tour.id_category)}
                             score={tour.score}
                         />
                     ))
@@ -55,8 +57,12 @@ export const Tours = () => {
             </div>
 
             <div className="recommendations__buttons">
-                <Button type="primary" onClick={prevPage}>Antes</Button>
-                <Button type="primary" onClick={nextPage}>Siguiente</Button>
+                <p>
+                    <Button type="primary" onClick={prevPage}>Antes</Button>
+                </p>
+                <p>
+                    <Button type="primary" onClick={nextPage}>Siguiente</Button>
+                </p>
             </div>
         </section>
     )

@@ -3,8 +3,10 @@ import "./footer.css";
 const Footer = () => {
   return (
     <footer className='footer'>
-      <div>
-        <a rel="noreferrer" target="_blank"><img className="footer_logo" src="../src/assets/logodb.png" alt='isologodigitalbooking' /></a>
+      <div className="footer__content">
+        <a rel="noreferrer" target="_blank">
+          <img className="footer_logo" src="../src/assets/logodb.png" alt='isologodigitalbooking' />
+        </a>
         <p>2023 © Digital Booking</p>
       </div>
       <div className='social-icons'>

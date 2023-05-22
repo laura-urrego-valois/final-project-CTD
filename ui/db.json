@@ -639,32 +639,6 @@
       "price": 13.6,
       "score": 7,
       "id_category": 4
-    },
-    {
-      "id": 48,
-      "img": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "title": "Amsterdam, Paises Bajos - 48",
-      "description": "Belleza y arquitectura: Ámsterdam es conocida por su impresionante arquitectura histórica. Los canales, los edificios con fachadas estrechas y las casas flotantes crean un entorno visualmente atractivo.",
-      "classification": "Bueno",
-      "capacity": 10,
-      "availability": false,
-      "price": 50.3,
-      "score": 8,
-      "id_categoria": 4,
-      "id_ciudad": 1,
-      "id_tour": 1
-    },
-    {
-      "id": 1684463655777,
-      "nombre": "zipaquira",
-      "descripcion": "tierra de egan bernal",
-      "imagen_url": "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "calificacion_promedio": "5",
-      "capacidad": "20",
-      "disponibilidad": true,
-      "precio_persona": "100",
-      "id_categoria": "1",
-      "id_ciudad": "1"
     }
   ]
 }
