@@ -1,0 +1,51 @@
+.list__container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.list__content{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  height: 8rem;
+  max-width: 72rem;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--color-secondary);
+
+}
+.list__image{
+  width: 10rem;
+  height: 100%;
+}
+.list__title{
+  font-size: 1.2rem;
+}
+
+.list__container button{
+  width: 10rem;
+}
+
+.modal__overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.modal__image{
+  width: 30rem;
+}

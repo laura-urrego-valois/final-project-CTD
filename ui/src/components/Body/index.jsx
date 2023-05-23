@@ -9,7 +9,6 @@ export const Body = () => {
     <main className="body">
       <Search />
       <Product />
-      {/* <Tours /> */}
       <Recommendations />
     </main>
   )

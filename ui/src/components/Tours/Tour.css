@@ -1,9 +1,0 @@
-.recommendations__buttons{
-  display: grid;
-  grid-template-columns:  1fr 1fr;
-  margin-inline: 1rem;
-  margin-top: 3rem;
-}
-.recommendations__buttons p{
-  width: 12rem;
-}
