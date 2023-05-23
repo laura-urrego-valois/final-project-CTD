@@ -40,6 +40,14 @@ export const AppReducer = (state, action) => {
 				...state,
 			};
 
+		case actions.REMOVE_ITEM:
+			return {
+				...state,
+				tours: state.tours.filter(
+					(tour) => tour.id_tour !== action.payload
+				),
+			};
+
 		default:
 			return { ...state };
 	}

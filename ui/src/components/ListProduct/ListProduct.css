@@ -15,7 +15,7 @@
   width: 100%;
   margin: 0 auto;
   background: var(--color-secondary);
-
+justify-content: space-between;
 }
 .list__image{
   width: 10rem;
@@ -23,6 +23,11 @@
 }
 .list__title{
   font-size: 1.2rem;
+}
+.list__button{
+display: flex;
+gap: 1rem;
+padding-inline: 1rem;
 }
 
 .list__container button{
