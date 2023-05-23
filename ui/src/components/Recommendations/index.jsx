@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useGlobalState } from "../../context";
-import { Button } from "../Button";
 import { DetailedCard } from "../Card";
+import { Pagination } from "../Pagination";
 import "./Recommendations.css";
 
 export const Recommendations = () => {
@@ -14,47 +15,57 @@ export const Recommendations = () => {
 		const category = categories?.find((cat) => cat.id_category === categoryId);
 		return category ? category.name : "";
 	};
-	console.log("hi", filteredTours, "oi", shuffledTours)
+
+	const [currentPage, setCurrentPage] = useState(1);
+	const filteredToursItemsPerPage = 4; // Elemento por pagina
+	const shuffledToursItemsPerPage = 6; // Elemento por pagina
+	
+	const goToNextPage = () => {
+		setCurrentPage((prevPage) => prevPage + 1);
+	};
+
+	const goToPrevPage = () => {
+		setCurrentPage((prevPage) => prevPage - 1);
+	};
+
+	const renderTours = (toursToRender, itemsPerPage) => {
+		return toursToRender
+			.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+			.map((tour) => (
+				<DetailedCard
+					key={tour.id_tour}
+					id={tour.id_tour}
+					title={tour.name}
+					description={tour.description}
+					imageSrc={tour.image_url}
+					classification={tour.classification}
+					category={getCategoryName(tour.id_category)}
+					score={tour.score}
+				/>
+			));
+	};
+
+	const filteredToursToShow = renderTours(filteredTours || [], filteredToursItemsPerPage);
+	const shuffledToursToShow = renderTours(shuffledTours || [], shuffledToursItemsPerPage);
+
+	const filteredToursTotalPages = Math.ceil((filteredTours?.length || 0) / filteredToursItemsPerPage);
+	const shuffledToursTotalPages = Math.ceil((shuffledTours?.length || 0) / shuffledToursItemsPerPage);
+
+	const totalPages = filteredToursToShow.length > 0 ? filteredToursTotalPages : shuffledToursTotalPages;
+
 	return (
 		<section>
 			<h2>Tours</h2>
 			<div className="recommendations__content">
-				{
-					filteredTours?.length > 0 ? (
-						filteredTours.slice(0, 6).map((tour) => (
-							<DetailedCard
-								key={tour.id_tour}
-								id={tour.id_tour}
-								title={tour.name}
-								description={tour.description}
-								imageSrc={tour.image_url}
-								classification={tour.classification}
-								category={getCategoryName(tour.id_category)}
-								score={tour.score}
-							/>
-						))
-					) : (
-						shuffledTours?.map((tour) => (
-							< DetailedCard
-								key={tour.id}
-								id={tour.id_tour}
-								title={tour.name}
-								description={tour.description}
-								imageSrc={tour.image_url}
-								classification={tour.classification}
-								category={getCategoryName(tour.id_category)}
-								score={tour.score}
-							/>
-						)))}
-
+				{filteredToursToShow.length > 0 ? filteredToursToShow : shuffledToursToShow}
 			</div>
 			<div className="recommendations__buttons">
-				<p>
-					<Button type="primary" >Antes</Button>
-				</p>
-				<p>
-					<Button type="primary" >Siguiente</Button>
-				</p>
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onNextPage={goToNextPage}
+					onPrevPage={goToPrevPage}
+				/>
 			</div>
 		</section>
 	);

@@ -1,6 +1,6 @@
 .product__content{
 display: grid;
-grid-gap: 1rem;
+grid-gap: 2rem;
 padding-inline: 1rem;
 margin: 0 auto;
 }
