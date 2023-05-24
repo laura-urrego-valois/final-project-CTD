@@ -1,0 +1,22 @@
+.product__content{
+display: grid;
+grid-gap: 2rem;
+padding-inline: 1rem;
+margin: 0 auto;
+}
+.product_link{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 414px) {
+  .product__content{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  .product__content{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
