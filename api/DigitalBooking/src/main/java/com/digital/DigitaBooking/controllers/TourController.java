@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tours")
+@RequestMapping("/Tours")
 public class TourController {
 
     @Autowired
