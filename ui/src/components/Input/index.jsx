@@ -23,3 +23,21 @@ export const Input = ({ iconSrc, displayLabel, label, errorMessage, ...props }) 
     </label>
   )
 }
+
+export const Select = ({ options, displayLabel, label, errorMessage, ...props }) => {
+  const hasError = errorMessage !== undefined && errorMessage !== '';
+
+  return (
+    <label htmlFor={label} className={`input__label ${hasError ? 'error' : ''}`}>
+      {displayLabel}
+      <div className='input'>
+        <select {...props} id={label} name={label} className={`input__field  ${hasError && "error"}`} >
+          {options.map((option, idx) => (
+            <option key={idx} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </div>
+      {hasError && <p className="input--error">{errorMessage}</p>}
+    </label>
+  )
+}
