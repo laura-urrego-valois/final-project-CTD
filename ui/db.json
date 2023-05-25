@@ -23,29 +23,29 @@
   ],
   "roles": [
     {
-      "id_role": 1,
-      "rol_usuario": "Cliente"
+      "id": 1,
+      "role": "Cliente"
     },
     {
-      "id_role": 2,
-      "rol_usuario": "Administrador"
+      "id": 2,
+      "role": "Administrador"
     }
   ],
-  "usuarios": [
+  "users": [
     {
-      "id_usuario": 1,
-      "nombre": "Karina",
-      "apellido": "Vargas",
-      "correo": "vargasriosk@gmail.com",
-      "contrasena": "pass123",
+      "id": 1,
+      "name": "Karina",
+      "lastName": "Vargas",
+      "email": "vargasriosk@gmail.com",
+      "password": "pass123",
       "id_role": 2
     },
     {
-      "id_usuario": 2,
-      "nombre": "Pepito",
-      "apellido": "Perezz",
-      "correo": "pepito@gmail.com",
-      "contrasena": "pass123",
+      "id": 2,
+      "name": "Pepito",
+      "lastName": "Perezz",
+      "email": "pepito@gmail.com",
+      "password": "pass123",
       "id_role": 1
     }
   ],
