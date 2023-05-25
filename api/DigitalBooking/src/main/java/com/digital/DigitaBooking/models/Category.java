@@ -17,10 +17,10 @@ public class Category {
     @Column(name="name")
     private String categoryName;
 
-    @Column(name="description")
+    @Column(name="description", columnDefinition="VARCHAR(1000)")
     private String categoryDescription;
 
-    @Column(name="image_url")
+    @Column(name="image_url", columnDefinition="VARCHAR(1000)")
     private String categoryImageURL;
 
     @JsonIgnore

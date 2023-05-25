@@ -11,13 +11,13 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tour;
 
-    @Column(name="imageurl")
+    @Column(name="image_url", columnDefinition="VARCHAR(1000)")
     private String tourImageURL;
 
     @Column(name="name")
     private String tourName;
 
-    @Column(name="description")
+    @Column(name="description", columnDefinition="VARCHAR(1000)")
     private  String tourDescription;
 
     @Column(name="classification")
