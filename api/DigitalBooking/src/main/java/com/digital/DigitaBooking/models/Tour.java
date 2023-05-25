@@ -1,6 +1,8 @@
 package com.digital.DigitaBooking.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -9,34 +11,44 @@ import lombok.Data;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_tour;
+    @NotNull
+    private Long idTour;
 
-    @Column(name="image_url", columnDefinition="VARCHAR(1000)")
+    @Column(name = "imageUrl", columnDefinition = "VARCHAR(1000)")
+    @NotNull
     private String tourImageURL;
 
-    @Column(name="name")
+    @Column(name = "name")
+    @NotNull
     private String tourName;
 
-    @Column(name="description", columnDefinition="VARCHAR(1000)")
-    private  String tourDescription;
+    @Column(name = "description", columnDefinition = "VARCHAR(1000)")
+    @NotNull
+    private String tourDescription;
 
-    @Column(name="classification")
+    @Column(name = "classification")
+    @NotNull
     private String tourClassification;
 
-    @Column(name="capacity")
+    @Column(name = "capacity")
+    @NotNull
     private Integer tourCapacity;
 
-    @Column(name="availability")
+    @Column(name = "availability")
+    @NotNull
     private Boolean tourAvailability;
 
-    @Column(name="price")
+    @Column(name = "price")
+    @NotNull
     private Double tourPrice;
 
-    @Column(name="score")
+    @Column(name = "score")
+    @NotNull
     private Integer tourScore;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="id_category")
-    private Category tourCategory;
+    @JoinColumn(name = "category", referencedColumnName = "idCategory")
+    private Category category;
 
 }
