@@ -26,5 +26,4 @@ public class UserRole {
     @OneToMany(mappedBy = "userRole")
     private Set<User> users = new HashSet<>();
 
-
 }

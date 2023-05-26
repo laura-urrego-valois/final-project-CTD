@@ -36,5 +36,4 @@ public class User {
     @JoinColumn(name = "userRole", referencedColumnName = "idUserRole")
     private UserRole userRole;
 
-
 }
