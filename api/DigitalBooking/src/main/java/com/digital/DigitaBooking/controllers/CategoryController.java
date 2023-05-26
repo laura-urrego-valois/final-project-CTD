@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/Category")
 public class CategoryController {
