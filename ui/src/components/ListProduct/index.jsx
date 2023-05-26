@@ -51,12 +51,12 @@ export const ListProduct = () => {
   return (
     <section className="list__container">
       {getCurrentPageTours().map((tour) => (
-        <article className="list__content" key={tour.id_tour}>
+        <article className="list__content" key={tour.id}>
           <img className="list__image" src={tour.image_url} alt="" />
           <p className="list__title">{tour.name}</p>
           <div className='list__button'>
             <Button onClick={() => openModal(tour)}>editar</Button>
-            <Button type="primary" onClick={() => handleDeleteTour(tour.id_tour)}>eliminar</Button>
+            <Button type="primary" onClick={() => handleDeleteTour(tour.id)}>eliminar</Button>
           </div>
         </article>
       ))}

@@ -20,7 +20,7 @@ const Detail = () => {
 	// 	};
 
 	const itemDetail = tours?.find(
-		(item) => item.id_tour == id
+		(item) => item.id == id
 	);
 	const getCategoryName = (categoryId) => {
 		const category = categories?.find((cat) => cat.id_category === categoryId);

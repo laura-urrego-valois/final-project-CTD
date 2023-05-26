@@ -44,7 +44,7 @@ export const AppReducer = (state, action) => {
 			return {
 				...state,
 				tours: state.tours.filter(
-					(tour) => tour.id_tour !== action.payload
+					(tour) => tour.id !== action.payload
 				),
 			};
 

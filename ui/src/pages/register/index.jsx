@@ -16,8 +16,9 @@ const initialState = {
 	id_category: 0
 };
 
-const validationsForm = (form) => {
-	let errors = {}
+const validationsForm = async (form) => {
+	const errors = {}
+
 	if (!form.name.trim()) {
 		errors.name = "El campo Nombre es requerido"
 	}
@@ -56,90 +57,82 @@ const urlParam = "tours"
 const redirectTo = "/product-list"
 
 export const Register = () => {
-	const {
-		form,
-		errors,
-		// loading,
-		// response,
-		handleChange,
-		handleBlur,
-		handleSubmit } = useForm(initialState, validationsForm, urlParam, redirectTo);
-	// const { dispatch } = useGlobalState();
-	// 
+	const
+		{
+			form,
+			errors,
+			handleChange,
+			handleBlur,
+			handleSubmit
+		} = useForm(
+			initialState,
+			validationsForm,
+			urlParam,
+			redirectTo
+		);
+
+	return (
+		<Container>
+			<h1 className='form_title'>Agregar Paquete</h1>
+			<form className="admin__form" onSubmit={handleSubmit}>
+				<Input
+					displayLabel="Nombre"
+					label="name"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.name}
+					errorMessage={errors.name}
+				/>
+				<Input
+					displayLabel="Descripcion"
+					label="description"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.description}
+					errorMessage={errors.description}
+				/>
+				<Input
+					displayLabel="Url Imagen"
+					label="image_url"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.image_url}
+					errorMessage={errors.image_url}
+				/>
+				<Input
+					displayLabel="Capacidad"
+					label="capacity"
+					type="number"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.capacity}
+					errorMessage={errors.capacity}
+				/>
+				<Input
+					displayLabel="Precio por Persona"
+					label="price"
+					type="number"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.price}
+					errorMessage={errors.price}
+				/>
+				<Select
+					options={options}
+					displayLabel="Categorias"
+					label="id_category"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={parseInt(form.id_category)}
+					errorMessage={errors.id_category}
+				/>
 
 
-	// const createItem = async (tour) => {
-
-	// };
-
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	await createItem(data)
-	// 	Swal.fire("Creado con éxito");
-	// 	setData({});
-	// 	// navigate("/");
-
-	// };
-	return <Container>
-		<h1 className='form_title'>Agregar Paquete</h1>
-		<form className="admin__form" onSubmit={handleSubmit}>
-			<Input
-				displayLabel="Nombre"
-				label="name"
-				type="text"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={form.name}
-				errorMessage={errors.name}
-			/>
-			<Input
-				displayLabel="Descripcion"
-				label="description"
-				type="text"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={form.description}
-				errorMessage={errors.description}
-			/>
-			<Input
-				displayLabel="Url Imagen"
-				label="image_url"
-				type="text"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={form.image_url}
-				errorMessage={errors.image_url}
-			/>
-			<Input
-				displayLabel="Capacidad"
-				label="capacity"
-				type="number"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={form.capacity}
-				errorMessage={errors.capacity}
-			/>
-			<Input
-				displayLabel="Precio por Persona"
-				label="price"
-				type="number"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={form.price}
-				errorMessage={errors.price}
-			/>
-			<Select
-				options={options}
-				displayLabel="Categorias"
-				label="id_category"
-				onBlur={handleBlur}
-				onChange={handleChange}
-				value={parseInt(form.id_category)}
-				errorMessage={errors.id_category}
-			/>
-
-
-			<Button type="primary">Agregar</Button>
-		</form>
-	</Container>;
+				<Button type="primary">Agregar</Button>
+			</form>
+		</Container>
+	)
 };

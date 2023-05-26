@@ -19,7 +19,7 @@ export const Recommendations = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
 	const shuffledToursItemsPerPage = 6; // Elemento por pagina
-	
+
 	const goToNextPage = () => {
 		setCurrentPage((prevPage) => prevPage + 1);
 	};
@@ -33,8 +33,8 @@ export const Recommendations = () => {
 			.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 			.map((tour) => (
 				<DetailedCard
-					key={tour.id_tour}
-					id={tour.id_tour}
+					key={tour.id}
+					id={tour.id}
 					title={tour.name}
 					description={tour.description}
 					imageSrc={tour.image_url}

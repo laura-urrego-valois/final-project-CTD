@@ -1,32 +1,75 @@
-import Swal from "sweetalert2";
-import { useState } from "react";
-
-
+/* eslint-disable no-control-regex */
 import { Container } from "../../components/Container"
-import { Input } from "../../components/Input";
+import { Input, Select } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { useForm } from "../../hooks/useForm";
+
+const initialState = {
+    id: Date.now(),
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    id_role: 0
+};
+
+const validationsForm = async (form) => {
+    const errors = {}
+    if (!form.name.trim()) {
+        errors.name = "Nombre es requerido"
+    }
+    if (form.name.length < 3) {
+        errors.name = "Nombre Formato Invalido"
+    }
+    if (!form.lastName.trim()) {
+        errors.lastName = "Apellido es requerido"
+    }
+    if (form.lastName.length < 3) {
+        errors.lastName = "Apellido Formato Invalido"
+    }
+    let regex = new RegExp(
+        "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
+    );
+    if (!form.email.trim()) {
+        errors.email = "Email es requerido"
+    }
+    if (!regex.test(form.email)) {
+        errors.email = "Email Invalido"
+    }
+    if (form.password != form.confirmPassword) {
+        errors.confirmPassword = "Contraseñas no coinciden"
+    }
+    if (Number.isInteger(form.id_role)) {
+        errors.id_role = "Debes seleccionar un rol"
+    }
+    return errors
+}
+
+const options = [
+    { label: "Cliente", value: 1 },
+    { label: "Administrador", value: 2 }
+];
+
+const urlParam = "users"
+const redirectTo = "/"
 
 export const SignUp = () => {
-    const [dataForm, setDataForm] = useState({
-        id: new Date().getTime()
-    });
 
-    const handleChange = ({ target }) => {
-        setDataForm({
-            ...dataForm,
-            [target.name]: target.value,
-        });
-    };
+    const
+        {
+            form,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit
+        } = useForm(
+            initialState,
+            validationsForm,
+            urlParam,
+            redirectTo
+        );
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // await createItem(data)
-        // setData({});
-        // navigate("/");
-        console.log(dataForm)
-        Swal.fire("Login");
-
-    };
 
     return (
         <Container>
@@ -37,32 +80,32 @@ export const SignUp = () => {
                     label="name"
                     type="text"
                     onChange={handleChange}
-                    value={dataForm?.name}
-                    errorMessage="no se"
-                    required
+                    value={form.name}
+                    errorMessage={errors.name}
                 />
                 <Input
                     displayLabel="Apellido"
                     label="lastName"
                     type="text"
                     onChange={handleChange}
-                    value={dataForm?.lastName}
-                    required
+                    value={form.lastName}
+                    errorMessage={errors.lastName}
                 />
                 <Input
                     displayLabel="Correo Electronico"
                     label="email"
-                    type="email"
+                    type="text"
                     onChange={handleChange}
-                    value={dataForm?.email}
-                    required
+                    value={form.email}
+                    errorMessage={errors.email}
                 />
                 <Input
                     displayLabel="Contrasena"
                     label="password"
                     type="password"
                     onChange={handleChange}
-                    value={dataForm?.password}
+                    value={form.password}
+                    errorMessage={errors.password}
                     required
                 />
                 <Input
@@ -70,25 +113,19 @@ export const SignUp = () => {
                     label="confirmPassword"
                     type="password"
                     onChange={handleChange}
-                    value={dataForm?.confirmPassword}
-                    required
+                    value={form.confirmPassword}
+                    errorMessage={errors.confirmPassword}
+
                 />
-                <label htmlFor="role">
-                    Rol
-                    <select
-                        value={dataForm?.role}
-                        onChange={handleChange}
-                        id="role"
-                        name="role">
-                        <option disabled hidden>Seleccione</option>
-                        <option
-                            value={1}
-                        >
-                            Cliente
-                        </option>
-                        <option value={2}>Administrador</option>
-                    </select>
-                </label>
+                <Select
+                    options={options}
+                    displayLabel="Rol de Usuario"
+                    label="id_role"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={parseInt(form.id_role)}
+                    errorMessage={errors.id_role}
+                />
                 <Button type="primary">Registrarse</Button>
             </form>
         </Container>
