@@ -40,4 +40,9 @@ public class TourController {
         return tourService.getTours();
     }
 
+    @GetMapping(path="byCategory/{id}")
+    public Collection<TourDTO> getToursByCategory(@PathVariable Integer id) {
+        return tourService.getToursByCategory(id);
+    }
+
 }

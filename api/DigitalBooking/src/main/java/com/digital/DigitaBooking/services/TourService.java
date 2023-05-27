@@ -51,4 +51,15 @@ public class TourService implements ITourService {
         return toursDTO;
     }
 
+    public Set<TourDTO> getToursByCategory(Integer id) {
+        Set<TourDTO> toursDTO = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllByCategoryId(id);
+        for (Tour tour :
+                tours) {
+            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+
+        }
+        return toursDTO;
+    }
+
 }

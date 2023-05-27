@@ -8,9 +8,8 @@ import java.util.Set;
 @Data
 public class CategoryDTO {
 
-    private Integer idCategory;
+    private Integer id;
     private String categoryName;
     private String categoryDescription;
     private String categoryImageURL;
-    private Set<Tour> tours;
 }

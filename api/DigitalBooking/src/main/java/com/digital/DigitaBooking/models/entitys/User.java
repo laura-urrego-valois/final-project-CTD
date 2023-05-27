@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long idUser;
+    private Long id;
 
     @Column
     @NotNull
@@ -33,7 +33,7 @@ public class User {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "userRole", referencedColumnName = "idUserRole")
+    @JoinColumn(name = "userRole", referencedColumnName = "id")
     private UserRole userRole;
 
 }

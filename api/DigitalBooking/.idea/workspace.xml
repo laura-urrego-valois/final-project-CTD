@@ -6,8 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="f8a2c14b-2697-4de8-94c9-eb8bf0d098a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserRoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserRoleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/Tour.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entitys/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ITourRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ITourRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/TourService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/TourService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
