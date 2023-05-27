@@ -7,6 +7,7 @@ import Footer from "../components/Footer/footer";
 import { ProductList } from "../pages/productList";
 import { Admin } from "../pages/admin";
 import { Register } from "../pages/register";
+import { Success } from "../pages/success";
 
 
 export const AppRoutes = () => {
@@ -33,6 +34,10 @@ export const AppRoutes = () => {
 				<Route
 					path="/register"
 					element={<Register />}
+				/>
+				<Route
+					path="/register-success"
+					element={<Success />}
 				/>
 				<Route
 					path="*"

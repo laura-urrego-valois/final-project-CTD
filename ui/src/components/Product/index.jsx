@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { SimpleCard } from '../Card'
-import './Product.css'
 import { useGlobalState } from "../../context";
+import './Product.css'
 
 export const Product = () => {
   const { state, setSelectedCategory, } = useGlobalState();
@@ -10,6 +10,7 @@ export const Product = () => {
     setSelectedCategory(categoryId);
   };
 
+  console.log("product", state)
   return (
     <section className='product'>
       <h2>Buscar por categorias</h2>
@@ -20,9 +21,9 @@ export const Product = () => {
               to={"/"}
               onClick={() => handleCategoryClick(data.id_category)}>
               <SimpleCard
-                imageSrc={data.image_url}
-                title={data.name}
-                description={data.description}
+                imageSrc={data.categoryImageURL}
+                title={data.categoryName}
+                description={data.categoryDescription}
               />
             </Link>
           ))}
