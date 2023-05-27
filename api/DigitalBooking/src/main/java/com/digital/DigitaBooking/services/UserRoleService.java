@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.UserRole;
-import com.digital.DigitaBooking.models.UserRoleDTO;
+import com.digital.DigitaBooking.models.entitys.UserRole;
+import com.digital.DigitaBooking.models.dtos.UserRoleDTO;
 import com.digital.DigitaBooking.repositories.IUserRoleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.models;
+package com.digital.DigitaBooking.models.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -15,25 +15,25 @@ public class User {
     @NotNull
     private Long idUser;
 
-    @Column(name = "name")
+    @Column
     @NotNull
     private String userName;
 
-    @Column(name = "lastName")
+    @Column
     @NotNull
     private String lastName;
 
-    @Column(name = "email")
+    @Column
     @NotNull
     private String email;
 
-    @Column(name = "password")
+    @Column
     @NotNull
     private String password;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "userRole", referencedColumnName = "idUserRole")
+    @JoinColumn(referencedColumnName = "idUserRole")
     private UserRole userRole;
 
 }

@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.User;
-import com.digital.DigitaBooking.models.UserDTO;
+import com.digital.DigitaBooking.models.entitys.User;
+import com.digital.DigitaBooking.models.dtos.UserDTO;
 import com.digital.DigitaBooking.repositories.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

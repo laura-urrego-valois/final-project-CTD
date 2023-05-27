@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.models;
+package com.digital.DigitaBooking.models.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "User_role")
+@Table
 public class UserRole {
 
     @Id
@@ -18,7 +18,7 @@ public class UserRole {
     @NotNull
     private Long idUserRole;
 
-    @Column(name = "userRole")
+    @Column
     @NotNull
     private String userRole;
 

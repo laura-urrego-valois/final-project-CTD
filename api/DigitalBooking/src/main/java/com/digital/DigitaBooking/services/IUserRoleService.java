@@ -1,8 +1,6 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.UserRoleDTO;
-
-import java.util.Set;
+import com.digital.DigitaBooking.models.dtos.UserRoleDTO;
 
 public interface IUserRoleService {
 

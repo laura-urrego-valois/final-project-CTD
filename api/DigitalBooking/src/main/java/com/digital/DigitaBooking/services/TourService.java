@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.Tour;
-import com.digital.DigitaBooking.models.TourDTO;
+import com.digital.DigitaBooking.models.entitys.Tour;
+import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ITourRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

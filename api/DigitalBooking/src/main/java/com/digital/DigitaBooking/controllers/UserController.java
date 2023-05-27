@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
-import com.digital.DigitaBooking.models.UserDTO;
+import com.digital.DigitaBooking.models.dtos.UserDTO;
 import com.digital.DigitaBooking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
