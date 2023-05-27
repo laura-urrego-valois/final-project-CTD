@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.Category;
-import com.digital.DigitaBooking.models.CategoryDTO;
+import com.digital.DigitaBooking.models.entitys.Category;
+import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

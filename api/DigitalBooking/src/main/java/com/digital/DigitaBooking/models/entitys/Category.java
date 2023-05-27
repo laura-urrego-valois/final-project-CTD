@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.models;
+package com.digital.DigitaBooking.models.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,12 +10,12 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "Category")
+@Table
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Integer idCategory;
+    private Integer id;
 
     @Column
     @NotNull

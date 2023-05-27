@@ -1,7 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
-import com.digital.DigitaBooking.models.Tour;
-import com.digital.DigitaBooking.models.TourDTO;
+import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.services.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import java.util.*;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/Tours")
+@RequestMapping("/tours")
 public class TourController {
 
     @Autowired
@@ -39,6 +38,11 @@ public class TourController {
     @GetMapping
     public Collection<TourDTO> getTours() {
         return tourService.getTours();
+    }
+
+    @GetMapping(path="byCategory/{id}")
+    public Collection<TourDTO> getToursByCategory(@PathVariable Integer id) {
+        return tourService.getToursByCategory(id);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.Tour;
-import com.digital.DigitaBooking.models.TourDTO;
+import com.digital.DigitaBooking.models.entitys.Tour;
+import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ITourRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +43,17 @@ public class TourService implements ITourService {
     public Set<TourDTO> getTours() {
         List<Tour> tours = tourRepository.findAll();
         Set<TourDTO> toursDTO = new HashSet<>();
+        for (Tour tour :
+                tours) {
+            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+
+        }
+        return toursDTO;
+    }
+
+    public Set<TourDTO> getToursByCategory(Integer id) {
+        Set<TourDTO> toursDTO = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllByCategoryId(id);
         for (Tour tour :
                 tours) {
             toursDTO.add(mapper.convertValue(tour, TourDTO.class));

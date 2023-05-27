@@ -1,12 +1,11 @@
-package com.digital.DigitaBooking.models;
+package com.digital.DigitaBooking.models.dtos;
 
 import lombok.*;
 
+@Data
 public class TourDTO {
 
-    @Getter
-    @Setter
-    private Long idTour;
+    private Long id;
     private String tourImageURL;
     private String tourName;
     private String tourDescription;

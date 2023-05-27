@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.models;
+package com.digital.DigitaBooking.models.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,12 +7,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Tour")
+@Table
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long idTour;
+    private Long id;
 
     @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
@@ -48,7 +48,7 @@ public class Tour {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "category", referencedColumnName = "idCategory")
+    @JoinColumn(name = "category", referencedColumnName = "id")
     private Category category;
 
 }

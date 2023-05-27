@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.CategoryDTO;
+import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 
 import java.util.Set;
 

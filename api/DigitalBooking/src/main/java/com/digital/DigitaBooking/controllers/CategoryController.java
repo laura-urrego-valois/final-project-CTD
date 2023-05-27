@@ -1,7 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
-import com.digital.DigitaBooking.models.Category;
-import com.digital.DigitaBooking.models.CategoryDTO;
+import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@CrossOrigin(maxAge = 3600)
+//@CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/Category")
+@RequestMapping("/category")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;

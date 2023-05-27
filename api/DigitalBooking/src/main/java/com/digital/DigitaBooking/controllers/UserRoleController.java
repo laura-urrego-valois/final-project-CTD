@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
-import com.digital.DigitaBooking.models.UserRoleDTO;
+import com.digital.DigitaBooking.models.dtos.UserRoleDTO;
 import com.digital.DigitaBooking.services.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/UserRole")
+@RequestMapping("/userRole")
 public class UserRoleController {
 
     @Autowired
