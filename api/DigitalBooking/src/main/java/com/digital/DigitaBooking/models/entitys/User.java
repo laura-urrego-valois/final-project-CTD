@@ -33,7 +33,7 @@ public class User {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(referencedColumnName = "idUserRole")
+    @JoinColumn(name = "userRole", referencedColumnName = "idUserRole")
     private UserRole userRole;
 
 }

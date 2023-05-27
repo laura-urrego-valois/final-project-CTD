@@ -48,7 +48,7 @@ public class Tour {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(referencedColumnName = "idCategory")
+    @JoinColumn(name = "category", referencedColumnName = "idCategory")
     private Category category;
 
 }
