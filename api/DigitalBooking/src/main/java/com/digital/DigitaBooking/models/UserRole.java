@@ -18,13 +18,12 @@ public class UserRole {
     @NotNull
     private Long idUserRole;
 
-    @Column(name = "userRole")
+    @Column
     @NotNull
     private String userRole;
 
     @JsonIgnore
     @OneToMany(mappedBy = "userRole")
     private Set<User> users = new HashSet<>();
-
 
 }
