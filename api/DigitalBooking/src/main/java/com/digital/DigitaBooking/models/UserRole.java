@@ -18,7 +18,7 @@ public class UserRole {
     @NotNull
     private Long idUserRole;
 
-    @Column(name = "userRole")
+    @Column
     @NotNull
     private String userRole;
 

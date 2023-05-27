@@ -17,15 +17,15 @@ public class Category {
     @NotNull
     private Integer idCategory;
 
-    @Column(name = "name")
+    @Column
     @NotNull
     private String categoryName;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(1000)")
+    @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
     private String categoryDescription;
 
-    @Column(name = "imageUrl", columnDefinition = "VARCHAR(1000)")
+    @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
     private String categoryImageURL;
 

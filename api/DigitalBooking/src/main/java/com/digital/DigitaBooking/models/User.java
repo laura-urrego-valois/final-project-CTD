@@ -15,19 +15,19 @@ public class User {
     @NotNull
     private Long idUser;
 
-    @Column(name = "name")
+    @Column
     @NotNull
     private String userName;
 
-    @Column(name = "lastName")
+    @Column
     @NotNull
     private String lastName;
 
-    @Column(name = "email")
+    @Column
     @NotNull
     private String email;
 
-    @Column(name = "password")
+    @Column
     @NotNull
     private String password;
 

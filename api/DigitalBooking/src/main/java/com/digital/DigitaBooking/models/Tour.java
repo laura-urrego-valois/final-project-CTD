@@ -14,35 +14,35 @@ public class Tour {
     @NotNull
     private Long idTour;
 
-    @Column(name = "imageUrl", columnDefinition = "VARCHAR(1000)")
+    @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
     private String tourImageURL;
 
-    @Column(name = "name")
+    @Column
     @NotNull
     private String tourName;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(1000)")
+    @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
     private String tourDescription;
 
-    @Column(name = "classification")
+    @Column
     @NotNull
     private String tourClassification;
 
-    @Column(name = "capacity")
+    @Column
     @NotNull
     private Integer tourCapacity;
 
-    @Column(name = "availability")
+    @Column
     @NotNull
     private Boolean tourAvailability;
 
-    @Column(name = "price")
+    @Column
     @NotNull
     private Double tourPrice;
 
-    @Column(name = "score")
+    @Column
     @NotNull
     private Integer tourScore;
 
