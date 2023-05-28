@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.entitys.Category;
+import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +32,21 @@ public class CategoryService implements ICategoryService {
             categoryDTO = mapper.convertValue(category, CategoryDTO.class);
 
         return categoryDTO;
+    }
+
+    @Override //Confirmar funcionamiento en Postman!
+    public void updateCategory(Integer id, CategoryDTO categoryDTO) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            category = mapper.convertValue(categoryDTO, Category.class);
+            categoryRepository.save(category);
+        }
+    }
+
+    @Override
+    public void deleteCategory(Integer id) {
+        categoryRepository.deleteById(id);
     }
 
     @Override

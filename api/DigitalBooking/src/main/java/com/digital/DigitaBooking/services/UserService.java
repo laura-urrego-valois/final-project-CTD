@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.entitys.User;
+import com.digital.DigitaBooking.models.entities.User;
 import com.digital.DigitaBooking.models.dtos.UserDTO;
 import com.digital.DigitaBooking.repositories.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
