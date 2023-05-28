@@ -8,11 +8,11 @@ export const Recommendations = () => {
 	const { state } = useGlobalState();
 	const { selectedCategory, tours, categories } = state;
 
-	const filteredTours = tours?.filter((tour) => tour.id_category === selectedCategory);
+	const filteredTours = tours?.filter((tour) => tour?.id_category === selectedCategory);
 	const shuffledTours = tours?.sort(() => Math.random() - 0.5);
 
 	const getCategoryName = (categoryId) => {
-		const category = categories?.find((cat) => cat.id_category === categoryId);
+		const category = categories?.find((cat) => cat?.id_category === categoryId);
 		return category ? category.name : "";
 	};
 
@@ -36,12 +36,12 @@ export const Recommendations = () => {
 				<DetailedCard
 					key={tour.id_tour}
 					id={tour.id_tour}
-					title={tour.tourName}
-					description={tour.tourDescription}
+					title={tour.name}
+					description={tour.description}
 					imageSrc={tour.image_url}
-					classification={tour.tourClassification}
-					category={getCategoryName(tour.tourCategory.id_category)}
-					score={tour.tourScore}
+					classification={tour.classification}
+					category={getCategoryName(tour.id_category)}
+					score={tour.score}
 				/>
 			));
 	};

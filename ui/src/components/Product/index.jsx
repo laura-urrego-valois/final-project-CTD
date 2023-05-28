@@ -10,7 +10,6 @@ export const Product = () => {
     setSelectedCategory(categoryId);
   };
 
-  console.log("product", state)
   return (
     <section className='product'>
       <h2>Buscar por categorias</h2>
@@ -21,9 +20,9 @@ export const Product = () => {
               to={"/"}
               onClick={() => handleCategoryClick(data.id_category)}>
               <SimpleCard
-                imageSrc={data.categoryImageURL}
-                title={data.categoryName}
-                description={data.categoryDescription}
+                imageSrc={data.image_url}
+                title={data.name}
+                description={data.description}
               />
             </Link>
           ))}
