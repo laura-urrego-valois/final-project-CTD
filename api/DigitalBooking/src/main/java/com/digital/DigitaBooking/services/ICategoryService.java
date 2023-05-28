@@ -10,6 +10,10 @@ public interface ICategoryService {
 
     CategoryDTO getCategory(Integer id);
 
+    void updateCategory(Integer id, CategoryDTO categoryDTO);
+
+    void deleteCategory (Integer id);
+
     Set<CategoryDTO> getCategories();
 
 }

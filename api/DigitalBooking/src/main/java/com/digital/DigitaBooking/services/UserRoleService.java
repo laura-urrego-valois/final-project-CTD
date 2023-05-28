@@ -1,6 +1,6 @@
 package com.digital.DigitaBooking.services;
 
-import com.digital.DigitaBooking.models.entitys.UserRole;
+import com.digital.DigitaBooking.models.entities.UserRole;
 import com.digital.DigitaBooking.models.dtos.UserRoleDTO;
 import com.digital.DigitaBooking.repositories.IUserRoleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
