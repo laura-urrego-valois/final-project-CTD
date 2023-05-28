@@ -1,5 +1,6 @@
 export const actions = {
 	GET_CATEGORIES: "GET_CATEGORIES",
+	REMOVE_CATEGORY: "REMOVE_CATEGORY",
 	GET_TOURS: "GET_TOURS",
 	GET_BY_ID: "GET_BY_ID",
 	GET_BY_DATACATEGORY: "GET_BY_DATACATEGORY",
@@ -46,6 +47,13 @@ export const AppReducer = (state, action) => {
 				tours: state.tours.filter(
 					(tour) => tour.id_tour !== action.payload
 				),
+			};
+		case actions.REMOVE_CATEGORY:
+			return {
+				...state,
+				categories: state.categories.filter(
+					(category) => category.id !== action.payload
+				)
 			};
 
 		default:
