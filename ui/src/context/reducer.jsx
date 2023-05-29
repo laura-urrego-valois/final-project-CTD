@@ -8,6 +8,8 @@ export const actions = {
 	CREATE_TOUR: "CREATE_TOUR",
 	REMOVE_ITEM: "REMOVE_ITEM",
 	MODIFY_ITEM: "MODIFY_ITEM",
+	UPDATE_CATEGORY: "UPDATE_CATEGORY",
+	ADD_CATEGORY: "ADD_CATEGORY"
 };
 
 export const AppReducer = (state, action) => {
@@ -48,13 +50,43 @@ export const AppReducer = (state, action) => {
 					(tour) => tour.id_tour !== action.payload
 				),
 			};
-		case actions.REMOVE_CATEGORY:
+
+		case actions.ADD_CATEGORY: {
+			const newCategory = {
+				...action.payload,
+				id_category: state.categories.length + 1,
+			};
+
 			return {
 				...state,
-				categories: state.categories.filter(
-					(category) => category.id !== action.payload
-				)
+				categories: [...state.categories, newCategory],
 			};
+		}
+
+		case actions.REMOVE_CATEGORY: {
+			const updatedCategories = state.categories.filter(
+				(category) => category.id_category !== action.payload
+			);
+
+			return {
+				...state,
+				categories: updatedCategories,
+			};
+		}
+
+		case actions.UPDATE_CATEGORY: {
+			const updatedCategories = state.categories.map((category) => {
+				if (category.id_category === action.payload.id_category) {
+					return action.payload;
+				}
+				return category;
+			});
+
+			return {
+				...state,
+				categories: updatedCategories,
+			};
+		}
 
 		default:
 			return { ...state };
