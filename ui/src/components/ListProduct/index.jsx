@@ -3,18 +3,46 @@ import { useGlobalState } from "../../context";
 import { actions } from "../../context/reducer";
 import { Pagination } from '../Pagination';
 import { Button } from '../Button';
+import { usePagination } from '../../hooks/usePagination';
+import { ModalProduct } from '../Modal/ModalProduct';
+import { useForm } from 'react-hook-form';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { GrAdd } from 'react-icons/gr';
 import './ListProduct.css';
+
 export const ListProduct = () => {
   const { state, dispatch } = useGlobalState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const toursPerPage = 7;
+  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(7);
 
-  const tours = state?.tours || []
+  const tours = state?.tours || [];
+  const categories = state?.categories || [];
+
+  const { reset } = useForm();
+  const [editMode, setEditMode] = useState(false);
+  const [tourForm, setTourForm] = useState({
+    id_tour: '',
+    name: '',
+    image_url: '',
+    description: '',
+    id_category: 0,
+  });
 
   const openModal = (tour) => {
-    setSelectedTour(tour);
+    if (tour) {
+      setEditMode(true);
+      setTourForm(tour);
+    } else {
+      setEditMode(false);
+      setTourForm({
+        name: '',
+        image_url: '',
+        description: '',
+        id_category: 0,
+      });
+      reset();
+    }
     setIsModalOpen(true);
   };
 
@@ -24,44 +52,67 @@ export const ListProduct = () => {
   };
 
   const handleDeleteTour = (tourId) => {
+    console.log('removeTour', tourId)
     dispatch({
       type: actions.REMOVE_ITEM,
       payload: tourId,
     });
-    console.log('eliminar id =>', tourId);
+
+    if (selectedTour && selectedTour.id_tour === tourId) {
+      closeModal();
+    }
   };
 
-  const totalPages = Math.ceil(tours.length / toursPerPage);
+  const totalPages = getTotalPages(tours);
+  const currentTours = getCurrentPageItems(tours);
 
-  const getCurrentPageTours = () => {
-    const startIndex = (currentPage - 1) * toursPerPage;
-    const endIndex = startIndex + toursPerPage;
-    return tours.slice(startIndex, endIndex);
+  const handleFormSubmit = (data) => {
+    data.id_category = parseInt(data.id_category);
+    const updatedTour = { ...tourForm, ...data };
+    console.log("update", updatedTour)
+    if (editMode) {
+      dispatch({
+        type: actions.UPDATE_TOUR,
+        payload: updatedTour,
+      });
+    } else {
+      dispatch({
+        type: actions.CREATE_TOUR,
+        payload: updatedTour,
+      });
+    }
+
+    closeModal();
+    reset();
   };
 
-  const goToNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((cat) => cat.id_category === categoryId);
+    return category ? category.name : '';
   };
-
-  const goToPrevPage = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
-  };
-
 
   return (
     <section className="list__container">
-      {getCurrentPageTours().map((tour) => (
+      <Button onClick={() => openModal(null)}><GrAdd /></Button>
+      {currentTours.map((tour) => (
         <article className="list__content" key={tour.id_tour}>
           <img className="list__image" src={tour.image_url} alt="" />
           <p className="list__title">{tour.name}</p>
+          <p>{getCategoryName(tour.id_category)}</p>
           <div className='list__button'>
-            <Button onClick={() => openModal(tour)}>editar</Button>
-            <Button type="primary" onClick={() => handleDeleteTour(tour.id_tour)}>eliminar</Button>
+            <Button onClick={() => openModal(tour)}><AiFillEdit /></Button>
+            <Button type="primary" onClick={() => handleDeleteTour(tour.id_tour)}><AiFillDelete /></Button>
           </div>
         </article>
       ))}
       {isModalOpen && (
-        <Modal tour={selectedTour} onClose={closeModal} />
+        <ModalProduct
+          tour={selectedTour}
+          onClose={closeModal}
+          editMode={editMode}
+          handleFormSubmit={handleFormSubmit}
+          tourForm={tourForm}
+        />
       )}
       <Pagination
         currentPage={currentPage}
@@ -70,19 +121,5 @@ export const ListProduct = () => {
         onPrevPage={goToPrevPage}
       />
     </section>
-  );
-};
-
-const Modal = ({ tour, onClose }) => {
-  return (
-    <div className="modal__overlay">
-      <div className="modal__content">
-        <h2>Editar Tour</h2>
-        <img className='modal__image' src={tour.image_url} alt="" />
-        <p>Nombre del tour: {tour?.name}</p>
-        <p>Categoria: {tour.id_category}</p>
-        <button onClick={onClose}>Cerrar</button>
-      </div>
-    </div>
   );
 };

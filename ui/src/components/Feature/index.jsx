@@ -1,10 +1,16 @@
 import './Feature.css'
+import { MdOutlineComputer } from 'react-icons/md';
+import { GiMountainClimbing, GiSandSnake, GiMonkey } from 'react-icons/gi';
 
 export const icons = [
-  { value: 'mono', icon: "🐵" },
-  { value: 'serpiente', icon: "🐍" },
-  { value: 'escalar', icon: "🧗" },
-  { value: 'computadora', icon: "💻" },
+  {
+    value: 'mono', icon: <GiMonkey />
+  },
+  { value: 'serpiente', icon: <GiSandSnake /> },
+  {
+    value: 'escalar', icon: <GiMountainClimbing />
+  },
+  { value: 'computadora', icon: <MdOutlineComputer /> },
 ];
 
 export const Feature = ({ feature }) => {

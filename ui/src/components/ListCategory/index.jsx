@@ -6,7 +6,9 @@ import { Pagination } from '../Pagination';
 import { actions } from '../../context/reducer';
 import { useForm } from 'react-hook-form';
 import { usePagination } from '../../hooks/usePagination';
-import { ModalCategory } from './ModalCategory';
+import { ModalCategory } from '../Modal/ModalCategory';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { GrAdd } from 'react-icons/gr';
 
 export const ListCategory = () => {
   const { state, dispatch } = useGlobalState();
@@ -15,7 +17,7 @@ export const ListCategory = () => {
   const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(7);
 
   const categories = state?.categories || []
-  console.log('cat', categories)
+
   const { reset } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [categoryForm, setCategoryForm] = useState({
@@ -49,7 +51,7 @@ export const ListCategory = () => {
   };
 
   const handleDeleteCategorie = (categorieId) => {
-    console.log('remove', categorieId)
+    console.log('removeCategory', categorieId)
     dispatch({
       type: actions.REMOVE_CATEGORY,
       payload: categorieId,
@@ -84,14 +86,14 @@ export const ListCategory = () => {
 
   return (
     <section className="list__container">
-      <Button onClick={() => openModal(null)}>Agregar</Button>
+      <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentCategories.map((categorie) => (
         <article className="list__content" key={categorie.id_category}>
           <img className="list__image" src={categorie.image_url} alt="" />
           <p className="list__title">{categorie.name}</p>
           <div className='list__button'>
-            <Button onClick={() => openModal(categorie)}>editar</Button>
-            <Button type="primary" onClick={() => handleDeleteCategorie(categorie.id_category)}>eliminar</Button>
+            <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button>
+            <Button type="primary" onClick={() => handleDeleteCategorie(categorie.id_category)}><AiFillDelete /></Button>
           </div>
         </article>
       ))}

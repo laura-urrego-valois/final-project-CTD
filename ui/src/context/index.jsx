@@ -68,6 +68,43 @@ export const ContextProvider = ({ children }) => {
 		});
 	};
 
+	const updateTour = async (tourId, updatedData) => {
+		try {
+			const response = await axios.put(
+				`${BASE_URL}/tours/${tourId}`,
+				updatedData
+			);
+			dispatch({
+				type: actions.UPDATE_TOUR,
+				payload: response.data,
+			});
+		} catch (error) {
+			console.error("Error updating tour:", error);
+		}
+	};
+	const addTour = async (newTourData) => {
+		try {
+			const response = await axios.post(`${BASE_URL}/tours`, newTourData);
+			dispatch({
+				type: actions.CREATE_TOUR,
+				payload: response.data,
+			});
+		} catch (error) {
+			console.error("Error adding tour:", error);
+		}
+	};
+	const deleteTour = async (tourId) => {
+		try {
+			await axios.delete(`${BASE_URL}/tours/${tourId}`);
+			dispatch({
+				type: actions.REMOVE_TOUR,
+				payload: tourId,
+			});
+		} catch (error) {
+			console.error("Error deleting tour:", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchCategories();
 		fetchTours();
@@ -83,7 +120,10 @@ export const ContextProvider = ({ children }) => {
 			}),
 		updateCategory,
 		addCategory,
-		deleteCategory
+		deleteCategory,
+		updateTour,
+		addTour,
+		deleteTour
 	};
 	return (
 		<ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
