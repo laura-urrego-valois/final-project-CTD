@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,7 @@ import java.util.*;
 public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
     // PasswordEncoder es una interfaz que proporciona métodos para codificar y verificar
     // contraseñas de manera segura. Se utiliza en el contexto de autenticación y
