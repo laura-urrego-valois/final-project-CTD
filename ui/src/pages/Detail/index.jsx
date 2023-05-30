@@ -3,6 +3,7 @@ import { useGlobalState } from "../../context";
 import { Button } from "../../components/Button";
 import './Detail.css'
 import { Gallery } from "../../components/Gallery";
+import { Feature } from "../../components/Feature";
 
 export const dataGallery = {
 	galleryImage: [
@@ -13,6 +14,8 @@ export const dataGallery = {
 		"https://images.unsplash.com/photo-1614444894791-c0c4d4286c35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
 	]
 }
+export const feature = ['mono', 'computadora', 'serpiente', 'escalar', 'mono', 'computadora', 'serpiente', 'escalar']
+
 
 const Detail = () => {
 	let { id } = useParams();
@@ -48,6 +51,7 @@ const Detail = () => {
 			</div>
 			{/* //Layout component Gallery */}
 			<Gallery dataImage={dataGallery.galleryImage} />
+			<Feature feature={feature} />
 
 			<section className="detail__content">
 				<div className="detail__info">
