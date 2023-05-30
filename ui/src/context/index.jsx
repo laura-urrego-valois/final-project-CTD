@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import { AppReducer, actions } from "./reducer";
 import axios from "axios";
 
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = "http://localhost:3000";
 
 const initialState = {
 	context: "testing context",
@@ -15,7 +15,7 @@ export const ContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
 	const fetchCategories = async () => {
-		await axios.get(`${BASE_URL}/category`).then((response) => {
+		await axios.get(`${BASE_URL}/categories`).then((response) => {
 			dispatch({
 				type: actions.GET_CATEGORIES,
 				payload: response.data,
