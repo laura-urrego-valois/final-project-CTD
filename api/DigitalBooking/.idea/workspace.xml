@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a2c14b-2697-4de8-94c9-eb8bf0d098a0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../ui/src/components/Product/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ui/src/components/Product/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ui/src/components/Recommendations/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ui/src/components/Recommendations/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ui/src/context/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ui/src/context/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ui/src/routes/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ui/src/routes/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/AuthenticationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/PasswordEncoderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/DigitaBookingApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/DigitaBookingApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +29,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="DigitaBooking" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
