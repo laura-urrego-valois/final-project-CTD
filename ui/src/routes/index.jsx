@@ -8,7 +8,7 @@ import { ProductList } from "../pages/productList";
 import { Admin } from "../pages/admin";
 import { Register } from "../pages/register";
 import { Success } from "../pages/success";
-
+import { CategoryList } from "../pages/categoryList";
 
 export const AppRoutes = () => {
 	return (
@@ -30,6 +30,10 @@ export const AppRoutes = () => {
 				<Route
 					path="/product-list"
 					element={<ProductList />}
+				/>
+				<Route
+					path="/category-list"
+					element={<CategoryList />}
 				/>
 				<Route
 					path="/register"

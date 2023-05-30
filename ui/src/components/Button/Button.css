@@ -19,5 +19,10 @@ button:hover{
 .btn__secondary{
   border: 2px solid var(--color-primary);
   color: var(--color-primary);
-
+}
+button:disabled{
+  border: 2px solid var(--color-font);
+  color: var(--color-font);
+  opacity: .5;
+   transform: scale(1);
 }

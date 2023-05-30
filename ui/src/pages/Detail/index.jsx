@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useGlobalState } from "../../context";
 import { Button } from "../../components/Button";
-import './Detail.css'
 import { Gallery } from "../../components/Gallery";
 import { Feature } from "../../components/Feature";
+import { BsStarFill, BsStar, BsStarHalf } from 'react-icons/bs';
+import './Detail.css'
 
 export const dataGallery = {
 	galleryImage: [
@@ -40,28 +41,36 @@ const Detail = () => {
 		const category = categories?.find((cat) => cat.id_category === categoryId);
 		return category ? category.name : "";
 	};
-
 	return (
 		<article className="detail__container">
 			<div className="detail">
-				<h1 className="detail__title">{itemDetail.name}</h1>
+				<div>
+					<h1 className="detail__title">{itemDetail.name}</h1>
+				</div>
 				<Link to="/">
 					<Button type="secondary">⬅</Button>
 				</Link>
 			</div>
+			<div className="detail__rating">
+				<div className="detail__rating-content">
+					<p className="detail__rating-classification">{itemDetail.classification}</p>
+					<p className="detail__rating-star"><BsStarFill /><BsStarFill /><BsStarFill /><BsStarHalf /><BsStar /></p>
+				</div>
+				<p className="detail__rating-score">{itemDetail.score}</p>
+			</div>
 			{/* //Layout component Gallery */}
 			<Gallery dataImage={dataGallery.galleryImage} />
-			<Feature feature={feature} />
 
 			<section className="detail__content">
 				<div className="detail__info">
 					<div className="detail-value">
-						<h3 className="detail__price">{`Price: ${itemDetail.price} USD`}</h3>
+						<h3 className="detail__price">{`Precio: ${itemDetail.price} USD`}</h3>
 						<p className="detail__category">{getCategoryName(itemDetail.id_category)}</p>
 					</div>
 					<p className="detail__description">{itemDetail.description}</p>
 				</div>
 			</section>
+			<Feature feature={feature} />
 		</article>
 	);
 };
