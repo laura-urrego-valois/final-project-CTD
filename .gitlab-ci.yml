@@ -62,7 +62,7 @@ deploy_Backend:
     - echo "Deploying started..."
     - echo $(pwd)
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl stop digitalbooking.service"
-    - scp equipo-10/api/DigitalBooking/build/libs ubuntu@$DEPLOY_SERVER_IP:/home/ubuntu/
+    - scp api/DigitalBooking/build/libs/DigitaBooking-0.0.1-SNAPSHOT.jar ubuntu@$DEPLOY_SERVER_IP:/home/ubuntu/
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
     - echo "Finished deploying the app."
   rules:
