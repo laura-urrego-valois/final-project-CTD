@@ -20,13 +20,13 @@ const validationsForm = async (form) => {
         errors.name = "Nombre es requerido"
     }
     if (form.name.length < 3) {
-        errors.name = "Nombre Formato Invalido"
+        errors.name = "Nombre formato Inválido"
     }
     if (!form.lastName.trim()) {
         errors.lastName = "Apellido es requerido"
     }
     if (form.lastName.length < 3) {
-        errors.lastName = "Apellido Formato Invalido"
+        errors.lastName = "Apellido formato Inválido"
     }
     let regex = new RegExp(
         "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
@@ -34,8 +34,14 @@ const validationsForm = async (form) => {
     if (!form.email.trim()) {
         errors.email = "Email es requerido"
     }
+    if (!form.confirmPassword.trim()) {
+        errors.confirmPassword = "Confirmacion es requerido"
+    }
+    if (!form.password.trim()) {
+        errors.password = "Contraseña es requerido"
+    }
     if (!regex.test(form.email)) {
-        errors.email = "Email Invalido"
+        errors.email = "Email Inválido"
     }
     if (form.password != form.confirmPassword) {
         errors.confirmPassword = "Contraseñas no coinciden"
@@ -74,7 +80,7 @@ export const SignUp = () => {
     return (
         <Container>
             <h1 className='form_title'>Crear Cuenta</h1>
-            <form className="login__form" onSubmit={handleSubmit}>
+            <form className="admin__form" onSubmit={handleSubmit}>
                 <Input
                     displayLabel="Nombre"
                     label="name"
@@ -92,7 +98,7 @@ export const SignUp = () => {
                     errorMessage={errors.lastName}
                 />
                 <Input
-                    displayLabel="Correo Electronico"
+                    displayLabel="Correo Electrónico"
                     label="email"
                     type="text"
                     onChange={handleChange}
@@ -100,22 +106,20 @@ export const SignUp = () => {
                     errorMessage={errors.email}
                 />
                 <Input
-                    displayLabel="Contrasena"
+                    displayLabel="Contraseña"
                     label="password"
                     type="password"
                     onChange={handleChange}
                     value={form.password}
                     errorMessage={errors.password}
-                    required
                 />
                 <Input
-                    displayLabel="Confirmar Contrasena"
+                    displayLabel="Confirmar Contraseña"
                     label="confirmPassword"
                     type="password"
                     onChange={handleChange}
                     value={form.confirmPassword}
                     errorMessage={errors.confirmPassword}
-
                 />
                 <Select
                     options={options}

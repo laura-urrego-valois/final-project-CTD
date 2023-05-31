@@ -20,7 +20,7 @@ export const User = () => {
             <h1>Profile</h1>
             <section className="user__section">
                 <div>
-                    <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" alt="user" />
+                    <img src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000" alt="user" />
                 </div>
                 <span>
                     <ion-icon name="person-outline" size="small"></ion-icon>
@@ -32,6 +32,11 @@ export const User = () => {
                     <ion-icon name="at-circle-outline" size="small"></ion-icon>
                     <h3>Email:</h3>
                     <p>{userInfo.email}</p>
+                </span>
+                <span>
+                    <ion-icon name="at-circle-outline" size="small"></ion-icon>
+                    <h3>Rol:</h3>
+                    <p>{userInfo.id_role == 1 ? "Cliente" : "Administrador"}</p>
                 </span>
                 <Button type="primary">Reservas</Button>
             </section>

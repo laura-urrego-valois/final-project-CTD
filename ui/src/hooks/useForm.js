@@ -53,12 +53,59 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
 				})
 				.catch((err) => {
 					Swal.fire({
-						icon: "Error " + err,
+						icon: "error",
+						text: err,
 						showConfirmButton: true,
 					});
 				});
 		}
 		return;
+	};
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		const hasErrors = await validateForm(form);
+		setErrors(hasErrors);
+		console.log(hasErrors);
+		if (
+			Object.keys(hasErrors).length === 0 &&
+			Object.keys(errors).length === 0
+		) {
+			await axios
+				.get(`${BASE_URL}/users`)
+				.then(async (res) => {
+					setForm(initialState);
+
+					const userFound = res.data.find((user) => {
+						return user.email === form.email && user.password === form.password;
+					});
+					if (await userFound) {
+						localStorage.setItem("user", JSON.stringify(userFound));
+
+						Swal.fire({
+							icon: "success",
+							text: "Ingreso exitoso!",
+							timer: 2000,
+							showConfirmButton: false,
+						});
+
+						navigate("/user");
+					} else {
+						Swal.fire({
+							icon: "error",
+							text: "Correo o contraseña incorrectos | Registrate",
+							showConfirmButton: true,
+						});
+					}
+				})
+				.catch((err) => {
+					Swal.fire({
+						icon: "error",
+						text: err,
+						showConfirmButton: true,
+					});
+				});
+		}
 	};
 
 	return {
@@ -67,5 +114,6 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
 		handleChange,
 		handleBlur,
 		handleSubmit,
+		handleLogin,
 	};
 };
