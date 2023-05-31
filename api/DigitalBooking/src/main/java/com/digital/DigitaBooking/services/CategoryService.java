@@ -35,15 +35,14 @@ public class CategoryService implements ICategoryService {
         return categoryDTO;
     }
 
-    @Override //Confirmar funcionamiento en Postman!
+    @Override
     public void updateCategory(Integer id, CategoryDTO categoryDTO) {
         Optional<Category> optionalCategory = categoryRepository.findById(id).map(category -> {
             category.setCategoryName(categoryDTO.getCategoryName());
             category.setCategoryDescription(categoryDTO.getCategoryDescription());
             category.setCategoryImageURL(categoryDTO.getCategoryImageURL());
             return categoryRepository.save(category);
-            });
-
+        });
 
     }
 

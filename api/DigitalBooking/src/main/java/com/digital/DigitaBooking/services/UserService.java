@@ -63,7 +63,7 @@ public class UserService implements IUserService {
                 userPage.getContent().stream()
                         .map(user -> conversionService.convert(user, UserDTO.class)).toList() // Se toma la lista de usuarios, se convierte cada usuario a su equivalente en UserDTO utilizando el servicio de conversión y se recopilan los resultados en una lista.
                 , userPage.getPageable()
-                , userPage.getTotalPages());
+                , userPage.getTotalElements());
     }
 
     @Override
