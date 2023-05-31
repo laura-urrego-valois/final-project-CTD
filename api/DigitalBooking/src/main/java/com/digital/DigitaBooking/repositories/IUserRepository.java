@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
 
-    @Query("from User u where u.userName =:userName")
-    User getFirstByName(@Param("userName") String userName);
+    @Query("from User u where u.userEmail =:userEmail")
+    User getFirstByName(@Param("userEmail") String userEmail);
 
     // La consulta busca un objeto User en la base de datos donde el atributo userName
     // sea igual al valor proporcionado como parámetro.

@@ -11,7 +11,6 @@ import lombok.Data;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
 
     @Column(columnDefinition = "VARCHAR(1000)")

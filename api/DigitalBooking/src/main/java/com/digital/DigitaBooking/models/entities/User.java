@@ -16,7 +16,7 @@ import java.util.Collections;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "User")
+@Table
 public class User implements UserDetails {
 
     // La interfaz UserDetails es parte del framework de seguridad de Spring (Spring
@@ -27,7 +27,6 @@ public class User implements UserDetails {
     // roles, permisos y otros detalles relevantes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
 
     @Column
@@ -36,11 +35,11 @@ public class User implements UserDetails {
 
     @Column
     @NotNull
-    private String lastName;
+    private String userLastName;
 
     @Column
     @NotNull
-    private String email;
+    private String userEmail;
 
     @Column
     @NotNull

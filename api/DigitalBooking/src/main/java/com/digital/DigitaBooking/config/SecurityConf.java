@@ -36,15 +36,24 @@ public class SecurityConf {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorizeHttpRequestsCustomizer -> authorizeHttpRequestsCustomizer
-                                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/sign-up").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/hello/user")
+                                //Rutas de autorizaciones
+                                .requestMatchers(HttpMethod.GET, "/welcome/anyone").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/welcome/user")
                                 .hasAnyAuthority(USER.name(), ADMIN.name())
-                                .requestMatchers(HttpMethod.GET, "/hello/admin").hasAuthority(ADMIN.name())
-                                .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/users").hasAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/sign-up").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/welcome/admin").hasAuthority(ADMIN.name())
+                                //Rutas de tours
+                                .requestMatchers(HttpMethod.GET, "/tours").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/tours/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
+                                //Rutas de categorias
+                                .requestMatchers(HttpMethod.POST,"/category").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.GET,"/category").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/category/{id}").permitAll()
+                                .requestMatchers(HttpMethod.PUT,"/category/{id}").hasAnyAuthority(ADMIN.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -54,7 +63,7 @@ public class SecurityConf {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("http://localhost:8000"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

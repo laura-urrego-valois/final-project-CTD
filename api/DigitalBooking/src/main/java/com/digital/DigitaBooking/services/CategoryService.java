@@ -6,6 +6,7 @@ import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.*;
 
@@ -36,12 +37,14 @@ public class CategoryService implements ICategoryService {
 
     @Override //Confirmar funcionamiento en Postman!
     public void updateCategory(Integer id, CategoryDTO categoryDTO) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            category = mapper.convertValue(categoryDTO, Category.class);
-            categoryRepository.save(category);
-        }
+        Optional<Category> optionalCategory = categoryRepository.findById(id).map(category -> {
+            category.setCategoryName(categoryDTO.getCategoryName());
+            category.setCategoryDescription(categoryDTO.getCategoryDescription());
+            category.setCategoryImageURL(categoryDTO.getCategoryImageURL());
+            return categoryRepository.save(category);
+            });
+
+
     }
 
     @Override

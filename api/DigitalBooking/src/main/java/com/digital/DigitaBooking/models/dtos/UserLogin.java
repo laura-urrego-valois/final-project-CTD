@@ -11,11 +11,11 @@ import org.hibernate.validator.constraints.Length;
 public class UserLogin {
 
     @NotEmpty
-    @Length(min = 8,max = 20)
-    private String userName;
+    @Length(min = 15, max = 30)
+    private String userEmail;
 
     @NotEmpty(message = "Password field cannot be empty")
-    @Length(min = 8,max = 50)
+    @Length(min = 8,max = 20)
     private String password;
 }
 

@@ -32,4 +32,10 @@ public class CategoryController {
         return categoryService.getCategories();
     }
 
+    @PutMapping(path="/{id}")
+    public ResponseEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO){
+        categoryService.updateCategory(id,categoryDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
 }
