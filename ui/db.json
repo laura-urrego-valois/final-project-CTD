@@ -56,6 +56,15 @@
       "password": "123",
       "id_role": "2",
       "confirmPassword": "123"
+    },
+    {
+      "id": 1685500892218,
+      "name": "sami",
+      "lastName": "villada",
+      "email": "sami@email.com",
+      "password": "pass123",
+      "confirmPassword": "pass123",
+      "id_role": "2"
     }
   ],
   "categories": [

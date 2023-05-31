@@ -20,25 +20,28 @@ const validationsForm = async (form) => {
 	const errors = {}
 
 	if (!form.name.trim()) {
-		errors.name = "El campo Nombre es requerido"
+		errors.name = "Nombre es requerido"
 	}
 	if (!form.description.trim()) {
-		errors.description = "El campo Descripcion es requerido"
+		errors.description = "Descripción es requerido"
 	}
 	let regex = new RegExp(
 		"/^https://images.unsplash.com/i"
 	);
 	if (regex.test(form.image_url)) {
-		errors.image_url = "No es un link de unplash valido"
+		errors.image_url = "No es un link de unplash válido"
 	}
 	if (!form.image_url.trim()) {
-		errors.image_url = "El campo Url Imagen es requerido"
+		errors.image_url = "Url Imagen es requerido"
+	}
+	if (!form.image_url.trim()) {
+		errors.image_url = "Url Imagen es requerido"
 	}
 	if (form.capacity <= 0) {
 		errors.capacity = "Al menos capacidad de (1) persona"
 	}
 	if (form.price <= 0) {
-		errors.price = "Precio invalido"
+		errors.price = "Precio válido"
 	}
 	if (Number.isInteger(form.id_category)) {
 		errors.id_category = "Debes seleccionar una categoria"
@@ -85,7 +88,7 @@ export const Register = () => {
 					errorMessage={errors.name}
 				/>
 				<Input
-					displayLabel="Descripcion"
+					displayLabel="Descripción"
 					label="description"
 					type="text"
 					onBlur={handleBlur}
@@ -94,7 +97,7 @@ export const Register = () => {
 					errorMessage={errors.description}
 				/>
 				<Input
-					displayLabel="Url Imagen"
+					displayLabel="Imagen"
 					label="image_url"
 					type="text"
 					onBlur={handleBlur}
@@ -127,10 +130,7 @@ export const Register = () => {
 					onBlur={handleBlur}
 					onChange={handleChange}
 					value={parseInt(form.id_category)}
-					errorMessage={errors.id_category}
 				/>
-
-
 				<Button type="primary">Agregar</Button>
 			</form>
 		</Container>

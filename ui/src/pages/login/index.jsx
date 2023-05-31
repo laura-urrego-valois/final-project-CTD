@@ -1,4 +1,5 @@
-import Swal from "sweetalert2";
+/* eslint-disable no-control-regex */
+// import Swal from "sweetalert2";
 
 import { useForm } from "../../hooks/useForm";
 
@@ -8,47 +9,59 @@ import { Button } from "../../components/Button";
 
 import "./Login.css";
 
-export const Login = () => {
-    const { data, setData, handleChange } = useForm();
-    // const createItem = async (tour) => {
-    //     await axios
-    //         .post(`${BASE_URL}/tours`, tour)
-    //         .then((response) => {
-    //             dispatch({
-    //                 type: actions.CREATE_TOUR,
-    //                 payload: response.data,
-    //             });
-    //         }).catch((err) => { console.log(err) })
-    // };
+const initialState = {
+    email: "",
+    password: "",
+};
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // await createItem(data)
-        Swal.fire("Login");
-        setData({});
-        // navigate("/");
-    };
+const validationsForm = async (form) => {
+    const errors = {};
+
+    if (!form.email.trim()) {
+        errors.email = "Correo es requerido";
+    }
+
+    let regex = new RegExp(
+        "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
+    );
+
+    if (!regex.test(form.email)) {
+        errors.email = "Correo no válido"
+    }
+
+    if (!form.password.trim()) {
+        errors.password = "Contraseña es requerida";
+    }
+    return errors
+};
+
+export const Login = () => {
+    const { form, errors, handleChange, handleLogin } = useForm(
+        initialState,
+        validationsForm
+    );
+
     return (
         <Container>
-            <h1 className="form_title">Iniciar Sesion</h1>
+            <h1 className="form_title">Iniciar Sesión</h1>
             <form
                 className="login__form"
-                onSubmit={handleSubmit}>
+                onSubmit={handleLogin}>
                 <Input
-                    displayLabel="Correo Electronico"
-                    label="name"
+                    displayLabel="Correo electrónico"
+                    label="email"
                     type="text"
                     onChange={handleChange}
-                    value={data?.name}
-                    required
+                    value={form.email}
+                    errorMessage={errors.email}
                 />
                 <Input
-                    displayLabel="Contrasena"
-                    label="description"
+                    displayLabel="Contraseña"
+                    label="password"
                     type="password"
                     onChange={handleChange}
-                    value={data?.description}
-                    required
+                    value={form.password}
+                    errorMessage={errors.password}
                 />
                 <Button type="primary">Ingresar</Button>
             </form>
