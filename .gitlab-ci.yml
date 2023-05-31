@@ -13,7 +13,6 @@ build_backend:
     - gradle clean
     - gradle build
     - echo "Finished building the app."
-
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "feature-pipeline"'
 
@@ -32,7 +31,6 @@ build_frontend:
   artifacts:
     paths:
       - ui/dist/
-
 deploy_frontend:
   stage: deploy
   before_script:
@@ -46,7 +44,6 @@ deploy_frontend:
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   dependencies:
     - build_frontend
-
 deploy_Backend:
   stage: deploy
   needs: [build_backend]
