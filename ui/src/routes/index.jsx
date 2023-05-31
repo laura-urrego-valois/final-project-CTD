@@ -10,6 +10,7 @@ import { Register } from "../pages/register";
 
 import { Login } from "../pages/login";
 import { SignUp } from "../pages/signUp";
+import { User } from "../pages/user";
 
 import { Success } from "../pages/success";
 import { CategoryList } from "../pages/categoryList";
@@ -30,6 +31,10 @@ export const AppRoutes = () => {
 				<Route
 					path="/admin"
 					element={<Admin />}
+				/>
+				<Route
+					path="/user"
+					element={<User />}
 				/>
 				<Route
 					path="/product-list"
