@@ -2,11 +2,11 @@ import Swal from "sweetalert2";
 
 import { useForm } from "../../hooks/useForm";
 
-import { Container } from "../../components/Container"
+import { Container } from "../../components/Container";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
-import "./Login.css"
+import "./Login.css";
 
 export const Login = () => {
     const { data, setData, handleChange } = useForm();
@@ -27,18 +27,31 @@ export const Login = () => {
         Swal.fire("Login");
         setData({});
         // navigate("/");
-
     };
     return (
         <Container>
-
-            <h1 className='form_title'>Iniciar Sesion</h1>
-            <form className="login__form" onSubmit={handleSubmit}>
-                <Input displayLabel="Correo Electronico" label="name" type="text" onChange={handleChange} value={data?.name} required />
-                <Input displayLabel="Contrasena" label="description" type="password" onChange={handleChange} value={data?.description} required />
+            <h1 className="form_title">Iniciar Sesion</h1>
+            <form
+                className="login__form"
+                onSubmit={handleSubmit}>
+                <Input
+                    displayLabel="Correo Electronico"
+                    label="name"
+                    type="text"
+                    onChange={handleChange}
+                    value={data?.name}
+                    required
+                />
+                <Input
+                    displayLabel="Contrasena"
+                    label="description"
+                    type="password"
+                    onChange={handleChange}
+                    value={data?.description}
+                    required
+                />
                 <Button type="primary">Ingresar</Button>
             </form>
-
         </Container>
-    )
-}
+    );
+};

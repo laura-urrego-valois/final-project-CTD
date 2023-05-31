@@ -11,6 +11,7 @@ import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
 import { Login } from "../pages/login";
 import { SignUp } from "../pages/signUp";
+import { User } from "../pages/user";
 
 
 export const AppRoutes = () => {
@@ -29,6 +30,10 @@ export const AppRoutes = () => {
 				<Route
 					path="/admin"
 					element={<Admin />}
+				/>
+				<Route
+					path="/user"
+					element={<User />}
 				/>
 				<Route
 					path="/product-list"
