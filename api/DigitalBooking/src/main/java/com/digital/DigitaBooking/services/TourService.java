@@ -1,5 +1,7 @@
 package com.digital.DigitaBooking.services;
 
+import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ITourRepository;
@@ -35,6 +37,19 @@ public class TourService implements ITourService {
     }
 
     @Override
+    public void updateTour(Long id, TourDTO tourDTO) {
+        Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
+            tour.setTourImageURL(tourDTO.getTourImageURL());
+            tour.setTourName(tourDTO.getTourName());
+            tour.setTourDescription(tourDTO.getTourDescription());
+            tour.setTourCapacity(tourDTO.getTourCapacity());
+            tour.setTourPrice(tour.getTourPrice());
+            return tourRepository.save(tour);
+        });
+
+    }
+
+    @Override
     public void deleteTour(Long id) {
         tourRepository.deleteById(id);
     }
@@ -51,6 +66,7 @@ public class TourService implements ITourService {
         return toursDTO;
     }
 
+    @Override
     public Set<TourDTO> getToursByCategory(Integer id) {
         Set<TourDTO> toursDTO = new HashSet<>();
         List<Tour> tours = tourRepository.findAllByCategoryId(id);
@@ -61,5 +77,5 @@ public class TourService implements ITourService {
         }
         return toursDTO;
     }
-
 }
+

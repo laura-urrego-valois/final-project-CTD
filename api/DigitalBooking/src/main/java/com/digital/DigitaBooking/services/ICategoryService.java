@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.services;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Set;
 
