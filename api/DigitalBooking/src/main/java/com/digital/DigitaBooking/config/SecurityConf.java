@@ -64,12 +64,10 @@ public class SecurityConf {
                 .build();
     }
 
-    // Para solucionar los errores debemos gestionar los roles, puse un Preauthorize en el Post de TourController para trabajar con ese método hasta que nos dé
-    // de un resultado positivo y poder hacer lo mismo con los otros controladores pero aún así queda faltando algo más.
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:8000"));
+        configuration.setAllowedOrigins(List.of("http://*:8000"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

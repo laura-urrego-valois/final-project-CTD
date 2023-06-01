@@ -14,4 +14,5 @@ public class TourDTO {
     private Boolean tourAvailability;
     private Double tourPrice;
     private Integer tourScore;
+    private Integer categoryId;
 }
