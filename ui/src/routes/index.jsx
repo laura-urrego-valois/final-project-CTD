@@ -15,9 +15,7 @@ import { Success } from "../pages/success";
 import { CategoryList } from "../pages/categoryList";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
-import { Login } from "../pages/login";
-import { SignUp } from "../pages/signUp";
-import { User } from "../pages/user";
+
 
 
 export const AppRoutes = () => {
@@ -36,10 +34,6 @@ export const AppRoutes = () => {
 				<Route
 					path="/admin"
 					element={<Admin />}
-				/>
-				<Route
-					path="/user"
-					element={<User />}
 				/>
 				<Route
 					path="/user"
@@ -66,12 +60,8 @@ export const AppRoutes = () => {
 					element={<Success />}
 				/>
 				<Route
-					path="/login"
-					element={<Login />}
-				/>
-				<Route
-					path="/signup"
-					element={<SignUp />}
+					path="/category-list"
+					element={<CategoryList />}
 				/>
 				<Route
 					path="*"
