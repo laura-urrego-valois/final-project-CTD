@@ -42,7 +42,7 @@ const Detail = () => {
   // 		});
   // 	};
 
-  const itemDetail = tours?.find((item) => item.id_tour == id);
+  const itemDetail = tours?.find((item) => item.id == id);
   const getCategoryName = (categoryId) => {
     const category = categories?.find((cat) => cat.id_category === categoryId);
     return category ? category.name : "";
@@ -60,7 +60,7 @@ const Detail = () => {
       <div className="detail__rating">
         <div className="detail__rating-content">
           <p className="detail__rating-classification">
-            {itemDetail.classification}
+            {itemDetail?.classification}
           </p>
           <p className="detail__rating-star">
             <BsStarFill />
