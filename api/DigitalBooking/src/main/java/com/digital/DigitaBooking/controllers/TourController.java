@@ -32,6 +32,7 @@ public class TourController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteTour(@PathVariable Long id) {
         tourService.deleteTour(id);
         return ResponseEntity.ok(HttpStatus.OK);
@@ -48,6 +49,7 @@ public class TourController {
     }
 
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateTour(@PathVariable Long id, @RequestBody TourDTO tourDTO) {
         tourService.updateTour(id, tourDTO);
         return ResponseEntity.ok(HttpStatus.OK);

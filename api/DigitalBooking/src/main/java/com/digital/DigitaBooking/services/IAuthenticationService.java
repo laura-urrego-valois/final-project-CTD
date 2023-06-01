@@ -9,4 +9,5 @@ public interface IAuthenticationService {
     AuthorizationResponse signUp(UserSignUp userSignUp);
 
     AuthorizationResponse logIn(UserLogin userLogin);
+
 }
