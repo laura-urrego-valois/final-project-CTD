@@ -24,12 +24,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="DigitaBooking" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -58,6 +53,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Desktop/Escritorio/CertifiedTech/Integrador/equipo-10/api/DigitalBooking&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -69,7 +65,7 @@
   <component name="RunManager">
     <configuration name="DigitaBookingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.digital.DigitaBooking.DigitaBookingApplication" />
-      <module name="DigitaBooking.main" />
+      <module name="DigitalBooking" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.digital.DigitaBooking.*" />

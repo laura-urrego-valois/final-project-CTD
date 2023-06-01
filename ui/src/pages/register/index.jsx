@@ -1,56 +1,138 @@
-// import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
-import Swal from "sweetalert2";
-
 import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
-import { Input } from "../../components/Input";
-
+import { Input, Select } from "../../components/Input";
 import { useForm } from "../../hooks/useForm";
-import { BASE_URL, useGlobalState } from '../../context';
-import { actions } from '../../context/reducer';
-
 import "./Register.css"
 
+const initialState = {
+	id: Date.now(),
+	name: "",
+	description: "",
+	image_url: "",
+	score: 0,
+	capacity: 0,
+	availability: true,
+	price: 0,
+	id_category: 0
+};
+
+const validationsForm = async (form) => {
+	const errors = {}
+
+	if (!form.name.trim()) {
+		errors.name = "Nombre es requerido"
+	}
+	if (!form.description.trim()) {
+		errors.description = "Descripción es requerido"
+	}
+	let regex = new RegExp(
+		"/^https://images.unsplash.com/i"
+	);
+	if (regex.test(form.image_url)) {
+		errors.image_url = "No es un link de unplash válido"
+	}
+	if (!form.image_url.trim()) {
+		errors.image_url = "Url Imagen es requerido"
+	}
+	if (!form.image_url.trim()) {
+		errors.image_url = "Url Imagen es requerido"
+	}
+	if (form.capacity <= 0) {
+		errors.capacity = "Al menos capacidad de (1) persona"
+	}
+	if (form.price <= 0) {
+		errors.price = "Precio válido"
+	}
+	if (Number.isInteger(form.id_category)) {
+		errors.id_category = "Debes seleccionar una categoria"
+	}
+	return errors
+}
+
+const options = [
+	{ label: "Ciudades Emblemáticas", value: 1 },
+	{ label: "Tropical Paradise Expedition", value: 2 },
+	{ label: "Magia Invernal", value: 3 },
+	{ label: "Caminos perdidos", value: 4 },
+];
+
+const urlParam = "tours"
+const redirectTo = "/product-list"
 
 export const Register = () => {
-	const { data, setData, handleChange } = useForm();
-	const { dispatch } = useGlobalState();
-	// const navigate = useNavigate();
+	const
+		{
+			form,
+			errors,
+			handleChange,
+			handleBlur,
+			handleSubmit
+		} = useForm(
+			initialState,
+			validationsForm,
+			urlParam,
+			redirectTo
+		);
 
-
-	const createItem = async (tour) => {
-		await axios
-			.post(`${BASE_URL}/tours`, tour)
-			.then((response) => {
-				dispatch({
-					type: actions.CREATE_TOUR,
-					payload: response.data,
-				});
-			}).catch((err) => { console.log(err) })
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await createItem(data)
-		Swal.fire("Creado con éxito");
-		setData({});
-		// navigate("/");
-
-	};
-	return <Container>
-		<h1 className='form_title'>Agregar Paquete</h1>
-		<form className="admin__form" onSubmit={handleSubmit}>
-			<Input label="name" type="text" onChange={handleChange} value={data?.name} required />
-			<Input label="description" type="textarea" onChange={handleChange} value={data?.description} required />
-			<Input label="image_url" type="text" onChange={handleChange} value={data?.image_url} required />
-			<Input label="score" type="number" onChange={handleChange} value={data?.score} required />
-			{/* 	<Input label="capacity" type="number" onChange={handleChange} value={data?.capacity} required /> */}
-			<Input label="price" type="number" onChange={handleChange} value={data?.price} required />
-			<Input label="id_category" type="number" onChange={handleChange} value={parseInt(data?.id_category)} required />
-			{/* <Input label="id_ciudad" type="text" onChange={handleChange} value={data?.id_ciudad} required /> */}
-
-			<Button type="primary">Agregar</Button>
-		</form>
-	</Container>;
+	return (
+		<Container>
+			<h1 className='form_title'>Agregar Paquete</h1>
+			<form className="admin__form" onSubmit={handleSubmit}>
+				<Input
+					displayLabel="Nombre"
+					label="name"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.name}
+					errorMessage={errors.name}
+				/>
+				<Input
+					displayLabel="Descripción"
+					label="description"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.description}
+					errorMessage={errors.description}
+				/>
+				<Input
+					displayLabel="Imagen"
+					label="image_url"
+					type="text"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.image_url}
+					errorMessage={errors.image_url}
+				/>
+				<Input
+					displayLabel="Capacidad"
+					label="capacity"
+					type="number"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.capacity}
+					errorMessage={errors.capacity}
+				/>
+				<Input
+					displayLabel="Precio por Persona"
+					label="price"
+					type="number"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={form.price}
+					errorMessage={errors.price}
+				/>
+				<Select
+					options={options}
+					displayLabel="Categorias"
+					label="id_category"
+					onBlur={handleBlur}
+					onChange={handleChange}
+					value={parseInt(form.id_category)}
+				/>
+				<Button type="primary">Agregar</Button>
+			</form>
+		</Container>
+	)
 };
