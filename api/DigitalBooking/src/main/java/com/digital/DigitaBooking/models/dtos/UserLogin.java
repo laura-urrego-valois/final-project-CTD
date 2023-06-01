@@ -12,7 +12,7 @@ public class UserLogin {
 
     @NotEmpty
     @Length(min = 15, max = 30)
-    private String userEmail;
+    private String userName;
 
     @NotEmpty(message = "Password field cannot be empty")
     @Length(min = 8,max = 20)

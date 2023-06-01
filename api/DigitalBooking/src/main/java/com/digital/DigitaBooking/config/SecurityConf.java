@@ -51,9 +51,9 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/tours/{id}").hasAnyAuthority(ADMIN.name())
                                 // Rutas de categorías
-                                .requestMatchers(HttpMethod.POST, "/category").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.GET, "/category").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/category/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/category").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/category/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/category/{id}").hasAuthority(ADMIN.name())
                                 .anyRequest().authenticated())

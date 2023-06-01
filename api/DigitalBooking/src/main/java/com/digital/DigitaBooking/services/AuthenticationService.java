@@ -30,7 +30,7 @@ public class AuthenticationService implements IAuthenticationService{
     @Override
     public AuthorizationResponse logIn(UserLogin userLogin) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(userLogin.getUserEmail(),
+                .authenticate(new UsernamePasswordAuthenticationToken(userLogin.getUserName(),
                         userLogin.getPassword()));
 
         String jwt = jwtService
