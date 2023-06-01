@@ -22,7 +22,7 @@ import java.util.List;
 import static com.digital.DigitaBooking.models.entities.Role.ADMIN;
 import static com.digital.DigitaBooking.models.entities.Role.USER;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
