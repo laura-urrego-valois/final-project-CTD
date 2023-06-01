@@ -6,6 +6,11 @@ import Detail from "../pages/Detail";
 import { ProductList } from "../pages/productList";
 import { Admin } from "../pages/admin";
 import { Register } from "../pages/register";
+
+import { Login } from "../pages/login";
+import { SignUp } from "../pages/signUp";
+import { User } from "../pages/user";
+
 import { Success } from "../pages/success";
 import { CategoryList } from "../pages/categoryList";
 import Header from "../components/Header/header";
@@ -37,16 +42,24 @@ export const AppRoutes = () => {
 					element={<User />}
 				/>
 				<Route
+					path="/user"
+					element={<User />}
+				/>
+				<Route
 					path="/product-list"
 					element={<ProductList />}
 				/>
 				<Route
-					path="/category-list"
-					element={<CategoryList />}
-				/>
-				<Route
 					path="/register"
 					element={<Register />}
+				/>
+				<Route
+					path="/login"
+					element={<Login />}
+				/>
+				<Route
+					path="/signup"
+					element={<SignUp />}
 				/>
 				<Route
 					path="/register-success"

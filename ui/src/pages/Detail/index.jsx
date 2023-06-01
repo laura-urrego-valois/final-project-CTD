@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { Gallery } from "../../components/Gallery";
 import { Feature } from "../../components/Feature";
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
-import "./detail.css";
+import "./Detail.css";
 
 export const dataGallery = {
   galleryImage: [
