@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
-//@CrossOrigin(maxAge = 3600)
+import java.util.ArrayList;
+import java.util.Optional;
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
