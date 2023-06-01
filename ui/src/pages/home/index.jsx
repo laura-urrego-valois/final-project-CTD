@@ -1,5 +1,7 @@
+import { Body } from "../../components/Body"
+
 export const Home = () => {
   return (
-    <h1>Welcome Equipo 10</h1>
+    <Body />
   )
 }

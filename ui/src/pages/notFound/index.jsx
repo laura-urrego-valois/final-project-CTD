@@ -1,5 +1,9 @@
+import { Container } from "../../components/Container"
+
 export const NotFound = () => {
   return (
-    <h1>Not Found</h1>
+    <Container>
+      <h1>Pagina no encontrada</h1>
+    </Container>
   )
 }
