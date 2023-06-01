@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +20,7 @@ public class WelcomeController {
             @ApiResponse(responseCode = "401", description = "Authentication Failure", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)})
     @GetMapping(path = "/welcome/user")
-//    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public String user(Authentication authentication) {
         return welcomeLoggedUser(authentication);
     }
@@ -29,7 +31,7 @@ public class WelcomeController {
             @ApiResponse(responseCode = "401", description = "Authentication Failure", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)})
     @GetMapping(path = "/welcome/admin")
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String admin(Authentication authentication) {
 
         return welcomeLoggedUser(authentication);
@@ -47,7 +49,7 @@ public class WelcomeController {
     }
 
     private static String welcomeLoggedUser(Authentication authentication) {
-        //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return "Welcome " + userDetails.getUsername();
     }

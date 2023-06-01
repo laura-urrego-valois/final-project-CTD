@@ -43,6 +43,8 @@ public class UserService implements IUserService {
         try {
             return userRepository.save(User.builder()
                     .userName(userSignUp.getUserName())
+                    .userLastName(userSignUp.getUserLastName())
+                    .userEmail(userSignUp.getUserEmail())
                     .password(passwordEncoder.encode(userSignUp.getPassword())) // Se utiliza para encriptar la contraseña antes de almacenarla en la base de datos.
                     .role(Role.USER) // Se asigna el rol del usuario registrado.
                     .build()); // Construye y retorna una instancia completa de la clase User con los datos proporcionados.
@@ -61,14 +63,15 @@ public class UserService implements IUserService {
                 userPage.getContent().stream()
                         .map(user -> conversionService.convert(user, UserDTO.class)).toList() // Se toma la lista de usuarios, se convierte cada usuario a su equivalente en UserDTO utilizando el servicio de conversión y se recopilan los resultados en una lista.
                 , userPage.getPageable()
-                , userPage.getTotalPages());
+                , userPage.getTotalElements());
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserDetails userDetails = userRepository.getFirstByName(userName);
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        UserDetails userDetails = userRepository.getFirstByEmail(userEmail);
+        //System.out.println(userDetails.getUsername());
         if (userDetails == null) {
-            throw new UsernameNotFoundException(userName);
+            throw new UsernameNotFoundException(userEmail);
         }
         return userDetails;
     }

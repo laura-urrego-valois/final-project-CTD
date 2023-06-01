@@ -10,7 +10,11 @@ public interface ITourService {
 
     TourDTO getTour(Long id);
 
+    void updateTour(Long id, TourDTO tourDTO);
+
     void deleteTour(Long id);
 
     Set<TourDTO> getTours();
+
+    Set<TourDTO> getToursByCategory(Integer id);
 }

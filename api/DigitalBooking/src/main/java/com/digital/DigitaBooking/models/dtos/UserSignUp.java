@@ -1,6 +1,8 @@
 package com.digital.DigitaBooking.models.dtos;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,6 +19,15 @@ public class UserSignUp {
     @NotEmpty
     @Length(min = 8, max = 20)
     private String userName;
+
+    @NotEmpty
+    @Length(min = 4, max = 20)
+    private String userLastName;
+
+
+    @NotEmpty
+    @Length(min = 15, max = 30)
+    private String userEmail;
 
     @NotEmpty
     @Length(min = 4, max = 20)
