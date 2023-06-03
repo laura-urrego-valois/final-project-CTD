@@ -4,6 +4,7 @@ import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
+import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.repositories.ITourRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,16 @@ public class TourService implements ITourService {
     private ITourRepository tourRepository;
 
     @Autowired
+    private ICategoryRepository categoryRepository;
+
+    @Autowired
     ObjectMapper mapper;
 
     @Override
     public void saveTour(TourDTO tourDTO) {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
+        Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
+        tour.setCategory(category);
         tourRepository.save(tour);
     }
 
@@ -43,7 +49,8 @@ public class TourService implements ITourService {
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
             tour.setTourCapacity(tourDTO.getTourCapacity());
-            tour.setTourPrice(tour.getTourPrice());
+            tour.setTourPrice(tourDTO.getTourPrice());
+            tour.setTourScore(tourDTO.getTourScore());
             return tourRepository.save(tour);
         });
 

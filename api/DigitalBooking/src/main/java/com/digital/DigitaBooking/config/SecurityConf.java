@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -62,8 +64,6 @@ public class SecurityConf {
                 .build();
     }
 
-    // Para solucionar los errores debemos gestionar los roles, puse un Preauthorize en el Post de TourController para trabajar con ese método hasta que nos dé
-    // de un resultado positivo y poder hacer lo mismo con los otros controladores pero aún así queda faltando algo más.
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -74,4 +74,15 @@ public class SecurityConf {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+    protected void configure(HttpSecurity http) throws Exception {
+        http.logout()
+                .logoutUrl("/logout") // URL de cierre de sesión
+                .logoutSuccessUrl("/login") // Redireccionar a la página de inicio de sesión después de cerrar sesión
+                .invalidateHttpSession(true) // Invalidar la sesión actual
+                .deleteCookies("JSESSIONID") // Elimina las cookies específicas (si es necesario)
+                .permitAll();
+    }
+
 }
+
