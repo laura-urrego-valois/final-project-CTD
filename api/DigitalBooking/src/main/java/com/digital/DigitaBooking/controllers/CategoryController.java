@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
