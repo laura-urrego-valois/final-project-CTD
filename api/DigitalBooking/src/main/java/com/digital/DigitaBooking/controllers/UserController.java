@@ -25,7 +25,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
