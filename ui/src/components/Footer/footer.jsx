@@ -1,3 +1,6 @@
+import { FaFacebookSquare, FaTiktok } from 'react-icons/fa';
+import { IoLogoWhatsapp } from 'react-icons/io';
+import { AiFillInstagram } from 'react-icons/ai';
 import "./footer.css";
 
 const Footer = () => {
@@ -11,16 +14,16 @@ const Footer = () => {
       </div>
       <div className='social-icons'>
         <a className='social-media' href="https://www.facebook.com" rel="noreferrer" target="_blank">
-          <img className="footer__icon" src="../src/assets/ico-facebook.png" alt='ico-facebook' />
+          <FaFacebookSquare />
         </a>
         <a className='social-media' href="https://www.instagram.com" rel="noreferrer" target="_blank">
-          <img className="footer__icon" src="../src/assets/ico-instagram.png" alt='ico-instagram' />
+          <AiFillInstagram />
         </a>
         <a className='social-media' href="https://www.tiktok.com" rel="noreferrer" target="_blank">
-          <img className="footer__icon" src="../src/assets/ico-tiktok.png" alt='ico-tiktok' />
+          <FaTiktok />
         </a>
         <a className='social-media' href="https://www.whatsapp.com" rel="noreferrer" target="_blank">
-          <img className="footer__icon" src="../src/assets/ico-whatsapp.png" alt='ico-whatsapp' />
+          <IoLogoWhatsapp />
         </a>
       </div>
     </footer>

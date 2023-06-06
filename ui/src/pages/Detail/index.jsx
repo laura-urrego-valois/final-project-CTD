@@ -43,6 +43,7 @@ const Detail = () => {
   // 	};
 
   const itemDetail = tours?.find((item) => item.id == id);
+  console.log("detail", itemDetail)
   const getCategoryName = (categoryId) => {
     const category = categories?.find((cat) => cat.id_category === categoryId);
     return category ? category.name : "";
@@ -51,7 +52,7 @@ const Detail = () => {
     <article className="detail__container">
       <div className="detail">
         <div>
-          <h1 className="detail__title">{itemDetail.name}</h1>
+          <h1 className="detail__title">{itemDetail.tourName}</h1>
         </div>
         <Link to="/">
           <Button type="secondary">⬅</Button>
@@ -60,7 +61,7 @@ const Detail = () => {
       <div className="detail__rating">
         <div className="detail__rating-content">
           <p className="detail__rating-classification">
-            {itemDetail?.classification}
+            {itemDetail?.tourClassification}
           </p>
           <p className="detail__rating-star">
             <BsStarFill />
@@ -70,7 +71,7 @@ const Detail = () => {
             <BsStar />
           </p>
         </div>
-        <p className="detail__rating-score">{itemDetail.score}</p>
+        <p className="detail__rating-score">{itemDetail.tourScore}</p>
       </div>
       {/* //Layout component Gallery */}
       <Gallery dataImage={dataGallery.galleryImage} />
@@ -78,12 +79,12 @@ const Detail = () => {
       <section className="detail__content">
         <div className="detail__info">
           <div className="detail-value">
-            <h3 className="detail__price">{`Precio: ${itemDetail.price} USD`}</h3>
+            <h3 className="detail__price">{`Precio: ${itemDetail.tourPrice} USD`}</h3>
             <p className="detail__category">
               {getCategoryName(itemDetail.id_category)}
             </p>
           </div>
-          <p className="detail__description">{itemDetail.description}</p>
+          <p className="detail__description">{itemDetail.tourDescription}</p>
         </div>
       </section>
       <Feature feature={feature} />

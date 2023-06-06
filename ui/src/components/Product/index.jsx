@@ -30,8 +30,8 @@ export const Product = () => {
     };
   }, []);
 
-  const handleCategoryClick = (categoryId) => {
-    setSelectedCategory(categoryId);
+  const handleCategoryClick = (id) => {
+    setSelectedCategory(id);
   };
 
   const NextArrow = (props) => {
@@ -82,16 +82,16 @@ export const Product = () => {
       <div className="">
         <Slider {...settings}>
           {state?.categories?.map((data) => (
-            <div key={data.id_category}>
+            <div key={data.id}>
               <Link
                 className="product_link"
                 to={"/"}
-                onClick={() => handleCategoryClick(data.id_category)}
+                onClick={() => handleCategoryClick(data.id)}
               >
                 <SimpleCard
-                  imageSrc={data.image_url}
-                  title={data.name}
-                  description={data.description}
+                  imageSrc={data.categoryImageURL}
+                  title={data.categoryName}
+                  description={data.categoryDescription}
                 />
               </Link>
             </div>

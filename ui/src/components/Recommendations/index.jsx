@@ -18,7 +18,8 @@ export const Recommendations = () => {
 	};
 
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
-	const shuffledToursItemsPerPage = 6; // Elemento por pagina
+	const shuffledToursItemsPerPage = 10; // Elemento por pagina
+	console.log("tour", state)
 
 	const renderTours = (toursToRender, itemsPerPage) => {
 		return toursToRender
@@ -27,12 +28,12 @@ export const Recommendations = () => {
 				<DetailedCard
 					key={tour.id}
 					id={tour.id}
-					title={tour.name}
-					description={tour.description}
-					imageSrc={tour.image_url}
-					classification={tour.classification}
-					category={getCategoryName(tour.id_category)}
-					score={tour.score}
+					title={tour.tourName}
+					description={tour.tourDescription}
+					imageSrc={tour.tourImageURL}
+					classification={tour.tourClassification}
+					category={getCategoryName(tour.categoryId)}
+					score={tour.tourScore}
 				/>
 			));
 	};
