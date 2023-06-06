@@ -1,3 +1,6 @@
+.product{
+  margin-bottom: 4rem;
+}
 .product__content{
 display: grid;
 grid-gap: 2rem;
@@ -8,6 +11,7 @@ margin: 0 auto;
   text-decoration: none;
   display: flex;
   justify-content: center;
+  margin-inline: .4rem;
 }
 
 @media (min-width: 414px) {
