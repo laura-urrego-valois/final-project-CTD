@@ -1,8 +1,9 @@
 .container{
-  height: 100vh;
+  height: 100%;
   box-sizing: border-box;
   /* overflow: auto; */
   margin-top: 6rem;
+  margin-bottom: 7rem;
 }
 @media (min-width: 414px) {
 }

@@ -1,47 +1,38 @@
-import { useState } from "react";
 import { useGlobalState } from "../../context";
 import { DetailedCard } from "../Card";
 import { Pagination } from "../Pagination";
+import { usePagination } from "../../hooks/usePagination";
 import "./Recommendations.css";
 
 export const Recommendations = () => {
 	const { state } = useGlobalState();
 	const { selectedCategory, tours, categories } = state;
+	const { currentPage, goToNextPage, goToPrevPage } = usePagination(7);
 
-	const filteredTours = tours?.filter((tour) => tour.id_category === selectedCategory);
+	const filteredTours = tours?.filter((tour) => tour?.id_category === selectedCategory);
 	const shuffledTours = tours?.sort(() => Math.random() - 0.5);
 
 	const getCategoryName = (categoryId) => {
-		const category = categories?.find((cat) => cat.id_category === categoryId);
+		const category = categories?.find((cat) => cat?.id_category === categoryId);
 		return category ? category.name : "";
 	};
 
-	const [currentPage, setCurrentPage] = useState(1);
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
 	const shuffledToursItemsPerPage = 6; // Elemento por pagina
-
-	const goToNextPage = () => {
-		setCurrentPage((prevPage) => prevPage + 1);
-	};
-
-	const goToPrevPage = () => {
-		setCurrentPage((prevPage) => prevPage - 1);
-	};
-	console.log("tours", tours)
 
 	const renderTours = (toursToRender, itemsPerPage) => {
 		return toursToRender
 			.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 			.map((tour) => (
 				<DetailedCard
-					key={tour.id_tour}
-					id={tour.id_tour}
-					title={tour.tourName}
-					description={tour.tourDescription}
+					key={tour.id}
+					id={tour.id}
+					title={tour.name}
+					description={tour.description}
 					imageSrc={tour.image_url}
-					classification={tour.tourClassification}
-					category={getCategoryName(tour.tourCategory.id_category)}
-					score={tour.tourScore}
+					classification={tour.classification}
+					category={getCategoryName(tour.id_category)}
+					score={tour.score}
 				/>
 			));
 	};

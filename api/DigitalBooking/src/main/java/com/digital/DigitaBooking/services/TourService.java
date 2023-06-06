@@ -1,7 +1,10 @@
 package com.digital.DigitaBooking.services;
 
+import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
+import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.repositories.ITourRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +19,16 @@ public class TourService implements ITourService {
     private ITourRepository tourRepository;
 
     @Autowired
+    private ICategoryRepository categoryRepository;
+
+    @Autowired
     ObjectMapper mapper;
 
     @Override
     public void saveTour(TourDTO tourDTO) {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
+        Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
+        tour.setCategory(category);
         tourRepository.save(tour);
     }
 
@@ -32,6 +40,20 @@ public class TourService implements ITourService {
             tourDTO = mapper.convertValue(tour, TourDTO.class);
 
         return tourDTO;
+    }
+
+    @Override
+    public void updateTour(Long id, TourDTO tourDTO) {
+        Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
+            tour.setTourImageURL(tourDTO.getTourImageURL());
+            tour.setTourName(tourDTO.getTourName());
+            tour.setTourDescription(tourDTO.getTourDescription());
+            tour.setTourCapacity(tourDTO.getTourCapacity());
+            tour.setTourPrice(tourDTO.getTourPrice());
+            tour.setTourScore(tourDTO.getTourScore());
+            return tourRepository.save(tour);
+        });
+
     }
 
     @Override
@@ -51,6 +73,7 @@ public class TourService implements ITourService {
         return toursDTO;
     }
 
+    @Override
     public Set<TourDTO> getToursByCategory(Integer id) {
         Set<TourDTO> toursDTO = new HashSet<>();
         List<Tour> tours = tourRepository.findAllByCategoryId(id);
@@ -61,5 +84,5 @@ public class TourService implements ITourService {
         }
         return toursDTO;
     }
-
 }
+
