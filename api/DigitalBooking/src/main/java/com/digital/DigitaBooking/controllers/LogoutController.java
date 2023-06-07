@@ -7,7 +7,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-@CrossOrigin(maxAge = 3600)
+
+@CrossOrigin(origins = "*")
 @RestController
 public class LogoutController {
 

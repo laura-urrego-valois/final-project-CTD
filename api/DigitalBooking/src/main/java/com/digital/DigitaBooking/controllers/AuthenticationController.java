@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-@CrossOrigin(maxAge = 3600)
+
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
-@Tag(name="Authentication")
+@Tag(name = "Authentication")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
