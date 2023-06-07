@@ -5,19 +5,21 @@ import com.digital.DigitaBooking.services.impl.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/feature")
+@RequestMapping("/features")
 public class FeatureController {
 
     @Autowired
     private FeatureService featureService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveFeature(@RequestBody FeatureDTO featureDTO) {
 
         featureService.saveFeature(featureDTO);
@@ -37,6 +39,7 @@ public class FeatureController {
     }
 
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateFeature(@PathVariable Long id, @RequestBody FeatureDTO featureDTO) {
 
         featureService.updateFeature(id, featureDTO);
@@ -44,6 +47,7 @@ public class FeatureController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteFeature(@PathVariable Long id) {
 
         featureService.deleteFeature(id);
