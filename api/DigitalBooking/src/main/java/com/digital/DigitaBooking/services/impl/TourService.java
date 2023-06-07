@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.services;
+package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
@@ -6,6 +6,7 @@ import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.repositories.ITourRepository;
+import com.digital.DigitaBooking.services.ITourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

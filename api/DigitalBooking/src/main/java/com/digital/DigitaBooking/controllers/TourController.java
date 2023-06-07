@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.models.dtos.TourDTO;
-import com.digital.DigitaBooking.services.TourService;
+import com.digital.DigitaBooking.services.impl.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

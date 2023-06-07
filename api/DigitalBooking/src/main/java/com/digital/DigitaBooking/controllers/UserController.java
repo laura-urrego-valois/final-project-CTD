@@ -4,7 +4,7 @@ import com.digital.DigitaBooking.models.dtos.PageResponseDTO;
 import com.digital.DigitaBooking.models.dtos.UserDTO;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
 import com.digital.DigitaBooking.models.dtos.UserPageDTO;
-import com.digital.DigitaBooking.services.UserService;
+import com.digital.DigitaBooking.services.impl.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -24,7 +24,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/users")

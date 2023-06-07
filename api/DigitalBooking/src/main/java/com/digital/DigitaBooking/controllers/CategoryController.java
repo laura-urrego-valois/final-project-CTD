@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
-import com.digital.DigitaBooking.services.CategoryService;
+import com.digital.DigitaBooking.services.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

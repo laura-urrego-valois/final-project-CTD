@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.services;
+package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.dtos.PageResponseDTO;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
@@ -6,6 +6,7 @@ import com.digital.DigitaBooking.models.entities.Role;
 import com.digital.DigitaBooking.models.entities.User;
 import com.digital.DigitaBooking.models.dtos.UserDTO;
 import com.digital.DigitaBooking.repositories.IUserRepository;
+import com.digital.DigitaBooking.services.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;

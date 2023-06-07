@@ -1,9 +1,10 @@
-package com.digital.DigitaBooking.services;
+package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.jwt.JwtService;
 import com.digital.DigitaBooking.models.dtos.AuthorizationResponse;
 import com.digital.DigitaBooking.models.dtos.UserLogin;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
+import com.digital.DigitaBooking.services.IAuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class AuthenticationService implements IAuthenticationService{
+public class AuthenticationService implements IAuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
