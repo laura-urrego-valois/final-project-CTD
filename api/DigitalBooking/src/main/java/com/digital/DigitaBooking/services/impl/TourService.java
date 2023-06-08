@@ -46,7 +46,7 @@ public class TourService implements ITourService {
     @Override
     public void updateTour(Long id, TourDTO tourDTO) {
         Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
-            tour.setTourImageURL(tourDTO.getTourImageURL());
+
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
             tour.setTourCapacity(tourDTO.getTourCapacity());

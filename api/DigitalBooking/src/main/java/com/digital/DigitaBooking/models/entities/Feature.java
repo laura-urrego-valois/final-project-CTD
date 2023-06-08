@@ -22,7 +22,7 @@ public class Feature {
     private String featureName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "feature")
+    @ManyToMany(mappedBy = "features")
     private Set<Tour> tours = new HashSet<>();
 
 }
