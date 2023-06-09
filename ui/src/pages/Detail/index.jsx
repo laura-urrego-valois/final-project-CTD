@@ -1,11 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 import { useGlobalState } from "../../context";
-import { Button } from "../../components/Button";
 import { Gallery } from "../../components/Gallery";
 import { Feature } from "../../components/Feature";
-import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
-import "./detail.css";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Politics } from "../../components/Politics";
+import "./detail.css";
+import { Container } from "../../components/Container";
+import { SearchProduct } from "../../components/SearchProduct";
 
 export const dataGallery = {
   galleryImage: [
@@ -44,36 +45,21 @@ const Detail = () => {
   // 	};
 
   const itemDetail = tours?.find((item) => item.id == id);
-  console.log("detail", itemDetail)
   const getCategoryName = (categoryId) => {
     const category = categories?.find((cat) => cat.id_category === categoryId);
     return category ? category.name : "";
   };
   return (
-    <article className="detail__container">
+    <Container>
       <div className="detail">
         <div>
           <h1 className="detail__title">{itemDetail.tourName}</h1>
         </div>
-        <Link to="/">
-          <Button type="secondary">⬅</Button>
+        <Link className="detail__icon" to="/">
+          <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <div className="detail__rating">
-        <div className="detail__rating-content">
-          <p className="detail__rating-classification">
-            {itemDetail?.tourClassification}
-          </p>
-          <p className="detail__rating-star">
-            <BsStarFill />
-            <BsStarFill />
-            <BsStarFill />
-            <BsStarHalf />
-            <BsStar />
-          </p>
-        </div>
-        <p className="detail__rating-score">{itemDetail.tourScore}</p>
-      </div>
+      <SearchProduct itemDetail={itemDetail} />
       {/* //Layout component Gallery */}
       <Gallery dataImage={dataGallery.galleryImage} />
 
@@ -89,8 +75,8 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={feature} />
-      <Politics/>
-    </article>
+      <Politics />
+    </Container>
   );
 };
 
