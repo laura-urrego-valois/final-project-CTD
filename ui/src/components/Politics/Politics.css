@@ -1,0 +1,32 @@
+.politics{
+  text-align: start;
+}
+.politics__title{
+  text-align: start;
+  margin-left: 1rem;
+}
+.politics__container{
+  border-top: 1.5px solid var(--color-primary);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding-inline: 1rem;
+}
+.politics__item h4{
+  margin-block: .8rem;
+}
+.politics__item p{
+  line-height: 1.7rem;
+  font-size: 1.2rem;
+  text-align: justify;
+}
+@media (min-width: 414px) {
+  .politics__container{
+  grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (min-width: 768px) {
+  .politics__container{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
