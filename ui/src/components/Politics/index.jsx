@@ -1,23 +1,34 @@
-import './Politics.css'
+import "./Politics.css";
 
 export const Politics = () => {
   return (
-    <section className='politics'>
-      <h2 className='politics__title'>Que Tenés que saber</h2>
-      <div className='politics__container'>
-        <article className='politics__item'>
-          <h4>Normas de la casa</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates minima delectus impedit ratione beatae repellendus. Eveniet id in laudantium culpa hic, perferendis mollitia nesciunt assumenda? Accusamus error ut dolorem dolorum!</p>
+    <section className="politics">
+      <h2 className="politics__title">Que Tenés que saber</h2>
+      <div className="politics__container">
+        <article className="politics__item">
+          <h4>Política de privacidad</h4>
+          <p>
+            Estas políticas describe cómo tratamos la información personal que
+            recopilamos cuando visita nuestro sitio web y nuestros servicios... <a href="/" target="_blank">ver más</a>
+          </p>
         </article>
-        <article className='politics__item'>
-          <h4>Salud y Seguridad</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates minima delectus impedit ratione beatae repellendus. Eveniet id in laudantium culpa hic, perferendis mollitia nesciunt assumenda? Accusamus error ut dolorem dolorum!</p>
+        <article className="politics__item">
+          <h4>Aviso Legal</h4>
+          <p>
+            Consideraciones legales que debe tener en cuenta al visitar nuestro
+            sitio web y posteriormente aceptación de los servicios que
+            ofrecemos... <a href="/" target="_blank">ver más</a>
+          </p>
         </article>
-        <article className='politics__item'>
-          <h4>Politíca de cancelación</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates minima delectus impedit ratione beatae repellendus. Eveniet id in laudantium culpa hic, perferendis mollitia nesciunt assumenda? Accusamus error ut dolorem dolorum!</p>
+        <article className="politics__item">
+          <h4>Términos y condiciones</h4>
+          <p>
+            Por favor lea términos y condiciones de servicio para este sitio
+            web, antes de utilizarlo, ya que al acceder usted manifiesta su
+            aceptación de los T&C... <a href="/" target="_blank">ver más</a>
+          </p>
         </article>
       </div>
     </section>
-  )
-}
+  );
+};
