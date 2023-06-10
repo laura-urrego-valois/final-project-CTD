@@ -6,7 +6,6 @@ import lombok.*;
 public class TourDTO {
 
     private Long id;
-    private String tourImageURL;
     private String tourName;
     private String tourDescription;
     private String tourClassification;
