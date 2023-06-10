@@ -5,6 +5,7 @@ import { Gallery } from "../../components/Gallery";
 import { Feature } from "../../components/Feature";
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 import "./detail.css";
+import { Politics } from "../../components/Politics";
 
 export const dataGallery = {
   galleryImage: [
@@ -88,6 +89,7 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={feature} />
+      <Politics/>
     </article>
   );
 };
