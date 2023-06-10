@@ -31,11 +31,13 @@
   .social-media {
     display: flex;
     gap:3em;
+    color: var(--color-secondary)
   }
 
   .social-icons{
     display: flex;
     gap:2rem;
+    font-size: 1.8rem;
   }
 
   .footer__icon{
