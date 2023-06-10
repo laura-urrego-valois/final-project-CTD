@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import { AppReducer, actions } from "./reducer";
 import axios from "axios";
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://localhost:8000";
 
 const initialState = {
 	context: "testing context",
@@ -13,9 +13,10 @@ export const ContextGlobal = createContext();
 
 export const ContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
+	console.log("state=>", state)
 
 	const fetchCategories = async () => {
-		await axios.get(`${BASE_URL}/categories`).then((response) => {
+		await axios.get(`${BASE_URL}/category`).then((response) => {
 			dispatch({
 				type: actions.GET_CATEGORIES,
 				payload: response.data,
@@ -25,7 +26,7 @@ export const ContextProvider = ({ children }) => {
 	const updateCategory = async (categoryId, updatedData) => {
 		try {
 			const response = await axios.put(
-				`${BASE_URL}/categories/${categoryId}`,
+				`${BASE_URL}/category/${categoryId}`,
 				updatedData
 			);
 			dispatch({

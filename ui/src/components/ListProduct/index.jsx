@@ -22,7 +22,7 @@ export const ListProduct = () => {
   const { reset } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [tourForm, setTourForm] = useState({
-    id_tour: '',
+    id: '',
     name: '',
     image_url: '',
     description: '',
@@ -58,7 +58,7 @@ export const ListProduct = () => {
       payload: tourId,
     });
 
-    if (selectedTour && selectedTour.id_tour === tourId) {
+    if (selectedTour && selectedTour.id === tourId) {
       closeModal();
     }
   };
@@ -87,21 +87,21 @@ export const ListProduct = () => {
   };
 
   const getCategoryName = (categoryId) => {
-    const category = categories.find((cat) => cat.id_category === categoryId);
-    return category ? category.name : '';
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.categoryName : '';
   };
 
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentTours.map((tour) => (
-        <article className="list__content" key={tour.id_tour}>
-          <img className="list__image" src={tour.image_url} alt="" />
-          <p className="list__title">{tour.name}</p>
-          <p>{getCategoryName(tour.id_category)}</p>
+        <article className="list__content" key={tour.id}>
+          <img className="list__image" src={tour.tourImageURL} alt="" />
+          <p className="list__title">{tour.tourName}</p>
+          <p>{getCategoryName(tour.categoryId)}</p>
           <div className='list__button'>
             <Button onClick={() => openModal(tour)}><AiFillEdit /></Button>
-            <Button type="primary" onClick={() => handleDeleteTour(tour.id_tour)}><AiFillDelete /></Button>
+            <Button type="primary" onClick={() => handleDeleteTour(tour.id)}><AiFillDelete /></Button>
           </div>
         </article>
       ))}
