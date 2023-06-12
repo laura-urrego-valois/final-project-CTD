@@ -1,19 +1,28 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import {
+	createContext,
+	useContext,
+	useReducer,
+	useState,
+	useEffect,
+} from "react";
 import { AppReducer, actions } from "./reducer";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const initialState = {
 	context: "testing context",
-	selectedCategory: null
+	selectedCategory: null,
 };
 
 export const ContextGlobal = createContext();
 
 export const ContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
-	console.log("state=>", state)
+	const [user, setUser] = useState(null);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const token = JSON.parse(localStorage.getItem("token")) || null;
 
 	const fetchCategories = async () => {
 		await axios.get(`${BASE_URL}/category`).then((response) => {
@@ -39,7 +48,10 @@ export const ContextProvider = ({ children }) => {
 	};
 	const addCategory = async (newCategoryData) => {
 		try {
-			const response = await axios.post(`${BASE_URL}/categories`, newCategoryData);
+			const response = await axios.post(
+				`${BASE_URL}/categories`,
+				newCategoryData
+			);
 			dispatch({
 				type: actions.ADD_CATEGORY,
 				payload: response.data,
@@ -68,7 +80,6 @@ export const ContextProvider = ({ children }) => {
 			});
 		});
 	};
-
 	const updateTour = async (tourId, updatedData) => {
 		try {
 			const response = await axios.put(
@@ -111,20 +122,36 @@ export const ContextProvider = ({ children }) => {
 		fetchTours();
 	}, []);
 
+	useEffect(() => {
+		if (token) {
+			const decoded = jwt_decode(token);
+			setUser(decoded);
+			setIsAuthenticated(true);
+		}
+	}, [token]);
+
 	const value = {
 		state,
 		dispatch,
+		// CATEGORY
 		setSelectedCategory: (category) =>
 			dispatch({
 				type: actions.SET_SELECTED_CATEGORY,
-				payload: category
+				payload: category,
 			}),
 		updateCategory,
 		addCategory,
 		deleteCategory,
+		// TOURS
 		updateTour,
 		addTour,
-		deleteTour
+		deleteTour,
+		// AUTHENTICATION
+		user,
+		setUser,
+		isAuthenticated,
+		setIsAuthenticated,
+		token,
 	};
 	return (
 		<ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

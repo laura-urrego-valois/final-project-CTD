@@ -41,8 +41,14 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
 			});
 
 			await axios
-				.post(`${BASE_URL}/${urlParam}`, form)
+				.post(`${BASE_URL}/${urlParam}`, {
+					userEmail: form.userEmail,
+					password: form.password,
+					userName: form.userEmail,
+					userLastName: form.userLastName,
+				})
 				.then((res) => {
+					localStorage.setItem("token", JSON.stringify(res.data.jwt));
 					Swal.fire({
 						icon: "success",
 						timer: 2000,
@@ -72,31 +78,16 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
 			Object.keys(errors).length === 0
 		) {
 			await axios
-				.get(`${BASE_URL}/users`)
-				.then(async (res) => {
-					setForm(initialState);
-
-					const userFound = res.data.find((user) => {
-						return user.email === form.email && user.password === form.password;
+				.post(`${BASE_URL}/${urlParam}`, form)
+				.then((res) => {
+					localStorage.setItem("token", JSON.stringify(res.data.jwt));
+					Swal.fire({
+						icon: "success",
+						timer: 2000,
+						showConfirmButton: false,
 					});
-					if (await userFound) {
-						localStorage.setItem("user", JSON.stringify(userFound));
-
-						Swal.fire({
-							icon: "success",
-							text: "Ingreso exitoso!",
-							timer: 2000,
-							showConfirmButton: false,
-						});
-
-						navigate("/user");
-					} else {
-						Swal.fire({
-							icon: "error",
-							text: "Correo o contraseña incorrectos | Registrate",
-							showConfirmButton: true,
-						});
-					}
+					setForm(initialState);
+					redirectTo && navigate(redirectTo);
 				})
 				.catch((err) => {
 					Swal.fire({

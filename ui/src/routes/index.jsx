@@ -14,6 +14,9 @@ import { Login } from "../pages/login";
 import { SignUp } from "../pages/signUp";
 import { User } from "../pages/user";
 
+import ProtectedRoutes from "./ProtectedRoutes";
+import { CountryList } from "../pages/countryList";
+import { UserList } from "../pages/userList";
 
 export const AppRoutes = () => {
 	return (
@@ -28,22 +31,35 @@ export const AppRoutes = () => {
 					path="/detalle/:id"
 					element={<Detail />}
 				/>
-				<Route
-					path="/admin"
-					element={<Admin />}
-				/>
-				<Route
-					path="/user"
-					element={<User />}
-				/>
-				<Route
-					path="/product-list"
-					element={<ProductList />}
-				/>
-				<Route
-					path="/category-list"
-					element={<CategoryList />}
-				/>
+
+				<Route element={<ProtectedRoutes />}>
+					<Route
+						path="/user"
+						element={<User />}
+					/>
+
+					<Route
+						path="/admin"
+						element={<Admin />}
+					/>
+					<Route
+						path="/product-list"
+						element={<ProductList />}
+					/>
+					<Route
+						path="/category-list"
+						element={<CategoryList />}
+					/>
+					<Route
+						path="/country-list"
+						element={<CountryList />}
+					/>
+					<Route
+						path="/user-list"
+						element={<UserList />}
+					/>
+				</Route>
+
 				<Route
 					path="/register"
 					element={<Register />}
@@ -60,6 +76,7 @@ export const AppRoutes = () => {
 					path="/signup"
 					element={<SignUp />}
 				/>
+
 				<Route
 					path="*"
 					element={<NotFound />}
