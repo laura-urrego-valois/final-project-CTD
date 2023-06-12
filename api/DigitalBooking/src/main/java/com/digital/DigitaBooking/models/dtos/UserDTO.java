@@ -7,8 +7,8 @@ public class UserDTO {
 
     private Long id;
     private String userName;
+    private String userFirstName;
     private String userLastName;
-    private String userEmail;
     private String password;
     private String role;
 }
