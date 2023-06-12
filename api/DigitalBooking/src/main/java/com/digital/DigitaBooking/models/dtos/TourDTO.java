@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.models.dtos;
 
+import com.digital.DigitaBooking.models.entities.Category;
 import lombok.*;
 
 @Data
@@ -15,4 +16,5 @@ public class TourDTO {
     private Double tourPrice;
     private Integer tourScore;
     private Integer categoryId;
+    private Category category;
 }

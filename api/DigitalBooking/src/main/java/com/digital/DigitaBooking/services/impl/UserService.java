@@ -57,6 +57,8 @@ public class UserService implements IUserService {
         }
     }
 
+//    public UserDetails changeUserRole()
+
     @Override
     public PageResponseDTO<UserDTO> getUsers(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable); // Devuelve un objeto Page que contiene la lista de usuarios y la información de paginación.

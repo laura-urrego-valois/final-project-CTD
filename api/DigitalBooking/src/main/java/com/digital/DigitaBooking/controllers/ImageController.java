@@ -2,13 +2,19 @@ package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.models.dtos.ImageDTO;
 import com.digital.DigitaBooking.services.impl.ImageService;
+import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -17,6 +23,17 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
+
+    @PostMapping(path = "load_image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<HttpStatus> loadImage(@RequestBody(required = true)@RequestPart List<MultipartFile> images) throws IOException {
+        for (MultipartFile image: images){
+            String fileName = image.getOriginalFilename();
+            File tempFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName);
+            image.transferTo(tempFile);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
