@@ -2,6 +2,7 @@ import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
 import { Input, Select } from "../../components/Input";
 import { useForm } from "../../hooks/useForm";
+import { SidebarLayout } from "../../layout/sidebar";
 import "./Register.css"
 
 const initialState = {
@@ -76,63 +77,65 @@ export const Register = () => {
 
 	return (
 		<Container>
-			<h1 className='form_title'>Agregar Paquete</h1>
-			<form className="admin__form" onSubmit={handleSubmit}>
-				<Input
-					displayLabel="Nombre"
-					label="name"
-					type="text"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={form.name}
-					errorMessage={errors.name}
-				/>
-				<Input
-					displayLabel="Descripción"
-					label="description"
-					type="text"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={form.description}
-					errorMessage={errors.description}
-				/>
-				<Input
-					displayLabel="Imagen"
-					label="image_url"
-					type="text"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={form.image_url}
-					errorMessage={errors.image_url}
-				/>
-				<Input
-					displayLabel="Capacidad"
-					label="capacity"
-					type="number"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={form.capacity}
-					errorMessage={errors.capacity}
-				/>
-				<Input
-					displayLabel="Precio por Persona"
-					label="price"
-					type="number"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={form.price}
-					errorMessage={errors.price}
-				/>
-				<Select
-					options={options}
-					displayLabel="Categorias"
-					label="id_category"
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={parseInt(form.id_category)}
-				/>
-				<Button type="primary">Agregar</Button>
-			</form>
+			<SidebarLayout>
+				<h1 className='form_title'>Agregar Paquete</h1>
+				<form className="admin__form" onSubmit={handleSubmit}>
+					<Input
+						displayLabel="Nombre"
+						label="name"
+						type="text"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={form.name}
+						errorMessage={errors.name}
+					/>
+					<Input
+						displayLabel="Descripción"
+						label="description"
+						type="text"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={form.description}
+						errorMessage={errors.description}
+					/>
+					<Input
+						displayLabel="Imagen"
+						label="image_url"
+						type="text"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={form.image_url}
+						errorMessage={errors.image_url}
+					/>
+					<Input
+						displayLabel="Capacidad"
+						label="capacity"
+						type="number"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={form.capacity}
+						errorMessage={errors.capacity}
+					/>
+					<Input
+						displayLabel="Precio por Persona"
+						label="price"
+						type="number"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={form.price}
+						errorMessage={errors.price}
+					/>
+					<Select
+						options={options}
+						displayLabel="Categorias"
+						label="id_category"
+						onBlur={handleBlur}
+						onChange={handleChange}
+						value={parseInt(form.id_category)}
+					/>
+					<Button type="primary">Agregar</Button>
+				</form>
+			</SidebarLayout>
 		</Container>
 	)
 };

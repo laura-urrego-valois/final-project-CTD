@@ -15,6 +15,7 @@ public class Feature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
 
     @Column
@@ -22,7 +23,7 @@ public class Feature {
     private String featureName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "features")
+    @ManyToMany(mappedBy = "features", fetch = FetchType.LAZY)
     private Set<Tour> tours = new HashSet<>();
 
 }

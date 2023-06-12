@@ -5,28 +5,25 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
 @Data
 @Entity
 @Table
-public class Image {
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long id;
+    private Integer id;
 
     @Column
     @NotNull
-    private String imageTitle;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String imageUrl;
+    private String countryName;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_tour", referencedColumnName = "id")
-    private Tour tour;
-
-
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    private Set<Tour> tours = new HashSet<>();
 }

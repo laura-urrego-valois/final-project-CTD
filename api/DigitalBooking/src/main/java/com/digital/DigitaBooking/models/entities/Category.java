@@ -14,6 +14,7 @@ import java.util.Set;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Integer id;
 
     @Column
@@ -29,7 +30,7 @@ public class Category {
     private String categoryImageURL;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tour> tours = new HashSet<>();
 
 }

@@ -8,25 +8,21 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class Image {
+public class Favorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
-    @Column
-    @NotNull
-    private String imageTitle;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String imageUrl;
-
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tour", referencedColumnName = "id")
     private Tour tour;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    private User user;
 
 }

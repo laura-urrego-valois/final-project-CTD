@@ -53,6 +53,7 @@ public class TourService implements ITourService {
 
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
+            tour.setTourClassification(tourDTO.getTourClassification());
             tour.setTourCapacity(tourDTO.getTourCapacity());
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setTourScore(tourDTO.getTourScore());
@@ -63,6 +64,7 @@ public class TourService implements ITourService {
 
     @Override
     public void deleteTour(Long id) {
+
         tourRepository.deleteById(id);
     }
 

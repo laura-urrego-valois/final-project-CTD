@@ -1,0 +1,33 @@
+.detail__rating{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 2rem;
+  box-sizing: border-box;
+}
+.detail__rating-container{
+  display: flex;
+  align-items: center;
+}
+.detail__rating-content{
+  text-align: start;
+}
+.detail__rating-classification{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+}
+.detail__rating-star{
+  font-size: 1.6rem;
+  color:  orange;
+  margin: 0;
+}
+.detail__rating-score{
+  background: var(--color-primary);
+  color: var(--color-tertiary);
+  font-size: 2rem;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  margin: .5rem;
+}

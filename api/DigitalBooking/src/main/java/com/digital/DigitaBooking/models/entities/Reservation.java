@@ -5,10 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 @Entity
 @Table
-public class Image {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +20,24 @@ public class Image {
 
     @Column
     @NotNull
-    private String imageTitle;
+    private LocalDate initialDate;
 
-    @Column(columnDefinition = "VARCHAR(1000)")
+    @Column
     @NotNull
-    private String imageUrl;
+    private LocalDate finalDate;
+
+    @Column
+    @NotNull
+    private LocalTime startTime;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tour", referencedColumnName = "id")
     private Tour tour;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    private User user;
 
 }

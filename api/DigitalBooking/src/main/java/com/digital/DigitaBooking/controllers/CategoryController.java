@@ -26,11 +26,13 @@ public class CategoryController {
 
     @GetMapping(path = "/{id}")
     public CategoryDTO getCategory(@PathVariable Integer id) {
+
         return categoryService.getCategory(id);
     }
 
     @GetMapping
     public Collection<CategoryDTO> getCategories() {
+
         return categoryService.getCategories();
     }
 
