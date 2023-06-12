@@ -1,4 +1,4 @@
-package com.digital.DigitaBooking.services;
+package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
@@ -6,6 +6,7 @@ import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.repositories.ITourRepository;
+import com.digital.DigitaBooking.services.ITourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,10 @@ public class TourService implements ITourService {
     @Override
     public void updateTour(Long id, TourDTO tourDTO) {
         Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
-            tour.setTourImageURL(tourDTO.getTourImageURL());
+
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
+            tour.setTourClassification(tourDTO.getTourClassification());
             tour.setTourCapacity(tourDTO.getTourCapacity());
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setTourScore(tourDTO.getTourScore());
@@ -58,6 +60,7 @@ public class TourService implements ITourService {
 
     @Override
     public void deleteTour(Long id) {
+
         tourRepository.deleteById(id);
     }
 

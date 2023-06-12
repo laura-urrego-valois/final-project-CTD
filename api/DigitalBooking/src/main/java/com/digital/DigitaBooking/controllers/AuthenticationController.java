@@ -3,7 +3,7 @@ package com.digital.DigitaBooking.controllers;
 import com.digital.DigitaBooking.models.dtos.AuthorizationResponse;
 import com.digital.DigitaBooking.models.dtos.UserLogin;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
-import com.digital.DigitaBooking.services.AuthenticationService;
+import com.digital.DigitaBooking.services.impl.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-@CrossOrigin(maxAge = 3600)
+
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
-@Tag(name="Authentication")
+@Tag(name = "Authentication")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;

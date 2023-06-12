@@ -8,10 +8,12 @@ import lombok.Data;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Data
 @Entity
 @Table
-public class Category {
+public class Country {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -19,18 +21,9 @@ public class Category {
 
     @Column
     @NotNull
-    private String categoryName;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String categoryDescription;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String categoryImageURL;
+    private String countryName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
     private Set<Tour> tours = new HashSet<>();
-
 }

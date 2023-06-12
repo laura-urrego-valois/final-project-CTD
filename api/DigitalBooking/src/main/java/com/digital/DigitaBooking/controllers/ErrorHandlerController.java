@@ -12,7 +12,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-@CrossOrigin(maxAge = 3600)
+
+@CrossOrigin(origins = "*")
 @ControllerAdvice
 @Slf4j
 public class ErrorHandlerController {

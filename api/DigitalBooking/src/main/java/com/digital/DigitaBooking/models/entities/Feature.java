@@ -11,26 +11,19 @@ import java.util.Set;
 @Data
 @Entity
 @Table
-public class Category {
+public class Feature {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Integer id;
+    private Long id;
 
     @Column
     @NotNull
-    private String categoryName;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String categoryDescription;
-
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String categoryImageURL;
+    private String featureName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "features", fetch = FetchType.LAZY)
     private Set<Tour> tours = new HashSet<>();
 
 }

@@ -1,8 +1,9 @@
-package com.digital.DigitaBooking.services;
+package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
+import com.digital.DigitaBooking.services.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public void deleteCategory(Integer id) {
+
         categoryRepository.deleteById(id);
     }
 
