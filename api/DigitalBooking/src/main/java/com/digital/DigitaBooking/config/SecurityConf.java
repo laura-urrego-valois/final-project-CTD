@@ -62,6 +62,12 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/users").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/users/{id}")
+                                    .hasAnyAuthority(ADMIN.name(), USER.name())
+                                .requestMatchers(HttpMethod.GET, "/users/name/{name}")
+                                    .hasAnyAuthority(ADMIN.name(), USER.name())
+                                //Rutas para imagenes
+                                .requestMatchers(HttpMethod.POST, "/images/load_image").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
