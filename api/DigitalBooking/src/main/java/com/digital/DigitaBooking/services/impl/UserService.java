@@ -57,7 +57,37 @@ public class UserService implements IUserService {
         }
     }
 
-//    public UserDetails changeUserRole()
+    public UserDetails makeAdmin(UserSignUp userSignUp) {
+        try {
+            User user = userRepository.getFirstByEmail(userSignUp.getUserName());
+            Role role = null;
+            user.setRole(role.ADMIN);
+            return userRepository.save(user); // Se asigna el rol del usuario registrado.
+
+        } catch (
+                DataIntegrityViolationException e) { // Esta excepción se lanza si ocurre una violación de integridad de datos al intentar guardar el usuario en la base de datos. Por ejemplo, si se intenta registrar un usuario con un nombre de usuario que ya existe.
+            throw new ErrorResponseException(HttpStatus.CONFLICT,
+                    ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT,
+                            "User Not found"), e);
+        }
+    }
+
+    public UserDetails makeUser(UserSignUp userSignUp) {
+        try {
+            User user = userRepository.getFirstByEmail(userSignUp.getUserName());
+            Role role = null;
+            user.setRole(role.USER);
+            return userRepository.save(user); // Se asigna el rol del usuario registrado.
+
+        } catch (
+                DataIntegrityViolationException e) { // Esta excepción se lanza si ocurre una violación de integridad de datos al intentar guardar el usuario en la base de datos. Por ejemplo, si se intenta registrar un usuario con un nombre de usuario que ya existe.
+            throw new ErrorResponseException(HttpStatus.CONFLICT,
+                    ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT,
+                            "U/ser Not Found"), e);
+        }
+    }
+
+
 
     @Override
     public PageResponseDTO<UserDTO> getUsers(Pageable pageable) {
