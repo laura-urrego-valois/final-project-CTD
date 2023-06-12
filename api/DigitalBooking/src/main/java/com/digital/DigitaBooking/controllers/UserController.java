@@ -88,5 +88,12 @@ public class UserController {
         userService.makeAdmin(userSingup);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @PostMapping("/user")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> makeUser(@RequestBody UserSignUp userSingup) {
+        userService.makeUser(userSingup);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
     // Este método obtiene una lista paginada de usuarios y la devuelve como una respuesta.
 }

@@ -61,6 +61,7 @@ public class SecurityConf {
                                 //Rutas para usuarios
                                 .requestMatchers(HttpMethod.GET, "/users").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
