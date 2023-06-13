@@ -49,8 +49,17 @@ export const ContextProvider = ({ children }) => {
 		}
 	};
 	const deleteCategory = async (categoryId) => {
+		console.log("remove =>", categoryId)
 		try {
-			await axios.delete(`${BASE_URL}/categories/${categoryId}`);
+			const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODY2MTEzODYsImV4cCI6MTY4NjYxNDA4Nn0.op7T_S3jgjXfakifEWkF6f7B8lguBp23-gln7ENPwSY';
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			};
+
+			await axios.delete(`${BASE_URL}/category/${categoryId}`, config);
 			dispatch({
 				type: actions.REMOVE_CATEGORY,
 				payload: categoryId,

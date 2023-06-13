@@ -16,7 +16,7 @@ export const ModalProduct = ({ onClose, editMode, tour, handleFormSubmit, tourFo
       setValue('name', tourForm.name);
       setValue('image_url', tourForm.image_url);
       setValue('description', tourForm.description);
-      setValue('id_category', tourForm.id_category.toString());
+      setValue('id_category', tourForm?.id_category);
     } else {
       setValue('name', '');
       setValue('image_url', '');
@@ -61,8 +61,8 @@ export const ModalProduct = ({ onClose, editMode, tour, handleFormSubmit, tourFo
           <label htmlFor="id_category">Categoría:</label>
           <select id="id_category" {...register('id_category')}>
             {categories.map(category => (
-              <option key={category.id_category} value={category.id_category}>
-                {category.name}
+              <option key={category?.id_category} value={category?.id_category}>
+                {category?.name}
               </option>
             ))}
           </select>

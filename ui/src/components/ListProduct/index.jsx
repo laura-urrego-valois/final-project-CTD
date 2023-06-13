@@ -14,7 +14,7 @@ export const ListProduct = () => {
   const { state, dispatch } = useGlobalState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
-  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(7);
+  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(4);
 
   const tours = state?.tours || [];
   const categories = state?.categories || [];
