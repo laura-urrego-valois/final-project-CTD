@@ -6,28 +6,28 @@ import { GrFormClose } from "react-icons/gr";
 import "./Modal.css";
 
 export const ModalProduct = ({
-	onClose,
-	editMode,
-	tour,
-	handleFormSubmit,
-	tourForm,
+  onClose,
+  editMode,
+  tour,
+  handleFormSubmit,
+  tourForm,
 }) => {
-	const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
-	const { state } = useGlobalState();
-	const categories = state?.categories || [];
+  const { state } = useGlobalState();
+  const categories = state?.categories || [];
 
   useEffect(() => {
     if (editMode && tourForm) {
-      setValue('name', tourForm.name);
+      setValue('tourName', tourForm.tourName);
       setValue('image_url', tourForm.image_url);
-      setValue('description', tourForm.description);
-      setValue('id_category', tourForm?.id_category);
+      setValue('tourDescription', tourForm.tourDescription);
+      setValue('categoryId', tourForm?.categoryId);
     } else {
-      setValue('name', '');
+      setValue('tourName', '');
       setValue('image_url', '');
-      setValue('description', '');
-      setValue('id_category', '');
+      setValue('tourDescription', '');
+      setValue('categoryId', '');
     }
   }, [editMode, tourForm, setValue]);
 
@@ -44,8 +44,8 @@ export const ModalProduct = ({
             type="text"
             id="name"
             placeholder="Nombre de la categoría"
-            defaultValue={tour?.name || ''}
-            {...register('name')}
+            defaultValue={tour?.tourName || ''}
+            {...register('tourName')}
           />
           <label htmlFor="image_url">URL de la imagen:</label>
           <input
@@ -61,14 +61,14 @@ export const ModalProduct = ({
             id="description"
             rows="5"
             placeholder="Descripción"
-            defaultValue={tour?.description || ''}
-            {...register('description')}
+            defaultValue={tour?.tourDescription || ''}
+            {...register('tourDescription')}
           />
           <label htmlFor="id_category">Categoría:</label>
-          <select id="id_category" {...register('id_category')}>
+          <select id="id_category" {...register('categoryId')}>
             {categories.map(category => (
-              <option key={category?.id_category} value={category?.id_category}>
-                {category?.name}
+              <option key={category?.id} value={category?.id}>
+                {category?.categoryName}
               </option>
             ))}
           </select>

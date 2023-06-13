@@ -11,6 +11,8 @@
 }
 .modal__content {
   max-width: 35rem;
+  max-height: 52rem;
+  overflow-y: auto;
   width: 100%;
   background-color: var(--color-tertiary);
   padding: 2rem;
