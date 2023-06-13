@@ -69,7 +69,7 @@ export const AppReducer = (state, action) => {
 
     case actions.REMOVE_CATEGORY: {
       const updatedCategories = state.categories.filter(
-        (category) => category.id_category !== action.payload
+        (category) => category.id !== action.payload
       )
 
       return {
