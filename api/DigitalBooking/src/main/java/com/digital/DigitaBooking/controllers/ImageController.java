@@ -31,23 +31,24 @@ public class ImageController {
     private ImageService imageService;
 
     @PostMapping(path = "/load_image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<HttpStatus> loadImage(@ModelAttribute ImageLoaderDTO imageLoaderDTO) throws IOException {
+    public ResponseEntity<HttpStatus> loadImage(@RequestBody(required = true) @RequestParam List<MultipartFile> images) throws IOException {
         try {
-            MultipartFile images = imageLoaderDTO.getImages();
-//        for (MultipartFile image: images){
-//            String fileName = image.getOriginalFilename();
-//            File tempFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName);
+//            List<MultipartFile> images = imageLoaderDTO.getImages();
+            for (MultipartFile image: images){
+                String fileName = image.getOriginalFilename();
+                File tempFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName);
+                File localFile = new File("C:\\Users\\Usuario\\Pictures\\Saved Pictures\\prueba.jpg");
+                image.transferTo(tempFile);
+                //Files.copy(image.getInputStream(),localFile.toPath());
+                return ResponseEntity.ok(HttpStatus.OK);
+            }
 //            File localFile = new File("C:\\Users\\Usuario\\Pictures\\Saved Pictures\\prueba.jpg");
-//            image.transferTo(tempFile);
-//            Files.copy(image.getInputStream(),localFile.toPath());
-//        }
-            File localFile = new File("C:\\Users\\Usuario\\Pictures\\Saved Pictures\\prueba.jpg");
-            Files.copy(images.getInputStream(),localFile.toPath());
-            return ResponseEntity.ok(HttpStatus.OK);
+//            Files.copy(images.getInputStream(),localFile.toPath());
+//            return ResponseEntity.ok(HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
-
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping
