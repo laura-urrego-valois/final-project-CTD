@@ -5,11 +5,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table
 public class Tour {
@@ -74,5 +77,18 @@ public class Tour {
     @JsonIgnore
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
+
+    public void addFeature(Feature feature) {
+        this.features.add(feature);
+        feature.getTours().add(this);
+    }
+
+    public void removeFeature(long featureId) {
+        Feature feature = this.features.stream().filter(t -> t.getId() == featureId).findFirst().orElse(null);
+        if (feature != null) {
+            this.features.remove(feature);
+            feature.getTours().remove(this);
+        }
+    }
 
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Data
 public class ImageLoaderDTO implements Serializable {
-    private MultipartFile images;
+    private List<MultipartFile> images;
 }

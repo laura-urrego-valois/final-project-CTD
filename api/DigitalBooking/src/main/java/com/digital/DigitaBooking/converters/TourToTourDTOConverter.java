@@ -12,6 +12,7 @@ public class TourToTourDTOConverter implements Converter<Tour, TourDTO> {
     public TourDTO convert(Tour tour) {
         TourDTO tourDTO = new TourDTO();
         //tourDTO.setTourImageURL(tour.getImages());
+        tourDTO.setId(tour.getId());
         tourDTO.setTourName(tour.getTourName());
         tourDTO.setTourDescription(tour.getTourDescription());
         tourDTO.setTourClassification(tour.getTourClassification());
@@ -20,6 +21,7 @@ public class TourToTourDTOConverter implements Converter<Tour, TourDTO> {
         tourDTO.setTourPrice(tour.getTourPrice());
         tourDTO.setTourScore(tour.getTourScore());
         tourDTO.setCategoryId(tour.getCategory().getId());
+        tourDTO.setFeatures(tour.getFeatures());
         return tourDTO;
     }
 }
