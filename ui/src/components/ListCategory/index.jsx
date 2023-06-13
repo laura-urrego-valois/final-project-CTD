@@ -83,7 +83,7 @@ export const ListCategory = () => {
     closeModal();
     reset();
   };
-
+//hola
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
