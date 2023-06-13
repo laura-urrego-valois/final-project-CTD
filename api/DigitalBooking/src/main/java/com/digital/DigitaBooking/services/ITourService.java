@@ -17,4 +17,6 @@ public interface ITourService {
     Set<TourDTO> getTours();
 
     Set<TourDTO> getToursByCategory(Integer id);
+
+    Set<TourDTO> getToursByCountry(Integer id);
 }
