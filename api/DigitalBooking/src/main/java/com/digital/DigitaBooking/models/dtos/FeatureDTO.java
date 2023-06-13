@@ -11,5 +11,4 @@ public class FeatureDTO {
     private Long id;
     private String featureName;
     private Set<Tour> tour;
-    private Set<Long> featureId;
 }

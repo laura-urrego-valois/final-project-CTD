@@ -62,9 +62,8 @@ public class TourService implements ITourService {
             tour.setTourCapacity(tourDTO.getTourCapacity());
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setTourScore(tourDTO.getTourScore());
-            tour.setFeatures(features);
+//            tour.setFeatures(features);
             for (Long featureId : tourDTO.getFeaturesId()){
-                System.out.println(featureRepository.getById(featureId));
                 tour.addFeature(featureRepository.getById(featureId));
             }
             return tourRepository.save(tour);
