@@ -41,6 +41,7 @@ public class TourController {
 
     @GetMapping
     public Collection<TourDTO> getTours() {
+
         return tourService.getTours();
     }
 
@@ -55,5 +56,12 @@ public class TourController {
         tourService.updateTour(id, tourDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping(path = "/country/{id}")
+    public Collection<TourDTO> getToursByCountry(@PathVariable Integer id) {
+
+        return tourService.getToursByCountry(id);
+    }
+
 
 }

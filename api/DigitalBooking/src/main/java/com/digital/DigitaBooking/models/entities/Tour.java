@@ -50,16 +50,18 @@ public class Tour {
     private Integer tourScore;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category", referencedColumnName = "id")
-    private Category category;
-
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "tour_feature",
             joinColumns = @JoinColumn(name = "id_tour"),
-            inverseJoinColumns = @JoinColumn(name = "id_feature"))
+            inverseJoinColumns =
+            @JoinColumn(name = "id_feature")
+    )
     private Set<Feature> features = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category", referencedColumnName = "id")
+    private Category category;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
