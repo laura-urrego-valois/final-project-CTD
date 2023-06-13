@@ -11,5 +11,5 @@ import java.util.List;
 public interface ITourRepository extends JpaRepository<Tour, Long> {
 
     List<Tour> findAllByCategoryId(Integer categoryId);
-    List<Tour> findToursBy
+    //List<Tour> findToursBy
 }
