@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -27,6 +30,7 @@ public class User implements UserDetails {
     // roles, permisos y otros detalles relevantes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
 
     @Column
@@ -39,11 +43,29 @@ public class User implements UserDetails {
 
     @Column
     @NotNull
-    private String userEmail;
+    private String userFirstName;
+
+    @Column
+    @NotNull
+    private Double latitude;
+
+    @Column
+    @NotNull
+    private Double longitude;
 
     @Column
     @NotNull
     private String password;
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Reservation> reservations = new HashSet<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch =FetchType.LAZY)
+    private Set<Favorite> favorites = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

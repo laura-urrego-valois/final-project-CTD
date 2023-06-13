@@ -10,8 +10,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@CrossOrigin(origins = "*")
 @ControllerAdvice
 @Slf4j
 public class ErrorHandlerController {

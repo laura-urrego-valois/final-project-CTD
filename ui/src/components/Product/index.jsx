@@ -13,10 +13,10 @@ export const Product = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSlidesToShow(2);
-      } else if (window.innerWidth < 414) {
+      if (window.innerWidth < 414) {
         setSlidesToShow(1);
+      } else if (window.innerWidth < 768) {
+        setSlidesToShow(2);
       } else {
         setSlidesToShow(4);
       }
@@ -30,8 +30,8 @@ export const Product = () => {
     };
   }, []);
 
-  const handleCategoryClick = (categoryId) => {
-    setSelectedCategory(categoryId);
+  const handleCategoryClick = (id) => {
+    setSelectedCategory(id);
   };
 
   const NextArrow = (props) => {
@@ -41,9 +41,7 @@ export const Product = () => {
         className={className}
         style={{
           ...style,
-          backgroundColor: "green",
-          right: "-50px",
-          zIndex: 1,
+          display: "none",
         }}
         onClick={onClick}
       />
@@ -79,25 +77,23 @@ export const Product = () => {
   return (
     <section className="product">
       <h2>Buscar por categorias</h2>
-      <div className="">
-        <Slider {...settings}>
-          {state?.categories?.map((data) => (
-            <div key={data.id_category}>
-              <Link
-                className="product_link"
-                to={"/"}
-                onClick={() => handleCategoryClick(data.id_category)}
-              >
-                <SimpleCard
-                  imageSrc={data.image_url}
-                  title={data.name}
-                  description={data.description}
-                />
-              </Link>
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <Slider {...settings}>
+        {state?.categories?.map((data) => (
+          <div key={data.id}>
+            <Link
+              className="product_link"
+              to={"/"}
+              onClick={() => handleCategoryClick(data.id)}
+            >
+              <SimpleCard
+                imageSrc={data.categoryImageURL}
+                title={data.categoryName}
+                description={data.categoryDescription}
+              />
+            </Link>
+          </div>
+        ))}
+      </Slider>
     </section>
   );
 };

@@ -57,7 +57,7 @@ export const ListCategory = () => {
       payload: categorieId,
     });
 
-    if (selectedCategorie && selectedCategorie.id_category === categorieId) {
+    if (selectedCategorie && selectedCategorie.id === categorieId) {
       closeModal();
     }
   };
@@ -88,12 +88,12 @@ export const ListCategory = () => {
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentCategories.map((categorie) => (
-        <article className="list__content" key={categorie.id_category}>
-          <img className="list__image" src={categorie.image_url} alt="" />
-          <p className="list__title">{categorie.name}</p>
+        <article className="list__content" key={categorie.id}>
+          <img className="list__image" src={categorie.categoryImageURL} alt="" />
+          <p className="list__title">{categorie.categoryName}</p>
           <div className='list__button'>
             <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button>
-            <Button type="primary" onClick={() => handleDeleteCategorie(categorie.id_category)}><AiFillDelete /></Button>
+            <Button type="primary" onClick={() => handleDeleteCategorie(categorie.id)}><AiFillDelete /></Button>
           </div>
         </article>
       ))}
