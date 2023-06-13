@@ -19,12 +19,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.Collection;
+
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
@@ -42,7 +45,8 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping(path="/name/{username}")
+    @PreAuthorize("hasRole('ADMIN','USER')")
     public ResponseEntity<UserDetails> getUserByUsername(@PathVariable("username") String username) {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -53,6 +57,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN','USER')")
     public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
@@ -76,8 +81,23 @@ public class UserController {
     // de usuarios.
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public PageResponseDTO<UserDTO> getUsers(@PageableDefault(size = 10, page = 0) @ParameterObject Pageable pageable) {
         return userService.getUsers(pageable);
+    }
+
+    @PostMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> makeAdmin(@RequestBody UserSignUp userSingup) {
+        userService.makeAdmin(userSingup);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/user")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> makeUser(@RequestBody UserSignUp userSingup) {
+        userService.makeUser(userSingup);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
     // Este método obtiene una lista paginada de usuarios y la devuelve como una respuesta.
 }

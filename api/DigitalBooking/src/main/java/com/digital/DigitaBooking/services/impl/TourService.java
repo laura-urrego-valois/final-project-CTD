@@ -1,10 +1,13 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.converters.TourToTourDTOConverter;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
+import com.digital.DigitaBooking.models.entities.Feature;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
+import com.digital.DigitaBooking.repositories.IFeatureRepository;
 import com.digital.DigitaBooking.repositories.ITourRepository;
 import com.digital.DigitaBooking.services.ITourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +26,13 @@ public class TourService implements ITourService {
     private ICategoryRepository categoryRepository;
 
     @Autowired
+    private IFeatureRepository featureRepository;
+
+    @Autowired
     ObjectMapper mapper;
+
+    @Autowired
+    TourToTourDTOConverter tourConverter;
 
     @Override
     public void saveTour(TourDTO tourDTO) {
@@ -46,13 +55,17 @@ public class TourService implements ITourService {
     @Override
     public void updateTour(Long id, TourDTO tourDTO) {
         Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
-
+            Set<Feature> features = new HashSet<>();
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
             tour.setTourClassification(tourDTO.getTourClassification());
             tour.setTourCapacity(tourDTO.getTourCapacity());
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setTourScore(tourDTO.getTourScore());
+//            tour.setFeatures(features);
+            for (Long featureId : tourDTO.getFeaturesId()){
+                tour.addFeature(featureRepository.getById(featureId));
+            }
             return tourRepository.save(tour);
         });
 
@@ -70,7 +83,8 @@ public class TourService implements ITourService {
         Set<TourDTO> toursDTO = new HashSet<>();
         for (Tour tour :
                 tours) {
-            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+//            tour.addFeature();
+            toursDTO.add(tourConverter.convert(tour));
 
         }
         return toursDTO;
@@ -84,6 +98,17 @@ public class TourService implements ITourService {
                 tours) {
             toursDTO.add(mapper.convertValue(tour, TourDTO.class));
 
+        }
+        return toursDTO;
+    }
+
+    @Override
+    public Set<TourDTO> getToursByCountry(Integer id) {
+        Set<TourDTO> toursDTO = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllToursByCountry(id);
+        for (Tour tour :
+                tours) {
+            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
         }
         return toursDTO;
     }

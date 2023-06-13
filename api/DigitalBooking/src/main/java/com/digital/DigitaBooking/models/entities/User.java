@@ -43,7 +43,15 @@ public class User implements UserDetails {
 
     @Column
     @NotNull
-    private String userEmail;
+    private String userFirstName;
+
+    @Column
+    @NotNull
+    private Double latitude;
+
+    @Column
+    @NotNull
+    private Double longitude;
 
     @Column
     @NotNull
@@ -56,7 +64,7 @@ public class User implements UserDetails {
 
     @Builder.Default
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch =FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
 
     @Enumerated(EnumType.STRING)

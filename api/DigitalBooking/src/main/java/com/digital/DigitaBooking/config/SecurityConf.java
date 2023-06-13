@@ -58,6 +58,22 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.POST, "/category").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/category/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/category/{id}").hasAuthority(ADMIN.name())
+                                //Rutas para usuarios
+                                .requestMatchers(HttpMethod.GET, "/users").hasAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/users/{id}")
+                                .hasAnyAuthority(ADMIN.name(), USER.name())
+                                .requestMatchers(HttpMethod.GET, "/users/name/{name}")
+                                .hasAnyAuthority(ADMIN.name(), USER.name())
+                                .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
+                                //Rutas para imagenes
+                                .requestMatchers(HttpMethod.POST, "/images/load_image").permitAll()
+                                //Rutas para feautures
+                                .requestMatchers(HttpMethod.GET, "/features").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/features").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT, "/features/{id}").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, "/features/{id}").hasAnyAuthority(ADMIN.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

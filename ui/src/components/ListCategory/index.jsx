@@ -138,7 +138,7 @@ export const ListCategory = () => {
       console.error("Error adding/updating category:", error);
     }
   };
-
+//hola
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>

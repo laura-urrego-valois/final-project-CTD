@@ -2,14 +2,20 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button";
 import { useGlobalState } from "../../context";
-import { GrFormClose } from 'react-icons/gr';
-import './ModalCategory.css'
+import { GrFormClose } from "react-icons/gr";
+import "./Modal.css";
 
-export const ModalProduct = ({ onClose, editMode, tour, handleFormSubmit, tourForm }) => {
-  const { register, handleSubmit, setValue } = useForm();
+export const ModalProduct = ({
+	onClose,
+	editMode,
+	tour,
+	handleFormSubmit,
+	tourForm,
+}) => {
+	const { register, handleSubmit, setValue } = useForm();
 
-  const { state } = useGlobalState();
-  const categories = state?.categories || [];
+	const { state } = useGlobalState();
+	const categories = state?.categories || [];
 
   useEffect(() => {
     if (editMode && tourForm) {

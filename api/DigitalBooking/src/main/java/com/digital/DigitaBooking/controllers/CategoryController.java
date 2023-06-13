@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
-@CrossOrigin(origins = "*")
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

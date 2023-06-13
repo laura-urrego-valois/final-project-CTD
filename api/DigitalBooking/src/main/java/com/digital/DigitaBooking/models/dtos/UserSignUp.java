@@ -24,10 +24,9 @@ public class UserSignUp {
     @Length(min = 4, max = 20)
     private String userLastName;
 
-
     @NotEmpty
-    @Length(min = 15, max = 30)
-    private String userEmail;
+    @Length(min = 4, max = 20)
+    private String userFirstName;
 
     @NotEmpty
     @Length(min = 4, max = 20)

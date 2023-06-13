@@ -1,6 +1,10 @@
 package com.digital.DigitaBooking.models.dtos;
 
+import com.digital.DigitaBooking.models.entities.Category;
+import com.digital.DigitaBooking.models.entities.Feature;
 import lombok.*;
+
+import java.util.Set;
 
 @Data
 public class TourDTO {
@@ -14,4 +18,7 @@ public class TourDTO {
     private Double tourPrice;
     private Integer tourScore;
     private Integer categoryId;
+    private Category category;
+    private Set<Feature> features;
+    private Set<Long> featuresId;
 }

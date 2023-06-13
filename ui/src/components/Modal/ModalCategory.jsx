@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button";
-import { GrFormClose } from 'react-icons/gr';
-import './ModalCategory.css'
+import { GrFormClose } from "react-icons/gr";
+import "./Modal.css";
 
 export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, categoryForm }) => {
   const { register, handleSubmit, setValue, watch } = useForm();
