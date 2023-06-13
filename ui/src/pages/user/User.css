@@ -1,25 +1,25 @@
 .user__section img {
-	max-width: 200px;
-	border-radius: 50%;
+  max-width: 200px;
+  border-radius: 50%;
 }
 
 .user__section span {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 5px;
-	font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 2rem;
 }
 
-.user__section span h3 {
-	font-weight: 500;
-	color: var(--color-primary);
+.user__section span h5 {
+  font-weight: 500;
+  color: var(--color-primary);
 }
 
 .user__section span p {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .user__section button {
-	max-width: 100px;
+  max-width: 100px;
 }
