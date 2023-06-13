@@ -23,6 +23,18 @@ public class Country {
     @NotNull
     private String countryName;
 
+    @Column
+    @NotNull
+    private String capitalName;
+
+    @Column
+    @NotNull
+    private Double latitude;
+
+    @Column
+    @NotNull
+    private Double longitude;
+
     @JsonIgnore
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
     private Set<Tour> tours = new HashSet<>();

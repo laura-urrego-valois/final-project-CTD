@@ -25,7 +25,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.Collection;
+
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
@@ -43,7 +45,8 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping(path="/name/{username}")
+    @PreAuthorize("hasRole('ADMIN','USER')")
     public ResponseEntity<UserDetails> getUserByUsername(@PathVariable("username") String username) {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -54,6 +57,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN','USER')")
     public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }

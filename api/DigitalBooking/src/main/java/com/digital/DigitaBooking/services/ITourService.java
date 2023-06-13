@@ -1,6 +1,8 @@
 package com.digital.DigitaBooking.services;
 
 import com.digital.DigitaBooking.models.dtos.TourDTO;
+import com.digital.DigitaBooking.models.entities.Tour;
+
 
 import java.util.Set;
 

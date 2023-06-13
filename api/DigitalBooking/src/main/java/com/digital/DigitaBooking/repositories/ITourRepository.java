@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+
 import java.time.LocalDate;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +41,8 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
     //--> ((reservation.initial_date not between ?1 and ?2) OR (reservation.initial_date is null)) verifica si la
     // fecha inicial de la reserva no está entre el rango de fechas especificado (initialDate y finalDate). Si
     // la fecha inicial es nula, también se considera que cumple con la condición.
+
+
+    //List<Tour> findToursBy
 
 }

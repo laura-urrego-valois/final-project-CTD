@@ -43,7 +43,15 @@ public class User implements UserDetails {
 
     @Column
     @NotNull
-    private String userEmail;
+    private String userFirstName;
+
+    @Column
+    @NotNull
+    private Double latitude;
+
+    @Column
+    @NotNull
+    private Double longitude;
 
     @Column
     @NotNull

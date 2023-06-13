@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.converters.UserToUserDTOConverter;
 import com.digital.DigitaBooking.models.dtos.PageResponseDTO;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
 import com.digital.DigitaBooking.models.entities.Role;
@@ -35,6 +36,8 @@ public class UserService implements IUserService {
     // contraseñas de manera segura. Se utiliza en el contexto de autenticación y
     // almacenamiento seguro de contraseñas.
     private final ConversionService conversionService;
+
+    private final UserToUserDTOConverter userToUserDTOConverter;
     // ConversionService es una interfaz que proporciona métodos para convertir objetos
     // de un tipo a otro, de acuerdo con las reglas de conversión configuradas. Como por
     // ejemplo para convertir objetos DTO a entidades de dominio o viceversa.
@@ -45,7 +48,7 @@ public class UserService implements IUserService {
             return userRepository.save(User.builder()
                     .userName(userSignUp.getUserName())
                     .userLastName(userSignUp.getUserLastName())
-                    .userEmail(userSignUp.getUserEmail())
+                    .userFirstName(userSignUp.getUserFirstName())
                     .password(passwordEncoder.encode(userSignUp.getPassword())) // Se utiliza para encriptar la contraseña antes de almacenarla en la base de datos.
                     .role(Role.USER) // Se asigna el rol del usuario registrado.
                     .build()); // Construye y retorna una instancia completa de la clase User con los datos proporcionados.
@@ -120,7 +123,7 @@ public class UserService implements IUserService {
         Optional<User> user = userRepository.findById(id);
         UserDTO userDTO = null;
         if (user.isPresent())
-            userDTO = mapper.convertValue(user, UserDTO.class);
+            userDTO = userToUserDTOConverter.convert(user.get());
 
         return userDTO;
     }
