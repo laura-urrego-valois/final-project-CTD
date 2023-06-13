@@ -4,15 +4,20 @@ export const actions = {
   GET_BY_ID: "GET_BY_ID",
   GET_BY_DATACATEGORY: "GET_BY_DATACATEGORY",
   SET_SELECTED_CATEGORY: "SET_SELECTED_CATEGORY",
+  // TOUR ACTIONS
   CREATE_TOUR: "CREATE_TOUR",
   UPDATE_TOUR: "UPDATE_TOUR",
   REMOVE_TOUR: "REMOVE_TOUR",
+  // CATEGORY ACTIONS
   ADD_CATEGORY: "ADD_CATEGORY",
   UPDATE_CATEGORY: "UPDATE_CATEGORY",
   REMOVE_CATEGORY: "REMOVE_CATEGORY",
+  // COUNTRY ACTIONS
   ADD_COUNTRY: "ADD_COUNTRY",
   UPDATE_COUNTRY: "UPDATE_COUNTRY",
   REMOVE_COUNTRY: "REMOVE_COUNTRY",
+  // USER ACTIONS
+  GET_USERS: "GET_USERS",
   ADD_USER: "ADD_USER",
   UPDATE_USER: "UPDATE_USER",
   REMOVE_USER: "REMOVE_USER",
@@ -148,6 +153,11 @@ export const AppReducer = (state, action) => {
         users: [...state.countries, newUser],
       }
     }
+    case actions.GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      }
 
     case actions.REMOVE_USER: {
       const updatedUsers = state.users.filter(

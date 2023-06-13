@@ -3,14 +3,7 @@ import { Container } from "../../components/Container"
 import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
 import { useForm } from "../../hooks/useForm"
-
-const initialState = {
-  userName: "",
-  userLastName: "",
-  userEmail: "",
-  password: "",
-  confirmPassword: "",
-}
+import { useState } from "react"
 
 const validationsForm = async (form) => {
   const errors = {}
@@ -52,19 +45,33 @@ const urlParam = "sign-up"
 const redirectTo = "/user"
 
 export const SignUp = () => {
+  const [lat, setLat] = useState(0)
+  const [long, setLong] = useState(0)
+
+  navigator.geolocation.getCurrentPosition((position) => {
+    const latitude = position.coords.latitude
+    setLat(latitude)
+
+    const longitude = position.coords.longitude
+    setLong(longitude)
+  })
+
+  const initialState = {
+    userName: "",
+    userLastName: "",
+    userFirstName: "",
+    latitude: lat,
+    longitude: long,
+    password: "",
+    confirmPassword: "",
+  }
+
   const { form, errors, handleChange, handleSubmit } = useForm(
     initialState,
     validationsForm,
     urlParam,
     redirectTo
   )
-
-  navigator.geolocation.getCurrentPosition((position) => {
-    const latitude = position.coords.latitude
-    const longitude = position.coords.longitude
-    console.log("latitude", latitude)
-    console.log("longitude", longitude)
-  })
 
   return (
     <Container>

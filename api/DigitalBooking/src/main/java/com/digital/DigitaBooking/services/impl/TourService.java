@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.converters.TourToTourDTOConverter;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Tour;
@@ -24,6 +25,9 @@ public class TourService implements ITourService {
 
     @Autowired
     ObjectMapper mapper;
+
+    @Autowired
+    TourToTourDTOConverter tourConverter;
 
     @Override
     public void saveTour(TourDTO tourDTO) {
@@ -70,7 +74,7 @@ public class TourService implements ITourService {
         Set<TourDTO> toursDTO = new HashSet<>();
         for (Tour tour :
                 tours) {
-            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+            toursDTO.add(tourConverter.convert(tour));
 
         }
         return toursDTO;

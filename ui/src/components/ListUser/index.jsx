@@ -1,17 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "../Button"
-import "../ListCategory/ListCategory.css"
+import "./ListUser.css"
 import { useGlobalState } from "../../context"
 import { Pagination } from "../Pagination"
 import { actions } from "../../context/reducer"
 import { useForm } from "react-hook-form"
 import { usePagination } from "../../hooks/usePagination"
 import { ModalUser } from "../Modal/ModalUser"
-import { AiFillDelete, AiFillEdit } from "react-icons/ai"
-import { GrAdd } from "react-icons/gr"
+import { AiFillEdit } from "react-icons/ai"
 
 export const ListUser = () => {
-  const { state, dispatch } = useGlobalState()
+  const { state, dispatch, fetchUsers } = useGlobalState()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
 
@@ -23,15 +22,18 @@ export const ListUser = () => {
     getTotalPages,
   } = usePagination(7)
 
-  const users = state?.users || []
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  const users = state?.users?.content || []
 
   const { reset } = useForm()
   const [editMode, setEditMode] = useState(false)
   const [userForm, setUserForm] = useState({
-    id_user: "",
-    name: "",
-    image_url: "",
-    description: "",
+    id: "",
+    userName: "",
+    role: "",
   })
 
   const openModal = (user) => {
@@ -41,10 +43,9 @@ export const ListUser = () => {
     } else {
       setEditMode(false)
       setUserForm({
-        id_user: "",
-        name: "",
-        image_url: "",
-        description: "",
+        id: "",
+        userName: "",
+        role: "",
       })
       reset()
     }
@@ -54,18 +55,6 @@ export const ListUser = () => {
   const closeModal = () => {
     setSelectedUser(null)
     setIsModalOpen(false)
-  }
-
-  const handleDeleteUser = (userId) => {
-    console.log("removeUser", userId)
-    dispatch({
-      type: actions.REMOVE_USER,
-      payload: userId,
-    })
-
-    if (selectedUser && selectedUser.id === userId) {
-      closeModal()
-    }
   }
 
   const totalPages = getTotalPages(users)
@@ -79,11 +68,6 @@ export const ListUser = () => {
         type: actions.UPDATE_USER,
         payload: updatedUser,
       })
-    } else {
-      dispatch({
-        type: actions.ADD_USER,
-        payload: updatedUser,
-      })
     }
 
     closeModal()
@@ -92,19 +76,16 @@ export const ListUser = () => {
 
   return (
     <section className="list__container">
-      <Button onClick={() => openModal(null)}>
-        <GrAdd />
-      </Button>
       {currentUsers.map((user) => (
-        <article className="list__content" key={user.id}>
-          <img className="list__image" src={user.userImageURL} alt="" />
-          <p className="list__title">{user.userName}</p>
+        <article className="list__content" key={user?.id}>
+          <p className="list__title">
+            {user.userFirstName == null ? "Nulo" : user?.userName}
+          </p>
+          <p>{user?.userName}</p>
+          <p>{user?.role}</p>
           <div className="list__button">
             <Button onClick={() => openModal(user)}>
               <AiFillEdit />
-            </Button>
-            <Button type="primary" onClick={() => handleDeleteUser(user.id)}>
-              <AiFillDelete />
             </Button>
           </div>
         </article>
