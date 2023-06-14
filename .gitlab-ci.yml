@@ -28,7 +28,7 @@ build_backend:
     - gradle build
     - echo "Finished building the app."
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
 
 build_frontend:
   stage: build
@@ -40,7 +40,7 @@ build_frontend:
     - npm run build
     - echo $(ls)
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
   image: node:latest
   artifacts:
     paths:
@@ -80,4 +80,4 @@ deploy_Backend:
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
     - echo "Finished deploying the app."
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
