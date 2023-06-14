@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.models.dtos;
 
 import com.digital.DigitaBooking.models.entities.Category;
+import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.models.entities.Feature;
 import lombok.*;
 
@@ -21,4 +22,6 @@ public class TourDTO {
     private Category category;
     private Set<Feature> features;
     private Set<Long> featuresId;
+    private Set<Country> countries;
+    private Set<Integer> countriesId;
 }
