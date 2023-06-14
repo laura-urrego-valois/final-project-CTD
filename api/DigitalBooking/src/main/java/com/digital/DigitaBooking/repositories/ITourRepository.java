@@ -39,7 +39,7 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
             "AND ((r.final_date NOT BETWEEN ?1 AND ?2) OR (r.final_date IS NULL)) " +
             "AND t.country LIKE ?3 " +
             "GROUP BY t.id", nativeQuery = true)
-    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);
+    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);}
 
     // En esta consulta se busca tours según ciertas condiciones de fechas y país utilizando SQL nativo.
     // Se seleccionan todas las columnas de la tabla "tour" mediante la cláusula SELECT t.*.
@@ -53,6 +53,7 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
 
     //List<Tour> findToursBy
 
+    /*
     @Query(value = "SELECT t.* FROM tour t " +
             "WHERE t.country.id = :")
 }
@@ -67,3 +68,5 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
                     ")" +
                     " group by P.id; ", nativeQuery = true)
     List<Product> getProductsByCityAndDates(@Param("cityId") Long cityId, @Param("checkInDate") LocalDate checkInDate, @Param("checkOutDate") LocalDate checkOutDate);
+
+     */
