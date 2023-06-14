@@ -39,6 +39,10 @@ public class User implements UserDetails {
 
     @Column
     @NotNull
+    private String userEmail;
+
+    @Column
+    @NotNull
     private String userLastName;
 
     @Column
