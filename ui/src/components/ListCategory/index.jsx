@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '../Button';
-import './ListCategory.css'
 import { useGlobalState } from '../../context';
 import { Pagination } from '../Pagination';
 import { actions } from '../../context/reducer';
@@ -9,22 +8,25 @@ import { usePagination } from '../../hooks/usePagination';
 import { ModalCategory } from '../Modal/ModalCategory';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
+import './ListCategory.css'
+
 
 export const ListCategory = () => {
-  const { state, dispatch } = useGlobalState();
+
+  const { state, dispatch, deleteCategory, updateCategory, addCategory } = useGlobalState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategorie, setSelectedCategorie] = useState(null);
-  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(7);
+  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(6);
 
   const categories = state?.categories || []
 
   const { reset } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [categoryForm, setCategoryForm] = useState({
-    id_category: '',
-    name: '',
-    image_url: '',
-    description: ''
+    id: '',
+    categoryName: '',
+    categoryImageURL: '',
+    categoryDescription: ''
   });
 
   const openModal = (categorie) => {
@@ -34,10 +36,10 @@ export const ListCategory = () => {
     } else {
       setEditMode(false);
       setCategoryForm({
-        id_category: '',
-        name: '',
-        image_url: '',
-        description: ''
+        id: '',
+        categoryName: '',
+        categoryImageURL: '',
+        categoryDescription: ''
 
       });
       reset();
@@ -50,50 +52,50 @@ export const ListCategory = () => {
     setIsModalOpen(false);
   };
 
-  const handleDeleteCategorie = (categorieId) => {
-    console.log('removeCategory', categorieId)
-    dispatch({
-      type: actions.REMOVE_CATEGORY,
-      payload: categorieId,
-    });
-
-    if (selectedCategorie && selectedCategorie.id === categorieId) {
-      closeModal();
+  const handleDeleteCategorie = async (categoryId) => {
+    try {
+      await deleteCategory(categoryId);
+    } catch (error) {
+      console.error("Error deleting category:", error);
     }
   };
 
   const totalPages = getTotalPages(categories);
   const currentCategories = getCurrentPageItems(categories);
 
-  const handleFormSubmit = (data) => {
-    const updatedCategory = { ...categoryForm, ...data };
+  const handleFormSubmit = async (data) => {
+    try {
+      const updatedCategory = { ...categoryForm, ...data };
+      console.log("updatedCategory", updatedCategory, data)
 
-    if (editMode) {
-      dispatch({
-        type: actions.UPDATE_CATEGORY,
-        payload: updatedCategory,
-      });
-    } else {
-      dispatch({
-        type: actions.ADD_CATEGORY,
-        payload: updatedCategory,
-      });
+      if (editMode) {
+        await updateCategory(updatedCategory.id, updatedCategory);
+        dispatch({
+          type: actions.UPDATE_CATEGORY,
+          payload: updatedCategory,
+        });
+      } else {
+        await addCategory(updatedCategory);
+      }
+      closeModal();
+      reset();
+
+      window.location.reload();
+    } catch (error) {
+      console.error("Error adding/updating category:", error);
     }
-
-    closeModal();
-    reset();
   };
 
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentCategories.map((categorie) => (
-        <article className="list__content" key={categorie.id}>
-          <img className="list__image" src={categorie.categoryImageURL} alt="" />
-          <p className="list__title">{categorie.categoryName}</p>
+        <article className="list__content" key={categorie?.id}>
+          <img className="list__image" src={categorie?.categoryImageURL} alt="" />
+          <p className="list__title">{categorie?.categoryName}</p>
           <div className='list__button'>
             <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button>
-            <Button type="primary" onClick={() => handleDeleteCategorie(categorie.id)}><AiFillDelete /></Button>
+            <Button type="primary" onClick={() => handleDeleteCategorie(categorie?.id)}><AiFillDelete /></Button>
           </div>
         </article>
       ))}

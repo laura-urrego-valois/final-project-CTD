@@ -46,8 +46,8 @@ const Detail = () => {
 
   const itemDetail = tours?.find((item) => item.id == id);
   const getCategoryName = (categoryId) => {
-    const category = categories?.find((cat) => cat.id_category === categoryId);
-    return category ? category.name : "";
+    const category = categories?.find((cat) => cat.id === categoryId);
+    return category ? category.categoryName : "";
   };
   return (
     <Container>
@@ -68,7 +68,7 @@ const Detail = () => {
           <div className="detail-value">
             <h3 className="detail__price">{`Precio: ${itemDetail.tourPrice} USD`}</h3>
             <p className="detail__category">
-              {getCategoryName(itemDetail.id_category)}
+              {getCategoryName(itemDetail.categoryId)}
             </p>
           </div>
           <p className="detail__description">{itemDetail.tourDescription}</p>

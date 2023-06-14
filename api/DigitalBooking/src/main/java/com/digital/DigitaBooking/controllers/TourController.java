@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
-@CrossOrigin(origins = "*")
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/tours")
 public class TourController {
@@ -40,6 +41,7 @@ public class TourController {
 
     @GetMapping
     public Collection<TourDTO> getTours() {
+
         return tourService.getTours();
     }
 
@@ -54,5 +56,12 @@ public class TourController {
         tourService.updateTour(id, tourDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping(path = "/country/{id}")
+    public Collection<TourDTO> getToursByCountry(@PathVariable Integer id) {
+
+        return tourService.getToursByCountry(id);
+    }
+
 
 }

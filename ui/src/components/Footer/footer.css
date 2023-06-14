@@ -1,7 +1,6 @@
 /* <------ */ /* FOOTER */ /* ------> */
 
 .footer {
-    max-width: 1280px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -14,7 +13,7 @@
     font-size: 1.2rem;
     position: fixed;
     bottom: 0;
-    padding: .5rem 1.5rem;
+    padding: .5rem 2rem;
     box-sizing: border-box;
   }
   .footer__content{

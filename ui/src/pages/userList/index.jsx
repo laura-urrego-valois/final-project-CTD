@@ -1,14 +1,14 @@
 import { Container } from "../../components/Container";
-import { ListCategory } from "../../components/ListCategory";
+import { ListUser } from "../../components/ListUser";
 import { SidebarLayout } from "../../layout/sidebar";
 
-export const CategoryList = () => {
+export const UserList = () => {
 	return (
 		<>
 			<Container>
 				<SidebarLayout>
-					<h1>Lista de categoria</h1>
-					<ListCategory />
+					<h1>Lista de usuarios</h1>
+					<ListUser />
 				</SidebarLayout>
 			</Container>
 		</>
