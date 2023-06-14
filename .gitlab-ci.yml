@@ -80,4 +80,4 @@ deploy_Backend:
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
     - echo "Finished deploying the app."
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
