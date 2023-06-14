@@ -68,7 +68,7 @@ public class User implements UserDetails {
 
     @Builder.Default
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch =FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
 
     @Enumerated(EnumType.STRING)

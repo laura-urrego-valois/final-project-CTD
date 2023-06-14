@@ -55,7 +55,6 @@ export const Product = () => {
         className={className}
         style={{
           ...style,
-          backgroundColor: "green",
           left: "-50px",
           zIndex: 1,
         }}

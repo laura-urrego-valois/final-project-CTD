@@ -11,10 +11,10 @@ import { GrAdd } from 'react-icons/gr';
 import './ListProduct.css';
 
 export const ListProduct = () => {
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch, deleteTour, updateTour, addTour } = useGlobalState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
-  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(7);
+  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(4);
 
   const tours = state?.tours || [];
   const categories = state?.categories || [];
@@ -51,39 +51,39 @@ export const ListProduct = () => {
     setIsModalOpen(false);
   };
 
-  const handleDeleteTour = (tourId) => {
-    console.log('removeTour', tourId)
-    dispatch({
-      type: actions.REMOVE_ITEM,
-      payload: tourId,
-    });
-
-    if (selectedTour && selectedTour.id === tourId) {
-      closeModal();
+  const handleDeleteTour = async (tourId) => {
+    try {
+      await deleteTour(tourId)
+    } catch (error) {
+      console.error("Error deleting tour:", error);
     }
   };
 
   const totalPages = getTotalPages(tours);
   const currentTours = getCurrentPageItems(tours);
 
-  const handleFormSubmit = (data) => {
-    data.id_category = parseInt(data.id_category);
-    const updatedTour = { ...tourForm, ...data };
-    console.log("update", updatedTour)
-    if (editMode) {
-      dispatch({
-        type: actions.UPDATE_TOUR,
-        payload: updatedTour,
-      });
-    } else {
-      dispatch({
-        type: actions.CREATE_TOUR,
-        payload: updatedTour,
-      });
-    }
+  const handleFormSubmit = async (data) => {
+    try {
+      data.categoryId = parseInt(data.categoryId);
+      const updatedTour = { ...tourForm, ...data };
+      console.log("update", updatedTour)
 
-    closeModal();
-    reset();
+      if (editMode) {
+        await updateTour(updatedTour.id, updatedTour);
+        dispatch({
+          type: actions.UPDATE_CATEGORY,
+          payload: updatedTour,
+        });
+      } else {
+        await addTour(updatedTour);
+      }
+      closeModal();
+      reset();
+
+      //window.location.reload();
+    } catch (error) {
+      console.error("Error adding/updating tour:", error);
+    }
   };
 
   const getCategoryName = (categoryId) => {

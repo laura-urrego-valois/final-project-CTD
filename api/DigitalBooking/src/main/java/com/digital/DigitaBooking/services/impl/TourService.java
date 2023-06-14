@@ -101,5 +101,16 @@ public class TourService implements ITourService {
         }
         return toursDTO;
     }
+
+    @Override
+    public Set<TourDTO> getToursByCountry(Integer id) {
+        Set<TourDTO> toursDTO = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllToursByCountry(id);
+        for (Tour tour :
+                tours) {
+            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+        }
+        return toursDTO;
+    }
 }
 

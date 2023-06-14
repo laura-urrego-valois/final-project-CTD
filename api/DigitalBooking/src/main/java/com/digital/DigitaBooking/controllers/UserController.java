@@ -25,7 +25,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.Collection;
+
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
