@@ -67,7 +67,7 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
                                 //Rutas para imagenes
-                                .requestMatchers(HttpMethod.POST, "/images/load_image").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/tours/load_image").permitAll()
                                 //Rutas para feautures
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()

@@ -39,7 +39,7 @@ public class TourService implements ITourService {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
         Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
         tour.setCategory(category);
-        tourRepository.save(tour);
+        tourRepository.save(tour).getId();
     }
 
     @Override
