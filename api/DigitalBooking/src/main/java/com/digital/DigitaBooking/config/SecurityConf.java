@@ -66,20 +66,14 @@ public class SecurityConf {
                                 .hasAnyAuthority(ADMIN.name(), USER.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
-                                //Rutas para imágenes
-                                .requestMatchers(HttpMethod.POST, "/images/load_image").permitAll()
-                                //Rutas para características
+                                //Rutas para imagenes
+                                .requestMatchers(HttpMethod.POST, "/tours/load_image").permitAll()
+                                //Rutas para feautures
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/features").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/features/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/features/{id}").hasAnyAuthority(ADMIN.name())
-                                //Rutas de países
-                                .requestMatchers(HttpMethod.GET, "/countries").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/countries/{id}").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/countries").hasAnyAuthority(ADMIN.name())
-                                .requestMatchers(HttpMethod.PUT, "/countries/{id}").hasAnyAuthority(ADMIN.name())
-                                .requestMatchers(HttpMethod.DELETE, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
