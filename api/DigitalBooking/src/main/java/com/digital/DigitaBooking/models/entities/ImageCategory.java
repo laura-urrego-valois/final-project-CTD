@@ -7,34 +7,26 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Setter
 @Getter
 @Entity
 @Table
-public class Category {
+public class ImageCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     @NotNull
-    private String categoryName;
+    private String imageTitle;
 
     @Column(columnDefinition = "VARCHAR(1000)")
     @NotNull
-    private String categoryDescription;
+    private String imageUrl;
 
     @JsonIgnore
-    @OneToOne
-    @JoinColumn(name="id_image_category", referencedColumnName = "id")
-    private ImageCategory imageCategory;
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Tour> tours = new HashSet<>();
+    @OneToOne(mappedBy = "imageCategory", cascade = CascadeType.ALL)
+    private Category category;
 
 }

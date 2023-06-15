@@ -1,7 +1,9 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.converters.CategoryToCategoryDTOConverter;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import com.digital.DigitaBooking.models.entities.ImageCategory;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.services.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,18 +22,22 @@ public class CategoryService implements ICategoryService {
     @Autowired
     ObjectMapper mapper;
 
+    @Autowired
+    CategoryToCategoryDTOConverter categoryConverter;
+
     @Override
-    public void saveCategory(CategoryDTO categoryDTO) {
+    public Category saveCategory(CategoryDTO categoryDTO, ImageCategory imageCategory) {
         Category category = mapper.convertValue(categoryDTO, Category.class);
-        categoryRepository.save(category);
+        category.setImageCategory(imageCategory);
+        Category newCategory = categoryRepository.save(category);
+        return  newCategory;
     }
 
     @Override
     public CategoryDTO getCategory(Integer id) {
-        Optional<Category> category = categoryRepository.findById(id);
+        Category category = categoryRepository.findById(id).get();
         CategoryDTO categoryDTO = null;
-        if (category.isPresent())
-            categoryDTO = mapper.convertValue(category, CategoryDTO.class);
+        categoryDTO = categoryConverter.convert(category);
 
         return categoryDTO;
     }
@@ -41,7 +47,6 @@ public class CategoryService implements ICategoryService {
         Optional<Category> optionalCategory = categoryRepository.findById(id).map(category -> {
             category.setCategoryName(categoryDTO.getCategoryName());
             category.setCategoryDescription(categoryDTO.getCategoryDescription());
-            category.setCategoryImageURL(categoryDTO.getCategoryImageURL());
             return categoryRepository.save(category);
         });
 
@@ -59,7 +64,7 @@ public class CategoryService implements ICategoryService {
         Set<CategoryDTO> categoriesDTO = new HashSet<>();
         for (Category category :
                 categories) {
-            categoriesDTO.add(mapper.convertValue(category, CategoryDTO.class));
+            categoriesDTO.add(categoryConverter.convert(category));
 
         }
         return categoriesDTO;

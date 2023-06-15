@@ -53,6 +53,7 @@ public class TourController {
     }
 
     @PostMapping(path = "/load_image")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> loadImage(@RequestPart(value="files") List<MultipartFile> imagenes,
     @RequestPart(value="Tour") String tourString) throws IOException {
         ImageDTO imageDTO = new ImageDTO();

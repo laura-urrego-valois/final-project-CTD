@@ -34,8 +34,6 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-
-
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveImage(@RequestBody ImageDTO imageDTO) {
