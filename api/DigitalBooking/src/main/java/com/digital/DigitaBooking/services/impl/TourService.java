@@ -51,10 +51,9 @@ public class TourService implements ITourService {
 
     @Override
     public TourDTO getTour(Long id) {
-        Optional<Tour> tour = tourRepository.findById(id);
+        Tour tour = tourRepository.findById(id).get();
         TourDTO tourDTO = null;
-        if (tour.isPresent())
-            tourDTO = mapper.convertValue(tour, TourDTO.class);
+        tourDTO = tourConverter.convert(tour);
 
         return tourDTO;
     }

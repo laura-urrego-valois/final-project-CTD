@@ -24,5 +24,6 @@ public class TourDTO {
     private Category category;
     private Set<Feature> features;
     private Set<Long> featuresId;
-    private Integer countryId;
+    private Integer CountryId;
+
 }
