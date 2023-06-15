@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e53d5c86-7ac6-4a11-ad27-338b8faa62af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/CategoryToCategoryDTOConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/CategoryDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/ImageCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/ImageCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/ICategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/ICategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageCategoryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
