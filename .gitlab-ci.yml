@@ -16,7 +16,7 @@
 stages:
   - build
   - deploy
-  - -test
+
 
 build_backend:
   stage: build
@@ -29,7 +29,7 @@ build_backend:
     - gradle build
     - echo "Finished building the app."
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "config_pipeline-yml"'
 
 build_frontend:
   stage: build
@@ -41,7 +41,7 @@ build_frontend:
     - npm run build
     - echo $(ls)
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "config_pipeline-yml"'
   image: node:latest
   artifacts:
     paths:
@@ -59,10 +59,6 @@ deploy_frontend:
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   dependencies:
     - build_frontend
-
-test:
-  stage: test
-  echo: "Testing the app"
 
 deploy_Backend:
   stage: deploy
@@ -86,4 +82,4 @@ deploy_Backend:
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
     - echo "Finished deploying the app."
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "config_pipeline-yml"'
