@@ -22,7 +22,9 @@ public class TourToTourDTOConverter implements Converter<Tour, TourDTO> {
         tourDTO.setTourScore(tour.getTourScore());
         tourDTO.setCategoryId(tour.getCategory().getId());
         tourDTO.setFeatures(tour.getFeatures());
+        tourDTO.setCountry(tour.getCountry());
         tourDTO.setCountryId(tour.getCountry().getId());
+        tourDTO.setImages(tour.getImages());
         return tourDTO;
     }
 }

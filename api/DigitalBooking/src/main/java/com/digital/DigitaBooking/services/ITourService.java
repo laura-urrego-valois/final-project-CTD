@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface ITourService {
 
-    void saveTour(TourDTO tourDTO);
+    Tour saveTour(TourDTO tourDTO);
 
     TourDTO getTour(Long id);
 

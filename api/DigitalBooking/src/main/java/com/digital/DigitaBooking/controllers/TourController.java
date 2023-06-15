@@ -39,8 +39,8 @@ public class TourController {
     @Autowired
     private ImageService imageService;
 
-//    @Autowired
-//    private ImageDTO imageDTO;
+
+
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -55,34 +55,26 @@ public class TourController {
     @PostMapping(path = "/load_image")
     public ResponseEntity<HttpStatus> loadImage(@RequestPart(value="files") List<MultipartFile> imagenes,
     @RequestPart(value="Tour") String tourString) throws IOException {
-
+        ImageDTO imageDTO = new ImageDTO();
 //        List<String> imagesURL = new ArrayList<>();
-//        TourDTO tourDTO = mapper.readValue(tourString,TourDTO.class);
-//        try {
-//            tourService.saveTour(tourDTO);
-////            tourService.getTour()
-//            for (MultipartFile image: imagenes){
-//                File mainFile = new File(image.getOriginalFilename());
-//                String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
-//                awss3Service.uploadFile(image);
-//                imageDTO.setImageTitle(mainFile.getName());
-//                imageDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
-////                imageDTO.setTour(tourService.getTour());
-//                imageService.saveImage(imageDTO);
-//
+        TourDTO tourDTO = mapper.readValue(tourString,TourDTO.class);
+        Tour newTour = tourService.saveTour(tourDTO);
+        System.out.println(newTour.toString());
+        try {
+            for (MultipartFile image: imagenes){
+                File mainFile = new File(image.getOriginalFilename());
+                String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
+                awss3Service.uploadFile(image);
+                imageDTO.setImageTitle(mainFile.getName());
+                imageDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
+                imageService.saveImage(imageDTO,newTour);
+
 //                imagesURL.add(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
-//
-//
-////                public void addImagesToProduct(Product newProduct, List<String> imagesURLs){
-////                    List<ProductImageEntity> images = imagesURLs.stream().map(url -> new ProductImageEntity(null, url, newProduct)).toList();
-////                    productImageRepository.saveAll(images);
-////                }
-//            }
-//
-//
-//        }catch (Exception e){
-//            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-//        }
+                }
+
+        }catch (Exception e){
+            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+        }
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
