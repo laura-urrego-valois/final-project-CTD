@@ -16,6 +16,7 @@
 stages:
   - build
   - deploy
+  - -test
 
 build_backend:
   stage: build
@@ -58,6 +59,11 @@ deploy_frontend:
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   dependencies:
     - build_frontend
+
+test:
+  stage: test
+  echo: "Testing the app"
+
 deploy_Backend:
   stage: deploy
   needs: [build_backend]
