@@ -1,7 +1,9 @@
 package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.dtos.ImageCategoryDTO;
+import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.ImageCategory;
+import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.repositories.IImageCategoryRepository;
 import com.digital.DigitaBooking.services.IImageCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,13 +22,16 @@ public class ImageCategoryService implements IImageCategoryService {
     private IImageCategoryRepository imageCategoryRepository;
 
     @Autowired
+    private ICategoryRepository categoryRepository;
+
+    @Autowired
     ObjectMapper mapper;
 
     @Override
-    public void saveImageCategory(ImageCategoryDTO imageCategoryDTO) {
-
+    public ImageCategory saveImageCategory(ImageCategoryDTO imageCategoryDTO) {
         ImageCategory imageCategory = mapper.convertValue(imageCategoryDTO, ImageCategory.class);
-        imageCategoryRepository.save(imageCategory);
+        ImageCategory newimageCategory =imageCategoryRepository.save(imageCategory);
+        return newimageCategory;
     }
 
     @Override

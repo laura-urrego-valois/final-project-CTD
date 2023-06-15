@@ -51,12 +51,14 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/country/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/tours/load_image").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/tours/{id}").hasAnyAuthority(ADMIN.name())
                                 // Rutas para categorías
                                 .requestMatchers(HttpMethod.GET, "/category").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/category/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/category").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/category/load_image").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/category/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/category/{id}").hasAuthority(ADMIN.name())
                                 // Rutas para usuarios
@@ -68,7 +70,6 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
                                 // Rutas para imágenes
-                                .requestMatchers(HttpMethod.POST, "/tours/load_image").permitAll()
                                 // Rutas para características
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()
