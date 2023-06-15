@@ -38,8 +38,11 @@ public class TourController {
     @Autowired
     private ImageService imageService;
 
+    /*
     @Autowired
     private ImageDTO imageDTO;
+
+     */
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -57,6 +60,7 @@ public class TourController {
 
         List<String> imagesURL = new ArrayList<>();
         TourDTO tourDTO = mapper.readValue(tourString,TourDTO.class);
+        /*
         try {
             tourService.saveTour(tourDTO);
 //            tourService.getTour()
@@ -67,7 +71,7 @@ public class TourController {
                 imageDTO.setImageTitle(mainFile.getName());
                 imageDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
 //                imageDTO.setTour(tourService.getTour());
-                imageService.saveImage(imageDTO);
+                //imageService.saveImage(imageDTO);
 
                 imagesURL.add(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
 
@@ -83,6 +87,8 @@ public class TourController {
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
 
+
+         */
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

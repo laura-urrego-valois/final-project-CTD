@@ -38,27 +38,27 @@ public class SecurityConf {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorizeHttpRequestsCustomizer -> authorizeHttpRequestsCustomizer
-                                // Rutas de autorizaciones
+                                // Rutas para autorizaciones
                                 .requestMatchers(HttpMethod.GET, "/welcome/anyone").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/welcome/user")
                                 .hasAnyAuthority(USER.name(), ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/sign-up").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/welcome/admin").hasAuthority(ADMIN.name())
-                                // Rutas de tours
+                                // Rutas para tours
                                 .requestMatchers(HttpMethod.GET, "/tours").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/tours/{id}").hasAnyAuthority(ADMIN.name())
-                                // Rutas de categorías
+                                // Rutas para categorías
                                 .requestMatchers(HttpMethod.GET, "/category").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/category/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/category").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/category/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/category/{id}").hasAuthority(ADMIN.name())
-                                //Rutas para usuarios
+                                // Rutas para usuarios
                                 .requestMatchers(HttpMethod.GET, "/users").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.GET, "/users/{id}")
                                 .hasAnyAuthority(ADMIN.name(), USER.name())
@@ -66,14 +66,20 @@ public class SecurityConf {
                                 .hasAnyAuthority(ADMIN.name(), USER.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
-                                //Rutas para imagenes
+                                // Rutas para imágenes
                                 .requestMatchers(HttpMethod.POST, "/tours/load_image").permitAll()
-                                //Rutas para feautures
+                                // Rutas para características
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/features").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/features/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/features/{id}").hasAnyAuthority(ADMIN.name())
+                                // Rutas para países
+                                .requestMatchers(HttpMethod.GET, "/countries").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/countries/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/countries").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT, "/countries/{id}").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -30,7 +30,6 @@ public class User implements UserDetails {
     // roles, permisos y otros detalles relevantes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
 
     @Column
