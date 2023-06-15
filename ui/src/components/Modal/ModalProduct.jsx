@@ -31,6 +31,16 @@ export const ModalProduct = ({
     }
   }, [editMode, tourForm, setValue]);
 
+  const feature = [{ id: 0, name: "selva" },
+  { id: 1, name: "paseos" },
+  { id: 2, name: "actividades deportivas" },
+  { id: 3, name: "comida tradicional" },
+  { id: 4, name: "parques naturales" },
+  { id: 5, name: "vida silvestre" },
+  { id: 6, name: "campamentos" },
+  { id: 7, name: "caminatas guiadas" },
+  ]
+
   return (
     <section className="modal__overlay">
       <div className="modal__content">
@@ -72,6 +82,15 @@ export const ModalProduct = ({
               </option>
             ))}
           </select>
+          <fieldset className="list__feature">
+            <legend>Tipo de Caracteristicas:</legend>
+            {feature.map(item => (
+              <div key={item.id} className="feature__item">
+                <input type="checkbox" id={item.name} name={item.name} />
+                <label htmlFor={item.name}>{item.name}</label>
+              </div>
+            ))}
+          </fieldset>
           <Button type="submit">{editMode ? 'Guardar' : 'Agregar'}</Button>
         </form>
         <span className="modal__close" onClick={onClose}><GrFormClose /></span>
