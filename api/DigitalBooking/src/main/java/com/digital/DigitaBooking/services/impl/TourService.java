@@ -40,13 +40,12 @@ public class TourService implements ITourService {
     TourToTourDTOConverter tourConverter;
 
     @Override
-    public void saveTour(TourDTO tourDTO) {
+    public Tour saveTour(TourDTO tourDTO) {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
         Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
         tour.setCategory(category);
-        Country country = countryRepository.findById(tourDTO.getCountryId()).get();
-        tour.setCountry(country);
-        tourRepository.save(tour).getId();
+        Tour newTour = tourRepository.save(tour);
+        return newTour;
     }
 
     @Override
@@ -76,6 +75,7 @@ public class TourService implements ITourService {
             }
             return tourRepository.save(tour);
         });
+
     }
 
     @Override
