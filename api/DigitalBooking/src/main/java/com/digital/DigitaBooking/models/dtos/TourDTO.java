@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.models.dtos;
 
 import com.digital.DigitaBooking.models.entities.Category;
+import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.models.entities.Feature;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
