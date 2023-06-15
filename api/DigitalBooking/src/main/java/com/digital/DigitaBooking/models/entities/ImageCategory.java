@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
-@Data
+@Setter
+@Getter
 @Entity
 @Table
-public class Country {
+public class ImageCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,18 +19,14 @@ public class Country {
 
     @Column
     @NotNull
-    private String countryName;
+    private String imageTitle;
 
-    @Column
-    private String capitalName;
-
-    @Column
-    private Double latitude;
-
-    @Column
-    private Double longitude;
+    @Column(columnDefinition = "VARCHAR(1000)")
+    @NotNull
+    private String imageUrl;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-    private Set<Tour> tours = new HashSet<>();
+    @OneToOne(mappedBy = "imageCategory", cascade = CascadeType.ALL)
+    private Category category;
+
 }

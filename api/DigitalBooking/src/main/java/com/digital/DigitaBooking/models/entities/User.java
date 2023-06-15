@@ -30,12 +30,15 @@ public class User implements UserDetails {
     // roles, permisos y otros detalles relevantes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
 
     @Column
     @NotNull
     private String userName;
+
+    @Column
+    @NotNull
+    private String userEmail;
 
     @Column
     @NotNull
@@ -46,11 +49,9 @@ public class User implements UserDetails {
     private String userFirstName;
 
     @Column
-    @NotNull
     private Double latitude;
 
     @Column
-    @NotNull
     private Double longitude;
 
     @Column
