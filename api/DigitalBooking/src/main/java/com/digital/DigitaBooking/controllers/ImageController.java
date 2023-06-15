@@ -40,7 +40,7 @@ public class ImageController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveImage(@RequestBody ImageDTO imageDTO) {
 
-        imageService.saveImage(imageDTO);
+//        imageService.saveImage(imageDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
