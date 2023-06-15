@@ -7,11 +7,11 @@ import "./Modal.css";
 export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, categoryForm }) => {
   const { register, handleSubmit, setValue, watch } = useForm();
   const categoryImageFile = watch('categoryImageFile');
-
+  console.log("categoryForm", categoryForm)
   useEffect(() => {
     if (editMode && categoryForm) {
       setValue('categoryName', categoryForm.categoryName);
-      setValue('categoryImageURL', categoryForm.categoryImageURL);
+      setValue('categoryImageURL', categoryForm.imageCategory.imageUrl);
       setValue('categoryDescription', categoryForm.categoryDescription);
     } else {
       setValue('categoryName', '');
@@ -76,7 +76,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
       <div className="modal__content">
         <h3>{editMode ? 'Editar Categoría' : 'Agregar Categoría'}</h3>
         {
-          editMode ? <img className='modal__image' src={categoryForm?.categoryImageURL} alt="" /> : ""
+          editMode ? <img className='modal__image' src={categoryForm?.imageCategory.imageUrl} alt="" /> : ""
         }
         <form className="modal__form" onSubmit={handleSubmit(handleFormSubmit)}>
           <label htmlFor="categoryName">Nombre de la categoría:</label>

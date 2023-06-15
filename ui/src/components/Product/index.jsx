@@ -85,9 +85,9 @@ export const Product = () => {
               onClick={() => handleCategoryClick(data.id)}
             >
               <SimpleCard
-                imageSrc={data.categoryImageURL}
-                title={data.categoryName}
-                description={data.categoryDescription}
+                imageSrc={data?.imageCategory?.imageUrl}
+                title={data?.categoryName}
+                description={data?.categoryDescription}
               />
             </Link>
           </div>

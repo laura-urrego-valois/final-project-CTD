@@ -49,6 +49,7 @@ const Detail = () => {
     const category = categories?.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : "";
   };
+  console.log("itemDetail", itemDetail)
   return (
     <Container>
       <div className="detail">
@@ -74,7 +75,7 @@ const Detail = () => {
           <p className="detail__description">{itemDetail.tourDescription}</p>
         </div>
       </section>
-      <Feature feature={feature} />
+      <Feature feature={itemDetail.features} />
       <Politics />
     </Container>
   );

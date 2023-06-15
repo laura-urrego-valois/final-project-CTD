@@ -52,13 +52,18 @@ export const ContextProvider = ({ children }) => {
     }
   };
   const addCategory = async (newCategoryData) => {
+    console.log("dataCategory", newCategoryData)
     try {
+      const formData = new FormData();
+      formData.append('file', newCategoryData.categoryImageFile[0]);
+      formData.append('Category', JSON.stringify(newCategoryData));
       const config = {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await axios.post(`${BASE_URL}/category`, newCategoryData, config);
+      const response = await axios.post(`${BASE_URL}/category/load_image`, formData, config);
       dispatch({
         type: actions.ADD_CATEGORY,
         payload: response.data

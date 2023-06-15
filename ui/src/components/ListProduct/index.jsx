@@ -96,7 +96,7 @@ export const ListProduct = () => {
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentTours.map((tour) => (
         <article className="list__content" key={tour.id}>
-          <img className="list__image" src={tour.tourImageURL} alt="" />
+          <img className="list__image" src={tour.imageCategory} alt="" />
           <p className="list__title">{tour.tourName}</p>
           <p>{getCategoryName(tour.categoryId)}</p>
           <div className='list__button'>
