@@ -49,11 +49,9 @@ public class User implements UserDetails {
     private String userFirstName;
 
     @Column
-    @NotNull
     private Double latitude;
 
     @Column
-    @NotNull
     private Double longitude;
 
     @Column

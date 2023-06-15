@@ -1,7 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.converters.TourToTourDTOConverter;
-import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.models.entities.Feature;
@@ -44,6 +43,8 @@ public class TourService implements ITourService {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
         Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
         tour.setCategory(category);
+        Country country = countryRepository.findById(tourDTO.getCountryId()).get();
+        tour.setCountry(country);
         Tour newTour = tourRepository.save(tour);
         return newTour;
     }

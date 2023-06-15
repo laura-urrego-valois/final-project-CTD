@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f8a2c14b-2697-4de8-94c9-eb8bf0d098a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/TourToTourDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/TourToTourDTOConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/ImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

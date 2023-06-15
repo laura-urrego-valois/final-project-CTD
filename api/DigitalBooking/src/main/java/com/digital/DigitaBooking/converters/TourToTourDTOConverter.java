@@ -24,6 +24,7 @@ public class TourToTourDTOConverter implements Converter<Tour, TourDTO> {
         tourDTO.setFeatures(tour.getFeatures());
         tourDTO.setCountry(tour.getCountry());
         tourDTO.setCountryId(tour.getCountry().getId());
+        tourDTO.setImages(tour.getImages());
         return tourDTO;
     }
 }
