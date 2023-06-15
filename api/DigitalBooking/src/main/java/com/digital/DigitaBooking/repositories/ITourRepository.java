@@ -52,21 +52,3 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
 
 
     //List<Tour> findToursBy
-
-    /*
-    @Query(value = "SELECT t.* FROM tour t " +
-            "WHERE t.country.id = :")
-}
-
-    @Query(
-            value = "select P.* from products P " +
-                    "where P.city_id = :cityId " +
-                    "and P.id not in ( " +
-                    "    select distinct B.product_id " +
-                    "    from bookings B " +
-                    "    where (B.check_out_date > :checkInDate and B.check_in_date < :checkOutDate) " +
-                    ")" +
-                    " group by P.id; ", nativeQuery = true)
-    List<Product> getProductsByCityAndDates(@Param("cityId") Long cityId, @Param("checkInDate") LocalDate checkInDate, @Param("checkOutDate") LocalDate checkOutDate);
-
-     */

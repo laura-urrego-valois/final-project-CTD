@@ -41,7 +41,6 @@ public class CategoryService implements ICategoryService {
         Optional<Category> optionalCategory = categoryRepository.findById(id).map(category -> {
             category.setCategoryName(categoryDTO.getCategoryName());
             category.setCategoryDescription(categoryDTO.getCategoryDescription());
-            category.setCategoryImageURL(categoryDTO.getCategoryImageURL());
             return categoryRepository.save(category);
         });
 

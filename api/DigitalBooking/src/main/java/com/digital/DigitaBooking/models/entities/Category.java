@@ -24,9 +24,10 @@ public class Category {
     @NotNull
     private String categoryDescription;
 
-    @Column(columnDefinition = "VARCHAR(1000)")
-    @NotNull
-    private String categoryImageURL;
+    @OneToOne
+    @JoinColumn(name="id_image_category", referencedColumnName = "id")
+    private ImageCategory imageCategory;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
