@@ -26,7 +26,6 @@
   bottom: 0;
   background: var(--color-tertiary);
   opacity: .9;
-  width: 100%;
 }
 .simpleCard__title{
   margin: 0rem;

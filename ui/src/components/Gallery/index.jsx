@@ -5,14 +5,14 @@ import './Gallery.css'
 
 export const Gallery = ({ dataImage }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log("iIMMMM", dataImage)
   return (
     <>
       <section className="gallery__container">
         <figure className="gallery__content">
           {
-            dataImage?.map((image, i) => (
-              <img className='content-image' key={i} src={image} alt="2" />
+            dataImage?.map((item, i) => (
+              <img className='content-image' key={i} src={item?.imageUrl} alt={item?.imageTitle} />
 
             ))
           }

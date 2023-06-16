@@ -128,7 +128,10 @@ export const ContextProvider = ({ children }) => {
 
   const addTour = async (newTourData) => {
     const formData = new FormData()
-    formData.append("files", newTourData.toursImageFile[0])
+    //formData.append("files", newTourData.toursImageFile[0])
+    for (let i = 0; i < newTourData.toursImageFile.length; i++) {
+      formData.append("files", newTourData.toursImageFile[i]);
+    }
     formData.append("Tour", JSON.stringify(newTourData))
     console.log("formData", formData)
     try {

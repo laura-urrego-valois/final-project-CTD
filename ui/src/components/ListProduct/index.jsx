@@ -75,7 +75,6 @@ export const ListProduct = () => {
   const totalPages = getTotalPages(tours);
   const currentTours = getCurrentPageItems(tours);
 
-  //const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODY4ODI2OTgsImV4cCI6MTY4Njg4NTM5OH0.VSHUSbn9ZpfFDmCNxF9ijiIplgFfWnRMBUhlmhDN8E8"
   const handleFormSubmit = async (data) => {
     data.categoryId = parseInt(data.categoryId);
     data.countryId = parseInt(data.countryId);
@@ -98,25 +97,6 @@ export const ListProduct = () => {
       } else {
         console.log("DATA_ADD", updatedTour)
         await addTour(updatedTour);
-        /*  const formData = new FormData();
-         formData.append('files', updatedTour.toursImageFile[0]);
-         formData.append('Tour', JSON.stringify(updatedTour));
-         console.log("formData", formData)
-         try {
-           const config = {
-             'Content-Type': 'multipart/form-data',
-             headers: {
-               Authorization: `Bearer ${token}`
-             }
-           };
-           const response = await axios.post(`http://localhost:8000/tours/load_image`, updatedTour, config)
-           dispatch({
-             type: actions.CREATE_TOUR,
-             payload: response.data,
-           })
-         } catch (error) {
-           console.error("Error adding tour:", error);
-         } */
       }
       closeModal();
       reset();
