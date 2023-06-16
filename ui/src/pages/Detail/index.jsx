@@ -49,7 +49,7 @@ const Detail = () => {
     const category = categories?.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : "";
   };
-  console.log("itemDetail", itemDetail?.images)
+  console.log("itemDetail", itemDetail, state)
   return (
     <Container>
       <div className="detail">
