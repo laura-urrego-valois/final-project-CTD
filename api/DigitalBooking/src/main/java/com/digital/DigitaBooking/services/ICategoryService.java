@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface ICategoryService {
 
-    Category saveCategory(CategoryDTO categoryDTO, ImageCategory imageCategory);
+    Category saveCategory(CategoryDTO categoryDTO);
 
     CategoryDTO getCategory(Integer id);
 

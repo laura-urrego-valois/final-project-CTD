@@ -28,8 +28,9 @@ public class ImageCategoryService implements IImageCategoryService {
     ObjectMapper mapper;
 
     @Override
-    public ImageCategory saveImageCategory(ImageCategoryDTO imageCategoryDTO) {
+    public ImageCategory saveImageCategory(ImageCategoryDTO imageCategoryDTO, Category category) {
         ImageCategory imageCategory = mapper.convertValue(imageCategoryDTO, ImageCategory.class);
+        imageCategory.setCategory(category);
         ImageCategory newimageCategory =imageCategoryRepository.save(imageCategory);
         return newimageCategory;
     }
