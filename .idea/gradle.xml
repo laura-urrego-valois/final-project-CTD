@@ -8,7 +8,6 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/api/DigitalBooking" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../gradle/gradle-8.1.1" />
         <option name="gradleJvm" value="17" />
         <option name="modules">
           <set>
