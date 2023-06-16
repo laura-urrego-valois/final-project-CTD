@@ -1,12 +1,14 @@
 package com.digital.DigitaBooking.services;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import com.digital.DigitaBooking.models.entities.Category;
+import com.digital.DigitaBooking.models.entities.ImageCategory;
 
 import java.util.Set;
 
 public interface ICategoryService {
 
-    void saveCategory(CategoryDTO categoryDTO);
+    Category saveCategory(CategoryDTO categoryDTO);
 
     CategoryDTO getCategory(Integer id);
 

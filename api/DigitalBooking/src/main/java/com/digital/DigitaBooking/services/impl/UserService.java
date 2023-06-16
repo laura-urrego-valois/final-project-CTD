@@ -46,6 +46,7 @@ public class UserService implements IUserService {
     public UserDetails registerUser(UserSignUp userSignUp) {
         try {
             return userRepository.save(User.builder()
+                    .userEmail(userSignUp.getUserEmail())
                     .userName(userSignUp.getUserName())
                     .userLastName(userSignUp.getUserLastName())
                     .userFirstName(userSignUp.getUserFirstName())

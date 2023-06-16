@@ -4,21 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a2c14b-2697-4de8-94c9-eb8bf0d098a0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/TourToTourDTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/ImageLoaderDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/UserToUserDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/converters/UserToUserDTOConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/TourDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserSignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/UserSignUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/UserService.java" afterDir="false" />
+    <list default="true" id="e53d5c86-7ac6-4a11-ad27-338b8faa62af" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/ImageCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/ImageCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/ICategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/ICategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageCategoryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,10 +52,39 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/ImageCategoryController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/ImageCategoryDTO.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/Category.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/entities/ImageCategory.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/IImageCategoryRepository.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ITourRepository.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/IImageCategoryService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ImageCategoryService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/ReservationService.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PnXrSuWUeJ2FrXGH7ycGSE4oxT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -72,17 +94,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Karina/Downloads/equipo-10/api/DigitalBooking&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Laura Urrego/Desktop/pruebas/equipo-10/api/DigitalBooking&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RunManager">
     <configuration name="DigitaBookingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="jbr-17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.digital.DigitaBooking.DigitaBookingApplication" />
       <module name="DigitaBooking.main" />
       <extension name="coverage">
@@ -104,7 +125,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f8a2c14b-2697-4de8-94c9-eb8bf0d098a0" name="Changes" comment="" />
+      <changelist id="e53d5c86-7ac6-4a11-ad27-338b8faa62af" name="Changes" comment="" />
       <created>1684094017399</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

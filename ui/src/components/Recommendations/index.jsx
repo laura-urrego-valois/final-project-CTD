@@ -9,12 +9,12 @@ export const Recommendations = () => {
 	const { selectedCategory, tours, categories } = state;
 	const { currentPage, goToNextPage, goToPrevPage } = usePagination(7);
 
-	const filteredTours = tours?.filter((tour) => tour?.id_category === selectedCategory);
+	const filteredTours = tours?.filter((tour) => tour?.categoryId === selectedCategory);
 	const shuffledTours = tours?.sort(() => Math.random() - 0.5);
 
 	const getCategoryName = (categoryId) => {
-		const category = categories?.find((cat) => cat?.id_category === categoryId);
-		return category ? category.name : "";
+		const category = categories?.find((cat) => cat?.id === categoryId);
+		return category ? category.categoryName : "";
 	};
 
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
@@ -30,11 +30,12 @@ export const Recommendations = () => {
 					id={tour.id}
 					title={tour.tourName}
 					description={tour.tourDescription}
-					imageSrc={tour.tourImageURL}
+					imageSrc={tour.images[0]?.imageUrl}
 					classification={tour.tourClassification}
 					category={getCategoryName(tour.categoryId)}
 					score={tour.tourScore}
 				/>
+
 			));
 	};
 
