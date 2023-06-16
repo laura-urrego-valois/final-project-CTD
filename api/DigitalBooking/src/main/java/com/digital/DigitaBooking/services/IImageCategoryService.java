@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface IImageCategoryService {
 
-    ImageCategory saveImageCategory(ImageCategoryDTO imageCategoryDTO);
+    ImageCategory saveImageCategory(ImageCategoryDTO imageCategoryDTO, Category category);
 
     ImageCategoryDTO getImageCategory(Integer id);
 

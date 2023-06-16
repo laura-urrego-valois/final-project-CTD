@@ -26,7 +26,8 @@ public class ImageCategory {
     private String imageUrl;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "imageCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name="id_category", referencedColumnName = "id")
     private Category category;
 
 }

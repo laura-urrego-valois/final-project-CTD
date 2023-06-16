@@ -42,7 +42,7 @@ public class CategoryController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveCategory(@RequestPart CategoryDTO categoryDTO,@RequestPart ImageCategory imageCategory) {
-        categoryService.saveCategory(categoryDTO, imageCategory);
+        categoryService.saveCategory(categoryDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -59,9 +59,8 @@ public class CategoryController {
                 awss3Service.uploadFile(image);
                 imageCategoryDTO.setImageTitle(mainFile.getName());
                 imageCategoryDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
-                ImageCategory newImageCategory = imageCategoryService.saveImageCategory(imageCategoryDTO);
-                categoryService.saveCategory(categoryDTO, newImageCategory);
-
+                Category newCategory = categoryService.saveCategory(categoryDTO);
+                imageCategoryService.saveImageCategory(imageCategoryDTO, newCategory);
 
         }catch (Exception e){
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);

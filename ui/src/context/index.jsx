@@ -226,6 +226,63 @@ export const ContextProvider = ({ children }) => {
     })
   }
 
+  const createCountry = async (newCountryData) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/countries`,
+        newCountryData,
+        config
+      )
+      dispatch({
+        type: actions.ADD_COUNTRY,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.error("Error adding country:", error)
+    }
+  }
+  const updateCountry = async (countryId, updatedData) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.put(
+        `${BASE_URL}/countries/${countryId}`,
+        updatedData,
+        config
+      )
+      dispatch({
+        type: actions.UPDATE_COUNTRY,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.error("Error updating country:", error)
+    }
+  }
+  const deleteCountry = async (countryId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
+      dispatch({
+        type: actions.REMOVE_COUNTRY,
+        payload: countryId,
+      })
+    } catch (error) {
+      console.error("Error deleting country:", error)
+    }
+  }
+
   useEffect(() => {
     fetchCategories()
     fetchTours()
@@ -270,6 +327,11 @@ export const ContextProvider = ({ children }) => {
     fetchUserByEmail,
     makeAdminRole,
     makeUserRole,
+    // COUNTRY
+    fetchCountry,
+    createCountry,
+    updateCountry,
+    deleteCountry,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
