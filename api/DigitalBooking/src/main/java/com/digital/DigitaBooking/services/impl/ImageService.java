@@ -2,6 +2,7 @@ package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.models.dtos.ImageDTO;
 import com.digital.DigitaBooking.models.entities.Image;
+import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.repositories.IImageRepository;
 import com.digital.DigitaBooking.services.IImageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,8 +24,9 @@ public class ImageService implements IImageService {
     ObjectMapper mapper;
 
     @Override
-    public void saveImage(ImageDTO imageDTO) {
+    public void saveImage(ImageDTO imageDTO, Tour newTour) {
         Image image = mapper.convertValue(imageDTO, Image.class);
+        image.setTour(newTour);
         imageRepository.save(image);
 
     }

@@ -13,6 +13,7 @@
 }
 .feature__item{
   font-size: 1.2rem;
+  display: flex;
 }
 .item-icon{
   font-size: 1.8rem;

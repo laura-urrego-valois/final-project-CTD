@@ -9,7 +9,9 @@ import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
 
-export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
+export const BASE_URL =
+  // import.meta.env.VITE_API_URL ||
+  "http://localhost:8000"
 
 const initialState = {
   context: "testing context",
@@ -34,9 +36,15 @@ export const ContextProvider = ({ children }) => {
   }
   const updateCategory = async (categoryId, updatedData) => {
     try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
       const response = await axios.put(
         `${BASE_URL}/category/${categoryId}`,
-        updatedData
+        updatedData,
+        config
       )
       dispatch({
         type: actions.UPDATE_CATEGORY,
@@ -48,9 +56,19 @@ export const ContextProvider = ({ children }) => {
   }
   const addCategory = async (newCategoryData) => {
     try {
+      const formData = new FormData()
+      formData.append("file", newCategoryData.categoryImageFile[0])
+      formData.append("Category", JSON.stringify(newCategoryData))
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
       const response = await axios.post(
-        `${BASE_URL}/categories`,
-        newCategoryData
+        `${BASE_URL}/category/load_image`,
+        formData,
+        config
       )
       dispatch({
         type: actions.ADD_CATEGORY,
@@ -62,7 +80,13 @@ export const ContextProvider = ({ children }) => {
   }
   const deleteCategory = async (categoryId) => {
     try {
-      await axios.delete(`${BASE_URL}/categories/${categoryId}`)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+
+      await axios.delete(`${BASE_URL}/category/${categoryId}`, config)
       dispatch({
         type: actions.REMOVE_CATEGORY,
         payload: categoryId,
@@ -80,11 +104,18 @@ export const ContextProvider = ({ children }) => {
       })
     })
   }
+
   const updateTour = async (tourId, updatedData) => {
     try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
       const response = await axios.put(
         `${BASE_URL}/tours/${tourId}`,
-        updatedData
+        updatedData,
+        config
       )
       dispatch({
         type: actions.UPDATE_TOUR,
@@ -94,20 +125,45 @@ export const ContextProvider = ({ children }) => {
       console.error("Error updating tour:", error)
     }
   }
+
   const addTour = async (newTourData) => {
+    const formData = new FormData()
+    //formData.append("files", newTourData.toursImageFile[0])
+    for (let i = 0; i < newTourData.toursImageFile.length; i++) {
+      formData.append("files", newTourData.toursImageFile[i]);
+    }
+    formData.append("Tour", JSON.stringify(newTourData))
+    console.log("formData", formData)
     try {
-      const response = await axios.post(`${BASE_URL}/tours`, newTourData)
-      dispatch({
-        type: actions.CREATE_TOUR,
-        payload: response.data,
-      })
+      const config = {
+        "Content-Type": "multipart/form-data",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/tours/load_image`,
+        formData,
+        config
+      )
+      if (response)
+        dispatch({
+          type: actions.CREATE_TOUR,
+          payload: response.data,
+        })
     } catch (error) {
       console.error("Error adding tour:", error)
     }
   }
+
   const deleteTour = async (tourId) => {
     try {
-      await axios.delete(`${BASE_URL}/tours/${tourId}`)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      await axios.delete(`${BASE_URL}/tours/${tourId}`, config)
       dispatch({
         type: actions.REMOVE_TOUR,
         payload: tourId,
@@ -161,10 +217,76 @@ export const ContextProvider = ({ children }) => {
       }
     )
   }
+  const fetchCountry = async () => {
+    await axios.get(`${BASE_URL}/countries`).then((response) => {
+      dispatch({
+        type: actions.GET_COUNTRIES,
+        payload: response.data,
+      })
+    })
+  }
+
+  const createCountry = async (newCountryData) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/countries`,
+        newCountryData,
+        config
+      )
+      dispatch({
+        type: actions.ADD_COUNTRY,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.error("Error adding country:", error)
+    }
+  }
+  const updateCountry = async (countryId, updatedData) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.put(
+        `${BASE_URL}/countries/${countryId}`,
+        updatedData,
+        config
+      )
+      dispatch({
+        type: actions.UPDATE_COUNTRY,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.error("Error updating country:", error)
+    }
+  }
+  const deleteCountry = async (countryId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
+      dispatch({
+        type: actions.REMOVE_COUNTRY,
+        payload: countryId,
+      })
+    } catch (error) {
+      console.error("Error deleting country:", error)
+    }
+  }
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
+    fetchCountry()
   }, [])
 
   useEffect(() => {
@@ -205,6 +327,11 @@ export const ContextProvider = ({ children }) => {
     fetchUserByEmail,
     makeAdminRole,
     makeUserRole,
+    // COUNTRY
+    fetchCountry,
+    createCountry,
+    updateCountry,
+    deleteCountry,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
