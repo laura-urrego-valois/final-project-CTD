@@ -11,7 +11,7 @@ import jwt_decode from "jwt-decode"
 
 export const BASE_URL =
   // import.meta.env.VITE_API_URL ||
-  "http://localhost:8000"
+  "http://3.133.208.24:8000"
 
 const initialState = {
   context: "testing context",
