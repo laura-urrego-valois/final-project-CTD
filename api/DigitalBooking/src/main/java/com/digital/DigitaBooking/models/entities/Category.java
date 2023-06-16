@@ -28,7 +28,7 @@ public class Category {
     private String categoryDescription;
 
     @JsonIgnore
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_image_category", referencedColumnName = "id")
     private ImageCategory imageCategory;
 

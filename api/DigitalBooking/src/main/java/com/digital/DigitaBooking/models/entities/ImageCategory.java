@@ -26,7 +26,7 @@ public class ImageCategory {
     private String imageUrl;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "imageCategory", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "imageCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Category category;
 
 }
