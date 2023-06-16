@@ -197,10 +197,19 @@ export const ContextProvider = ({ children }) => {
       }
     )
   }
+  const fetchCountry = async () => {
+    await axios.get(`${BASE_URL}/countries`).then((response) => {
+      dispatch({
+        type: actions.GET_COUNTRIES,
+        payload: response.data,
+      });
+    });
+  };
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
+    fetchCountry()
   }, [])
 
   useEffect(() => {

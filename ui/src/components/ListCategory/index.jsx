@@ -66,8 +66,6 @@ export const ListCategory = () => {
   const handleFormSubmit = async (data) => {
     try {
       const updatedCategory = { ...categoryForm, ...data };
-      console.log("updatedCategoryPrueba", updatedCategory, updatedCategory.categoryImageFile[0].name)
-
       if (editMode) {
         await updateCategory(updatedCategory.id, updatedCategory);
         dispatch({
@@ -85,7 +83,7 @@ export const ListCategory = () => {
       console.error("Error adding/updating category:", error);
     }
   };
-  console.log("currentCategories", currentCategories)
+
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>

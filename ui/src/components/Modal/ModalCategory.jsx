@@ -7,7 +7,7 @@ import "./Modal.css";
 export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, categoryForm }) => {
   const { register, handleSubmit, setValue, watch } = useForm();
   const categoryImageFile = watch('categoryImageFile');
-  console.log("categoryForm", categoryForm)
+
   useEffect(() => {
     if (editMode && categoryForm) {
       setValue('categoryName', categoryForm.categoryName);
