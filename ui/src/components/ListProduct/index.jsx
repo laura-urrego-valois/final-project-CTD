@@ -14,7 +14,7 @@ export const ListProduct = () => {
   const { state, dispatch, deleteTour, updateTour, addTour } = useGlobalState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
-  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(4);
+  const { currentPage, goToNextPage, goToPrevPage, getCurrentPageItems, getTotalPages } = usePagination(6);
 
   const tours = state?.tours || [];
   const categories = state?.categories || [];
@@ -23,10 +23,16 @@ export const ListProduct = () => {
   const [editMode, setEditMode] = useState(false);
   const [tourForm, setTourForm] = useState({
     id: '',
-    name: '',
-    image_url: '',
-    description: '',
-    id_category: 0,
+    categoryId: 0,
+    countryId: '',
+    features: [],
+    images: [],
+    tourCapacity: 0,
+    tourClassification: "",
+    tourDescription: "",
+    tourName: '',
+    tourPrice: 0,
+    tourScore: 0
   });
 
   const openModal = (tour) => {
@@ -36,10 +42,17 @@ export const ListProduct = () => {
     } else {
       setEditMode(false);
       setTourForm({
-        name: '',
-        image_url: '',
-        description: '',
-        id_category: 0,
+        id: '',
+        categoryId: 0,
+        countryId: '',
+        features: [],
+        images: [],
+        tourCapacity: 0,
+        tourClassification: "",
+        tourDescription: "",
+        tourName: '',
+        tourPrice: 0,
+        tourScore: 0
       });
       reset();
     }
@@ -63,10 +76,13 @@ export const ListProduct = () => {
   const currentTours = getCurrentPageItems(tours);
 
   const handleFormSubmit = async (data) => {
+    console.log("DATA", data)
     try {
       data.categoryId = parseInt(data.categoryId);
+      data.countryId = parent(data.countryId);
+
       const updatedTour = { ...tourForm, ...data };
-      console.log("update", updatedTour)
+      console.log("updateTourData=>", updateTour)
 
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);

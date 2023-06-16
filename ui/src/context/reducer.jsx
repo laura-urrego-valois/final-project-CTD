@@ -13,6 +13,7 @@ export const actions = {
   UPDATE_CATEGORY: "UPDATE_CATEGORY",
   REMOVE_CATEGORY: "REMOVE_CATEGORY",
   // COUNTRY ACTIONS
+  GET_COUNTRIES: "GET_COUNTRIES",
   ADD_COUNTRY: "ADD_COUNTRY",
   UPDATE_COUNTRY: "UPDATE_COUNTRY",
   REMOVE_COUNTRY: "REMOVE_COUNTRY",
@@ -104,6 +105,12 @@ export const AppReducer = (state, action) => {
         tours: updatedTours,
       }
     }
+
+    case actions.GET_COUNTRIES:
+      return {
+        ...state,
+        contries: action.payload,
+      }
 
     case actions.ADD_COUNTRY: {
       const newCountry = {

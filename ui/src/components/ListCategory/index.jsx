@@ -6,8 +6,8 @@ import { actions } from '../../context/reducer';
 import { useForm } from 'react-hook-form';
 import { usePagination } from '../../hooks/usePagination';
 import { ModalCategory } from '../Modal/ModalCategory';
-//import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+//import { AiFillDelete } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
 import './ListCategory.css'
 
@@ -66,8 +66,6 @@ export const ListCategory = () => {
   const handleFormSubmit = async (data) => {
     try {
       const updatedCategory = { ...categoryForm, ...data };
-      console.log("updatedCategoryPrueba", updatedCategory, updatedCategory.categoryImageFile[0].name)
-
       if (editMode) {
         await updateCategory(updatedCategory.id, updatedCategory);
         dispatch({
@@ -85,7 +83,7 @@ export const ListCategory = () => {
       console.error("Error adding/updating category:", error);
     }
   };
-  console.log("currentCategories", currentCategories)
+
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
@@ -94,7 +92,7 @@ export const ListCategory = () => {
           <img className="list__image" src={categorie?.imageCategory?.imageUrl} alt="" />
           <p className="list__title">{categorie?.categoryName}</p>
           <div className='list__button'>
-            {/* <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button> */}
+            <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button>
             <Button type="primary" onClick={() => handleDeleteCategorie(categorie?.id)}><AiFillDelete /></Button>
           </div>
         </article>
