@@ -24,7 +24,7 @@ export const ListProduct = () => {
   const [tourForm, setTourForm] = useState({
     id: '',
     categoryId: 0,
-    country: {},
+    countryId: '',
     features: [],
     images: [],
     tourCapacity: 0,
@@ -44,7 +44,7 @@ export const ListProduct = () => {
       setTourForm({
         id: '',
         categoryId: 0,
-        country: {},
+        countryId: '',
         features: [],
         images: [],
         tourCapacity: 0,
@@ -76,10 +76,13 @@ export const ListProduct = () => {
   const currentTours = getCurrentPageItems(tours);
 
   const handleFormSubmit = async (data) => {
+    console.log("DATA", data)
     try {
       data.categoryId = parseInt(data.categoryId);
+      data.countryId = parent(data.countryId);
+
       const updatedTour = { ...tourForm, ...data };
-      console.log("update", updatedTour)
+      console.log("updateTourData=>", updateTour)
 
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);

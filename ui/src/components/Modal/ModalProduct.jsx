@@ -27,15 +27,15 @@ export const ModalProduct = ({
       setValue('tourDescription', tourForm.tourDescription);
       setValue('categoryId', tourForm?.categoryId);
       setValue('tourPrice', tourForm?.tourPrice);
-      setValue('features', tourForm?.features);
-      setValue('country', tourForm?.country)
+      setValue('countryId', tourForm?.country)
+      setValue('features', tourForm?.features || []);
     } else {
       setValue('tourName', '');
       setValue('image_url', '');
       setValue('tourDescription', '');
       setValue('categoryId', '');
       setValue('features', []);
-      setValue('country', {})
+      setValue('countryId', '')
     }
   }, [editMode, tourForm, setValue]);
 
@@ -98,6 +98,17 @@ export const ModalProduct = ({
     console.log(newImgs);
     setimages(newImgs);
   }
+
+  const [selectedFeatures, setSelectedFeatures] = useState([]);
+
+  const handleFeatureChange = (featureId, checked) => {
+    if (checked) {
+      setSelectedFeatures([...selectedFeatures, featureId]);
+    } else {
+      setSelectedFeatures(selectedFeatures.filter((id) => id !== featureId));
+    }
+    setValue('features', selectedFeatures);
+  };
 
   return (
     <section className="modal__overlay">
@@ -166,13 +177,19 @@ export const ModalProduct = ({
             <legend>Tipo de Caracteristicas:</legend>
             {feature.map(item => (
               <div key={item.id} className="feature__item">
-                <input type="checkbox" id={item.name} name={item.name} />
+                <input
+                  type="checkbox"
+                  id={item.name}
+                  name={item.name}
+                  checked={selectedFeatures.includes(item.id)}
+                  onChange={(e) => handleFeatureChange(item.id, e.target.checked)}
+                />
                 <label htmlFor={item.name}>{item.name}</label>
               </div>
             ))}
           </fieldset>
           <label htmlFor="id_category">País:</label>
-          <select id="id_category" {...register('country')}>
+          <select id="id_category" {...register('countryId')}>
             {countries.map(country => (
               <option key={country?.id} value={country?.id}>
                 {country?.countryName}
