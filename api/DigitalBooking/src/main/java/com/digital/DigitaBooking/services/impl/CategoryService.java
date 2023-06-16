@@ -26,9 +26,8 @@ public class CategoryService implements ICategoryService {
     CategoryToCategoryDTOConverter categoryConverter;
 
     @Override
-    public Category saveCategory(CategoryDTO categoryDTO, ImageCategory imageCategory) {
+    public Category saveCategory(CategoryDTO categoryDTO) {
         Category category = mapper.convertValue(categoryDTO, Category.class);
-        category.setImageCategory(imageCategory);
         Category newCategory = categoryRepository.save(category);
         return  newCategory;
     }
