@@ -109,13 +109,13 @@ export const AppReducer = (state, action) => {
     case actions.GET_COUNTRIES:
       return {
         ...state,
-        contries: action.payload,
+        countries: action.payload,
       }
 
     case actions.ADD_COUNTRY: {
       const newCountry = {
         ...action.payload,
-        id_country: state.countries.length + 1,
+        id: state.countries.length + 1,
       }
 
       return {
@@ -125,8 +125,8 @@ export const AppReducer = (state, action) => {
     }
 
     case actions.REMOVE_COUNTRY: {
-      const updatedCountries = state.categories.filter(
-        (country) => country.id_country !== action.payload
+      const updatedCountries = state.countries.filter(
+        (country) => country.id !== action.payload
       )
 
       return {
@@ -137,7 +137,7 @@ export const AppReducer = (state, action) => {
 
     case actions.UPDATE_COUNTRY: {
       const updatedCountries = state.countries.map((country) => {
-        if (country.id_country === action.payload.id_country) {
+        if (country.id === action.payload.id) {
           return action.payload
         }
         return country
