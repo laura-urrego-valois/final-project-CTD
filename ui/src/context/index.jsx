@@ -9,7 +9,9 @@ import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
 
-export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
+export const BASE_URL =
+  // import.meta.env.VITE_API_URL ||
+  "http://localhost:8000"
 
 const initialState = {
   context: "testing context",
@@ -29,65 +31,70 @@ export const ContextProvider = ({ children }) => {
       dispatch({
         type: actions.GET_CATEGORIES,
         payload: response.data,
-      });
-    });
-  };
+      })
+    })
+  }
   const updateCategory = async (categoryId, updatedData) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+          Authorization: `Bearer ${token}`,
+        },
+      }
       const response = await axios.put(
         `${BASE_URL}/category/${categoryId}`,
-        updatedData, config
-      );
+        updatedData,
+        config
+      )
       dispatch({
         type: actions.UPDATE_CATEGORY,
         payload: response.data,
-      });
+      })
     } catch (error) {
-      console.error("Error updating category:", error);
+      console.error("Error updating category:", error)
     }
-  };
+  }
   const addCategory = async (newCategoryData) => {
     try {
-      const formData = new FormData();
-      formData.append('file', newCategoryData.categoryImageFile[0]);
-      formData.append('Category', JSON.stringify(newCategoryData));
+      const formData = new FormData()
+      formData.append("file", newCategoryData.categoryImageFile[0])
+      formData.append("Category", JSON.stringify(newCategoryData))
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
-        }
-      };
-      const response = await axios.post(`${BASE_URL}/category/load_image`, formData, config);
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/category/load_image`,
+        formData,
+        config
+      )
       dispatch({
         type: actions.ADD_CATEGORY,
-        payload: response.data
-      });
+        payload: response.data,
+      })
     } catch (error) {
-      console.error("Error adding category:", error);
+      console.error("Error adding category:", error)
     }
-  };
+  }
   const deleteCategory = async (categoryId) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+          Authorization: `Bearer ${token}`,
+        },
+      }
 
-      await axios.delete(`${BASE_URL}/category/${categoryId}`, config);
+      await axios.delete(`${BASE_URL}/category/${categoryId}`, config)
       dispatch({
         type: actions.REMOVE_CATEGORY,
         payload: categoryId,
-      });
+      })
     } catch (error) {
-      console.error("Error deleting category:", error);
+      console.error("Error deleting category:", error)
     }
-  };
+  }
 
   const fetchTours = async () => {
     await axios.get(`${BASE_URL}/tours`).then((response) => {
@@ -102,51 +109,57 @@ export const ContextProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+          Authorization: `Bearer ${token}`,
+        },
+      }
       const response = await axios.put(
         `${BASE_URL}/tours/${tourId}`,
-        updatedData, config
-      );
+        updatedData,
+        config
+      )
       dispatch({
         type: actions.UPDATE_TOUR,
         payload: response.data,
-      });
+      })
     } catch (error) {
-      console.error("Error updating tour:", error);
+      console.error("Error updating tour:", error)
     }
-  };
+  }
 
   const addTour = async (newTourData) => {
-    const formData = new FormData();
-    formData.append('files', newTourData.toursImageFile[0]);
-    formData.append('Tour', JSON.stringify(newTourData));
+    const formData = new FormData()
+    formData.append("files", newTourData.toursImageFile[0])
+    formData.append("Tour", JSON.stringify(newTourData))
     console.log("formData", formData)
     try {
       const config = {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
-      const response = await axios.post(`${BASE_URL}/tours/load_image`, newTourData, config)
-      dispatch({
-        type: actions.CREATE_TOUR,
-        payload: response.data,
-      })
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/tours/load_image`,
+        formData,
+        config
+      )
+      if (response)
+        dispatch({
+          type: actions.CREATE_TOUR,
+          payload: response.data,
+        })
     } catch (error) {
-      console.error("Error adding tour:", error);
+      console.error("Error adding tour:", error)
     }
-  };
+  }
 
   const deleteTour = async (tourId) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+          Authorization: `Bearer ${token}`,
+        },
+      }
       await axios.delete(`${BASE_URL}/tours/${tourId}`, config)
       dispatch({
         type: actions.REMOVE_TOUR,
@@ -206,9 +219,9 @@ export const ContextProvider = ({ children }) => {
       dispatch({
         type: actions.GET_COUNTRIES,
         payload: response.data,
-      });
-    });
-  };
+      })
+    })
+  }
 
   useEffect(() => {
     fetchCategories()
