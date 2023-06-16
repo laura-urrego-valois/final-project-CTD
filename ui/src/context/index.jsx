@@ -52,7 +52,6 @@ export const ContextProvider = ({ children }) => {
     }
   };
   const addCategory = async (newCategoryData) => {
-    console.log("dataCategory", newCategoryData)
     try {
       const formData = new FormData();
       formData.append('file', newCategoryData.categoryImageFile[0]);
@@ -120,13 +119,18 @@ export const ContextProvider = ({ children }) => {
   };
 
   const addTour = async (newTourData) => {
+    const formData = new FormData();
+    formData.append('files', newTourData.toursImageFile[0]);
+    formData.append('Tour', JSON.stringify(newTourData));
+    console.log("formData", formData)
     try {
       const config = {
+        'Content-Type': 'multipart/form-data',
         headers: {
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await axios.post(`${BASE_URL}/tours`, newTourData, config)
+      const response = await axios.post(`${BASE_URL}/tours/load_image`, newTourData, config)
       dispatch({
         type: actions.CREATE_TOUR,
         payload: response.data,

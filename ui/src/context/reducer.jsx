@@ -67,6 +67,17 @@ export const AppReducer = (state, action) => {
         categories: [...state.categories, newCategory],
       }
     }
+    case actions.CREATE_TOUR: {
+      const newTour = {
+        ...action.payload,
+        id: state.tours.length + 1,
+      }
+
+      return {
+        ...state,
+        tours: [...state.tours, newTour],
+      }
+    }
 
     case actions.REMOVE_CATEGORY: {
       const updatedCategories = state.categories.filter(

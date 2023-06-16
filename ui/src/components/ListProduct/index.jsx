@@ -75,15 +75,20 @@ export const ListProduct = () => {
   const totalPages = getTotalPages(tours);
   const currentTours = getCurrentPageItems(tours);
 
+  //const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODY4ODI2OTgsImV4cCI6MTY4Njg4NTM5OH0.VSHUSbn9ZpfFDmCNxF9ijiIplgFfWnRMBUhlmhDN8E8"
   const handleFormSubmit = async (data) => {
-    console.log("DATA", data)
+    data.categoryId = parseInt(data.categoryId);
+    data.countryId = parseInt(data.countryId);
+    const dataF = {
+      tourClassification: "Bueno",
+      tourCapacity: 10,
+      tourAvailability: 0,
+      tourPrice: 50.3,
+      tourScore: 8,
+    }
     try {
-      data.categoryId = parseInt(data.categoryId);
-      data.countryId = parent(data.countryId);
-
-      const updatedTour = { ...tourForm, ...data };
-      console.log("updateTourData=>", updateTour)
-
+      const updatedTour = { ...tourForm, ...data, ...dataF };
+      console.log("dataNEW", updatedTour)
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);
         dispatch({
@@ -91,7 +96,27 @@ export const ListProduct = () => {
           payload: updatedTour,
         });
       } else {
+        console.log("DATA_ADD", updatedTour)
         await addTour(updatedTour);
+        /*  const formData = new FormData();
+         formData.append('files', updatedTour.toursImageFile[0]);
+         formData.append('Tour', JSON.stringify(updatedTour));
+         console.log("formData", formData)
+         try {
+           const config = {
+             'Content-Type': 'multipart/form-data',
+             headers: {
+               Authorization: `Bearer ${token}`
+             }
+           };
+           const response = await axios.post(`http://localhost:8000/tours/load_image`, updatedTour, config)
+           dispatch({
+             type: actions.CREATE_TOUR,
+             payload: response.data,
+           })
+         } catch (error) {
+           console.error("Error adding tour:", error);
+         } */
       }
       closeModal();
       reset();
