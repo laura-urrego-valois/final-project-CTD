@@ -70,7 +70,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
     console.log(newImgs);
     setimages(newImgs);
   }
-
+  console.log("editMode", editMode)
   return (
     <section className="modal__overlay">
       <div className="modal__content">
@@ -87,14 +87,18 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
             defaultValue={categorie?.categoryName || ''}
             {...register('categoryName')}
           />
-          <label htmlFor="categoryImageFile">Cargar imagen:</label>
-          <input
-            type="file"
-            id="categoryImageFile"
-            accept="image/jpeg, image/png"
-            {...register('categoryImageFile')}
-            onChange={changeInput}
-          />
+          {editMode ? "" : (
+            <>
+              <label htmlFor="categoryImageFile">Cargar imagen:</label>
+              <input
+                type="file"
+                id="categoryImageFile"
+                accept="image/jpeg, image/png"
+                {...register('categoryImageFile')}
+                onChange={changeInput}
+              />
+            </>
+          )}
           <div className="image__container">
             {images.map((imagen) => (
               <div className="image__content" key={imagen.index}>
@@ -111,7 +115,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
                     data-toggle="modal"
                     data-target="#ModalPreViewImg"
                     className="image-responsive"
-                  ></img>
+                  />
                 </div>
               </div>
             ))}
