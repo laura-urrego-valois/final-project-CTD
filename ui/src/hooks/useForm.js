@@ -43,6 +43,7 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
       await axios
         .post(`${BASE_URL}/${urlParam}`, {
           userEmail: form.userEmail,
+          userFirstName: form.userName,
           password: form.password,
           userName: form.userEmail,
           userLastName: form.userLastName,

@@ -15,71 +15,20 @@
 
 stages:
   - build
+  - test
   - deploy
 
-
-build_backend:
+build:
   stage: build
-  image: gradle:8.1.1-jdk17-alpine
   script:
-    - cd api/DigitalBooking/
-    - echo $(pwd)
-    - echo "Building app..."
-    - gradle clean
-    - gradle build
-    - echo "Finished building the app."
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+    - echo "Compiling the code..."
 
-build_frontend:
-  stage: build
-  before_script:
-    - cd ui
+test:
+  stage: test
   script:
-    - echo $(pwd)
-    - npm install
-    - npm run build
-    - echo $(ls)
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
-  image: node:latest
-  artifacts:
-    paths:
-      - ui/dist/
-deploy_frontend:
-  stage: deploy
-  before_script:
-    - cd ui
-  script:
-    - echo $(pwd)
-    - echo $(ls)
-    - echo $(Verificar bucket)
-    - aws s3 cp dist/assets s3://c3-e10-digitalbooking-s3/assets --recursive
-    - aws s3 cp dist/index.html s3://c3-e10-digitalbooking-s3
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  dependencies:
-    - build_frontend
+    - echo "Running unit tests...."
 
-deploy_Backend:
+deploy:
   stage: deploy
-  needs: [build_backend]
-  image: alpine:3.11
-  before_script:
-    - apk update && apk add openssh-client bash
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - touch ~/.ssh/config
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh-keyscan -H "$DEPLOY_SERVER_IP" >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
   script:
-    - echo "Deploying started..."
-    - echo $(pwd)
-    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl stop digitalbooking.service"
-    - scp api/DigitalBooking/build/libs/DigitaBooking-0.0.1-SNAPSHOT.jar ubuntu@$DEPLOY_SERVER_IP:/home/ubuntu/
-    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
-    - echo "Finished deploying the app."
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "config_pipeline-yml"'
+    - echo "Deploying application..."
