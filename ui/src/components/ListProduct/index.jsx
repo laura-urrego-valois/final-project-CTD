@@ -101,7 +101,7 @@ export const ListProduct = () => {
       closeModal();
       reset();
 
-      //window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error("Error adding/updating tour:", error);
     }
@@ -111,13 +111,13 @@ export const ListProduct = () => {
     const category = categories.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : '';
   };
-
+  console.log("currentTours", currentTours)
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentTours.map((tour) => (
         <article className="list__content" key={tour.id}>
-          <img className="list__image" src={tour.imageCategory} alt="" />
+          <img className="list__image" src={tour.images[0]?.imageUrl} alt="" />
           <p className="list__title">{tour.tourName}</p>
           <p>{getCategoryName(tour.categoryId)}</p>
           <div className='list__button'>

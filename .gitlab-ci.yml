@@ -13,22 +13,73 @@
 #
 # For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
 
-stages:          
+stages:
   - build
-  - test
   - deploy
 
-build:      
+
+build_backend:
   stage: build
+  image: gradle:8.1.1-jdk17-alpine
   script:
-    - echo "Compiling the code..."
+    - cd api/DigitalBooking/
+    - echo $(pwd)
+    - echo "Building app..."
+    - gradle clean
+    - gradle build
+    - echo "Finished building the app."
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
 
-test:   
-  stage: test
+build_frontend:
+  stage: build
+  before_script:
+    - cd ui
   script:
-    - echo "Running unit tests...."
-
-deploy:
+    - echo $(pwd)
+    - npm install
+    - npm run build
+    - echo $(ls)
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'
+  image: node:latest
+  artifacts:
+    paths:
+      - ui/dist/
+deploy_frontend:
   stage: deploy
+  before_script:
+    - cd ui
   script:
-    - echo "Deploying application..."
+    - echo $(pwd)
+    - echo $(ls)
+    - echo $(Verificar bucket)
+    - aws s3 cp dist/assets s3://c3-e10-digitalbooking-s3/assets --recursive
+    - aws s3 cp dist/index.html s3://c3-e10-digitalbooking-s3
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build_frontend
+
+deploy_Backend:
+  stage: deploy
+  needs: [build_backend]
+  image: alpine:3.11
+  before_script:
+    - apk update && apk add openssh-client bash
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - touch ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh-keyscan -H "$DEPLOY_SERVER_IP" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - echo "Deploying started..."
+    - echo $(pwd)
+    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl stop digitalbooking.service"
+    - scp api/DigitalBooking/build/libs/DigitaBooking-0.0.1-SNAPSHOT.jar ubuntu@$DEPLOY_SERVER_IP:/home/ubuntu/
+    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start digitalbooking.service"
+    - echo "Finished deploying the app."
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"'

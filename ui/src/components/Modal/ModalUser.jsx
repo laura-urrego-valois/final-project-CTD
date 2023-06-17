@@ -29,11 +29,11 @@ export const ModalUser = ({
   const handleRoleChange = async (email, role) => {
     if (role == "USER") {
       await makeAdminRole(email)
-      fetchUsers()
+      await fetchUsers()
       Toast("Cambio a rol Admin", "success")
     } else if (role == "ADMIN") {
       await makeUserRole(email)
-      fetchUsers()
+      await fetchUsers()
       Toast("Cambio a rol User", "success")
     }
   }
