@@ -63,7 +63,7 @@ public class Tour {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tour",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Image> images = new HashSet<>();
 
     @JsonIgnore
