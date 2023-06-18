@@ -15,10 +15,11 @@ public class UserToUserDTOConverter implements Converter<User, UserDTO> {
     public UserDTO convert(User source) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(source.getId());
-        userDTO.setUserEmail(userDTO.getUserEmail());
         userDTO.setUserName(source.getUsername());
         userDTO.setUserFirstName(source.getUserFirstName());
         userDTO.setUserLastName(source.getUserLastName());
+        userDTO.setLatitude(source.getLatitude());
+        userDTO.setLongitude(source.getLongitude());
         userDTO.setRole(source.getRole().name());
         return userDTO;
 
