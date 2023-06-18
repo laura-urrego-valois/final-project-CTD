@@ -23,11 +23,9 @@ public class TourDTO {
     private Double tourPrice;
     private Integer tourScore;
     private Integer categoryId;
-    private Category category;
+    private Integer CountryId;
     private Set<Feature> features;
     private Set<Long> featuresId;
-    private Integer CountryId;
-    private Country country;
     private Set<Image> images;
 
 }

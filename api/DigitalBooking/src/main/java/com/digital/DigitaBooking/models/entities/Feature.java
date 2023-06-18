@@ -28,4 +28,17 @@ public class Feature {
     @ManyToMany(mappedBy = "features", fetch = FetchType.LAZY)
     private Set<Tour> tours = new HashSet<>();
 
+    public void addTour(Tour tour) {
+        this.tours.add(tour);
+        tour.getFeatures().add(this);
+    }
+
+//    public void removeFeature(long featureId) {
+//        Feature feature = this.features.stream().filter(t -> t.getId() == featureId).findFirst().orElse(null);
+//        if (feature != null) {
+//            this.features.remove(feature);
+//            feature.getTours().remove(this);
+//        }
+//    }
+
 }
