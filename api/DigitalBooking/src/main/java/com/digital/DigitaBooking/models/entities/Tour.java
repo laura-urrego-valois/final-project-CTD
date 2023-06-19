@@ -63,7 +63,7 @@ public class Tour {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tour",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Image> images = new HashSet<>();
 
     @JsonIgnore
@@ -79,17 +79,5 @@ public class Tour {
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
 
-    public void addFeature(Feature feature) {
-        this.features.add(feature);
-        feature.getTours().add(this);
-    }
-
-    public void removeFeature(long featureId) {
-        Feature feature = this.features.stream().filter(t -> t.getId() == featureId).findFirst().orElse(null);
-        if (feature != null) {
-            this.features.remove(feature);
-            feature.getTours().remove(this);
-        }
-    }
 
 }

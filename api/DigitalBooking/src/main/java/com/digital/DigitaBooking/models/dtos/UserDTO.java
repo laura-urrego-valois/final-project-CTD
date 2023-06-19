@@ -9,9 +9,10 @@ public class UserDTO {
 
     private Long id;
     private String userName;
-    private String userEmail;
     private String userFirstName;
     private String userLastName;
+    private Double latitude;
+    private Double longitude;
     private String password;
     private String role;
 }

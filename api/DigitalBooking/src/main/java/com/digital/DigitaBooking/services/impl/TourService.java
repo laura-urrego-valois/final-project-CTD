@@ -42,9 +42,14 @@ public class TourService implements ITourService {
     public Tour saveTour(TourDTO tourDTO) {
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
         Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
+        Set<Feature> features = new HashSet<>();
         tour.setCategory(category);
         Country country = countryRepository.findById(tourDTO.getCountryId()).get();
         tour.setCountry(country);
+        for (Long featureId : tourDTO.getFeaturesId()) {
+            features.add(featureRepository.getReferenceById(featureId));
+        }
+        tour.setFeatures(features);
         Tour newTour = tourRepository.save(tour);
         return newTour;
     }
@@ -54,13 +59,14 @@ public class TourService implements ITourService {
         Tour tour = tourRepository.findById(id).get();
         TourDTO tourDTO = null;
         tourDTO = tourConverter.convert(tour);
-
         return tourDTO;
     }
 
     @Override
     public void updateTour(Long id, TourDTO tourDTO) {
+
         Optional<Tour> optionalTour = tourRepository.findById(id).map(tour -> {
+            System.out.println("entro al map");
             Set<Feature> features = new HashSet<>();
             tour.setTourName(tourDTO.getTourName());
             tour.setTourDescription(tourDTO.getTourDescription());
@@ -69,12 +75,13 @@ public class TourService implements ITourService {
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setTourScore(tourDTO.getTourScore());
             tour.setCountry(countryRepository.getById(tourDTO.getCountryId()));
-            tour.setCategory(categoryRepository.getById(tourDTO.getCategoryId()));
-//          tour.setFeatures(features);
+            System.out.println(tourDTO.getFeaturesId());
             for (Long featureId : tourDTO.getFeaturesId()) {
-                tour.addFeature(featureRepository.getById(featureId));
+                System.out.println("Entro a los features");
+                features.add(featureRepository.getReferenceById(featureId));
             }
-            return tourRepository.save(tour);
+            tour.setFeatures(features);
+            return tour;
         });
 
     }
@@ -104,7 +111,7 @@ public class TourService implements ITourService {
         List<Tour> tours = tourRepository.findAllByCategoryId(id);
         for (Tour tour :
                 tours) {
-            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+            toursDTO.add(tourConverter.convert(tour));
 
         }
         return toursDTO;
@@ -116,7 +123,7 @@ public class TourService implements ITourService {
         List<Tour> tours = tourRepository.findAllToursByCountry(id);
         for (Tour tour :
                 tours) {
-            toursDTO.add(mapper.convertValue(tour, TourDTO.class));
+            toursDTO.add(tourConverter.convert(tour));
         }
         return toursDTO;
     }

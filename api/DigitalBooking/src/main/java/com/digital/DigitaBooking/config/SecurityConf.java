@@ -51,7 +51,6 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/country/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
-                                .requestMatchers(HttpMethod.POST, "/tours/load_image").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/tours/{id}").hasAnyAuthority(ADMIN.name())
                                 // Rutas para categorías

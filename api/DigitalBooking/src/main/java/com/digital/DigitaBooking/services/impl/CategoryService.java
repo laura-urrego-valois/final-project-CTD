@@ -1,16 +1,27 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.amazonaws.http.HttpResponse;
 import com.digital.DigitaBooking.converters.CategoryToCategoryDTOConverter;
+import com.digital.DigitaBooking.models.dtos.Response;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
 import com.digital.DigitaBooking.models.entities.ImageCategory;
 import com.digital.DigitaBooking.repositories.ICategoryRepository;
 import com.digital.DigitaBooking.services.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import jakarta.persistence.EntityNotFoundException;
+import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 @Service
@@ -33,12 +44,12 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public CategoryDTO getCategory(Integer id) {
-        Category category = categoryRepository.findById(id).get();
-        CategoryDTO categoryDTO = null;
-        categoryDTO = categoryConverter.convert(category);
+    public CategoryDTO getCategory(Integer id)  {
 
-        return categoryDTO;
+            Category category = categoryRepository.findById(id).get();
+            CategoryDTO categoryDTO = null;
+            categoryDTO = categoryConverter.convert(category);
+            return categoryDTO;
     }
 
     @Override

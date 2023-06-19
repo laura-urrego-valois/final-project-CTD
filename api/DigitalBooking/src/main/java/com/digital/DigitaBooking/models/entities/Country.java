@@ -26,9 +26,11 @@ public class Country {
     private String capitalName;
 
     @Column
+    @NotNull
     private Double latitude;
 
     @Column
+    @NotNull
     private Double longitude;
 
     @JsonIgnore

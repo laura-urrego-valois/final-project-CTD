@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.services;
 
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
+import com.digital.DigitaBooking.models.dtos.Response;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.ImageCategory;
 
