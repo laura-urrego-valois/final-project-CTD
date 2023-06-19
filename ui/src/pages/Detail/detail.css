@@ -57,9 +57,9 @@
   .detail{
     padding-inline: 2rem;
   }
-  .detail__content{
+/*   .detail__content{
   flex-direction: row;
-}
+} */
   .detail__img{
     width: 60%;
   }

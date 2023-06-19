@@ -30,11 +30,12 @@ export const Recommendations = () => {
 					id={tour.id}
 					title={tour.tourName}
 					description={tour.tourDescription}
-					imageSrc={tour.tourImageURL}
+					imageSrc={tour.images[0]?.imageUrl}
 					classification={tour.tourClassification}
 					category={getCategoryName(tour.categoryId)}
 					score={tour.tourScore}
 				/>
+
 			));
 	};
 

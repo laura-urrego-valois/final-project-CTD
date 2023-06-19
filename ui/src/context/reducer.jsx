@@ -13,6 +13,7 @@ export const actions = {
   UPDATE_CATEGORY: "UPDATE_CATEGORY",
   REMOVE_CATEGORY: "REMOVE_CATEGORY",
   // COUNTRY ACTIONS
+  GET_COUNTRIES: "GET_COUNTRIES",
   ADD_COUNTRY: "ADD_COUNTRY",
   UPDATE_COUNTRY: "UPDATE_COUNTRY",
   REMOVE_COUNTRY: "REMOVE_COUNTRY",
@@ -66,6 +67,17 @@ export const AppReducer = (state, action) => {
         categories: [...state.categories, newCategory],
       }
     }
+    case actions.CREATE_TOUR: {
+      const newTour = {
+        ...action.payload,
+        id: state.tours.length + 1,
+      }
+
+      return {
+        ...state,
+        tours: [...state.tours, newTour],
+      }
+    }
 
     case actions.REMOVE_CATEGORY: {
       const updatedCategories = state.categories.filter(
@@ -105,10 +117,16 @@ export const AppReducer = (state, action) => {
       }
     }
 
+    case actions.GET_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload,
+      }
+
     case actions.ADD_COUNTRY: {
       const newCountry = {
         ...action.payload,
-        id_country: state.countries.length + 1,
+        id: state.countries.length + 1,
       }
 
       return {
@@ -118,8 +136,8 @@ export const AppReducer = (state, action) => {
     }
 
     case actions.REMOVE_COUNTRY: {
-      const updatedCountries = state.categories.filter(
-        (country) => country.id_country !== action.payload
+      const updatedCountries = state.countries.filter(
+        (country) => country.id !== action.payload
       )
 
       return {
@@ -130,7 +148,7 @@ export const AppReducer = (state, action) => {
 
     case actions.UPDATE_COUNTRY: {
       const updatedCountries = state.countries.map((country) => {
-        if (country.id_country === action.payload.id_country) {
+        if (country.id === action.payload.id) {
           return action.payload
         }
         return country

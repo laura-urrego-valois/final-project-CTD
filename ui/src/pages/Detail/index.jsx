@@ -49,6 +49,7 @@ const Detail = () => {
     const category = categories?.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : "";
   };
+  console.log("itemDetail", itemDetail, state)
   return (
     <Container>
       <div className="detail">
@@ -61,7 +62,7 @@ const Detail = () => {
       </div>
       <SearchProduct itemDetail={itemDetail} />
       {/* //Layout component Gallery */}
-      <Gallery dataImage={dataGallery.galleryImage} />
+      <Gallery dataImage={itemDetail?.images} />
 
       <section className="detail__content">
         <div className="detail__info">
@@ -74,7 +75,7 @@ const Detail = () => {
           <p className="detail__description">{itemDetail.tourDescription}</p>
         </div>
       </section>
-      <Feature feature={feature} />
+      <Feature feature={itemDetail.features} />
       <Politics />
     </Container>
   );

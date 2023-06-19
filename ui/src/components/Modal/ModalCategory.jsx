@@ -11,7 +11,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
   useEffect(() => {
     if (editMode && categoryForm) {
       setValue('categoryName', categoryForm.categoryName);
-      setValue('categoryImageURL', categoryForm.categoryImageURL);
+      setValue('categoryImageURL', categoryForm.imageCategory.imageUrl);
       setValue('categoryDescription', categoryForm.categoryDescription);
     } else {
       setValue('categoryName', '');
@@ -70,13 +70,13 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
     console.log(newImgs);
     setimages(newImgs);
   }
-
+  console.log("editMode", editMode)
   return (
     <section className="modal__overlay">
       <div className="modal__content">
         <h3>{editMode ? 'Editar Categoría' : 'Agregar Categoría'}</h3>
         {
-          editMode ? <img className='modal__image' src={categoryForm?.categoryImageURL} alt="" /> : ""
+          editMode ? <img className='modal__image' src={categoryForm?.imageCategory.imageUrl} alt="" /> : ""
         }
         <form className="modal__form" onSubmit={handleSubmit(handleFormSubmit)}>
           <label htmlFor="categoryName">Nombre de la categoría:</label>
@@ -87,14 +87,18 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
             defaultValue={categorie?.categoryName || ''}
             {...register('categoryName')}
           />
-          <label htmlFor="categoryImageFile">Cargar imagen:</label>
-          <input
-            type="file"
-            id="categoryImageFile"
-            accept="image/jpeg, image/png"
-            {...register('categoryImageFile')}
-            onChange={changeInput}
-          />
+          {editMode ? "" : (
+            <>
+              <label htmlFor="categoryImageFile">Cargar imagen:</label>
+              <input
+                type="file"
+                id="categoryImageFile"
+                accept="image/jpeg, image/png"
+                {...register('categoryImageFile')}
+                onChange={changeInput}
+              />
+            </>
+          )}
           <div className="image__container">
             {images.map((imagen) => (
               <div className="image__content" key={imagen.index}>
@@ -111,7 +115,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
                     data-toggle="modal"
                     data-target="#ModalPreViewImg"
                     className="image-responsive"
-                  ></img>
+                  />
                 </div>
               </div>
             ))}

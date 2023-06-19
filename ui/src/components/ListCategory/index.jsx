@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form';
 import { usePagination } from '../../hooks/usePagination';
 import { ModalCategory } from '../Modal/ModalCategory';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+//import { AiFillDelete } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
 import './ListCategory.css'
-
 
 export const ListCategory = () => {
 
@@ -66,8 +66,6 @@ export const ListCategory = () => {
   const handleFormSubmit = async (data) => {
     try {
       const updatedCategory = { ...categoryForm, ...data };
-      console.log("updatedCategory", updatedCategory, data)
-
       if (editMode) {
         await updateCategory(updatedCategory.id, updatedCategory);
         dispatch({
@@ -91,7 +89,7 @@ export const ListCategory = () => {
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
       {currentCategories.map((categorie) => (
         <article className="list__content" key={categorie?.id}>
-          <img className="list__image" src={categorie?.categoryImageURL} alt="" />
+          <img className="list__image" src={categorie?.imageCategory?.imageUrl} alt="" />
           <p className="list__title">{categorie?.categoryName}</p>
           <div className='list__button'>
             <Button onClick={() => openModal(categorie)}><AiFillEdit /></Button>

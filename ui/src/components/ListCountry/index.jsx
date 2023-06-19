@@ -28,10 +28,11 @@ export const ListCountry = () => {
   const { reset } = useForm()
   const [editMode, setEditMode] = useState(false)
   const [countryForm, setCountryForm] = useState({
-    id_country: "",
-    name: "",
-    image_url: "",
-    description: "",
+    id: "",
+    countryName: "",
+    capitalName: "",
+    latitude: "",
+    longitude: "",
   })
 
   const openModal = (categorie) => {
@@ -41,10 +42,11 @@ export const ListCountry = () => {
     } else {
       setEditMode(false)
       setCountryForm({
-        id_country: "",
-        name: "",
-        image_url: "",
-        description: "",
+        id: "",
+        countryName: "",
+        capitalName: "",
+        latitude: "",
+        longitude: "",
       })
       reset()
     }
@@ -59,7 +61,7 @@ export const ListCountry = () => {
   const handleDeleteCountry = (countryId) => {
     console.log("removeCountry", countryId)
     dispatch({
-      type: actions.REMOVE_CATEGORY,
+      type: actions.REMOVE_COUNTRY,
       payload: countryId,
     })
 
@@ -97,7 +99,13 @@ export const ListCountry = () => {
       </Button>
       {currentCountries.map((country) => (
         <article className="list__content" key={country.id}>
-          <img className="list__image" src={country.countryImageURL} alt="" />
+          <img
+            className="list__image"
+            src={
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw0zKknEf_ExsMDMYCkGnkF4bvK-dRrBJb9FdYBJOO0vy5H15IsJSpMBSlVDz7bt6BKCk&usqp=CAU"
+            }
+            alt=""
+          />
           <p className="list__title">{country.countryName}</p>
           <div className="list__button">
             <Button onClick={() => openModal(country)}>
