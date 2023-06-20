@@ -1,10 +1,11 @@
 package com.digital.DigitaBooking.models.entities;
 
+import com.digital.DigitaBooking.models.entities.score.Counter;
+import com.digital.DigitaBooking.models.entities.score.Score;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table
+@AllArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +45,6 @@ public class Tour {
     @Column
     @NotNull
     private Double tourPrice;
-
-    @Column
-    @NotNull
-    private Integer tourScore;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -79,5 +77,13 @@ public class Tour {
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
 
+    @OneToOne(mappedBy = "tour", cascade = CascadeType.ALL)
+    private Counter counter;
+
+    public void initializeCounter() {
+        Counter counter = new Counter();
+        counter.setTour(this);
+        this.setCounter(counter);
+    }
 
 }

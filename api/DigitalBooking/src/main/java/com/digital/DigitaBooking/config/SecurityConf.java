@@ -68,7 +68,12 @@ public class SecurityConf {
                                 .hasAnyAuthority(ADMIN.name(), USER.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
-                                // Rutas para imágenes
+                                // Rutas para puntuaciones
+                                .requestMatchers(HttpMethod.GET, "/scores/fromTour/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/scores/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/scores").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.PUT, "/scores/update").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/scores/delete/{id}").hasAuthority(USER.name())
                                 // Rutas para características
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()

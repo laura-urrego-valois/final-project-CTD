@@ -1,10 +1,6 @@
 package com.digital.DigitaBooking.models.dtos;
 
-import com.digital.DigitaBooking.controllers.ImageController;
-import com.digital.DigitaBooking.models.entities.Category;
-import com.digital.DigitaBooking.models.entities.Country;
-import com.digital.DigitaBooking.models.entities.Feature;
-import com.digital.DigitaBooking.models.entities.Image;
+import com.digital.DigitaBooking.models.entities.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -27,5 +23,6 @@ public class TourDTO {
     private Set<Feature> features;
     private Set<Long> featuresId;
     private Set<Image> images;
+    private CounterDTO counter;
 
 }
