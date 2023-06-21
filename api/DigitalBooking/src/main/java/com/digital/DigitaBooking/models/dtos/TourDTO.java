@@ -24,5 +24,7 @@ public class TourDTO {
     private Set<Long> featuresId;
     private Set<Image> images;
     private CounterDTO counter;
+    private Double latitude;
+    private Double longitude;
 
 }

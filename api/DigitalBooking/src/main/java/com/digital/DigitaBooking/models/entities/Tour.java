@@ -46,6 +46,14 @@ public class Tour {
     @NotNull
     private Double tourPrice;
 
+    @Column
+    @NotNull
+    private Double latitude;
+
+    @Column
+    @NotNull
+    private Double longitude;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "tour_feature",
