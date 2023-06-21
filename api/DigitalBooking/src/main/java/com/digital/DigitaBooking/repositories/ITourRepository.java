@@ -47,30 +47,3 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
     // superponen con las fechas proporcionadas (initialDate y finalDate).
 
 }
-
-
-    /*@Query(value = "SELECT t.* FROM tour t LEFT JOIN reservation ON tour.id = reservation.id_tour WHERE ((reservation.initial_date not between ?1 and ?2)" +
-            "OR (reservation.initial_date is null)) AND ((reservation.final_date NOT BETWEEN ?1 AND ?2) OR (reservation.final_date is null)) AND tour.country LIKE ?3" +
-            "GROUP BY tour.id", nativeQuery = true)
-    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);
-    @Query(value = "SELECT t.* FROM tour t LEFT JOIN reservation r ON t.id = r.id_tour " +
-            "WHERE ((r.initial_date NOT BETWEEN ?1 AND ?2) OR (r.initial_date IS NULL)) " +
-            "AND ((r.final_date NOT BETWEEN ?1 AND ?2) OR (r.final_date IS NULL)) " +
-            "AND t.country LIKE ?3 " +
-            "GROUP BY t.id", nativeQuery = true)
-    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);
-}
-
-// En esta consulta se busca tours según ciertas condiciones de fechas y país utilizando SQL nativo.
-// Se seleccionan todas las columnas de la tabla "tour" mediante la cláusula SELECT t.*.
-// Se realiza un LEFT JOIN entre las tablas "tour" y "reservation" utilizando la cláusula
-// ON tour.id = reservation.id_tour. Esto combina los datos de ambas tablas en la consulta.
-// La cláusula WHERE establece las condiciones de búsqueda:
-//--> ((reservation.initial_date not between ?1 and ?2) OR (reservation.initial_date is null)) verifica si la
-// fecha inicial de la reserva no está entre el rango de fechas especificado (initialDate y finalDate). Si
-// la fecha inicial es nula, también se considera que cumple con la condición.
-
-
-//List<Tour> findToursBy
-
-     */

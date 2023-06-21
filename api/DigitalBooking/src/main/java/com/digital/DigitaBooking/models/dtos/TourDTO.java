@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TourDTO {
 
@@ -27,4 +28,9 @@ public class TourDTO {
     private Double latitude;
     private Double longitude;
 
+    public TourDTO(Tour tour) {
+        if (tour.getCounter() != null) {
+            this.counter = new CounterDTO(tour.getCounter());
+        }
+    }
 }

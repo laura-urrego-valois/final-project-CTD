@@ -1,9 +1,12 @@
 package com.digital.DigitaBooking.services;
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
 import com.digital.DigitaBooking.models.entities.Tour;
+import com.digital.DigitaBooking.util.TourFilter;
 
 
+import java.util.List;
 import java.util.Set;
 
 public interface ITourService {
@@ -21,4 +24,8 @@ public interface ITourService {
     Set<TourDTO> getToursByCategory(Integer id);
 
     Set<TourDTO> getToursByCountry(Integer id);
+
+    List<TourDTO> findAllToursByCountryName(String countryName) throws BadRequestException;
+
+    List<TourDTO> findToursByCountryAndDates(TourFilter tourFilter) throws BadRequestException;
 }

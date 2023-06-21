@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.CountryDTO;
 import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.repositories.ICountryRepository;
@@ -63,5 +64,19 @@ public class CountryService implements ICountryService {
 
         }
         return countriesDTO;
+    }
+
+    @Override
+    public CountryDTO searchCountryByName(String countryName) throws BadRequestException {
+        Country country = countryRepository.searchCountryByName(countryName);
+        if (country != null) {
+            return convertCountryToDTO(country);
+        } else {
+            throw new BadRequestException("No existe un país con el nombre: " + countryName);
+        }
+    }
+
+    private CountryDTO convertCountryToDTO(Country country) {
+        return mapper.convertValue(country, CountryDTO.class);
     }
 }

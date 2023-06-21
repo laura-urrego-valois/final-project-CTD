@@ -1,21 +1,25 @@
 package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.converters.TourToTourDTOConverter;
+import com.digital.DigitaBooking.exceptions.BadRequestException;
+import com.digital.DigitaBooking.models.dtos.CountryDTO;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.models.entities.Feature;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.models.dtos.TourDTO;
-import com.digital.DigitaBooking.repositories.ICategoryRepository;
-import com.digital.DigitaBooking.repositories.ICountryRepository;
-import com.digital.DigitaBooking.repositories.IFeatureRepository;
-import com.digital.DigitaBooking.repositories.ITourRepository;
+import com.digital.DigitaBooking.models.entities.score.Counter;
+import com.digital.DigitaBooking.repositories.*;
+import com.digital.DigitaBooking.services.ICountryService;
 import com.digital.DigitaBooking.services.ITourService;
+import com.digital.DigitaBooking.util.TourFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TourService implements ITourService {
@@ -31,6 +35,13 @@ public class TourService implements ITourService {
 
     @Autowired
     private ICountryRepository countryRepository;
+
+    @Autowired
+    private ICounterRepository counterRepository;
+
+    @Autowired
+    private CountryService countryService;
+
 
     @Autowired
     ObjectMapper mapper;
@@ -125,6 +136,52 @@ public class TourService implements ITourService {
             toursDTO.add(tourConverter.convert(tour));
         }
         return toursDTO;
+    }
+
+    @Override
+    public List<TourDTO> findAllToursByCountryName(String countryName) throws BadRequestException {
+        CountryDTO isCountryValid = countryService.searchCountryByName(countryName);
+        if (isCountryValid == null) {
+            throw new BadRequestException("País no encontrado.");
+        }
+        List<Tour> matchingTours = this.tourRepository.findAllToursByCountryName(countryName);
+        return convertToDTOList(matchingTours);
+    }
+
+    @Override
+    public List<TourDTO> findToursByCountryAndDates(TourFilter tourFilter) throws BadRequestException {
+        boolean noNullData = tourFilter.getInitialDate() != null && tourFilter.getFinalDate() != null && tourFilter.getCountryId() != null;
+        if (noNullData) {
+            throw new BadRequestException("El filtro no puede estar vacío.");
+        }
+        boolean datesInOrder = tourFilter.getFinalDate().isAfter(tourFilter.getInitialDate());
+        boolean oldInitialDate = LocalDate.now().isAfter(tourFilter.getInitialDate());
+        if (!datesInOrder) {
+            throw new BadRequestException("Las fechas no están en orden correcto o son iguales.");
+        }
+        if (oldInitialDate) {
+            throw new BadRequestException("La fecha inicial no puede ser anterior a la fecha actual.");
+        }
+        countryService.getCountry(tourFilter.getCountryId());
+        List<Tour> results = tourRepository.findToursByCountryAndDates(tourFilter.getCountryId(), tourFilter.getInitialDate(), tourFilter.getFinalDate());
+        return convertToDTOList(results);
+    }
+
+
+    private List<TourDTO> convertToDTOList(List<Tour> list) {
+        return list.stream().map(tour -> tourConverter.convert(tour)).collect(Collectors.toList());
+    }
+
+    // Convertimos los objetos Tour en objetos TourDTO mediante un stream para recorrer la lista de tours
+    // y el método map para aplicar la conversión a cada uno.
+
+    private Counter getPuntuationCounter(Long puntuationId) throws BadRequestException {
+        Optional<Counter> optionalCounter = counterRepository.findById(puntuationId);
+        if (optionalCounter.isEmpty()) {
+            throw new BadRequestException("No existe el Counter ID.");
+        } else {
+            return optionalCounter.get();
+        }
     }
 }
 
