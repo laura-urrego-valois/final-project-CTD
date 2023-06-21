@@ -32,21 +32,21 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     @NotNull
     private String userName;
 
     @Column
     @NotNull
-    private String userEmail;
-
-    @Column
-    @NotNull
-    private String userLastName;
+    private String password;
 
     @Column
     @NotNull
     private String userFirstName;
+
+    @Column
+    @NotNull
+    private String userLastName;
 
     @Column
     private Double latitude;
@@ -54,9 +54,7 @@ public class User implements UserDetails {
     @Column
     private Double longitude;
 
-    @Column
-    @NotNull
-    private String password;
+
 
     @Builder.Default
     @JsonIgnore

@@ -39,20 +39,9 @@ public class TourController {
     @Autowired
     private ImageService imageService;
 
-
-
-
     private ObjectMapper mapper = new ObjectMapper();
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> saveTour(@RequestBody TourDTO tourDTO) {
-        tourService.saveTour(tourDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
-
-    }
-
-    @PostMapping(path = "/load_image")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> loadImage(@RequestPart(value="files") List<MultipartFile> imagenes,
     @RequestPart(value="Tour") String tourString) throws IOException {
@@ -69,8 +58,7 @@ public class TourController {
                 imageDTO.setImageTitle(mainFile.getName());
                 imageDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
                 imageService.saveImage(imageDTO,newTour);
-
-//                imagesURL.add(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
+                mainFile.delete();
                 }
 
         }catch (Exception e){
@@ -106,6 +94,7 @@ public class TourController {
     @PutMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateTour(@PathVariable Long id, @RequestBody TourDTO tourDTO) {
+        System.out.println(id);
         tourService.updateTour(id, tourDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }

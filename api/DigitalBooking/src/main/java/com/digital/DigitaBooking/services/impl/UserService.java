@@ -46,10 +46,11 @@ public class UserService implements IUserService {
     public UserDetails registerUser(UserSignUp userSignUp) {
         try {
             return userRepository.save(User.builder()
-                    .userEmail(userSignUp.getUserEmail())
                     .userName(userSignUp.getUserName())
-                    .userLastName(userSignUp.getUserLastName())
                     .userFirstName(userSignUp.getUserFirstName())
+                    .userLastName(userSignUp.getUserLastName())
+                    .latitude(userSignUp.getLatitude())
+                    .longitude(userSignUp.getLongitude())
                     .password(passwordEncoder.encode(userSignUp.getPassword())) // Se utiliza para encriptar la contraseña antes de almacenarla en la base de datos.
                     .role(Role.USER) // Se asigna el rol del usuario registrado.
                     .build()); // Construye y retorna una instancia completa de la clase User con los datos proporcionados.
@@ -104,11 +105,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        UserDetails userDetails = userRepository.getFirstByEmail(userEmail);
-        //System.out.println(userDetails.getUsername());
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        UserDetails userDetails = userRepository.getFirstByEmail(userName);
         if (userDetails == null) {
-            throw new UsernameNotFoundException(userEmail);
+            throw new UsernameNotFoundException(userName);
         }
         return userDetails;
     }

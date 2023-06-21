@@ -1,9 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
-import com.digital.DigitaBooking.models.dtos.CategoryDTO;
-import com.digital.DigitaBooking.models.dtos.ImageCategoryDTO;
-import com.digital.DigitaBooking.models.dtos.ImageDTO;
-import com.digital.DigitaBooking.models.dtos.TourDTO;
+import com.digital.DigitaBooking.models.dtos.*;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.ImageCategory;
 import com.digital.DigitaBooking.models.entities.Tour;
@@ -11,6 +8,7 @@ import com.digital.DigitaBooking.service.impl.AWSS3ServiceImpl;
 import com.digital.DigitaBooking.services.impl.CategoryService;
 import com.digital.DigitaBooking.services.impl.ImageCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,14 +37,8 @@ public class CategoryController {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> saveCategory(@RequestPart CategoryDTO categoryDTO,@RequestPart ImageCategory imageCategory) {
-        categoryService.saveCategory(categoryDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
 
-    @PostMapping(path = "/load_image")
+    @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> loadImage(@RequestPart(value="file") MultipartFile image,
                                                 @RequestPart(value="Category") String categoryString) throws IOException {
@@ -70,9 +62,19 @@ public class CategoryController {
     }
 
     @GetMapping(path = "/{id}")
-    public CategoryDTO getCategory(@PathVariable Integer id) {
+    public Response getCategory(@PathVariable Integer id) {
+        try {
+            CategoryDTO categoryDTO = categoryService.getCategory(id);
+            Response response = new Response(categoryDTO, HttpStatus.OK);
+            return response;
 
-        return categoryService.getCategory(id);
+        }catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+            JsonObject jsonReponse = new JsonObject();
+            jsonReponse.addProperty("status",404);
+            jsonReponse.addProperty("error",e.getMessage());
+            return new Response(jsonReponse.toString(),HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
