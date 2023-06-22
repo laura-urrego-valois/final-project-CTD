@@ -30,8 +30,7 @@ export const Recommendations = () => {
 					id={tour.id}
 					title={tour.tourName}
 					description={tour.tourDescription}
-					//TODO: Se modifico ya que no llega las imagen del endpoint
-					/* imageSrc={tour?.images[0]?.imageUrl} */
+					imageSrc={tour?.images[0]?.imageUrl}
 					classification={tour.tourClassification}
 					category={getCategoryName(tour.categoryId)}
 					score={tour.tourScore}
