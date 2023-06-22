@@ -74,7 +74,7 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
     e.preventDefault()
     const hasErrors = await validateForm(form)
     setErrors(hasErrors)
-    console.log(hasErrors)
+
     if (
       Object.keys(hasErrors).length === 0 &&
       Object.keys(errors).length === 0

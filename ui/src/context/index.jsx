@@ -133,7 +133,6 @@ export const ContextProvider = ({ children }) => {
       formData.append("files", newTourData.toursImageFile[i]);
     }
     formData.append("Tour", JSON.stringify(newTourData))
-    console.log("formData", formData)
     try {
       const config = {
         "Content-Type": "multipart/form-data",

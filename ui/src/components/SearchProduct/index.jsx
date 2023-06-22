@@ -3,6 +3,7 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import './SearchProduct.css'
 
 export const SearchProduct = ({ itemDetail }) => {
+  console.log("itemDetail", itemDetail)
   return (
     <div className="detail__rating">
       <h3 className="detail__rating-title"><MdOutlineLocationOn /> {itemDetail.country?.countryName}</h3>
