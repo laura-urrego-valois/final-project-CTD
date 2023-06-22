@@ -36,9 +36,9 @@ public class ScoreService implements IScoreService {
             throw new BadRequestException("El voto ya tiene un ID asignado.");
         }
         Counter scoreInDatabase = getScore(scoreDTO.getScoreId());
-        boolean invalidValue = scoreDTO.getValue() > 5 || scoreDTO.getValue() < 0;
+        boolean invalidValue = scoreDTO.getValue() > 5 || scoreDTO.getValue() < 1;
         if (invalidValue) {
-            throw new BadRequestException("El valor del voto no es válido, debe ser un valor entre 0 y 5.");
+            throw new BadRequestException("El valor del voto no es válido, debe ser un valor entre 1 y 5.");
         }
         boolean alreadyVoted = userAlreadyVotedOn(user, scoreDTO.getScoreId());
         if (alreadyVoted) {
@@ -103,8 +103,8 @@ public class ScoreService implements IScoreService {
         if (scoreDTO.getValue() == null) {
             throw new BadRequestException("El valor del voto es nulo.");
         }
-        if (scoreDTO.getValue() > 5 || scoreDTO.getValue() < 0) {
-            throw new BadRequestException("El valor del voto no es válido, debe ser un valor entre 0 y 5.");
+        if (scoreDTO.getValue() > 5 || scoreDTO.getValue() < 1) {
+            throw new BadRequestException("El valor del voto no es válido, debe ser un valor entre 1 y 5.");
         }
         boolean valueChange = !voteInDatabase.getValue().equals(scoreDTO.getValue());
         if (valueChange) {
