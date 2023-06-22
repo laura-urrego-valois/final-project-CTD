@@ -22,3 +22,20 @@ A private subnet is a subdivision of the VPC that does not have a direct route t
 
 #### Bucket: 
 It is a container for storing data in Amazon S3 (Simple Storage Service), a highly scalable cloud storage service. This will be our directory/folder in the cloud where you we will store and retrieve files and data such as images, videos, text files, etc.
+
+### Documentacion
+
+#### Terraform
+Terraform files to deploy the infrastructure were added to this repository
+
+#### CICD
+Succesful deployment of the pipeline showed in the image
+
+![](https://i.postimg.cc/501JqdP4/CICD-Digitalbooking.png)
+
+#### AWS URL
+Frontend Bucket S3:
+http://c3-e10-digitalbooking-s3.s3-website.us-east-2.amazonaws.com
+
+Backend EC2:
+ec2-3-133-208-24.us-east-2.compute.amazonaws.com
