@@ -167,6 +167,17 @@ public class TourService implements ITourService {
         return convertToDTOList(results);
     }
 
+    @Override
+    public Tour searchTourByIdAsClass(Long id) throws BadRequestException {
+        Optional<Tour> optionalTour = tourRepository.findById(id);
+        if (optionalTour.isPresent()) {
+            Tour tour = optionalTour.get();
+            return tour;
+        } else {
+            throw new BadRequestException("No existe un tour con ID " + id);
+        }
+    }
+
 
     private List<TourDTO> convertToDTOList(List<Tour> list) {
         return list.stream().map(tour -> tourConverter.convert(tour)).collect(Collectors.toList());

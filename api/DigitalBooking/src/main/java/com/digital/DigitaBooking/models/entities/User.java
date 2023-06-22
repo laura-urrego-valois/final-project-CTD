@@ -54,10 +54,9 @@ public class User implements UserDetails {
     @Column
     private Double longitude;
 
-    @Builder.Default
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Reservation> reservations = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
     @Builder.Default
     @JsonIgnore
@@ -78,6 +77,11 @@ public class User implements UserDetails {
             }
         }
         return false;
+    }
+
+    public void addReservation(Reservation res) {
+
+        reservations.add(res);
     }
 
     @Override

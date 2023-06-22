@@ -28,4 +28,7 @@ public interface ITourService {
     List<TourDTO> findAllToursByCountryName(String countryName) throws BadRequestException;
 
     List<TourDTO> findToursByCountryAndDates(TourFilter tourFilter) throws BadRequestException;
+
+    Tour searchTourByIdAsClass(Long id) throws BadRequestException;
+
 }

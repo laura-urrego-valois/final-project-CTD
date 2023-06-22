@@ -9,7 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -48,11 +51,12 @@ public class Tour {
 
     @Column
     @NotNull
-    private Double latitude;
+    private Integer earliestCheckInHour;
 
     @Column
     @NotNull
-    private Double longitude;
+    private Integer latestCheckInHour;
+
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -78,8 +82,8 @@ public class Tour {
     private Country country;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
-    private Set<Reservation> reservations = new HashSet<>();
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
@@ -92,6 +96,11 @@ public class Tour {
         Counter counter = new Counter();
         counter.setTour(this);
         this.setCounter(counter);
+    }
+
+    public void addReservation(Reservation reservation) {
+
+        reservations.add(reservation);
     }
 
 }

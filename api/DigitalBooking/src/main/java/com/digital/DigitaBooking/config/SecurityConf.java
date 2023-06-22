@@ -88,6 +88,11 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.POST, "/countries").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/countries/{id}").hasAnyAuthority(ADMIN.name())
+                                // Rutas para reservas
+                                .requestMatchers(HttpMethod.GET, "/reservations/byTour/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/reservations/byUser/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/reservations").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/reservations/{id}").hasAnyAuthority(USER.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

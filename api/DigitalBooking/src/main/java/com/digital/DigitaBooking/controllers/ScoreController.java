@@ -2,7 +2,9 @@ package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.ScoreDTO;
+import com.digital.DigitaBooking.models.dtos.ScoreRequest;
 import com.digital.DigitaBooking.models.dtos.UserDTO;
+import com.digital.DigitaBooking.models.entities.Reservation;
 import com.digital.DigitaBooking.models.entities.User;
 import com.digital.DigitaBooking.models.entities.score.Score;
 import com.digital.DigitaBooking.services.impl.ScoreService;
@@ -29,16 +31,16 @@ public class ScoreController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Score> saveScore(@RequestBody ScoreDTO scoreDTO, UserDTO userDTO) throws BadRequestException {
-        User user = convertUserDTOToUser(userDTO);
-        Score savedScore = scoreService.saveScore(scoreDTO, user);
+    public ResponseEntity<Score> saveScore(@RequestBody ScoreRequest request) throws BadRequestException {
+        User user = convertUserDTOToUser(request.getUserDTO());
+        Score savedScore = scoreService.saveScore(request.getScoreDTO(), user);
         return new ResponseEntity<Score>(savedScore, HttpStatus.CREATED);
     }
 
     private User convertUserDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setId(userDTO.getId());
-        user.setUserFirstName(userDTO.getUserFirstName()); //¡PENDIENTE VALIDAR SI ES FIRST NAME O EMAIL!
+        user.setUserFirstName(userDTO.getUserFirstName());
         return user;
 
     }
