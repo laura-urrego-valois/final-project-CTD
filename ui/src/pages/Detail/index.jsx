@@ -1,12 +1,13 @@
-import { Link, useParams } from "react-router-dom";
-import { useGlobalState } from "../../context";
-import { Gallery } from "../../components/Gallery";
-import { Feature } from "../../components/Feature";
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import { Politics } from "../../components/Politics";
-import "./detail.css";
-import { Container } from "../../components/Container";
-import { SearchProduct } from "../../components/SearchProduct";
+import { Link, useParams } from "react-router-dom"
+import { useGlobalState } from "../../context"
+import { Gallery } from "../../components/Gallery"
+import { Feature } from "../../components/Feature"
+import { BsFillArrowLeftCircleFill } from "react-icons/bs"
+import { Politics } from "../../components/Politics"
+import "./detail.css"
+import { Container } from "../../components/Container"
+import { SearchProduct } from "../../components/SearchProduct"
+import { Dates } from "../../components/Dates"
 
 export const dataGallery = {
   galleryImage: [
@@ -16,7 +17,7 @@ export const dataGallery = {
     "https://images.unsplash.com/photo-1587019720353-0ac8b27083fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     "https://images.unsplash.com/photo-1614444894791-c0c4d4286c35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
   ],
-};
+}
 export const feature = [
   "mono",
   "computadora",
@@ -26,12 +27,12 @@ export const feature = [
   "computadora",
   "serpiente",
   "escalar",
-];
+]
 
 const Detail = () => {
-  let { id } = useParams();
-  const { state } = useGlobalState();
-  const { categories, tours } = state;
+  let { id } = useParams()
+  const { state } = useGlobalState()
+  const { categories, tours } = state
 
   // Descomentar cuando funcione endpoint get by id
 
@@ -44,11 +45,11 @@ const Detail = () => {
   // 		});
   // 	};
 
-  const itemDetail = tours?.find((item) => item.id == id);
+  const itemDetail = tours?.find((item) => item.id == id)
   const getCategoryName = (categoryId) => {
-    const category = categories?.find((cat) => cat.id === categoryId);
-    return category ? category.categoryName : "";
-  };
+    const category = categories?.find((cat) => cat.id === categoryId)
+    return category ? category.categoryName : ""
+  }
   console.log("itemDetail", itemDetail, state)
   return (
     <Container>
@@ -76,9 +77,10 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail.features} />
+      <Dates />
       <Politics />
     </Container>
-  );
-};
+  )
+}
 
-export default Detail;
+export default Detail
