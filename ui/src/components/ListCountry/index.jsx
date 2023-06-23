@@ -74,22 +74,23 @@ export const ListCountry = () => {
   const currentCountries = getCurrentPageItems(countries)
 
   const handleFormSubmit = (data) => {
-    const updatedCountry = { ...countryForm, ...data }
+    console.log(data)
+    // const updatedCountry = { ...countryForm, ...data }
 
-    if (editMode) {
-      dispatch({
-        type: actions.UPDATE_COUNTRY,
-        payload: updatedCountry,
-      })
-    } else {
-      dispatch({
-        type: actions.ADD_COUNTRY,
-        payload: updatedCountry,
-      })
-    }
+    // if (editMode) {
+    //   dispatch({
+    //     type: actions.UPDATE_COUNTRY,
+    //     payload: updatedCountry,
+    //   })
+    // } else {
+    //   dispatch({
+    //     type: actions.ADD_COUNTRY,
+    //     payload: updatedCountry,
+    //   })
+    // }
 
-    closeModal()
-    reset()
+    // closeModal()
+    // reset()
   }
 
   return (
@@ -102,7 +103,7 @@ export const ListCountry = () => {
           <img
             className="list__image"
             src={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw0zKknEf_ExsMDMYCkGnkF4bvK-dRrBJb9FdYBJOO0vy5H15IsJSpMBSlVDz7bt6BKCk&usqp=CAU"
+              "https://upload.wikimedia.org/wikipedia/commons/7/74/Location_icon_from_Noun_Project.png"
             }
             alt=""
           />
