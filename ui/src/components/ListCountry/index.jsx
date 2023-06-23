@@ -7,7 +7,7 @@ import { actions } from "../../context/reducer"
 import { useForm } from "react-hook-form"
 import { usePagination } from "../../hooks/usePagination"
 import { ModalCountry } from "../Modal/ModalCountry"
-import { AiFillDelete, AiFillEdit } from "react-icons/ai"
+import { AiFillDelete } from "react-icons/ai"
 import { GrAdd } from "react-icons/gr"
 
 export const ListCountry = () => {
@@ -26,7 +26,6 @@ export const ListCountry = () => {
   const countries = state?.countries || []
 
   const { reset } = useForm()
-  const [editMode, setEditMode] = useState(false)
   const [countryForm, setCountryForm] = useState({
     id: "",
     countryName: "",
@@ -37,10 +36,8 @@ export const ListCountry = () => {
 
   const openModal = (categorie) => {
     if (categorie) {
-      setEditMode(true)
       setCountryForm(categorie)
     } else {
-      setEditMode(false)
       setCountryForm({
         id: "",
         countryName: "",
@@ -89,7 +86,7 @@ export const ListCountry = () => {
     //   })
     // }
 
-    // closeModal()
+    closeModal()
     // reset()
   }
 
@@ -109,9 +106,6 @@ export const ListCountry = () => {
           />
           <p className="list__title">{country.countryName}</p>
           <div className="list__button">
-            <Button onClick={() => openModal(country)}>
-              <AiFillEdit />
-            </Button>
             <Button
               type="primary"
               onClick={() => handleDeleteCountry(country.id)}
@@ -123,9 +117,7 @@ export const ListCountry = () => {
       ))}
       {isModalOpen && (
         <ModalCountry
-          country={selectedCountry}
           onClose={closeModal}
-          editMode={editMode}
           handleFormSubmit={handleFormSubmit}
           countryForm={countryForm}
         />
