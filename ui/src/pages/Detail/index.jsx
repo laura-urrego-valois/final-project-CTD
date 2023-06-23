@@ -6,7 +6,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Politics } from "../../components/Politics";
 import "./detail.css";
 import { Container } from "../../components/Container";
-import { SearchProduct } from "../../components/SearchProduct";
+import { LocateProduct, SearchProduct } from "../../components/SearchProduct";
 
 export const dataGallery = {
   galleryImage: [
@@ -49,7 +49,7 @@ const Detail = () => {
     const category = categories?.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : "";
   };
-  console.log("itemDetail", itemDetail, state)
+
   return (
     <Container>
       <div className="detail">
@@ -60,7 +60,7 @@ const Detail = () => {
           <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <SearchProduct itemDetail={itemDetail} />
+      <SearchProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
       {/* //Layout component Gallery */}
       <Gallery dataImage={itemDetail?.images} />
 
@@ -75,7 +75,8 @@ const Detail = () => {
           <p className="detail__description">{itemDetail.tourDescription}</p>
         </div>
       </section>
-      <Feature feature={itemDetail.features} />
+      <Feature feature={itemDetail?.features} />
+      <LocateProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
       <Politics />
     </Container>
   );
