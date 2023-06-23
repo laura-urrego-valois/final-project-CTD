@@ -18,6 +18,7 @@ import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
+import { Favorites } from "../pages/favorites"
 
 export const AppRoutes = () => {
   const { user } = useGlobalState()
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detalle/:id" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/user" element={<User />} />

@@ -10,18 +10,19 @@ import axios from "axios"
 import jwt_decode from "jwt-decode"
 
 export const BASE_URL =
-  // import.meta.env.VITE_API_URL || hola
+  // import.meta.env.VITE_API_URL ||
   "http://localhost:8000"
 
 const initialState = {
-  context: "testing context",
   selectedCategory: null,
+  favorites: [],
 }
 
 export const ContextGlobal = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
+  const [getFavorites, setGetFavorites] = useState([])
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const token = null || JSON.parse(localStorage.getItem("token"))
@@ -130,7 +131,7 @@ export const ContextProvider = ({ children }) => {
     const formData = new FormData()
     //formData.append("files", newTourData.toursImageFile[0])
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
-      formData.append("files", newTourData.toursImageFile[i]);
+      formData.append("files", newTourData.toursImageFile[i])
     }
     formData.append("Tour", JSON.stringify(newTourData))
     console.log("formData", formData)
@@ -300,6 +301,10 @@ export const ContextProvider = ({ children }) => {
     decodeResponse()
   }, [token])
 
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(state.favorites))
+  }, [state.favorites])
+
   const value = {
     state,
     dispatch,
@@ -332,6 +337,9 @@ export const ContextProvider = ({ children }) => {
     createCountry,
     updateCountry,
     deleteCountry,
+    // FAVORITES
+    getFavorites,
+    setGetFavorites,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
