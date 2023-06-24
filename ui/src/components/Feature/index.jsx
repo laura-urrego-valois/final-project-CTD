@@ -17,7 +17,6 @@ export const icons = [
 
 export const Feature = ({ feature }) => {
 
-
   function renderIcon(feature) {
     const icon = icons.find(icon => icon.value === feature);
     return icon ? icon.icon : '';
@@ -27,15 +26,15 @@ export const Feature = ({ feature }) => {
     <section className='feature'>
       <h2 className='feature__title'>Experiencia que se ofrecen</h2>
       <ul className='feature__list'>
-        {feature.length > 0 ? (
-          feature.map((item, i) => (
+        {feature?.length > 0 ? (
+          feature?.map((item, i) => (
             <li key={i} className='feature__item'>
-              <span className='item-icon'>{renderIcon(item.value)}</span>
-              <span className='item-description'>{item.name}</span>
+              <span className='item-icon'>{renderIcon(item.id)}</span>
+              <span className='item-description'>{item.featureName}</span>
             </li>
           ))
         ) : (
-          icons.map((item, i) => (
+          icons?.map((item, i) => (
             <li key={i} className='feature__item'>
               <span className='item-icon'>{item.icon}</span>
               <span className='item-description'>{item.name}</span>
