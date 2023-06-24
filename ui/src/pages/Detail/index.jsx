@@ -6,7 +6,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { Politics } from "../../components/Politics"
 import "./detail.css"
 import { Container } from "../../components/Container"
-import { SearchProduct } from "../../components/SearchProduct"
+import { LocateProduct, SearchProduct } from "../../components/SearchProduct"
 import { Dates } from "../../components/Dates"
 
 export const dataGallery = {
@@ -77,6 +77,7 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail?.features} />
+      <Dates />
       <LocateProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
       <Politics />
     </Container>
