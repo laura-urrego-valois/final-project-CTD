@@ -53,5 +53,12 @@ export const LocateProduct = ({ country, itemDetail }) => {
     };
   }, [country]);
 
-  return <div id="map" className="map-container"></div>;
+  return (
+    <section className="locate">
+      <h2 className="locate__title">Ubicación tour</h2>
+      <div className="locate__content">
+      <div id="map" className="map-container"></div>
+      </div>
+    </section>
+  )
 }

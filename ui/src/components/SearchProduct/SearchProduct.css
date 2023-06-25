@@ -41,3 +41,11 @@
   border-radius: 1rem;
   opacity: .7;
 }
+.locate__title {
+  text-align: start;
+  margin-left: 1rem;
+}
+.locate__content {
+  border-top: 1.5px solid var(--color-primary);
+  padding-top: 20px;
+}

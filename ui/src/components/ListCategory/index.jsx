@@ -10,6 +10,7 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 //import { AiFillDelete } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
 import './ListCategory.css'
+import Swal from "sweetalert2";
 
 export const ListCategory = () => {
 
@@ -54,9 +55,28 @@ export const ListCategory = () => {
 
   const handleDeleteCategorie = async (categoryId) => {
     try {
-      await deleteCategory(categoryId);
+      const result = await Swal.fire({
+        title: 'Estas seguro que desea eliminar una categoría.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ok'
+      });
+
+      if (result.isConfirmed) {
+        await deleteCategory(categoryId);
+        Swal.fire(
+          'Eliminada!',
+          'Tu categoría ha sido eliminada.',
+          'success'
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
     } catch (error) {
-      console.error("Error deleting category:", error);
+      console.error("Error al borrar categoría:", error);
+      Swal.fire("Error", "Se ha producido un error al eliminar la categoría.", "error");
     }
   };
 
@@ -72,15 +92,30 @@ export const ListCategory = () => {
           type: actions.UPDATE_CATEGORY,
           payload: updatedCategory,
         });
+        Swal.fire({
+          title: "Categoría actualizada",
+          icon: "success"
+        }).then(() => {
+          window.location.reload();
+        });
       } else {
         await addCategory(updatedCategory);
+        Swal.fire({
+          title: "Categoría añadida",
+          icon: "success"
+        }).then(() => {
+          window.location.reload();
+        });
       }
       closeModal();
       reset();
-
-      window.location.reload();
     } catch (error) {
       console.error("Error adding/updating category:", error);
+      Swal.fire(
+        "Error",
+        "Se ha producido un error al añadir/actualizar la categoría.",
+        "error"
+      );
     }
   };
 

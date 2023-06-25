@@ -31,7 +31,7 @@ export const Dates = () => {
 
   return (
     <section className="dates">
-      <h2 className="dates__title">Fechas Disponibles</h2>
+      <h2 className="dates__title">Fechas disponibles</h2>
       <div className="dates__calendar">
         <DatePicker
           selected={startDate}

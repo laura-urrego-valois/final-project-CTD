@@ -49,7 +49,7 @@ export const DetailedCard = ({
 	return (
 		<figure
 			className="card"
-			onClick={() => navigate(`/detalle/${id}`)}>
+		>
 			<img
 				src={imageSrc}
 				alt={title}
@@ -67,7 +67,7 @@ export const DetailedCard = ({
 				<div className="card__info">
 					<h4 className="card__title">{title}</h4>
 					<p className="card__description">{description}</p>
-					<Button type="primary">Ver más</Button>
+					<Button type="primary" onClick={() => navigate(`/detalle/${id}`)}>Ver más</Button>
 				</div>
 			</figcaption>
 		</figure>
