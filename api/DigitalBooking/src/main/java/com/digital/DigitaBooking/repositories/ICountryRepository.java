@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICountryRepository extends JpaRepository<Country, Integer> {
 
-    @Query(value = "SELECT c FROM country c WHERE c.country_name LIKE :country_name", nativeQuery = true)
+    @Query(value = "SELECT c.* FROM country c WHERE c.country_name LIKE :country_name", nativeQuery = true)
     Country searchCountryByName(@Param("country_name") String country_name);
 
     // La consulta busca y devuelve un registro de país cuyo nombre coincida parcialmente con el parámetro

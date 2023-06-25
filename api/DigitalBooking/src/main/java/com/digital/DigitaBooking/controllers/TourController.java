@@ -110,7 +110,7 @@ public class TourController {
         return tourService.getToursByCountry(id);
     }
 
-    @GetMapping(path = "/country/{countryName}")
+    @GetMapping(path = "/country/name/{countryName}")
     public ResponseEntity<List<TourDTO>> getToursByCountryName(@PathVariable String countryName) throws BadRequestException {
         List<TourDTO> toursByCountryName = tourService.findAllToursByCountryName(countryName);
         return ResponseEntity.ok(toursByCountryName);

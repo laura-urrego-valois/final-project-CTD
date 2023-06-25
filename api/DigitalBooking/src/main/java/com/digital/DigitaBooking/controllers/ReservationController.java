@@ -34,8 +34,8 @@ public class ReservationController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation) throws BadRequestException {
-        Reservation savedReservation = reservationService.saveReservation(reservation);
+    public ResponseEntity<Reservation> saveReservation(@RequestBody ReservationDTO reservationDTO) throws BadRequestException {
+        Reservation savedReservation = reservationService.saveReservation(reservationDTO);
         return new ResponseEntity<Reservation>(savedReservation, HttpStatus.CREATED);
     }
 

@@ -27,7 +27,7 @@ public class Reservation {
 
     @Column
     @NotNull
-    private Integer startTime;
+    private LocalTime startTime;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

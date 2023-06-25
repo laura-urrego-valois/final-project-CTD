@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table
+@NoArgsConstructor
 @AllArgsConstructor
 public class Tour {
     @Id
@@ -51,11 +53,11 @@ public class Tour {
 
     @Column
     @NotNull
-    private Integer earliestCheckInHour;
+    private LocalTime earliestCheckInHour;
 
     @Column
     @NotNull
-    private Integer latestCheckInHour;
+    private LocalTime latestCheckInHour;
 
 
     @JsonIgnore

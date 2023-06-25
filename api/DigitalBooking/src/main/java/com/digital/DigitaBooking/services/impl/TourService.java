@@ -177,6 +177,7 @@ public class TourService implements ITourService {
             throw new BadRequestException("No existe un tour con ID " + id);
         }
     }
+    // Busca un tour en la base de datos por su ID y devuelve el objeto Tour correspondiente si se encuentra.
 
 
     private List<TourDTO> convertToDTOList(List<Tour> list) {

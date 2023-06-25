@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface IReservationService {
 
-    Reservation saveReservation(Reservation reservation) throws BadRequestException;
+    Reservation saveReservation(ReservationDTO reservationDTO) throws BadRequestException;
 
     Reservation getReservationById(Long id) throws BadRequestException;
 

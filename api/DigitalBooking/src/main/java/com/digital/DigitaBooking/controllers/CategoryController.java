@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.*;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.entities.ImageCategory;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin(origins="*")
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
@@ -40,21 +42,21 @@ public class CategoryController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<HttpStatus> loadImage(@RequestPart(value="file") MultipartFile image,
-                                                @RequestPart(value="Category") String categoryString) throws IOException {
+    public ResponseEntity<HttpStatus> loadImage(@RequestPart(value = "file") MultipartFile image,
+                                                @RequestPart(value = "Category") String categoryString) throws IOException {
         ImageCategoryDTO imageCategoryDTO = new ImageCategoryDTO();
-        CategoryDTO categoryDTO = mapper.readValue(categoryString,CategoryDTO.class);
+        CategoryDTO categoryDTO = mapper.readValue(categoryString, CategoryDTO.class);
 
         try {
-                File mainFile = new File(image.getOriginalFilename());
-                String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
-                awss3Service.uploadFile(image);
-                imageCategoryDTO.setImageTitle(mainFile.getName());
-                imageCategoryDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
-                Category newCategory = categoryService.saveCategory(categoryDTO);
-                imageCategoryService.saveImageCategory(imageCategoryDTO, newCategory);
+            File mainFile = new File(image.getOriginalFilename());
+            String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
+            awss3Service.uploadFile(image);
+            imageCategoryDTO.setImageTitle(mainFile.getName());
+            imageCategoryDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
+            Category newCategory = categoryService.saveCategory(categoryDTO);
+            imageCategoryService.saveImageCategory(imageCategoryDTO, newCategory);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
 
@@ -68,12 +70,12 @@ public class CategoryController {
             Response response = new Response(categoryDTO, HttpStatus.OK);
             return response;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             JsonObject jsonReponse = new JsonObject();
-            jsonReponse.addProperty("status",404);
-            jsonReponse.addProperty("error",e.getMessage());
-            return new Response(jsonReponse.toString(),HttpStatus.NOT_FOUND);
+            jsonReponse.addProperty("status", 404);
+            jsonReponse.addProperty("error", e.getMessage());
+            return new Response(jsonReponse.toString(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -96,5 +98,4 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
 }

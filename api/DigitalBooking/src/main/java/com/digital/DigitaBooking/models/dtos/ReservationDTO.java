@@ -2,14 +2,17 @@ package com.digital.DigitaBooking.models.dtos;
 
 import com.digital.DigitaBooking.models.entities.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationDTO {
 
@@ -17,7 +20,11 @@ public class ReservationDTO {
     private LocalDate initialDate;
     private LocalDate finalDate;
 
-    private Integer startTime;
+    private LocalTime startTime;
+
+    private Long idUser;
+
+    private Long idTour;
 
     public ReservationDTO(Reservation reservation) {
         LocalDate today = LocalDate.now();

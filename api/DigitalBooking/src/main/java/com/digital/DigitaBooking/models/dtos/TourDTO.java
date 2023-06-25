@@ -30,8 +30,8 @@ public class TourDTO {
     private Set<Image> images;
     private CounterDTO counter;
     private List<ReservationDTO> reservationList;
-    private Integer earliestCheckInHour;
-    private Integer latestCheckInHour;
+    private LocalTime earliestCheckInHour;
+    private LocalTime latestCheckInHour;
 
     public TourDTO(Tour tour) {
         if (tour.getCounter() != null) {

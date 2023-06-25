@@ -32,13 +32,18 @@ public class ReservationService implements IReservationService {
     private UserService userService;
 
     @Override
-    public Reservation saveReservation(Reservation reservation) throws BadRequestException {
-        boolean IdAssigned = reservation.getId() != null;
-        boolean validStartTime = reservation.getStartTime() <= 24;
-        // Esto es útil para validar si la hora de inicio está dentro del rango válido de un día y asegurarse
-        // de que no exceda las 24 horas en el formato de 24 horas.
-        boolean validInterval = reservation.getInitialDate().isBefore(reservation.getFinalDate());
-        validInterval &= !(reservation.getInitialDate().isBefore(LocalDate.now()));
+    public Reservation saveReservation(ReservationDTO reservationDTO) throws BadRequestException {
+        boolean IdAssigned = reservationDTO.getId() != null;
+        LocalTime maxTime = LocalTime.MAX; // Esto representa el límite superior permitido para un tiempo.
+        boolean validStartTime = reservationDTO.getStartTime().compareTo(maxTime) <= 0;
+        // El método compareTo() devuelve un valor negativo si reservationDTO.getStartTime() es anterior a
+        // maxTime, cero si son iguales y un valor positivo si reservationDTO.getStartTime() es posterior
+        // a maxTime.
+        // Con esto verificamos si el tiempo de inicio en reservationDTO está dentro del rango válido,
+        // considerando LocalTime.MAX como el límite superior permitido. Si validStartTime es true, significa
+        // que el tiempo de inicio es válido.
+        boolean validInterval = reservationDTO.getInitialDate().isBefore(reservationDTO.getFinalDate());
+        validInterval &= !(reservationDTO.getInitialDate().isBefore(LocalDate.now()));
         // Se está verificando que el intervalo de reserva sea válido, es decir, que la fecha inicial no sea
         // anterior a la fecha actual.
         if (IdAssigned) {
@@ -50,21 +55,21 @@ public class ReservationService implements IReservationService {
         if (!validStartTime) {
             throw new BadRequestException("La hora de inicio no es válida.");
         }
-        Tour tour = tourService.searchTourByIdAsClass(reservation.getTour().getId());
-        User user = userService.searchUserByIdAsClass(reservation.getUser().getId());
-        boolean isInitialDateValidRange = tour.getEarliestCheckInHour() <= reservation.getStartTime();
+        Tour tour = tourService.searchTourByIdAsClass(reservationDTO.getIdTour());
+        System.out.println(tour.toString());
+        User user = userService.searchUserByIdAsClass(reservationDTO.getIdUser());
+        boolean isInitialDateValidRange = !reservationDTO.getStartTime().isBefore(tour.getEarliestCheckInHour());
         if (!isInitialDateValidRange) {
             throw new BadRequestException("La hora de check-in no es posible asignarla.");
-            // Esta línea de código se utiliza para verificar si la hora de inicio de una reserva
-            // (reservation.getStartTime()) está dentro del rango aceptado para el último horario de check-in
-            // de un tour (tour.getEarliestCheckInHour())
-            // La excepción se lanza si la hora de check-in no cumple con la condición de estar dentro del
-            // rango aceptado.
+            // Verifica si el tiempo de inicio de la reserva es igual o posterior a la hora de check-in más
+            // temprana. Si es así, se considera que el rango de fechas de inicio es válido y
+            // isInitialDateValidRange se establecerá en true.
         }
         boolean isIntervalDateAvailable = true;
         for (Reservation previousReservation : tour.getReservations()) {
-            boolean distinct = !reservation.getInitialDate().isBefore(previousReservation.getFinalDate());
-            distinct |= !reservation.getFinalDate().isAfter(previousReservation.getInitialDate());
+            System.out.println(previousReservation.toString());
+            boolean distinct = !reservationDTO.getInitialDate().isBefore(previousReservation.getFinalDate());
+            distinct |= !reservationDTO.getFinalDate().isAfter(previousReservation.getInitialDate());
             isIntervalDateAvailable &= distinct;
             // Se verifica si el intervalo de fechas de la reserva actual no se superpone con ninguna de las
             // reservas anteriores del tour, y actualiza la variable isIntervalDateAvailable en función de
@@ -74,6 +79,12 @@ public class ReservationService implements IReservationService {
         if (!isIntervalDateAvailable) {
             throw new BadRequestException("El intervalo de fechas no está disponible porque ya ha sido ocupado.");
         } else {
+            Reservation reservation = new Reservation();
+            reservation.setInitialDate(reservationDTO.getInitialDate());
+            reservation.setFinalDate(reservationDTO.getFinalDate());
+            reservation.setStartTime(reservationDTO.getStartTime());
+            reservation.setTour(tour);
+            reservation.setUser(user);
             Reservation saved = reservationRepository.save(reservation);
             tour.addReservation(saved);
             user.addReservation(saved);
