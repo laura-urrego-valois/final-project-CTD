@@ -61,7 +61,7 @@ const Detail = () => {
           <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <SearchProduct itemDetail={itemDetail} />
+      <SearchProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
       {/* //Layout component Gallery */}
       <Gallery dataImage={itemDetail?.images} />
 
@@ -76,8 +76,8 @@ const Detail = () => {
           <p className="detail__description">{itemDetail.tourDescription}</p>
         </div>
       </section>
-      <Feature feature={itemDetail.features} />
-      <Dates />
+      <Feature feature={itemDetail?.features} />
+      <LocateProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
       <Politics />
     </Container>
   )
