@@ -241,11 +241,16 @@ export const ContextProvider = ({ children }) => {
         newCountryData,
         config
       )
-      dispatch({
-        type: actions.ADD_COUNTRY,
-        payload: response.data,
-      })
+      if (response) {
+        Toast("Pais agregado", "success")
+        dispatch({
+          type: actions.ADD_COUNTRY,
+          payload: response.data,
+        })
+      }
     } catch (error) {
+      Toast("Error", "error")
+
       console.error("Error adding country:", error)
     }
   }
@@ -276,12 +281,19 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
+      const response = await axios.delete(
+        `${BASE_URL}/countries/${countryId}`,
+        config
+      )
+      // if (response) {
+      Toast("Pais eliminado", "success")
       dispatch({
         type: actions.REMOVE_COUNTRY,
         payload: countryId,
       })
+      // }
     } catch (error) {
+      Toast("Error", "error")
       console.error("Error deleting country:", error)
     }
   }

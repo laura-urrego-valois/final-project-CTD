@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .modal__content {
   max-width: 35rem;
@@ -97,4 +98,14 @@
 }
 .feature__item {
   text-align: start;
+}
+.share__message {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2;
+  letter-spacing: 12;
+}
+.share__icons {
+  display: flex;
+  gap: 5px;
 }
