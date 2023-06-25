@@ -14,10 +14,13 @@ import { Login } from "../pages/login"
 import { SignUp } from "../pages/signUp"
 import { User } from "../pages/user"
 
+
 import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
+import { BookingSuccessful } from "../pages/bookingSuccessful"
+import { BookingFailure } from "../pages/bookingFailure"
 
 export const AppRoutes = () => {
   const { user } = useGlobalState()
@@ -42,6 +45,9 @@ export const AppRoutes = () => {
         <Route path="/register-success" element={<Success />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+
+        <Route path="/booking-failure" element={<BookingFailure />} />
+        <Route path="/booking-success" element={<BookingSuccessful />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
