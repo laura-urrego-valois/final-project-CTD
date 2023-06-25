@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import {
   createContext,
   useContext,
@@ -8,6 +9,7 @@ import {
 import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
+import { Toast } from "../utils/Toast"
 
 export const BASE_URL =
   // import.meta.env.VITE_API_URL ||
@@ -15,7 +17,7 @@ export const BASE_URL =
 
 const initialState = {
   selectedCategory: null,
-  favorites: [],
+  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
 }
 
 export const ContextGlobal = createContext()
@@ -305,6 +307,27 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("favorites", JSON.stringify(state.favorites))
   }, [state.favorites])
 
+  const isTourInFavorites = (newTour) =>
+    state?.favorites?.find((tour) => tour.id === newTour.id)
+
+  const addFav = (tour) => {
+    if (isTourInFavorites(tour)) {
+      Toast("Tour removido", "success")
+
+      dispatch({
+        type: actions.REMOVE_FROM_FAVORITE,
+        payload: tour,
+      })
+    } else {
+      Toast("Tour agregado", "success")
+
+      dispatch({
+        type: actions.ADD_TO_FAVORITE,
+        payload: tour,
+      })
+    }
+  }
+
   const value = {
     state,
     dispatch,
@@ -340,6 +363,7 @@ export const ContextProvider = ({ children }) => {
     // FAVORITES
     getFavorites,
     setGetFavorites,
+    addFav,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

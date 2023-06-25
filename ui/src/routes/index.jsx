@@ -28,12 +28,11 @@ export const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detalle/:id" element={<Detail />} />
-        <Route path="/favorites" element={<Favorites />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/user" element={<User />} />
           {user?.role && <Route path="/admin" element={<Admin />} />}
-
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/product-list" element={<ProductList />} />
           <Route path="/category-list" element={<CategoryList />} />
           <Route path="/country-list" element={<CountryList />} />

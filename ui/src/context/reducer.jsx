@@ -214,7 +214,9 @@ export const AppReducer = (state, action) => {
       return {
         ...state,
         favorites: [
-          ...state.favorites.filter((favorite) => favorite !== action.payload),
+          ...state.favorites.filter(
+            (favorite) => favorite.id !== action.payload.id
+          ),
         ],
       }
 

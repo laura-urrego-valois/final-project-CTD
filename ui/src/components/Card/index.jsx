@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-extra-boolean-cast */
 import { AiOutlineHeart } from "react-icons/ai"
 import { Button } from "../Button"
 import "./Card.css"
 import "./SimpleCard.css"
 import { useNavigate } from "react-router-dom"
 import { useGlobalState } from "../../context"
-import { Toast } from "../../utils/Toast"
-import { actions } from "../../context/reducer"
 
 /**
  * Representa una tarjeta simple con una imagen y un título.
@@ -47,28 +43,7 @@ export const DetailedCard = ({
   score,
 }) => {
   const navigate = useNavigate()
-  const { state, dispatch } = useGlobalState()
-
-  const isTourInFavorites = (newTour) =>
-    state?.favorites?.find((tour) => tour.id === newTour.id)
-
-  const addFav = (tour) => {
-    if (!!isTourInFavorites(tour)) {
-      Toast("Tour removido", "success")
-
-      dispatch({
-        type: actions.REMOVE_FROM_FAVORITE,
-        payload: tour,
-      })
-    } else {
-      Toast("Tour agregado", "success")
-
-      dispatch({
-        type: actions.ADD_TO_FAVORITE,
-        payload: tour,
-      })
-    }
-  }
+  const { addFav, user } = useGlobalState()
 
   return (
     <figure className="card">
@@ -76,21 +51,24 @@ export const DetailedCard = ({
       <figcaption className="card__content">
         <span className="card__category">{category}</span>
         <div className="card__details">
-          <AiOutlineHeart
-            className="card__favorite"
-            onClick={() =>
-              addFav({
-                id,
-                imageSrc,
-                title,
-                rating,
-                description,
-                category,
-                classification,
-                score,
-              })
-            }
-          />
+          {user && (
+            <AiOutlineHeart
+              className="card__favorite"
+              onClick={() =>
+                addFav({
+                  id,
+                  imageSrc,
+                  title,
+                  rating,
+                  description,
+                  category,
+                  classification,
+                  score,
+                })
+              }
+            />
+          )}
+
           <span className="card__rating">{rating}</span>
           <div className="card__info">
             <p className="card__score">{score}</p>

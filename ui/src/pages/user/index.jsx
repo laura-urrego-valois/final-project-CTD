@@ -7,15 +7,19 @@ import { MdAlternateEmail } from "react-icons/md"
 import { HiIdentification } from "react-icons/hi"
 import { LuUser } from "react-icons/lu"
 import { Button } from "../../components/Button"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 export const User = () => {
   const { user } = useGlobalState()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleButtonClick = () => {
-    navigate("/admin");
-  };
+    navigate("/admin")
+  }
+
+  const handleButtonClickFav = () => {
+    navigate("/favorites")
+  }
 
   return (
     <Container>
@@ -49,7 +53,13 @@ export const User = () => {
             <h5>Role:</h5>
             <p>{user?.role}</p>
           </span>
-          <Button onClick={handleButtonClick}>Ir a Panel</Button>
+          {user.role == "ADMIN" && (
+            <Button onClick={handleButtonClick}>Panel</Button>
+          )}
+
+          <Button type="primary" onClick={handleButtonClickFav}>
+            Favoritos
+          </Button>
         </section>
       )}
     </Container>

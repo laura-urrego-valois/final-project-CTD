@@ -1,23 +1,27 @@
 import { DetailedCard } from "../../components/Card"
+import { Container } from "../../components/Container"
 import { useGlobalState } from "../../context"
 
 export const Favorites = () => {
   const { state } = useGlobalState()
 
-  const getCategoryName = (categoryId) => {
-    const category = state?.categories?.find((cat) => cat?.id === categoryId)
-    return category ? category.categoryName : ""
-  }
-  return state?.favorites?.map((tour) => (
-    <DetailedCard
-      key={tour.id}
-      id={tour.id}
-      title={tour.tourName}
-      description={tour.tourDescription}
-      imageSrc={tour.images[0]?.imageUrl}
-      classification={tour.tourClassification}
-      category={getCategoryName(tour.categoryId)}
-      score={tour.tourScore}
-    />
-  ))
+  return (
+    <Container>
+      <h1>Mis favoritos</h1>
+      <div className="recommendations__content">
+        {state?.favorites?.map((tour) => (
+          <DetailedCard
+            key={tour.id}
+            id={tour.id}
+            title={tour.title}
+            description={tour.description}
+            imageSrc={tour.imageSrc}
+            classification={tour.classification}
+            category={tour.category}
+            score={tour.score}
+          />
+        ))}
+      </div>
+    </Container>
+  )
 }
