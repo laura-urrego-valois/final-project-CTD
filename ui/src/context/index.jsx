@@ -128,7 +128,6 @@ export const ContextProvider = ({ children }) => {
 
   const addTour = async (newTourData) => {
     const formData = new FormData()
-    //formData.append("files", newTourData.toursImageFile[0])
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
       formData.append("files", newTourData.toursImageFile[i]);
     }
@@ -282,6 +281,14 @@ export const ContextProvider = ({ children }) => {
       console.error("Error deleting country:", error)
     }
   }
+  const fetchToursByCountry = async (countryId) => {
+    await axios.get(`${BASE_URL}/tours/country/${countryId}`).then((response) => {
+      dispatch({
+        type: actions.SEARCH_BY_COUNTRY,
+        payload: response.data,
+      });
+    })
+  };
 
   useEffect(() => {
     fetchCategories()
@@ -332,6 +339,8 @@ export const ContextProvider = ({ children }) => {
     createCountry,
     updateCountry,
     deleteCountry,
+    //SEARCH
+    fetchToursByCountry
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

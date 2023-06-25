@@ -22,6 +22,8 @@ export const actions = {
   ADD_USER: "ADD_USER",
   UPDATE_USER: "UPDATE_USER",
   REMOVE_USER: "REMOVE_USER",
+  //SEARCH_BY_COUNTRY
+  SEARCH_BY_COUNTRY: "SEARCH_BY_COUNTRY",
 }
 
 export const AppReducer = (state, action) => {
@@ -200,6 +202,12 @@ export const AppReducer = (state, action) => {
         ...state,
         users: updatedUser,
       }
+    }
+    case actions.SEARCH_BY_COUNTRY: {
+      return {
+        ...state,
+        filterTours: action.payload,
+      };
     }
 
     default:
