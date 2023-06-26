@@ -61,10 +61,13 @@ const Detail = () => {
           <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <SearchProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
+
+      <SearchProduct
+        country={state.countries[itemDetail.countryId]}
+        itemDetail={itemDetail}
+      />
       {/* //Layout component Gallery */}
       <Gallery dataImage={itemDetail?.images} />
-
       <section className="detail__content">
         <div className="detail__info">
           <div className="detail-value">
@@ -78,7 +81,10 @@ const Detail = () => {
       </section>
       <Feature feature={itemDetail?.features} />
       <Dates />
-      <LocateProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
+      <LocateProduct
+        country={state.countries[itemDetail.countryId]}
+        itemDetail={itemDetail}
+      />
       <Politics />
     </Container>
   )

@@ -22,6 +22,9 @@ export const actions = {
   ADD_USER: "ADD_USER",
   UPDATE_USER: "UPDATE_USER",
   REMOVE_USER: "REMOVE_USER",
+  // FAVORITE ACTIONS
+  ADD_TO_FAVORITE: "ADD_TO_FAVORITE",
+  REMOVE_FROM_FAVORITE: "REMOVE_FROM_FAVORITE",
 }
 
 export const AppReducer = (state, action) => {
@@ -201,6 +204,21 @@ export const AppReducer = (state, action) => {
         users: updatedUser,
       }
     }
+    case actions.ADD_TO_FAVORITE:
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      }
+
+    case actions.REMOVE_FROM_FAVORITE:
+      return {
+        ...state,
+        favorites: [
+          ...state.favorites.filter(
+            (favorite) => favorite.id !== action.payload.id
+          ),
+        ],
+      }
 
     default:
       return { ...state }
