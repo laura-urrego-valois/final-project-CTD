@@ -1,4 +1,3 @@
-/* eslint-disable no-extra-boolean-cast */
 import {
   createContext,
   useContext,
@@ -9,22 +8,20 @@ import {
 import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
-import { Toast } from "../utils/Toast"
 
 export const BASE_URL =
-  // import.meta.env.VITE_API_URL ||
+  // import.meta.env.VITE_API_URL || hola
   "http://localhost:8000"
 
 const initialState = {
+  context: "testing context",
   selectedCategory: null,
-  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
 }
 
 export const ContextGlobal = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
-  const [getFavorites, setGetFavorites] = useState([])
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const token = null || JSON.parse(localStorage.getItem("token"))
@@ -133,7 +130,7 @@ export const ContextProvider = ({ children }) => {
     const formData = new FormData()
     //formData.append("files", newTourData.toursImageFile[0])
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
-      formData.append("files", newTourData.toursImageFile[i])
+      formData.append("files", newTourData.toursImageFile[i]);
     }
     formData.append("Tour", JSON.stringify(newTourData))
     console.log("formData", formData)
@@ -241,16 +238,11 @@ export const ContextProvider = ({ children }) => {
         newCountryData,
         config
       )
-      if (response) {
-        Toast("Pais agregado", "success")
-        dispatch({
-          type: actions.ADD_COUNTRY,
-          payload: response.data,
-        })
-      }
+      dispatch({
+        type: actions.ADD_COUNTRY,
+        payload: response.data,
+      })
     } catch (error) {
-      Toast("Error", "error")
-
       console.error("Error adding country:", error)
     }
   }
@@ -281,19 +273,12 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.delete(
-        `${BASE_URL}/countries/${countryId}`,
-        config
-      )
-      // if (response) {
-      Toast("Pais eliminado", "success")
+      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
       dispatch({
         type: actions.REMOVE_COUNTRY,
         payload: countryId,
       })
-      // }
     } catch (error) {
-      Toast("Error", "error")
       console.error("Error deleting country:", error)
     }
   }
@@ -314,31 +299,6 @@ export const ContextProvider = ({ children }) => {
 
     decodeResponse()
   }, [token])
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(state.favorites))
-  }, [state.favorites])
-
-  const isTourInFavorites = (newTour) =>
-    state?.favorites?.find((tour) => tour.id === newTour.id)
-
-  const addFav = (tour) => {
-    if (isTourInFavorites(tour)) {
-      Toast("Tour removido", "success")
-
-      dispatch({
-        type: actions.REMOVE_FROM_FAVORITE,
-        payload: tour,
-      })
-    } else {
-      Toast("Tour agregado", "success")
-
-      dispatch({
-        type: actions.ADD_TO_FAVORITE,
-        payload: tour,
-      })
-    }
-  }
 
   const value = {
     state,
@@ -372,10 +332,6 @@ export const ContextProvider = ({ children }) => {
     createCountry,
     updateCountry,
     deleteCountry,
-    // FAVORITES
-    getFavorites,
-    setGetFavorites,
-    addFav,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

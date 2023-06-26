@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Button } from "../Button"
 import { GrFormClose } from "react-icons/gr"
@@ -13,37 +13,49 @@ import {
 export const ModalCountry = ({
   onClose,
   editMode,
+  country,
   handleFormSubmit,
   countryForm,
 }) => {
   const { register, handleSubmit, setValue } = useForm()
-
   const [allCountries, setAllCountries] = useState([])
+  const [valueSelect, setValueSelect] = useState(allCountries[0])
+  const [capital, setCapital] = useState("")
+  const [latitude, setLatitude] = useState("")
+  const [longitude, setLongitude] = useState("")
 
-  const updateCountryInfo = useCallback(async (selectedCountry) => {
-    const capitalName = await getCountryCapital(selectedCountry);
-    const location = await getCountryPositions(selectedCountry);
-    setValue("capitalName", capitalName.data.data.capital);
-    setValue("latitude", location.data.data.lat);
-    setValue("longitude", location.data.data.long);
-  }, [setValue]);
+  const handleChange = async (event) => {
+    setValueSelect(event.target.value)
+    const capitalName = await getCountryCapital(event.target.value)
+    setCapital(capitalName.data.data.capital)
+    if (capitalName) {
+      const location = await getCountryPositions(event.target.value)
+      setLatitude(location.data.data.lat)
+      setLongitude(location.data.data.long)
+    }
+  }
 
   useEffect(() => {
-    const fetchCountries = async () => {
+    const countryData = async () => {
       const countries = await getCountries()
       setAllCountries(countries.data.data)
     }
-    fetchCountries()
+    countryData()
   }, [])
 
   useEffect(() => {
     if (editMode && countryForm) {
       setValue("countryName", countryForm.countryName)
-      updateCountryInfo(countryForm.countryName)
+      setValue("capitalName", countryForm.capitalName)
+      setValue("latitude", countryForm.latitude)
+      setValue("longitude", countryForm.longitude)
     } else {
       setValue("countryName", "")
+      setValue("capitalName", "")
+      setValue("latitude", "")
+      setValue("longitude", "")
     }
-  }, [editMode, countryForm, setValue, updateCountryInfo])
+  }, [editMode, countryForm, setValue])
 
   return (
     <section className="modal__overlay">
@@ -55,11 +67,10 @@ export const ModalCountry = ({
             <select
               id="countryName"
               name="countryName"
-              {...register("countryName", { required: true })}
-              onChange={(event) => {
-                setValue("countryName", event.target.value)
-                updateCountryInfo(event.target.value)
-              }}
+              value={valueSelect}
+              onChange={handleChange}
+              defaultValue={country?.countryName || ""}
+              // {...register("countryName")}
             >
               {allCountries.map((countryInfo) => (
                 <option key={countryInfo.name} value={countryInfo.name}>
@@ -72,8 +83,9 @@ export const ModalCountry = ({
             type="text"
             name="capitalName"
             id="capitalName"
-            readOnly
-            {...register("capitalName")}
+            value={capital}
+            defaultValue={country?.capitalName || ""}
+            // {...register("capitalName")}
             disabled
           />
 
@@ -81,8 +93,9 @@ export const ModalCountry = ({
             type="text"
             name="latitude"
             id="latitude"
-            readOnly
-            {...register("latitude")}
+            value={latitude}
+            defaultValue={country?.latitude || ""}
+            // {...register("latitude")}
             disabled
           />
 
@@ -90,8 +103,9 @@ export const ModalCountry = ({
             type="text"
             name="longitude"
             id="longitude"
-            readOnly
-            {...register("longitude")}
+            value={longitude}
+            defaultValue={country?.longitude || ""}
+            // {...register("longitude")}
             disabled
           />
 
