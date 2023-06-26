@@ -5,8 +5,8 @@ import { AppRoutes } from "./routes"
 import "./theme/theme.css"
 import { ContextProvider } from "./context"
 
-import "react-datepicker/dist/react-datepicker.css"
-import "react-datepicker/dist/react-datepicker-cssmodules.css"
+import "react-date-range/dist/styles.css" // main css file
+import "react-date-range/dist/theme/default.css" // theme css file
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

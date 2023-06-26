@@ -281,10 +281,8 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.delete(
-        `${BASE_URL}/countries/${countryId}`,
-        config
-      )
+      // const response =
+      await axios.delete(`${BASE_URL}/countries/${countryId}`, config)
       // if (response) {
       Toast("Pais eliminado", "success")
       dispatch({
@@ -305,14 +303,16 @@ export const ContextProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    const decodeResponse = async () => {
-      setIsAuthenticated(true)
-      const decoded = await jwt_decode(token)
-      const userInfo = await fetchUserByEmail(decoded.sub)
-      setUser(userInfo.data)
-    }
+    if (token) {
+      const decodeResponse = async () => {
+        setIsAuthenticated(true)
+        const decoded = await jwt_decode(token)
+        const userInfo = await fetchUserByEmail(decoded.sub)
+        setUser(userInfo.data)
+      }
 
-    decodeResponse()
+      decodeResponse()
+    }
   }, [token])
 
   useEffect(() => {
