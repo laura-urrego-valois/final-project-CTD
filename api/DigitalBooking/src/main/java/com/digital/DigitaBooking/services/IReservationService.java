@@ -1,19 +1,23 @@
 package com.digital.DigitaBooking.services;
 
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.ReservationDTO;
+import com.digital.DigitaBooking.models.entities.Reservation;
 
+import java.util.List;
 import java.util.Set;
 
 public interface IReservationService {
 
-    void saveReservation(ReservationDTO reservationDTO);
+    Reservation saveReservation(ReservationDTO reservationDTO) throws BadRequestException;
 
-    ReservationDTO getReservation(Long id);
+    Reservation getReservationById(Long id) throws BadRequestException;
 
-    void updateReservation(Long id, ReservationDTO reservationDTO);
+    Boolean deleteReservation(Long id) throws BadRequestException;
 
-    void deleteReservation(Long id);
+    List<Reservation> getReservationsByTour(Long id) throws BadRequestException;
 
-    Set<ReservationDTO> getReservations();
+    List<Reservation> getReservationsByUser(Long id) throws BadRequestException;
+
 }

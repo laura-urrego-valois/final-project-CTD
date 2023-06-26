@@ -4,6 +4,7 @@ import com.digital.DigitaBooking.models.entities.Tour;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -30,25 +31,19 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
     // utilizan para indicar que se espera recibir un valor para ese parámetro en el momento de ejecutar la
     // consulta.
 
-    /*@Query(value = "SELECT t.* FROM tour t LEFT JOIN reservation ON tour.id = reservation.id_tour WHERE ((reservation.initial_date not between ?1 and ?2)" +
-            "OR (reservation.initial_date is null)) AND ((reservation.final_date NOT BETWEEN ?1 AND ?2) OR (reservation.final_date is null)) AND tour.country LIKE ?3" +
-            "GROUP BY tour.id", nativeQuery = true)
-    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);*/
-    @Query(value = "SELECT t.* FROM tour t LEFT JOIN reservation r ON t.id = r.id_tour " +
-            "WHERE ((r.initial_date NOT BETWEEN ?1 AND ?2) OR (r.initial_date IS NULL)) " +
-            "AND ((r.final_date NOT BETWEEN ?1 AND ?2) OR (r.final_date IS NULL)) " +
-            "AND t.country LIKE ?3 " +
+    @Query(value = "SELECT t.*, c.country_name FROM tour t INNER JOIN country c ON c.id = t.country WHERE c.country_name LIKE %:country_name%", nativeQuery = true)
+    List<Tour> findAllToursByCountryName(@Param("country_name") String country_name);
+
+    // La consulta proporcionada busca tours basados en el nombre parcial de un país.
+    // Por ejemplo, si se proporciona el valor "Uni" como filtro, la consulta buscará tours cuyo nombre de país
+    // contenga la cadena "Uni", como "United States", "United Kingdom", "Tunisia", etc.
+
+    @Query(value = "SELECT t.* FROM tour t " + "WHERE t.country = :countryId " + "AND t.id NOT IN ( " +
+            "SELECT DISTINCT r.id_tour " + "FROM reservation r " + " WHERE (r.final_date > :initialDate AND r.initial_date < :finalDate) " + ")" +
             "GROUP BY t.id", nativeQuery = true)
-    Optional<List<Tour>> findTourByDate(LocalDate initialDate, LocalDate finalDate, Integer id);}
+    List<Tour> findToursByCountryAndDates(@Param("countryId") Integer countryId, @Param("initialDate") LocalDate initialDate, @Param("finalDate") LocalDate finalDate);
 
-    // En esta consulta se busca tours según ciertas condiciones de fechas y país utilizando SQL nativo.
-    // Se seleccionan todas las columnas de la tabla "tour" mediante la cláusula SELECT t.*.
-    // Se realiza un LEFT JOIN entre las tablas "tour" y "reservation" utilizando la cláusula
-    // ON tour.id = reservation.id_tour. Esto combina los datos de ambas tablas en la consulta.
-    // La cláusula WHERE establece las condiciones de búsqueda:
-    //--> ((reservation.initial_date not between ?1 and ?2) OR (reservation.initial_date is null)) verifica si la
-    // fecha inicial de la reserva no está entre el rango de fechas especificado (initialDate y finalDate). Si
-    // la fecha inicial es nula, también se considera que cumple con la condición.
+    // Esta consulta busca tours en un país específico (countryId) y excluye aquellos que tienen reservas que se
+    // superponen con las fechas proporcionadas (initialDate y finalDate).
 
-
-    //List<Tour> findToursBy
+}

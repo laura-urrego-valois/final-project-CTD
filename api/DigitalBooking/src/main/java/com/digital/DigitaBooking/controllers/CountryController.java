@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.controllers;
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.CountryDTO;
 import com.digital.DigitaBooking.services.impl.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,16 @@ public class CountryController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
-    public CountryDTO getCountry(@PathVariable Integer id) {
 
-        return countryService.getCountry(id);
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<CountryDTO> getCountry(@PathVariable Integer id) throws BadRequestException {
+        CountryDTO countryDTO = countryService.getCountry(id);
+
+        if (countryDTO == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        return ResponseEntity.ok(countryDTO);
     }
 
     @GetMapping
