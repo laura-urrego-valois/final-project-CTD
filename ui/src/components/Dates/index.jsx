@@ -2,11 +2,8 @@ import "./Dates.css"
 import { useState } from "react"
 import DatePicker from "react-datepicker"
 import { addDays } from "date-fns"
-import { Button } from "../Button"
-import { useGlobalState } from "../../context"
 
 export const Dates = () => {
-  const { user } = useGlobalState()
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
   const onChange = (dates) => {
@@ -22,14 +19,14 @@ export const Dates = () => {
         addDays(new Date(), 1),
       ],
     },
-    // {
-    //   "react-datepicker__day--highlighted-custom-2": [
-    //     addDays(new Date(), 11),
-    //     addDays(new Date(), 12),
-    //     addDays(new Date(), 13),
-    //     addDays(new Date(), 15),
-    //   ],
-    // },
+    {
+      "react-datepicker__day--highlighted-custom-2": [
+        addDays(new Date(), 11),
+        addDays(new Date(), 12),
+        addDays(new Date(), 13),
+        addDays(new Date(), 15),
+      ],
+    },
   ]
 
   return (
@@ -48,11 +45,6 @@ export const Dates = () => {
           monthsShown={2}
           shouldCloseOnSelect={false}
         />
-        {user && (
-          <div className="dates__btn">
-            <Button type="primary">Reservar</Button>
-          </div>
-        )}
       </div>
     </section>
   )

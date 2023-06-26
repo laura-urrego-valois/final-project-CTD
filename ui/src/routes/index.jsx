@@ -19,7 +19,6 @@ import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
-import { Favorites } from "../pages/favorites"
 import { BookingSuccessful } from "../pages/bookingSuccessful"
 import { BookingFailure } from "../pages/bookingFailure"
 
@@ -35,7 +34,7 @@ export const AppRoutes = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/user" element={<User />} />
           {user?.role && <Route path="/admin" element={<Admin />} />}
-          <Route path="/favorites" element={<Favorites />} />
+
           <Route path="/product-list" element={<ProductList />} />
           <Route path="/category-list" element={<CategoryList />} />
           <Route path="/country-list" element={<CountryList />} />
