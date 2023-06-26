@@ -31,11 +31,16 @@ public class CountryService implements ICountryService {
     }
 
     @Override
-    public CountryDTO getCountry(Integer id) {
+    public CountryDTO getCountry(Integer id) throws BadRequestException{
+        if (id == null){
+            throw new BadRequestException("El id de busqueda no puede ser nulo");
+        }
         Optional<Country> country = countryRepository.findById(id);
         CountryDTO countryDTO = null;
-        if (country.isPresent())
-            countryDTO = mapper.convertValue(country, CountryDTO.class);
+        if (!country.isPresent()){
+            throw  new BadRequestException("el pais con id "+id+" no existe");
+        }
+        countryDTO = mapper.convertValue(country, CountryDTO.class);
 
         return countryDTO;
     }
@@ -44,6 +49,9 @@ public class CountryService implements ICountryService {
     public void updateCountry(Integer id, CountryDTO countryDTO) {
         Optional<Country> optionalCountry = countryRepository.findById(id).map(country -> {
             country.setCountryName(countryDTO.getCountryName());
+            country.setCapitalName(countryDTO.getCapitalName());
+            country.setLatitude(countryDTO.getLatitude());
+            country.setLongitude(countryDTO.getLongitude());
             return countryRepository.save(country);
         });
     }

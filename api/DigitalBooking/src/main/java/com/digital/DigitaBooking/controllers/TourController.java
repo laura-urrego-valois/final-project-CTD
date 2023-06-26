@@ -13,6 +13,7 @@ import com.digital.DigitaBooking.services.impl.TourService;
 import com.digital.DigitaBooking.util.TourFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.catalina.mapper.Mapper;
+import org.modelmapper.internal.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,10 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.time.ZoneId;
+import java.util.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -116,11 +115,12 @@ public class TourController {
         return ResponseEntity.ok(toursByCountryName);
     }
 
-    @GetMapping(path = "/filterByCountryAndDates/{countryId}/{startDate}/{endDate}")
-    public ResponseEntity<List<TourDTO>> filterByCountryAndDates(@PathVariable Integer countryId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initialDate, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finalDate) throws BadRequestException {
+    @GetMapping(path = "/filterByCountryAndDates/{countryId}/{initialDate}/{finalDate}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<TourDTO>> filterByCountryAndDates(@PathVariable Integer countryId, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date initialDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date finalDate) throws BadRequestException {
         TourFilter tourFilter = new TourFilter();
-        tourFilter.setInitialDate(initialDate);
-        tourFilter.setFinalDate(finalDate);
+        tourFilter.setInitialDate(initialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        tourFilter.setFinalDate(finalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         tourFilter.setCountryId(countryId);
         List<TourDTO> filteredTours = tourService.findToursByCountryAndDates(tourFilter);
         return ResponseEntity.ok(filteredTours);

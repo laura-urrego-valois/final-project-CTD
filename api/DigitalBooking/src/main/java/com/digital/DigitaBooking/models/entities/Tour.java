@@ -1,7 +1,7 @@
 package com.digital.DigitaBooking.models.entities;
 
 import com.digital.DigitaBooking.models.entities.score.Counter;
-import com.digital.DigitaBooking.models.entities.score.Score;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.sql.Time;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,11 +53,13 @@ public class Tour {
 
     @Column
     @NotNull
-    private LocalTime earliestCheckInHour;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private Time earliestCheckInHour;
 
     @Column
     @NotNull
-    private LocalTime latestCheckInHour;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private Time latestCheckInHour;
 
 
     @JsonIgnore
@@ -104,5 +106,24 @@ public class Tour {
 
         reservations.add(reservation);
     }
+
+    public void updateCategory(Category category) {
+        this.getCategory().getTours().remove(this);
+        this.setCategory(null);
+
+        this.setCategory(category);
+        category.getTours().add(this);
+    }
+
+    public void updateCountry(Country country){
+        this.getCountry().getTours().remove(this);
+        this.setCountry(null);
+
+        country.getTours().add(this);
+        this.setCountry(country);
+    }
+
+
+
 
 }

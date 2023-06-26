@@ -12,11 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
-@Data
+
 @Entity
 @Builder
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table

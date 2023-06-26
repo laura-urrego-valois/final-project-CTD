@@ -1,9 +1,11 @@
 package com.digital.DigitaBooking.models.dtos;
 
 import com.digital.DigitaBooking.models.entities.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -30,8 +32,12 @@ public class TourDTO {
     private Set<Image> images;
     private CounterDTO counter;
     private List<ReservationDTO> reservationList;
-    private LocalTime earliestCheckInHour;
-    private LocalTime latestCheckInHour;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private Time earliestCheckInHour;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private Time latestCheckInHour;
 
     public TourDTO(Tour tour) {
         if (tour.getCounter() != null) {

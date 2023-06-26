@@ -10,7 +10,7 @@ public interface ICountryService {
 
     void saveCountry(CountryDTO countryDTO);
 
-    CountryDTO getCountry(Integer id);
+    CountryDTO getCountry(Integer id)throws BadRequestException;
 
     void updateCountry(Integer id, CountryDTO countryDTO);
 

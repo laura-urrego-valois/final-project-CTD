@@ -132,6 +132,8 @@ public class UserService implements IUserService {
     @Override
     public User searchUserByIdAsClass(Long id) throws BadRequestException {
         Optional<User> optionalUser = userRepository.findById(id);
+        System.out.println(optionalUser);
+        System.out.println(optionalUser.get());
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {

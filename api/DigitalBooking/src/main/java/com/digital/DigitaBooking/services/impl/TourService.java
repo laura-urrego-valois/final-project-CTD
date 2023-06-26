@@ -51,7 +51,10 @@ public class TourService implements ITourService {
 
     @Override
     public Tour saveTour(TourDTO tourDTO) {
+        System.out.println(tourDTO.toString());
+
         Tour tour = mapper.convertValue(tourDTO, Tour.class);
+        System.out.println(tour.toString());
         Category category = categoryRepository.findById(tourDTO.getCategoryId()).get();
         Set<Feature> features = new HashSet<>();
         tour.setCategory(category);
@@ -85,12 +88,17 @@ public class TourService implements ITourService {
             tour.setTourCapacity(tourDTO.getTourCapacity());
             tour.setTourPrice(tourDTO.getTourPrice());
             tour.setCountry(countryRepository.getById(tourDTO.getCountryId()));
+            tour.updateCategory(categoryRepository.getById(tourDTO.getCategoryId()));
+            tour.updateCountry(countryRepository.getById(tourDTO.getCountryId()));
             System.out.println(tourDTO.getFeaturesId());
             for (Long featureId : tourDTO.getFeaturesId()) {
                 System.out.println("Entro a los features");
                 features.add(featureRepository.getReferenceById(featureId));
             }
             tour.setFeatures(features);
+            tour.setEarliestCheckInHour(tourDTO.getEarliestCheckInHour());
+            tour.setLatestCheckInHour(tourDTO.getLatestCheckInHour());
+            tourRepository.save(tour);
             return tour;
         });
 
@@ -151,7 +159,7 @@ public class TourService implements ITourService {
     @Override
     public List<TourDTO> findToursByCountryAndDates(TourFilter tourFilter) throws BadRequestException {
         boolean noNullData = tourFilter.getInitialDate() != null && tourFilter.getFinalDate() != null && tourFilter.getCountryId() != null;
-        if (noNullData) {
+        if (!noNullData) {
             throw new BadRequestException("El filtro no puede estar vacío.");
         }
         boolean datesInOrder = tourFilter.getFinalDate().isAfter(tourFilter.getInitialDate());

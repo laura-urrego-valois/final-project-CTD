@@ -55,6 +55,7 @@ public class CategoryController {
             imageCategoryDTO.setImageUrl(awss3Service.generateUrl(newFileName).replaceFirst("/[0-9]+_", "/_"));
             Category newCategory = categoryService.saveCategory(categoryDTO);
             imageCategoryService.saveImageCategory(imageCategoryDTO, newCategory);
+            mainFile.delete();
 
         } catch (Exception e) {
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);

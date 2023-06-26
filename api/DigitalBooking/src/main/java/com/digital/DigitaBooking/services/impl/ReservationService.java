@@ -56,9 +56,12 @@ public class ReservationService implements IReservationService {
             throw new BadRequestException("La hora de inicio no es válida.");
         }
         Tour tour = tourService.searchTourByIdAsClass(reservationDTO.getIdTour());
+        System.out.println("----------------------------------------------------");
         System.out.println(tour.toString());
+        System.out.println("----------------------------------------------------");
         User user = userService.searchUserByIdAsClass(reservationDTO.getIdUser());
-        boolean isInitialDateValidRange = !reservationDTO.getStartTime().isBefore(tour.getEarliestCheckInHour());
+        System.out.println(user.toString());
+        boolean isInitialDateValidRange = !reservationDTO.getStartTime().isBefore(tour.getEarliestCheckInHour().toLocalTime());
         if (!isInitialDateValidRange) {
             throw new BadRequestException("La hora de check-in no es posible asignarla.");
             // Verifica si el tiempo de inicio de la reserva es igual o posterior a la hora de check-in más
