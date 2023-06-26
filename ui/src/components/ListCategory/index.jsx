@@ -59,18 +59,19 @@ export const ListCategory = () => {
         title: 'Estas seguro que desea eliminar una categoría.',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#6D9886',
+        cancelButtonColor: '#ED2B2A',
         confirmButtonText: 'Ok'
       });
 
       if (result.isConfirmed) {
         await deleteCategory(categoryId);
-        Swal.fire(
-          'Eliminada!',
-          'Tu categoría ha sido eliminada.',
-          'success'
-        );
+        Swal.fire({
+          title: 'Tu categoría ha sido eliminada.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.close();
       }
@@ -94,6 +95,7 @@ export const ListCategory = () => {
         });
         Swal.fire({
           title: "Categoría actualizada",
+          confirmButtonColor: '#6D9886',
           icon: "success"
         }).then(() => {
           window.location.reload();
@@ -102,6 +104,7 @@ export const ListCategory = () => {
         await addCategory(updatedCategory);
         Swal.fire({
           title: "Categoría añadida",
+          confirmButtonColor: '#6D9886',
           icon: "success"
         }).then(() => {
           window.location.reload();

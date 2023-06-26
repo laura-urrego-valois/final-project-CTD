@@ -19,7 +19,6 @@ export const ModalProduct = ({
   const countries = state?.countries || []
   const toursImageFile = watch("toursImageFile")
 
-  console.log("tourForm", tourForm)
   useEffect(() => {
     if (editMode && tourForm) {
       setValue("tourName", tourForm.tourName)

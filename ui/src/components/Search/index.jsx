@@ -38,27 +38,47 @@ export const Search = () => {
       "dd/MM/yyyy"
     )}`
   )
+
+  const [isClearable, setIsClearable] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const options = state?.countries?.map(({ countryName, id }) => ({
     value: id,
     label: countryName
   }));
 
   const handleSelectChange = (selectedOption) => {
-    const countryId = selectedOption.value;
-    fetchToursByCountry(countryId);
+    if (selectedOption === null) {
+      setSelectedOption(null);
+      setIsClearable(false);
+    } else {
+      setSelectedOption(selectedOption);
+      setIsClearable(true);
+    }
   };
+  useEffect(() => {
+    if (selectedOption === null) {
+      fetchToursByCountry(0);
+      setIsClearable(false);
+    } else {
+      const countryId = selectedOption.value;
+      fetchToursByCountry(countryId);
+      setIsClearable(true);
+    }
+  }, [selectedOption]);
 
-  console.log("stateSearch", state)
   return (
     <section className="search">
       <h1 className="search__title">Busca ofertas de experiencia turística</h1>
       <form action="" className="search-form">
         <Select
           placeholder="Búsqueda por país"
+          classNamePrefix="select"
           className="search__select"
+          isClearable={isClearable}
           options={options}
+          value={selectedOption}
           onChange={handleSelectChange}
-          isSearchable
         />
 
         <Input

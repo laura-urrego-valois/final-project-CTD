@@ -58,10 +58,12 @@ export const ContextProvider = ({ children }) => {
     }
   }
   const addCategory = async (newCategoryData) => {
+
     try {
       const formData = new FormData()
       formData.append("file", newCategoryData.categoryImageFile[0])
       formData.append("Category", JSON.stringify(newCategoryData))
+      console.log("peticion", formData)
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -69,7 +71,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/category/load_image`,
+        `${BASE_URL}/category`,
         formData,
         config
       )
@@ -135,7 +137,6 @@ export const ContextProvider = ({ children }) => {
       formData.append("files", newTourData.toursImageFile[i])
     }
     formData.append("Tour", JSON.stringify(newTourData))
-    console.log("formData", formData)
     try {
       const config = {
         "Content-Type": "multipart/form-data",

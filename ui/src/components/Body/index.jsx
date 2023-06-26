@@ -6,17 +6,17 @@ import './Body.css'
 
 export const Body = () => {
   const { state } = useGlobalState()
-  console.log("render", state)
+
   return (
     <main className="body">
       <Search />
       <Product />
-      {state?.filterTours ? (
+      {state?.filterTours?.length > 0 ? (
         <Recommendations state={state}
           tours={state.filterTours}
           title={"Tours filtrado"} />
       ) : (
-          <Recommendations state={state}
+        <Recommendations state={state}
           tours={state.tours}
           title={"Tours"} />
 

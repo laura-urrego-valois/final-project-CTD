@@ -17,7 +17,6 @@ export const Recommendations = ({ state, tours, title }) => {
 
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
 	const shuffledToursItemsPerPage = 10; // Elemento por pagina
-	console.log("tour", state)
 
 	const renderTours = (toursToRender, itemsPerPage) => {
 		return toursToRender

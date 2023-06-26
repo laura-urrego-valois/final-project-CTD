@@ -87,7 +87,7 @@ export const ListProduct = () => {
     }
     try {
       const updatedTour = { ...tourForm, ...data, ...dataF };
-      console.log("dataNEW", updatedTour)
+
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);
         dispatch({
@@ -95,7 +95,6 @@ export const ListProduct = () => {
           payload: updatedTour,
         });
       } else {
-        console.log("DATA_ADD", updatedTour)
         await addTour(updatedTour);
       }
       closeModal();
@@ -111,7 +110,7 @@ export const ListProduct = () => {
     const category = categories.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : '';
   };
-  console.log("currentTours", currentTours)
+
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>

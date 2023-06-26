@@ -85,7 +85,6 @@ export const Admin = () => {
     maintainAspectRatio: false,
   };
 
-  console.log("state", state)
   return (
     <Container>
       <SidebarLayout>

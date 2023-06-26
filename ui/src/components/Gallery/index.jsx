@@ -5,7 +5,7 @@ import './Gallery.css'
 
 export const Gallery = ({ dataImage }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log("iIMMMM", dataImage)
+
   return (
     <>
       <section className="gallery__container">
