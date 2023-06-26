@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { Button } from "../Button"
 import { GrFormClose } from "react-icons/gr"
@@ -13,49 +13,37 @@ import {
 export const ModalCountry = ({
   onClose,
   editMode,
-  country,
   handleFormSubmit,
   countryForm,
 }) => {
   const { register, handleSubmit, setValue } = useForm()
-  const [allCountries, setAllCountries] = useState([])
-  const [valueSelect, setValueSelect] = useState(allCountries[0])
-  const [capital, setCapital] = useState("")
-  const [latitude, setLatitude] = useState("")
-  const [longitude, setLongitude] = useState("")
 
-  const handleChange = async (event) => {
-    setValueSelect(event.target.value)
-    const capitalName = await getCountryCapital(event.target.value)
-    setCapital(capitalName.data.data.capital)
-    if (capitalName) {
-      const location = await getCountryPositions(event.target.value)
-      setLatitude(location.data.data.lat)
-      setLongitude(location.data.data.long)
-    }
-  }
+  const [allCountries, setAllCountries] = useState([])
+
+  const updateCountryInfo = useCallback(async (selectedCountry) => {
+    const capitalName = await getCountryCapital(selectedCountry);
+    const location = await getCountryPositions(selectedCountry);
+    setValue("capitalName", capitalName.data.data.capital);
+    setValue("latitude", location.data.data.lat);
+    setValue("longitude", location.data.data.long);
+  }, [setValue]);
 
   useEffect(() => {
-    const countryData = async () => {
+    const fetchCountries = async () => {
       const countries = await getCountries()
       setAllCountries(countries.data.data)
     }
-    countryData()
+    fetchCountries()
   }, [])
 
   useEffect(() => {
     if (editMode && countryForm) {
       setValue("countryName", countryForm.countryName)
-      setValue("capitalName", countryForm.capitalName)
-      setValue("latitude", countryForm.latitude)
-      setValue("longitude", countryForm.longitude)
+      updateCountryInfo(countryForm.countryName)
     } else {
       setValue("countryName", "")
-      setValue("capitalName", "")
-      setValue("latitude", "")
-      setValue("longitude", "")
     }
-  }, [editMode, countryForm, setValue])
+  }, [editMode, countryForm, setValue, updateCountryInfo])
 
   return (
     <section className="modal__overlay">
@@ -67,10 +55,11 @@ export const ModalCountry = ({
             <select
               id="countryName"
               name="countryName"
-              value={valueSelect}
-              onChange={handleChange}
-              defaultValue={country?.countryName || ""}
-              // {...register("countryName")}
+              {...register("countryName", { required: true })}
+              onChange={(event) => {
+                setValue("countryName", event.target.value)
+                updateCountryInfo(event.target.value)
+              }}
             >
               {allCountries.map((countryInfo) => (
                 <option key={countryInfo.name} value={countryInfo.name}>
@@ -83,9 +72,8 @@ export const ModalCountry = ({
             type="text"
             name="capitalName"
             id="capitalName"
-            value={capital}
-            defaultValue={country?.capitalName || ""}
-            // {...register("capitalName")}
+            readOnly
+            {...register("capitalName")}
             disabled
           />
 
@@ -93,9 +81,8 @@ export const ModalCountry = ({
             type="text"
             name="latitude"
             id="latitude"
-            value={latitude}
-            defaultValue={country?.latitude || ""}
-            // {...register("latitude")}
+            readOnly
+            {...register("latitude")}
             disabled
           />
 
@@ -103,9 +90,8 @@ export const ModalCountry = ({
             type="text"
             name="longitude"
             id="longitude"
-            value={longitude}
-            defaultValue={country?.longitude || ""}
-            // {...register("longitude")}
+            readOnly
+            {...register("longitude")}
             disabled
           />
 
