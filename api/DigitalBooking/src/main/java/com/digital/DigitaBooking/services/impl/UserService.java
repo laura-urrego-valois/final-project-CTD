@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.converters.UserToUserDTOConverter;
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.PageResponseDTO;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
 import com.digital.DigitaBooking.models.entities.Role;
@@ -93,7 +94,6 @@ public class UserService implements IUserService {
     }
 
 
-
     @Override
     public PageResponseDTO<UserDTO> getUsers(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable); // Devuelve un objeto Page que contiene la lista de usuarios y la información de paginación.
@@ -129,4 +129,15 @@ public class UserService implements IUserService {
         return userDTO;
     }
 
+    @Override
+    public User searchUserByIdAsClass(Long id) throws BadRequestException {
+        Optional<User> optionalUser = userRepository.findById(id);
+        System.out.println(optionalUser);
+        System.out.println(optionalUser.get());
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new BadRequestException("No existe el usuario con ID " + id);
+        }
+    }
 }

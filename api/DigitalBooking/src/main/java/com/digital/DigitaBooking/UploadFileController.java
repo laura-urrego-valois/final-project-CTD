@@ -25,9 +25,9 @@ public class UploadFileController {
     private AWSS3Service awss3Service;
 
     @PostMapping(value = "/upload")
-    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestPart(value = "file") MultipartFile file) {
         awss3Service.uploadFile(file);
-        String response = "El archivo "+file.getOriginalFilename()+" fue cargado correctamente a S3";
+        String response = "El archivo " + file.getOriginalFilename() + " fue cargado correctamente a S3";
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
@@ -38,8 +38,8 @@ public class UploadFileController {
 
     @GetMapping(value = "/download")
     public ResponseEntity<Resource> download(@RequestParam("key") String key) {
-        InputStreamResource resource  = new InputStreamResource(awss3Service.downloadFile(key));
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+key+"\"").body(resource);
+        InputStreamResource resource = new InputStreamResource(awss3Service.downloadFile(key));
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + key + "\"").body(resource);
     }
 
 }
