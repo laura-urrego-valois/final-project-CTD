@@ -60,6 +60,7 @@ export const SignUp = () => {
     userName: "",
     userLastName: "",
     userFirstName: "",
+    userEmail: "",
     latitude: lat,
     longitude: long,
     password: "",

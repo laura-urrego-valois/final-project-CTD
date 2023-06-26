@@ -7,11 +7,12 @@ import { actions } from "../../context/reducer"
 import { useForm } from "react-hook-form"
 import { usePagination } from "../../hooks/usePagination"
 import { ModalCountry } from "../Modal/ModalCountry"
-import { AiFillDelete, AiFillEdit } from "react-icons/ai"
+import { AiFillDelete } from "react-icons/ai"
 import { GrAdd } from "react-icons/gr"
+import { Toast } from "../../utils/Toast"
 
 export const ListCountry = () => {
-  const { state, dispatch } = useGlobalState()
+  const { state, dispatch, createCountry, deleteCountry } = useGlobalState()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedCountry, setSelectedCountry] = useState(null)
 
@@ -35,10 +36,10 @@ export const ListCountry = () => {
     longitude: "",
   })
 
-  const openModal = (categorie) => {
-    if (categorie) {
+  const openModal = (country) => {
+    if (country) {
       setEditMode(true)
-      setCountryForm(categorie)
+      setCountryForm(country)
     } else {
       setEditMode(false)
       setCountryForm({
@@ -58,8 +59,9 @@ export const ListCountry = () => {
     setIsModalOpen(false)
   }
 
-  const handleDeleteCountry = (countryId) => {
-    console.log("removeCountry", countryId)
+  const handleDeleteCountry = async (countryId) => {
+    // await deleteCountry(countryId)
+
     dispatch({
       type: actions.REMOVE_COUNTRY,
       payload: countryId,
@@ -73,24 +75,25 @@ export const ListCountry = () => {
   const totalPages = getTotalPages(countries)
   const currentCountries = getCurrentPageItems(countries)
 
-  const handleFormSubmit = (data) => {
-    console.log(data)
-    // const updatedCountry = { ...countryForm, ...data }
+  const handleFormSubmit = async (data) => {
+    const updatedCountry = { ...countryForm, ...data }
 
-    // if (editMode) {
-    //   dispatch({
-    //     type: actions.UPDATE_COUNTRY,
-    //     payload: updatedCountry,
-    //   })
-    // } else {
-    //   dispatch({
-    //     type: actions.ADD_COUNTRY,
-    //     payload: updatedCountry,
-    //   })
-    // }
+    if (editMode) {
+      dispatch({
+        type: actions.UPDATE_COUNTRY,
+        payload: updatedCountry,
+      })
+    } else {
+      await createCountry(data)
+      dispatch({
+        type: actions.ADD_COUNTRY,
+        payload: updatedCountry,
+      })
+      Toast("Pais agregado", "success")
+    }
 
-    // closeModal()
-    // reset()
+    closeModal()
+    reset()
   }
 
   return (
@@ -108,10 +111,11 @@ export const ListCountry = () => {
             alt=""
           />
           <p className="list__title">{country.countryName}</p>
+          <p className="list__title">{country.capitalName}</p>
+          <p className="list__title">{country.latitude}</p>
+          <p className="list__title">{country.longitude}</p>
+
           <div className="list__button">
-            <Button onClick={() => openModal(country)}>
-              <AiFillEdit />
-            </Button>
             <Button
               type="primary"
               onClick={() => handleDeleteCountry(country.id)}
@@ -123,9 +127,7 @@ export const ListCountry = () => {
       ))}
       {isModalOpen && (
         <ModalCountry
-          country={selectedCountry}
           onClose={closeModal}
-          editMode={editMode}
           handleFormSubmit={handleFormSubmit}
           countryForm={countryForm}
         />
