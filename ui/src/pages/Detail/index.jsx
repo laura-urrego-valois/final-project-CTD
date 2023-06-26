@@ -7,7 +7,7 @@ import { Politics } from "../../components/Politics"
 import "./detail.css"
 import { Container } from "../../components/Container"
 import { LocateProduct, SearchProduct } from "../../components/SearchProduct"
-import { Dates } from "../../components/Dates"
+import { DatesPicker } from "../../components/DatesPicker"
 
 export const dataGallery = {
   galleryImage: [
@@ -34,23 +34,12 @@ const Detail = () => {
   const { state } = useGlobalState()
   const { categories, tours } = state
 
-  // Descomentar cuando funcione endpoint get by id
-
-  // const fetchById = async () => {
-  // 		await axios.get(`${BASE_URL}/tours/${id}`).then((response) => {
-  // 			dispatch({
-  // 				type: actions.GET_BY_ID,
-  // 				payload: response.data,
-  // 			});
-  // 		});
-  // 	};
-
   const itemDetail = tours?.find((item) => item.id == id)
   const getCategoryName = (categoryId) => {
     const category = categories?.find((cat) => cat.id === categoryId)
     return category ? category.categoryName : ""
   }
-  console.log("itemDetail", itemDetail, state)
+  // console.log("itemDetail", itemDetail, state)
   return (
     <Container>
       <div className="detail">
@@ -77,8 +66,11 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail?.features} />
-      <Dates />
-      <LocateProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
+      <DatesPicker />
+      <LocateProduct
+        country={state.countries[itemDetail.countryId]}
+        itemDetail={itemDetail}
+      />
       <Politics />
     </Container>
   )

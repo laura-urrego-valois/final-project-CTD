@@ -8,6 +8,7 @@ import {
 import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
+import { Toast } from "../utils/Toast"
 
 export const BASE_URL =
   // import.meta.env.VITE_API_URL || hola
@@ -273,7 +274,10 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
+      // const response =
+      await axios.delete(`${BASE_URL}/countries/${countryId}`, config)
+      // if (response) {
+      Toast("Pais eliminado", "success")
       dispatch({
         type: actions.REMOVE_COUNTRY,
         payload: countryId,
@@ -290,14 +294,16 @@ export const ContextProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    const decodeResponse = async () => {
-      setIsAuthenticated(true)
-      const decoded = await jwt_decode(token)
-      const userInfo = await fetchUserByEmail(decoded.sub)
-      setUser(userInfo.data)
-    }
+    if (token) {
+      const decodeResponse = async () => {
+        setIsAuthenticated(true)
+        const decoded = await jwt_decode(token)
+        const userInfo = await fetchUserByEmail(decoded.sub)
+        setUser(userInfo.data)
+      }
 
-    decodeResponse()
+      decodeResponse()
+    }
   }, [token])
 
   const value = {

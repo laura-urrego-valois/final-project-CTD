@@ -18,6 +18,7 @@
 }
 .input-calendar {
   grid-area: input-date;
+  cursor: pointer;
 }
 .search-form button {
   grid-area: button;
@@ -45,4 +46,7 @@
     grid-template-columns: repeat(2, minmax(25rem, 44rem)) 20rem;
     grid-template-rows: 1fr;
   }
+}
+.calendar__search {
+  z-index: 1;
 }
