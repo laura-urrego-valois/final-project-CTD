@@ -33,7 +33,6 @@ public class Category {
 
 
     @JsonIgnore
-
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tour> tours = new HashSet<>();
 
