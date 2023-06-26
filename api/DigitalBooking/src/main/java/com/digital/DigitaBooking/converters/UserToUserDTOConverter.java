@@ -18,6 +18,8 @@ public class UserToUserDTOConverter implements Converter<User, UserDTO> {
         userDTO.setUserName(source.getUsername());
         userDTO.setUserFirstName(source.getUserFirstName());
         userDTO.setUserLastName(source.getUserLastName());
+        userDTO.setLatitude(source.getLatitude());
+        userDTO.setLongitude(source.getLongitude());
         userDTO.setRole(source.getRole().name());
         return userDTO;
 

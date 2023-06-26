@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.digital.DigitaBooking.AWSS3Service;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +34,14 @@ public class AWSS3ServiceImpl implements AWSS3Service {
     private AmazonS3 amazonS3;
 
     @Value("${aws.s3.bucket}")
-    private String bucketName;
+    public String bucketName;
 
     @Override
     public void uploadFile(MultipartFile file) {
         File mainFile = new File(file.getOriginalFilename());
         try (FileOutputStream stream = new FileOutputStream(mainFile)) {
             stream.write(file.getBytes());
-            String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
+            String newFileName = "_" + mainFile.getName();
             LOGGER.info("Subiendo archivo con el nombre... " + newFileName);
             PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
             amazonS3.putObject(request);
@@ -56,6 +59,12 @@ public class AWSS3ServiceImpl implements AWSS3Service {
             return item.getKey();
         }).collect(Collectors.toList());
         return list;
+    }
+
+
+    public String generateUrl(String key) {
+        String s3Url = amazonS3.getUrl(bucketName, key).toString();
+        return s3Url;
     }
 
     @Override

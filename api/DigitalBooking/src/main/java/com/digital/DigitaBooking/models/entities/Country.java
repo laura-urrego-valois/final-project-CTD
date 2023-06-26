@@ -16,7 +16,6 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Integer id;
 
     @Column
@@ -24,7 +23,6 @@ public class Country {
     private String countryName;
 
     @Column
-    @NotNull
     private String capitalName;
 
     @Column

@@ -1,45 +1,67 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react"
 import { Container } from "../../components/Container"
 
 import "./User.css"
+import { useGlobalState } from "../../context"
+import { MdAlternateEmail } from "react-icons/md"
+import { HiIdentification } from "react-icons/hi"
+import { LuUser } from "react-icons/lu"
 import { Button } from "../../components/Button"
+import { useNavigate } from "react-router-dom"
 
 export const User = () => {
-    const [userInfo, setUserInfo] = useState({})
+  const { user } = useGlobalState()
+  const navigate = useNavigate()
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (user) {
-            setUserInfo(user);
-        }
-    }, []);
+  const handleButtonClick = () => {
+    navigate("/admin")
+  }
 
-    return (
-        <Container>
-            <h1>Profile</h1>
-            <section className="user__section">
-                <div>
-                    <img src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000" alt="user" />
-                </div>
-                <span>
-                    <ion-icon name="person-outline" size="small"></ion-icon>
-                    <h3>Nombre:</h3>
-                    <p>{userInfo.name}</p>
-                    <p>{userInfo.lastName}</p>
-                </span>
-                <span>
-                    <ion-icon name="at-circle-outline" size="small"></ion-icon>
-                    <h3>Email:</h3>
-                    <p>{userInfo.email}</p>
-                </span>
-                <span>
-                    <ion-icon name="at-circle-outline" size="small"></ion-icon>
-                    <h3>Rol:</h3>
-                    <p>{userInfo.id_role == 1 ? "Cliente" : "Administrador"}</p>
-                </span>
-                <Button type="primary">Reservas</Button>
-            </section>
-        </Container>
-    )
+  const handleButtonClickFav = () => {
+    navigate("/favorites")
+  }
+
+  return (
+    <Container>
+      <h1>Perfil</h1>
+
+      {user && (
+        <section className="user__section">
+          <div>
+            <img
+              src="https://img.freepik.com/free-icon/user_318-159711.jpg?w=2000"
+              alt="user"
+            />
+          </div>
+          <span>
+            <HiIdentification />
+            <h5>Nombre:</h5>
+            <p>{user?.userFirstName}</p>
+          </span>
+          <span>
+            <HiIdentification />
+            <h5>Apellido:</h5>
+            <p>{user?.userLastName}</p>
+          </span>
+          <span>
+            <MdAlternateEmail />
+            <h5>Email:</h5>
+            <p>{user?.username}</p>
+          </span>
+          <span>
+            <LuUser />
+            <h5>Role:</h5>
+            <p>{user?.role}</p>
+          </span>
+          {user.role == "ADMIN" && (
+            <Button onClick={handleButtonClick}>Panel</Button>
+          )}
+
+          <Button type="primary" onClick={handleButtonClickFav}>
+            Favoritos
+          </Button>
+        </section>
+      )}
+    </Container>
+  )
 }

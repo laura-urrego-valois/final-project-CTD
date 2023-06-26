@@ -1,8 +1,7 @@
 package com.digital.DigitaBooking.models.dtos;
 
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -22,7 +21,7 @@ public class UserSignUp {
 
     @NotEmpty
     @Length(min = 4, max = 20)
-    private String userLastName;
+    private String password;
 
     @NotEmpty
     @Length(min = 4, max = 20)
@@ -30,7 +29,18 @@ public class UserSignUp {
 
     @NotEmpty
     @Length(min = 4, max = 20)
-    private String password;
+    private String userLastName;
+
+    @DecimalMax("90.00")
+    @DecimalMin("-90.00")
+    private Double latitude;
+
+    @DecimalMax("108.00")
+    @DecimalMin("-180.00")
+    private Double longitude;
+
+
+
 
 
 }

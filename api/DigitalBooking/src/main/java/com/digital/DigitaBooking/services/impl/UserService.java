@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.converters.UserToUserDTOConverter;
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.PageResponseDTO;
 import com.digital.DigitaBooking.models.dtos.UserSignUp;
 import com.digital.DigitaBooking.models.entities.Role;
@@ -47,8 +48,10 @@ public class UserService implements IUserService {
         try {
             return userRepository.save(User.builder()
                     .userName(userSignUp.getUserName())
-                    .userLastName(userSignUp.getUserLastName())
                     .userFirstName(userSignUp.getUserFirstName())
+                    .userLastName(userSignUp.getUserLastName())
+                    .latitude(userSignUp.getLatitude())
+                    .longitude(userSignUp.getLongitude())
                     .password(passwordEncoder.encode(userSignUp.getPassword())) // Se utiliza para encriptar la contraseña antes de almacenarla en la base de datos.
                     .role(Role.USER) // Se asigna el rol del usuario registrado.
                     .build()); // Construye y retorna una instancia completa de la clase User con los datos proporcionados.
@@ -91,7 +94,6 @@ public class UserService implements IUserService {
     }
 
 
-
     @Override
     public PageResponseDTO<UserDTO> getUsers(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable); // Devuelve un objeto Page que contiene la lista de usuarios y la información de paginación.
@@ -103,11 +105,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        UserDetails userDetails = userRepository.getFirstByEmail(userEmail);
-        //System.out.println(userDetails.getUsername());
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        UserDetails userDetails = userRepository.getFirstByEmail(userName);
         if (userDetails == null) {
-            throw new UsernameNotFoundException(userEmail);
+            throw new UsernameNotFoundException(userName);
         }
         return userDetails;
     }
@@ -128,4 +129,15 @@ public class UserService implements IUserService {
         return userDTO;
     }
 
+    @Override
+    public User searchUserByIdAsClass(Long id) throws BadRequestException {
+        Optional<User> optionalUser = userRepository.findById(id);
+        System.out.println(optionalUser);
+        System.out.println(optionalUser.get());
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new BadRequestException("No existe el usuario con ID " + id);
+        }
+    }
 }

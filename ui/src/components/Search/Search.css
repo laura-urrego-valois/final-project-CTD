@@ -1,23 +1,24 @@
-.search{
+.search {
   padding-block: 2rem;
   background-color: var(--color-secondary);
   padding-inline: 1rem;
   color: var(--color-primary);
   margin-top: 3rem;
 }
-.search-form{
+.search-form {
   display: grid;
   grid-template-areas:
-  "input-location"
-  "input-date"
-  "button";
+    "input-location"
+    "input-date"
+    "button";
   grid-template-columns: repeat(1, 1fr);
 }
-.input-location{
+.input-location {
   grid-area: input-location;
 }
-.input-calendar{
+.input-calendar {
   grid-area: input-date;
+  cursor: pointer;
 }
 .search-form button {
   grid-area: button;
@@ -32,8 +33,8 @@
     grid-template-columns: repeat(2, minmax(16rem, 1fr));
     grid-template-rows: repeat(2, 1fr);
     grid-template-areas:
-        "input-location input-date"
-        "button button";
+      "input-location input-date"
+      "button button";
     gap: 1rem;
     justify-content: center;
   }
@@ -41,9 +42,11 @@
 
 @media (min-width: 768px) {
   .search-form {
-      grid-template-areas:
-          "input-location input-date button";
-      grid-template-columns: repeat(2, minmax(25rem, 44rem)) 20rem;
-      grid-template-rows: 1fr;
+    grid-template-areas: "input-location input-date button";
+    grid-template-columns: repeat(2, minmax(25rem, 44rem)) 20rem;
+    grid-template-rows: 1fr;
   }
+}
+.calendar__search {
+  z-index: 1;
 }

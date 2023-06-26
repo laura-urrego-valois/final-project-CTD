@@ -1,74 +1,211 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "../Button";
-import { useGlobalState } from "../../context";
-import { GrFormClose } from 'react-icons/gr';
-import './ModalCategory.css'
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import { Button } from "../Button"
+import { useGlobalState } from "../../context"
+import { GrFormClose } from "react-icons/gr"
+import "./Modal.css"
 
-export const ModalProduct = ({ onClose, editMode, tour, handleFormSubmit, tourForm }) => {
-  const { register, handleSubmit, setValue } = useForm();
+export const ModalProduct = ({
+  onClose,
+  editMode,
+  tour,
+  handleFormSubmit,
+  tourForm,
+}) => {
+  const { register, handleSubmit, setValue, watch } = useForm()
 
-  const { state } = useGlobalState();
-  const categories = state?.categories || [];
+  const { state } = useGlobalState()
+  const categories = state?.categories || []
+  const countries = state?.countries || []
+  const toursImageFile = watch("toursImageFile")
 
+  console.log("tourForm", tourForm)
   useEffect(() => {
     if (editMode && tourForm) {
-      setValue('name', tourForm.name);
-      setValue('image_url', tourForm.image_url);
-      setValue('description', tourForm.description);
-      setValue('id_category', tourForm.id_category.toString());
+      setValue("tourName", tourForm.tourName)
+      setValue("image_url", tourForm.image_url)
+      setValue("tourDescription", tourForm.tourDescription)
+      setValue("categoryId", tourForm?.categoryId)
+      setValue("tourPrice", tourForm?.tourPrice)
+      setValue("countryId", tourForm?.country)
+      setValue("features", tourForm?.features || [])
     } else {
-      setValue('name', '');
-      setValue('image_url', '');
-      setValue('description', '');
-      setValue('id_category', '');
+      setValue("tourName", "")
+      setValue("image_url", "")
+      setValue("tourDescription", "")
+      setValue("categoryId", "")
+      setValue("features", [])
+      setValue("countryId", "")
     }
-  }, [editMode, tourForm, setValue]);
+  }, [editMode, tourForm, setValue])
+
+  const feature = [
+    { id: 0, name: "selva" },
+    { id: 1, name: "paseos" },
+    { id: 2, name: "actividades deportivas" },
+    { id: 3, name: "comida tradicional" },
+    { id: 4, name: "parques naturales" },
+    { id: 5, name: "vida silvestre" },
+    { id: 6, name: "campamentos" },
+    { id: 7, name: "caminatas guiadas" },
+  ]
+
+  useEffect(() => {
+    if (toursImageFile instanceof File || toursImageFile instanceof Blob) {
+      const imageUrl = URL.createObjectURL(toursImageFile)
+      setValue("categoryImageURL", imageUrl)
+    }
+  }, [toursImageFile, setValue])
+
+  const [images, setimages] = useState([])
+  const changeInput = (e) => {
+    let indexImg
+
+    if (images.length > 0) {
+      indexImg = images[images.length - 1].index + 1
+    } else {
+      indexImg = 0
+    }
+
+    let newImgsToState = readmultifiles(e, indexImg)
+    let newImgsState = [...images, ...newImgsToState]
+    setimages(newImgsState)
+  }
+
+  function readmultifiles(e, indexInicial) {
+    const files = e.currentTarget.files
+    const arrayImages = []
+
+    Object.keys(files).forEach((i) => {
+      const file = files[i]
+
+      let url = URL.createObjectURL(file)
+      arrayImages.push({
+        index: indexInicial,
+        name: file.name,
+        url,
+        file,
+      })
+
+      indexInicial++
+    })
+
+    return arrayImages
+  }
+  function deleteImg(indice) {
+    const newImgs = images.filter(function (element) {
+      return element.index !== indice
+    })
+    console.log(newImgs)
+    setimages(newImgs)
+  }
+
+  const [selectedFeatures, setSelectedFeatures] = useState([])
+
+  const handleFeatureChange = (featureId, checked) => {
+    if (checked) {
+      setSelectedFeatures([...selectedFeatures, featureId])
+    } else {
+      setSelectedFeatures(selectedFeatures.filter((id) => id !== featureId))
+    }
+    setValue("features", selectedFeatures)
+  }
 
   return (
     <section className="modal__overlay">
       <div className="modal__content">
-        <h3>{editMode ? 'Editar Tour' : 'Agregar Tour'}</h3>
-        {
-          editMode ? <img className='modal__image' src={tourForm?.image_url} alt="" /> : ""
-        }
+        <h3>{editMode ? "Editar Tour" : "Agregar Tour"}</h3>
+        {editMode ? (
+          <img className="modal__image" src={tourForm?.image_url} alt="" />
+        ) : (
+          ""
+        )}
         <form className="modal__form" onSubmit={handleSubmit(handleFormSubmit)}>
-          <label htmlFor="name">Nombre del tour:</label>
+          <label htmlFor="tourName">Nombre del tour:</label>
           <input
             type="text"
-            id="name"
+            id="tourName"
             placeholder="Nombre de la categoría"
-            defaultValue={tour?.name || ''}
-            {...register('name')}
+            defaultValue={tour?.tourName || ""}
+            {...register("tourName")}
           />
-          <label htmlFor="image_url">URL de la imagen:</label>
+          <label htmlFor="toursImageFile">Cargar imagen:</label>
           <input
-            type="text"
-            id="image_url"
-            placeholder="URL de la imagen"
-            defaultValue={tour?.image_url || ''}
-            {...register('image_url')}
+            type="file"
+            id="toursImageFile"
+            multiple
+            accept="image/jpeg, image/png"
+            {...register("toursImageFile")}
+            onChange={changeInput}
           />
+          <div className="image__container">
+            {images.map((imagen) => (
+              <div className="image__content" key={imagen.index}>
+                <div className="content-img">
+                  <button
+                    className="image-btn"
+                    onClick={deleteImg.bind(this, imagen.index)}
+                  >
+                    <GrFormClose />
+                  </button>
+                  <img
+                    alt="algo"
+                    src={imagen.url}
+                    data-toggle="modal"
+                    data-target="#ModalPreViewImg"
+                    className="image-responsive"
+                  ></img>
+                </div>
+              </div>
+            ))}
+          </div>
           <label htmlFor="description">Descripción:</label>
           <textarea
             type="text"
             id="description"
             rows="5"
             placeholder="Descripción"
-            defaultValue={tour?.description || ''}
-            {...register('description')}
+            defaultValue={tour?.tourDescription || ""}
+            {...register("tourDescription")}
           />
           <label htmlFor="id_category">Categoría:</label>
-          <select id="id_category" {...register('id_category')}>
-            {categories.map(category => (
-              <option key={category.id_category} value={category.id_category}>
-                {category.name}
+          <select id="id_category" {...register("categoryId")}>
+            {categories.map((category) => (
+              <option key={category?.id} value={category?.id}>
+                {category?.categoryName}
               </option>
             ))}
           </select>
-          <Button type="submit">{editMode ? 'Guardar' : 'Agregar'}</Button>
+          <fieldset className="list__feature">
+            <legend>Tipo de Caracteristicas:</legend>
+            {feature.map((item) => (
+              <div key={item.id} className="feature__item">
+                <input
+                  type="checkbox"
+                  id={item.name}
+                  name={item.name}
+                  checked={selectedFeatures.includes(item.id)}
+                  onChange={(e) =>
+                    handleFeatureChange(item.id, e.target.checked)
+                  }
+                />
+                <label htmlFor={item.name}>{item.name}</label>
+              </div>
+            ))}
+          </fieldset>
+          <label htmlFor="id_category">País:</label>
+          <select id="id_category" {...register("countryId")}>
+            {countries.map((country) => (
+              <option key={country?.id} value={country?.id}>
+                {country?.countryName}
+              </option>
+            ))}
+          </select>
+          <Button type="submit">{editMode ? "Guardar" : "Agregar"}</Button>
         </form>
-        <span className="modal__close" onClick={onClose}><GrFormClose /></span>
+        <span className="modal__close" onClick={onClose}>
+          <GrFormClose />
+        </span>
       </div>
     </section>
   )
