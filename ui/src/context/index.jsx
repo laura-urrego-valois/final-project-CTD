@@ -132,6 +132,7 @@ export const ContextProvider = ({ children }) => {
   }
 
   const addTour = async (newTourData) => {
+    console.log("ADDTour", newTourData)
     const formData = new FormData()
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
       formData.append("files", newTourData.toursImageFile[i])
@@ -145,7 +146,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/tours/load_image`,
+        `${BASE_URL}/tours`,
         formData,
         config
       )
@@ -285,13 +286,13 @@ export const ContextProvider = ({ children }) => {
         `${BASE_URL}/countries/${countryId}`,
         config
       )
-      // if (response) {
-      Toast("Pais eliminado", "success")
-      dispatch({
-        type: actions.REMOVE_COUNTRY,
-        payload: countryId,
-      })
-      // }
+      if (response) {
+        Toast("Pais eliminado", "success")
+        dispatch({
+          type: actions.REMOVE_COUNTRY,
+          payload: countryId,
+        })
+      }
     } catch (error) {
       Toast("Error", "error")
       console.error("Error deleting country:", error)

@@ -56,18 +56,6 @@ export const Admin = () => {
   };
   const options = {
     plugins: {
-      title: {
-        display: true,
-        text: 'Título de la Gráfica', // Add the title here
-        font: {
-          size: 16,
-          weight: 'bold',
-        },
-        padding: {
-          top: 10,
-          bottom: 30
-        }
-      },
       legend: {
         position: 'right',
         align: 'center',
@@ -109,8 +97,8 @@ export const Admin = () => {
               </article>
             </div>
             <article>
-              < h3 > Mapa de los tours</h3>
-              <MapSection />
+              <h3> Mapa de los tours</h3>
+              <MapSection countries={state?.countries} />
             </article>
           </section>
         </section>

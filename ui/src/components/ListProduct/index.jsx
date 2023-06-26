@@ -8,6 +8,7 @@ import { ModalProduct } from '../Modal/ModalProduct';
 import { useForm } from 'react-hook-form';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
+import Swal from "sweetalert2";
 import './ListProduct.css';
 
 export const ListProduct = () => {
@@ -66,9 +67,29 @@ export const ListProduct = () => {
 
   const handleDeleteTour = async (tourId) => {
     try {
-      await deleteTour(tourId)
+      const result = await Swal.fire({
+        title: 'Estas seguro que desea eliminar un tour.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9886',
+        cancelButtonColor: '#ED2B2A',
+        confirmButtonText: 'Ok'
+      });
+
+      if (result.isConfirmed) {
+        await deleteTour(tourId);
+        Swal.fire({
+          title: 'El Tour ha sido eliminado.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
     } catch (error) {
-      console.error("Error deleting tour:", error);
+      console.error("Error al borrar tour:", error);
+      Swal.fire("Error", "Se ha producido un error al eliminar el tour.", "error");
     }
   };
 
@@ -90,19 +111,32 @@ export const ListProduct = () => {
 
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);
+        Swal.fire({
+          title: 'Tour actualizado correctamente.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
         dispatch({
           type: actions.UPDATE_CATEGORY,
           payload: updatedTour,
         });
       } else {
         await addTour(updatedTour);
+        Swal.fire({
+          title: 'Tour agregado correctamente.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
       }
       closeModal();
       reset();
 
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error("Error adding/updating tour:", error);
+      Swal.fire("Error", "Se ha producido un error al guardar el tour.", "error");
     }
   };
 

@@ -9,8 +9,8 @@ import { ModalCategory } from '../Modal/ModalCategory';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 //import { AiFillDelete } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
-import './ListCategory.css'
 import Swal from "sweetalert2";
+import './ListCategory.css'
 
 export const ListCategory = () => {
 

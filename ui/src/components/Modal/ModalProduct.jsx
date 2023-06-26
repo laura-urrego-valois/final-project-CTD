@@ -110,14 +110,17 @@ export const ModalProduct = ({
     setValue("features", selectedFeatures)
   }
 
+  console.log("tourForm ==>", tourForm)
   return (
     <section className="modal__overlay">
       <div className="modal__content">
         <h3>{editMode ? "Editar Tour" : "Agregar Tour"}</h3>
         {editMode ? (
-          <img className="modal__image" src={tourForm?.image_url} alt="" />
+          <img className="modal__image"
+            src={tourForm.images[0].imageUrl}
+            alt={`${tourForm.images[0].imageTitle}`} />
         ) : (
-          ""
+        ""
         )}
         <form className="modal__form" onSubmit={handleSubmit(handleFormSubmit)}>
           <label htmlFor="tourName">Nombre del tour:</label>
@@ -128,15 +131,21 @@ export const ModalProduct = ({
             defaultValue={tour?.tourName || ""}
             {...register("tourName")}
           />
-          <label htmlFor="toursImageFile">Cargar imagen:</label>
-          <input
-            type="file"
-            id="toursImageFile"
-            multiple
-            accept="image/jpeg, image/png"
-            {...register("toursImageFile")}
-            onChange={changeInput}
-          />
+          {
+            editMode ? "" : (
+              <>
+                <label htmlFor="toursImageFile">Cargar imagen:</label>
+                <input
+                  type="file"
+                  id="toursImageFile"
+                  multiple
+                  accept="image/jpeg, image/png"
+                  {...register("toursImageFile")}
+                  onChange={changeInput}
+                />
+              </>
+            )
+          }
           <div className="image__container">
             {images.map((imagen) => (
               <div className="image__content" key={imagen.index}>
