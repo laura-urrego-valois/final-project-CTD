@@ -48,3 +48,11 @@
   align-items: center;
   gap: 5px;
 }
+.locate__title {
+  text-align: start;
+  margin-left: 1rem;
+}
+.locate__content {
+  border-top: 1.5px solid var(--color-primary);
+  padding-top: 20px;
+}

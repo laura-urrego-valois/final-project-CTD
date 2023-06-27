@@ -67,10 +67,9 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
     const newImgs = images.filter(function (element) {
       return element.index !== indice;
     });
-    console.log(newImgs);
     setimages(newImgs);
   }
-  console.log("editMode", editMode)
+
   return (
     <section className="modal__overlay">
       <div className="modal__content">

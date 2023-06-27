@@ -58,10 +58,12 @@ export const ContextProvider = ({ children }) => {
     }
   }
   const addCategory = async (newCategoryData) => {
+
     try {
       const formData = new FormData()
       formData.append("file", newCategoryData.categoryImageFile[0])
       formData.append("Category", JSON.stringify(newCategoryData))
+      console.log("peticion", formData)
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -69,7 +71,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/category/load_image`,
+        `${BASE_URL}/category`,
         formData,
         config
       )
@@ -130,13 +132,12 @@ export const ContextProvider = ({ children }) => {
   }
 
   const addTour = async (newTourData) => {
+    console.log("ADDTour", newTourData)
     const formData = new FormData()
-    //formData.append("files", newTourData.toursImageFile[0])
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
       formData.append("files", newTourData.toursImageFile[i])
     }
     formData.append("Tour", JSON.stringify(newTourData))
-    console.log("formData", formData)
     try {
       const config = {
         "Content-Type": "multipart/form-data",
@@ -145,7 +146,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/tours/load_image`,
+        `${BASE_URL}/tours`,
         formData,
         config
       )
@@ -285,23 +286,40 @@ export const ContextProvider = ({ children }) => {
         `${BASE_URL}/countries/${countryId}`,
         config
       )
-      // if (response) {
-      Toast("Pais eliminado", "success")
-      dispatch({
-        type: actions.REMOVE_COUNTRY,
-        payload: countryId,
-      })
-      // }
+      if (response) {
+        Toast("Pais eliminado", "success")
+        dispatch({
+          type: actions.REMOVE_COUNTRY,
+          payload: countryId,
+        })
+      }
     } catch (error) {
       Toast("Error", "error")
       console.error("Error deleting country:", error)
     }
+  }
+  const fetchToursByCountry = async (countryId) => {
+    await axios.get(`${BASE_URL}/tours/country/${countryId}`).then((response) => {
+      dispatch({
+        type: actions.SEARCH_BY_COUNTRY,
+        payload: response.data,
+      });
+    })
+  };
+  const fetchFeature = async () => {
+    await axios.get(`${BASE_URL}/features`).then((response) => {
+      dispatch({
+        type: actions.GET_FEATURES,
+        payload: response.data,
+      })
+    })
   }
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
     fetchCountry()
+    fetchFeature()
   }, [])
 
   useEffect(() => {
@@ -372,10 +390,14 @@ export const ContextProvider = ({ children }) => {
     createCountry,
     updateCountry,
     deleteCountry,
+    //SEARCH
+    fetchToursByCountry,
     // FAVORITES
     getFavorites,
     setGetFavorites,
     addFav,
+    // FEATURE
+    fetchFeature,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

@@ -12,7 +12,6 @@ export const Carrusel = ({ dataImage }) => {
     setActiveSlide((prevSlide) => (prevSlide === 0 ? dataImage?.length - 1 : prevSlide - 1));
   };
 
-  console.log("dataImage", dataImage, dataImage[activeSlide].imageUrl, activeSlide)
   return (
     <section className="slider">
       <div className="slider__slide active" id={`img_${activeSlide + 1}`}>

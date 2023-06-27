@@ -1,12 +1,10 @@
-import { useGlobalState } from "../../context";
 import { DetailedCard } from "../Card";
 import { Pagination } from "../Pagination";
 import { usePagination } from "../../hooks/usePagination";
 import "./Recommendations.css";
 
-export const Recommendations = () => {
-	const { state } = useGlobalState();
-	const { selectedCategory, tours, categories } = state;
+export const Recommendations = ({ state, tours, title }) => {
+	const { selectedCategory, categories } = state;
 	const { currentPage, goToNextPage, goToPrevPage } = usePagination(7);
 
 	const filteredTours = tours?.filter((tour) => tour?.categoryId === selectedCategory);
@@ -19,7 +17,6 @@ export const Recommendations = () => {
 
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
 	const shuffledToursItemsPerPage = 10; // Elemento por pagina
-	console.log("tour", state)
 
 	const renderTours = (toursToRender, itemsPerPage) => {
 		return toursToRender
@@ -49,7 +46,7 @@ export const Recommendations = () => {
 
 	return (
 		<section>
-			<h2>Tours</h2>
+			<h2>{title}</h2>
 			<div className="recommendations__content">
 				{filteredToursToShow.length > 0 ? filteredToursToShow : shuffledToursToShow}
 			</div>

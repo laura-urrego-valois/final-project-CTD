@@ -1,14 +1,17 @@
 /* eslint-disable react/display-name */
 import { Input } from "../../components/Input"
 import { Button } from "../Button"
-import Location from "../../assets/localizador.svg"
+//import Location from "../../assets/localizador.svg"
+import Select from 'react-select';
 import Calendar from "../../assets/calendar.svg"
 import "./Search.css"
 import { useEffect, useRef, useState } from "react"
 import { addDays, format } from "date-fns"
+import { useGlobalState } from "../../context"
 import { DateRange } from "react-date-range"
 
 export const Search = () => {
+  const { state, fetchToursByCountry } = useGlobalState()
   const [open, setOpen] = useState(false)
   const refOne = useRef(null)
   const [range, setRange] = useState([
@@ -35,15 +38,47 @@ export const Search = () => {
       "dd/MM/yyyy"
     )}`
   )
+
+  const [isClearable, setIsClearable] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const options = state?.countries?.map(({ countryName, id }) => ({
+    value: id,
+    label: countryName
+  }));
+
+  const handleSelectChange = (selectedOption) => {
+    if (selectedOption === null) {
+      setSelectedOption(null);
+      setIsClearable(false);
+    } else {
+      setSelectedOption(selectedOption);
+      setIsClearable(true);
+    }
+  };
+  useEffect(() => {
+    if (selectedOption === null) {
+      fetchToursByCountry(0);
+      setIsClearable(false);
+    } else {
+      const countryId = selectedOption.value;
+      fetchToursByCountry(countryId);
+      setIsClearable(true);
+    }
+  }, [selectedOption]);
+
   return (
     <section className="search">
       <h1 className="search__title">Busca ofertas de experiencia turística</h1>
       <form action="" className="search-form">
-        <Input
-          className="input-location"
-          iconSrc={Location}
-          type="text"
-          placeholder="¿A dónde vamos?"
+        <Select
+          placeholder="Búsqueda por país"
+          classNamePrefix="select"
+          className="search__select"
+          isClearable={isClearable}
+          options={options}
+          value={selectedOption}
+          onChange={handleSelectChange}
         />
 
         <Input

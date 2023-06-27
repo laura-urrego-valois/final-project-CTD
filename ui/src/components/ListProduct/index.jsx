@@ -8,6 +8,7 @@ import { ModalProduct } from '../Modal/ModalProduct';
 import { useForm } from 'react-hook-form';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
+import Swal from "sweetalert2";
 import './ListProduct.css';
 
 export const ListProduct = () => {
@@ -19,7 +20,7 @@ export const ListProduct = () => {
   const tours = state?.tours || [];
   const categories = state?.categories || [];
 
-  const { reset } = useForm();
+  const { reset, getValues } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [tourForm, setTourForm] = useState({
     id: '',
@@ -66,9 +67,29 @@ export const ListProduct = () => {
 
   const handleDeleteTour = async (tourId) => {
     try {
-      await deleteTour(tourId)
+      const result = await Swal.fire({
+        title: 'Estas seguro que desea eliminar un tour.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9886',
+        cancelButtonColor: '#ED2B2A',
+        confirmButtonText: 'Ok'
+      });
+
+      if (result.isConfirmed) {
+        await deleteTour(tourId);
+        Swal.fire({
+          title: 'El Tour ha sido eliminado.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
     } catch (error) {
-      console.error("Error deleting tour:", error);
+      console.error("Error al borrar tour:", error);
+      Swal.fire("Error", "Se ha producido un error al eliminar el tour.", "error");
     }
   };
 
@@ -80,30 +101,40 @@ export const ListProduct = () => {
     data.countryId = parseInt(data.countryId);
     const dataF = {
       tourClassification: "Bueno",
-      tourCapacity: 10,
       tourAvailability: 0,
-      tourPrice: 50.3,
-      tourScore: 8,
     }
     try {
-      const updatedTour = { ...tourForm, ...data, ...dataF };
-      console.log("dataNEW", updatedTour)
+      const updatedTour = { ...tourForm, ...data, ...dataF, features: getValues("features") };
+      console.log("ADDTOUR =>", updatedTour)
+
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);
+        Swal.fire({
+          title: 'Tour actualizado correctamente.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
         dispatch({
           type: actions.UPDATE_CATEGORY,
           payload: updatedTour,
         });
       } else {
-        console.log("DATA_ADD", updatedTour)
         await addTour(updatedTour);
+        Swal.fire({
+          title: 'Tour agregado correctamente.',
+          icon: 'success',
+          confirmButtonColor: '#6D9886',
+          confirmButtonText: 'Ok'
+        });
       }
       closeModal();
       reset();
 
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error("Error adding/updating tour:", error);
+      Swal.fire("Error", "Se ha producido un error al guardar el tour.", "error");
     }
   };
 
@@ -111,7 +142,7 @@ export const ListProduct = () => {
     const category = categories.find((cat) => cat.id === categoryId);
     return category ? category.categoryName : '';
   };
-  console.log("currentTours", currentTours)
+
   return (
     <section className="list__container">
       <Button onClick={() => openModal(null)}><GrAdd /></Button>
@@ -133,6 +164,7 @@ export const ListProduct = () => {
           editMode={editMode}
           handleFormSubmit={handleFormSubmit}
           tourForm={tourForm}
+          onSubmit={handleFormSubmit}
         />
       )}
       <Pagination

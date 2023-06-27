@@ -22,9 +22,13 @@ export const actions = {
   ADD_USER: "ADD_USER",
   UPDATE_USER: "UPDATE_USER",
   REMOVE_USER: "REMOVE_USER",
+  //SEARCH_BY_COUNTRY
+  SEARCH_BY_COUNTRY: "SEARCH_BY_COUNTRY",
   // FAVORITE ACTIONS
   ADD_TO_FAVORITE: "ADD_TO_FAVORITE",
   REMOVE_FROM_FAVORITE: "REMOVE_FROM_FAVORITE",
+  // FEATURE
+  GET_FEATURES: "GET_FEATURES",
 }
 
 export const AppReducer = (state, action) => {
@@ -204,6 +208,12 @@ export const AppReducer = (state, action) => {
         users: updatedUser,
       }
     }
+    case actions.SEARCH_BY_COUNTRY: {
+      return {
+        ...state,
+        filterTours: action.payload,
+      };
+    }
     case actions.ADD_TO_FAVORITE:
       return {
         ...state,
@@ -218,6 +228,11 @@ export const AppReducer = (state, action) => {
             (favorite) => favorite.id !== action.payload.id
           ),
         ],
+      }
+    case actions.GET_FEATURES:
+      return {
+        ...state,
+        features: action.payload,
       }
 
     default:
