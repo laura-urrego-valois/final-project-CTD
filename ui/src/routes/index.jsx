@@ -21,6 +21,7 @@ import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
+import Booking from "../pages/Booking"
 import { Favorites } from "../pages/favorites"
 
 export const AppRoutes = () => {
