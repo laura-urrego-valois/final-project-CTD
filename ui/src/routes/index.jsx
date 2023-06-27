@@ -13,6 +13,8 @@ import Footer from "../components/Footer/footer"
 import { Login } from "../pages/login"
 import { SignUp } from "../pages/signUp"
 import { User } from "../pages/user"
+import { BookingSuccessful } from "../pages/bookingSuccessful"
+import { BookingFailure } from "../pages/bookingFailure"
 
 
 import ProtectedRoutes from "./ProtectedRoutes"
@@ -45,6 +47,9 @@ export const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 
+        <Route path="/booking-success" element={<BookingSuccessful />} />
+        <Route path="/booking-failure" element={<BookingFailure />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
