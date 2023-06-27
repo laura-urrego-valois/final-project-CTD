@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.sql.Time;
@@ -18,11 +15,11 @@ import java.util.Set;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 @Table
-@NoArgsConstructor
-@AllArgsConstructor
 public class Tour {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -97,9 +94,9 @@ public class Tour {
     private Counter counter;
 
     public void initializeCounter() {
-        Counter counter = new Counter();
-        counter.setTour(this);
-        this.setCounter(counter);
+        Counter justCreated = new Counter();
+        justCreated.setTour(this);
+        this.setCounter(justCreated);
     }
 
     public void addReservation(Reservation reservation) {
@@ -115,15 +112,12 @@ public class Tour {
         category.getTours().add(this);
     }
 
-    public void updateCountry(Country country){
+    public void updateCountry(Country country) {
         this.getCountry().getTours().remove(this);
         this.setCountry(null);
 
         country.getTours().add(this);
         this.setCountry(country);
     }
-
-
-
 
 }

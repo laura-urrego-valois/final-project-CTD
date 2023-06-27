@@ -7,13 +7,14 @@ import lombok.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TourDTO {
 
@@ -24,7 +25,6 @@ public class TourDTO {
     private Integer tourCapacity;
     private Boolean tourAvailability;
     private Double tourPrice;
-    private Integer tourScore;
     private Integer categoryId;
     private Integer CountryId;
     private Set<Feature> features;
@@ -40,6 +40,14 @@ public class TourDTO {
     private Time latestCheckInHour;
 
     public TourDTO(Tour tour) {
+        this.id = tour.getId();
+        this.tourName = tour.getTourName();
+        this.tourDescription = tour.getTourDescription();
+        this.tourClassification = tour.getTourClassification();
+        this.tourCapacity = tour.getTourCapacity();
+        this.tourAvailability = tour.getTourAvailability();
+        this.tourPrice = tour.getTourPrice();
+        this.features = tour.getFeatures();
         if (tour.getCounter() != null) {
             this.counter = new CounterDTO(tour.getCounter());
         }
@@ -67,5 +75,6 @@ public class TourDTO {
     // El método filtra las reservas que aún no han finalizado y las convierte en objetos ReservationDTO,
     // esto puede ser útil para mostrar únicamente las reservas activas o futuras en una interfaz de usuario
     // o para realizar algún tipo de procesamiento o cálculo basado en las reservas activas.
+
 
 }

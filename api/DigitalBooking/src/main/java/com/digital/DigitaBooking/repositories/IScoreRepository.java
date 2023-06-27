@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IScoreRepository extends JpaRepository<Score, Long> {
-    @Query(value = "SELECT S.* FROM score S WHERE S.id_counter = (" +
+    @Query(value = "SELECT s.* FROM score s WHERE s.id_counter = (" +
             "SELECT counter.id FROM counter " +
             "WHERE counter.id_tour = :tourId)", nativeQuery = true)
     List<Score> getAllScoresByTourId(Long tourId);

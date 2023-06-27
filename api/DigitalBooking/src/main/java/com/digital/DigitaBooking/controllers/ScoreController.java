@@ -40,7 +40,7 @@ public class ScoreController {
     private User convertUserDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setId(userDTO.getId());
-        user.setUserFirstName(userDTO.getUserFirstName());
+        user.setUserName(userDTO.getUserName());
         return user;
 
     }

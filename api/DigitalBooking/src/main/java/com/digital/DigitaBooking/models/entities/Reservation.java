@@ -3,12 +3,14 @@ package com.digital.DigitaBooking.models.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
 @Table
 public class Reservation {
