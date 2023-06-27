@@ -1,0 +1,41 @@
+.booking__container {
+  display: flex;
+}
+
+.booking__right {
+  flex: 0.6;
+}
+
+.booking__detail {
+  margin-top: 20px;
+  flex: 0.3;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.booking__detail button {
+  margin-top: 20px;
+}
+
+.booking__detail img {
+  max-width: 100%;
+}
+.booking__form,
+.booking__time {
+  max-width: 650px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.booking__form label,
+.booking__detail label {
+  font-size: 1.8rem;
+}
