@@ -306,11 +306,20 @@ export const ContextProvider = ({ children }) => {
       });
     })
   };
+  const fetchFeature = async () => {
+    await axios.get(`${BASE_URL}/features`).then((response) => {
+      dispatch({
+        type: actions.GET_FEATURES,
+        payload: response.data,
+      })
+    })
+  }
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
     fetchCountry()
+    fetchFeature()
   }, [])
 
   useEffect(() => {
@@ -387,6 +396,8 @@ export const ContextProvider = ({ children }) => {
     getFavorites,
     setGetFavorites,
     addFav,
+    // FEATURE
+    fetchFeature,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

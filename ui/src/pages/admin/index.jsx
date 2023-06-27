@@ -72,7 +72,7 @@ export const Admin = () => {
     shadowColor: 'rgba(0, 0, 0, 0.3)',
     maintainAspectRatio: false,
   };
-
+  console.log("state?.countries", state?.countries)
   return (
     <Container>
       <SidebarLayout>

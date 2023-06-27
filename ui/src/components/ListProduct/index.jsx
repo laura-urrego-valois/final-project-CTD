@@ -20,7 +20,7 @@ export const ListProduct = () => {
   const tours = state?.tours || [];
   const categories = state?.categories || [];
 
-  const { reset } = useForm();
+  const { reset, getValues } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [tourForm, setTourForm] = useState({
     id: '',
@@ -101,13 +101,11 @@ export const ListProduct = () => {
     data.countryId = parseInt(data.countryId);
     const dataF = {
       tourClassification: "Bueno",
-      tourCapacity: 10,
       tourAvailability: 0,
-      tourPrice: 50.3,
-      tourScore: 8,
     }
     try {
-      const updatedTour = { ...tourForm, ...data, ...dataF };
+      const updatedTour = { ...tourForm, ...data, ...dataF, features: getValues("features") };
+      console.log("ADDTOUR =>", updatedTour)
 
       if (editMode) {
         await updateTour(updatedTour.id, updatedTour);
@@ -166,6 +164,7 @@ export const ListProduct = () => {
           editMode={editMode}
           handleFormSubmit={handleFormSubmit}
           tourForm={tourForm}
+          onSubmit={handleFormSubmit}
         />
       )}
       <Pagination

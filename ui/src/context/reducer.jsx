@@ -27,6 +27,8 @@ export const actions = {
   // FAVORITE ACTIONS
   ADD_TO_FAVORITE: "ADD_TO_FAVORITE",
   REMOVE_FROM_FAVORITE: "REMOVE_FROM_FAVORITE",
+  // FEATURE
+  GET_FEATURES: "GET_FEATURES",
 }
 
 export const AppReducer = (state, action) => {
@@ -226,6 +228,11 @@ export const AppReducer = (state, action) => {
             (favorite) => favorite.id !== action.payload.id
           ),
         ],
+      }
+    case actions.GET_FEATURES:
+      return {
+        ...state,
+        features: action.payload,
       }
 
     default:

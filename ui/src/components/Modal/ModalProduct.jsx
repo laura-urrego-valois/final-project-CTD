@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "../Button"
 import { useGlobalState } from "../../context"
 import { GrFormClose } from "react-icons/gr"
+import Select from 'react-select';
 import "./Modal.css"
 
 export const ModalProduct = ({
@@ -26,7 +27,9 @@ export const ModalProduct = ({
       setValue("tourDescription", tourForm.tourDescription)
       setValue("categoryId", tourForm?.categoryId)
       setValue("tourPrice", tourForm?.tourPrice)
-      setValue("countryId", tourForm?.country)
+      setValue("tourScore", tourForm?.tourScore)
+      setValue("tourCapacity", tourForm?.tourCapacity)
+      setValue("countryId", tourForm?.countryId)
       setValue("features", tourForm?.features || [])
     } else {
       setValue("tourName", "")
@@ -35,19 +38,11 @@ export const ModalProduct = ({
       setValue("categoryId", "")
       setValue("features", [])
       setValue("countryId", "")
+      setValue("tourPrice", "")
+      setValue("tourScore", "")
+      setValue("tourCapacity", "")
     }
   }, [editMode, tourForm, setValue])
-
-  const feature = [
-    { id: 0, name: "selva" },
-    { id: 1, name: "paseos" },
-    { id: 2, name: "actividades deportivas" },
-    { id: 3, name: "comida tradicional" },
-    { id: 4, name: "parques naturales" },
-    { id: 5, name: "vida silvestre" },
-    { id: 6, name: "campamentos" },
-    { id: 7, name: "caminatas guiadas" },
-  ]
 
   useEffect(() => {
     if (toursImageFile instanceof File || toursImageFile instanceof Blob) {
@@ -99,18 +94,16 @@ export const ModalProduct = ({
     setimages(newImgs)
   }
 
-  const [selectedFeatures, setSelectedFeatures] = useState([])
+  const options = state?.features?.map(({ featureName, id }) => ({
+    value: id,
+    label: featureName
+  }));
+  const optionsFeatures = tourForm?.features?.map(({ featureName, id }) => ({
+    value: id,
+    label: featureName
+  }));
 
-  const handleFeatureChange = (featureId, checked) => {
-    if (checked) {
-      setSelectedFeatures([...selectedFeatures, featureId])
-    } else {
-      setSelectedFeatures(selectedFeatures.filter((id) => id !== featureId))
-    }
-    setValue("features", selectedFeatures)
-  }
-
-  console.log("tourForm ==>", tourForm)
+  
   return (
     <section className="modal__overlay">
       <div className="modal__content">
@@ -120,7 +113,7 @@ export const ModalProduct = ({
             src={tourForm.images[0].imageUrl}
             alt={`${tourForm.images[0].imageTitle}`} />
         ) : (
-        ""
+          ""
         )}
         <form className="modal__form" onSubmit={handleSubmit(handleFormSubmit)}>
           <label htmlFor="tourName">Nombre del tour:</label>
@@ -184,31 +177,47 @@ export const ModalProduct = ({
               </option>
             ))}
           </select>
-          <fieldset className="list__feature">
-            <legend>Tipo de Caracteristicas:</legend>
-            {feature.map((item) => (
-              <div key={item.id} className="feature__item">
-                <input
-                  type="checkbox"
-                  id={item.name}
-                  name={item.name}
-                  checked={selectedFeatures.includes(item.id)}
-                  onChange={(e) =>
-                    handleFeatureChange(item.id, e.target.checked)
-                  }
-                />
-                <label htmlFor={item.name}>{item.name}</label>
-              </div>
-            ))}
-          </fieldset>
-          <label htmlFor="id_category">País:</label>
-          <select id="id_category" {...register("countryId")}>
+          <Select
+            name="features"
+            defaultValue={optionsFeatures}
+            isMulti
+            options={options}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            {...register("features")}
+          />
+          <label htmlFor="countryId">País:</label>
+          <select id="countryId" {...register("countryId")}>
             {countries.map((country) => (
               <option key={country?.id} value={country?.id}>
                 {country?.countryName}
               </option>
             ))}
           </select>
+          <label htmlFor="price">Precio:</label>
+          <input
+            type="text"
+            id="price"
+            placeholder="Precio"
+            defaultValue={tour?.tourPrice || ""}
+            {...register("tourPrice")}
+          />
+          <label htmlFor="capacity">Capacidad:</label>
+          <input
+            type="text"
+            id="capacity"
+            placeholder="capacidad"
+            defaultValue={tour?.tourCapacity || ""}
+            {...register("tourCapacity")}
+          />
+          <label htmlFor="score">Score:</label>
+          <input
+            type="text"
+            id="score"
+            placeholder="puntuación"
+            defaultValue={tour?.tourScore || ""}
+            {...register("tourScore")}
+          />
           <Button type="submit">{editMode ? "Guardar" : "Agregar"}</Button>
         </form>
         <span className="modal__close" onClick={onClose}>
