@@ -116,7 +116,6 @@ public class TourController {
     }
 
     @GetMapping(path = "/filterByCountryAndDates/{countryId}/{initialDate}/{finalDate}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<TourDTO>> filterByCountryAndDates(@PathVariable Integer countryId, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date initialDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date finalDate) throws BadRequestException {
         TourFilter tourFilter = new TourFilter();
         tourFilter.setInitialDate(initialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
