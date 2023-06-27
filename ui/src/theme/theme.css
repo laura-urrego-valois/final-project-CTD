@@ -46,3 +46,7 @@ h4 {
 p, span, button, label, input{
   font-family: var(--font-family-text);
 }
+
+table {
+  font-family: var(--font-family-base);
+}
