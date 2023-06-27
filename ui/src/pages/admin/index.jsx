@@ -56,18 +56,6 @@ export const Admin = () => {
   };
   const options = {
     plugins: {
-      title: {
-        display: true,
-        text: 'Título de la Gráfica', // Add the title here
-        font: {
-          size: 16,
-          weight: 'bold',
-        },
-        padding: {
-          top: 10,
-          bottom: 30
-        }
-      },
       legend: {
         position: 'right',
         align: 'center',
@@ -84,8 +72,7 @@ export const Admin = () => {
     shadowColor: 'rgba(0, 0, 0, 0.3)',
     maintainAspectRatio: false,
   };
-
-  console.log("state", state)
+  console.log("state?.countries", state?.countries)
   return (
     <Container>
       <SidebarLayout>
@@ -110,8 +97,8 @@ export const Admin = () => {
               </article>
             </div>
             <article>
-              < h3 > Mapa de los tours</h3>
-              <MapSection />
+              <h3> Mapa de los tours</h3>
+              <MapSection countries={state?.countries} />
             </article>
           </section>
         </section>

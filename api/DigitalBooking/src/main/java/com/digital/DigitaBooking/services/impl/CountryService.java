@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.CountryDTO;
 import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.repositories.ICountryRepository;
@@ -30,11 +31,16 @@ public class CountryService implements ICountryService {
     }
 
     @Override
-    public CountryDTO getCountry(Integer id) {
+    public CountryDTO getCountry(Integer id) throws BadRequestException{
+        if (id == null){
+            throw new BadRequestException("El id de busqueda no puede ser nulo");
+        }
         Optional<Country> country = countryRepository.findById(id);
         CountryDTO countryDTO = null;
-        if (country.isPresent())
-            countryDTO = mapper.convertValue(country, CountryDTO.class);
+        if (!country.isPresent()){
+            throw  new BadRequestException("el pais con id "+id+" no existe");
+        }
+        countryDTO = mapper.convertValue(country, CountryDTO.class);
 
         return countryDTO;
     }
@@ -43,6 +49,9 @@ public class CountryService implements ICountryService {
     public void updateCountry(Integer id, CountryDTO countryDTO) {
         Optional<Country> optionalCountry = countryRepository.findById(id).map(country -> {
             country.setCountryName(countryDTO.getCountryName());
+            country.setCapitalName(countryDTO.getCapitalName());
+            country.setLatitude(countryDTO.getLatitude());
+            country.setLongitude(countryDTO.getLongitude());
             return countryRepository.save(country);
         });
     }
@@ -63,5 +72,19 @@ public class CountryService implements ICountryService {
 
         }
         return countriesDTO;
+    }
+
+    @Override
+    public CountryDTO searchCountryByName(String countryName) throws BadRequestException {
+        Country country = countryRepository.searchCountryByName(countryName);
+        if (country != null) {
+            return convertCountryToDTO(country);
+        } else {
+            throw new BadRequestException("No existe un país con el nombre: " + countryName);
+        }
+    }
+
+    private CountryDTO convertCountryToDTO(Country country) {
+        return mapper.convertValue(country, CountryDTO.class);
     }
 }

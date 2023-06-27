@@ -13,11 +13,15 @@ import Footer from "../components/Footer/footer"
 import { Login } from "../pages/login"
 import { SignUp } from "../pages/signUp"
 import { User } from "../pages/user"
+import { BookingSuccessful } from "../pages/bookingSuccessful"
+import { BookingFailure } from "../pages/bookingFailure"
+
 
 import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
+import { Favorites } from "../pages/favorites"
 
 export const AppRoutes = () => {
   const { user } = useGlobalState()
@@ -31,7 +35,7 @@ export const AppRoutes = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/user" element={<User />} />
           {user?.role && <Route path="/admin" element={<Admin />} />}
-
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/product-list" element={<ProductList />} />
           <Route path="/category-list" element={<CategoryList />} />
           <Route path="/country-list" element={<CountryList />} />
@@ -43,6 +47,9 @@ export const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 
+        <Route path="/booking-success" element={<BookingSuccessful />} />
+        <Route path="/booking-failure" element={<BookingFailure />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

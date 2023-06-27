@@ -40,13 +40,26 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
         showConfirmButton: false,
       })
 
+      console.log({
+        userEmail: form.userEmail,
+        password: form.password,
+        userName: form.userEmail,
+        userFirstName: form.userName,
+        userLastName: form.userLastName,
+        latitude: Number(form.latitude),
+        longitude: Number(form.longitude),
+      })
+
+      console.log(`${BASE_URL}/${urlParam}`)
       await axios
         .post(`${BASE_URL}/${urlParam}`, {
-          userEmail: form.userEmail,
-          userFirstName: form.userName,
+          // userEmail: form.userEmail,
           password: form.password,
           userName: form.userEmail,
+          userFirstName: form.userName,
           userLastName: form.userLastName,
+          latitude: parseFloat(form.latitude),
+          longitude: parseFloat(form.longitude),
         })
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.jwt))
@@ -65,6 +78,7 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
             text: err,
             showConfirmButton: true,
           })
+          console.log(err)
         })
     }
     return

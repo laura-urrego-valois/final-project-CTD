@@ -69,6 +69,7 @@ export const ModalCategory = ({ onClose, editMode, categorie, handleFormSubmit, 
     });
     setimages(newImgs);
   }
+
   return (
     <section className="modal__overlay">
       <div className="modal__content">

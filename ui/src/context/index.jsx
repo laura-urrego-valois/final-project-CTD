@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import {
   createContext,
   useContext,
@@ -8,20 +9,22 @@ import {
 import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
+import { Toast } from "../utils/Toast"
 
 export const BASE_URL =
   // import.meta.env.VITE_API_URL ||
   "http://3.133.208.24:8000"
 
 const initialState = {
-  context: "testing context",
   selectedCategory: null,
+  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
 }
 
 export const ContextGlobal = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
+  const [getFavorites, setGetFavorites] = useState([])
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const token = null || JSON.parse(localStorage.getItem("token"))
@@ -66,7 +69,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/category/load_image`,
+        `${BASE_URL}/category`,
         formData,
         config
       )
@@ -128,9 +131,8 @@ export const ContextProvider = ({ children }) => {
 
   const addTour = async (newTourData) => {
     const formData = new FormData()
-    //formData.append("files", newTourData.toursImageFile[0])
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
-      formData.append("files", newTourData.toursImageFile[i]);
+      formData.append("files", newTourData.toursImageFile[i])
     }
     formData.append("Tour", JSON.stringify(newTourData))
     try {
@@ -141,7 +143,7 @@ export const ContextProvider = ({ children }) => {
         },
       }
       const response = await axios.post(
-        `${BASE_URL}/tours/load_image`,
+        `${BASE_URL}/tours`,
         formData,
         config
       )
@@ -237,11 +239,16 @@ export const ContextProvider = ({ children }) => {
         newCountryData,
         config
       )
-      dispatch({
-        type: actions.ADD_COUNTRY,
-        payload: response.data,
-      })
+      if (response) {
+        Toast("Pais agregado", "success")
+        dispatch({
+          type: actions.ADD_COUNTRY,
+          payload: response.data,
+        })
+      }
     } catch (error) {
+      Toast("Error", "error")
+
       console.error("Error adding country:", error)
     }
   }
@@ -272,20 +279,44 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      await axios.delete(`${BASE_URL}/tours/${countryId}`, config)
-      dispatch({
-        type: actions.REMOVE_COUNTRY,
-        payload: countryId,
-      })
+      const response = await axios.delete(
+        `${BASE_URL}/countries/${countryId}`,
+        config
+      )
+      if (response) {
+        Toast("Pais eliminado", "success")
+        dispatch({
+          type: actions.REMOVE_COUNTRY,
+          payload: countryId,
+        })
+      }
     } catch (error) {
+      Toast("Error", "error")
       console.error("Error deleting country:", error)
     }
+  }
+  const fetchToursByCountry = async (countryId) => {
+    await axios.get(`${BASE_URL}/tours/country/${countryId}`).then((response) => {
+      dispatch({
+        type: actions.SEARCH_BY_COUNTRY,
+        payload: response.data,
+      });
+    })
+  };
+  const fetchFeature = async () => {
+    await axios.get(`${BASE_URL}/features`).then((response) => {
+      dispatch({
+        type: actions.GET_FEATURES,
+        payload: response.data,
+      })
+    })
   }
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
     fetchCountry()
+    fetchFeature()
   }, [])
 
   useEffect(() => {
@@ -298,6 +329,31 @@ export const ContextProvider = ({ children }) => {
 
     decodeResponse()
   }, [token])
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(state.favorites))
+  }, [state.favorites])
+
+  const isTourInFavorites = (newTour) =>
+    state?.favorites?.find((tour) => tour.id === newTour.id)
+
+  const addFav = (tour) => {
+    if (isTourInFavorites(tour)) {
+      Toast("Tour removido", "success")
+
+      dispatch({
+        type: actions.REMOVE_FROM_FAVORITE,
+        payload: tour,
+      })
+    } else {
+      Toast("Tour agregado", "success")
+
+      dispatch({
+        type: actions.ADD_TO_FAVORITE,
+        payload: tour,
+      })
+    }
+  }
 
   const value = {
     state,
@@ -331,6 +387,14 @@ export const ContextProvider = ({ children }) => {
     createCountry,
     updateCountry,
     deleteCountry,
+    //SEARCH
+    fetchToursByCountry,
+    // FAVORITES
+    getFavorites,
+    setGetFavorites,
+    addFav,
+    // FEATURE
+    fetchFeature,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

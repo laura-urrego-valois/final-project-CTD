@@ -1,20 +1,27 @@
 package com.digital.DigitaBooking.models.entities;
 
+import com.digital.DigitaBooking.models.entities.score.Counter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+import java.sql.Time;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
 @Getter
 @Entity
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +53,14 @@ public class Tour {
 
     @Column
     @NotNull
-    private Integer tourScore;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private Time earliestCheckInHour;
+
+    @Column
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private Time latestCheckInHour;
+
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -72,12 +86,44 @@ public class Tour {
     private Country country;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
-    private Set<Reservation> reservations = new HashSet<>();
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
     private Set<Favorite> favorites = new HashSet<>();
+
+    @OneToOne(mappedBy = "tour", cascade = CascadeType.ALL)
+    private Counter counter;
+
+    public void initializeCounter() {
+        Counter counter = new Counter();
+        counter.setTour(this);
+        this.setCounter(counter);
+    }
+
+    public void addReservation(Reservation reservation) {
+
+        reservations.add(reservation);
+    }
+
+    public void updateCategory(Category category) {
+        this.getCategory().getTours().remove(this);
+        this.setCategory(null);
+
+        this.setCategory(category);
+        category.getTours().add(this);
+    }
+
+    public void updateCountry(Country country){
+        this.getCountry().getTours().remove(this);
+        this.setCountry(null);
+
+        country.getTours().add(this);
+        this.setCountry(country);
+    }
+
+
 
 
 }

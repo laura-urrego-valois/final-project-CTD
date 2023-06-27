@@ -50,6 +50,8 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/tours/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/country/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/tours/country/name/{countryName}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/tours/filterByCountryAndDates/{countryId}/{startDate}/{endDate}").hasAnyAuthority(USER.name())
                                 .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/tours/{id}").hasAnyAuthority(ADMIN.name())
@@ -68,7 +70,12 @@ public class SecurityConf {
                                 .hasAnyAuthority(ADMIN.name(), USER.name())
                                 .requestMatchers(HttpMethod.POST, "/users/admin").hasAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/users/users").hasAuthority(ADMIN.name())
-                                // Rutas para imágenes
+                                // Rutas para puntuaciones
+                                .requestMatchers(HttpMethod.GET, "/scores/fromTour/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/scores/{id}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/scores").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.PUT, "/scores/update").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/scores/delete/{id}").hasAuthority(USER.name())
                                 // Rutas para características
                                 .requestMatchers(HttpMethod.GET, "/features").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/features/{id}").permitAll()
@@ -81,6 +88,11 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.POST, "/countries").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/countries/{id}").hasAnyAuthority(ADMIN.name())
+                                // Rutas para reservas
+                                .requestMatchers(HttpMethod.GET, "/reservations/byTour/{id}").hasAnyAuthority(ADMIN.name(), USER.name())
+                                .requestMatchers(HttpMethod.GET, "/reservations/byUser/{id}").hasAnyAuthority(ADMIN.name(), USER.name())
+                                .requestMatchers(HttpMethod.POST, "/reservations").hasAnyAuthority(USER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/reservations/{id}").hasAnyAuthority(USER.name())
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

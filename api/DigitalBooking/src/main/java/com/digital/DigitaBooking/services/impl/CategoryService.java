@@ -2,6 +2,7 @@ package com.digital.DigitaBooking.services.impl;
 
 import com.amazonaws.http.HttpResponse;
 import com.digital.DigitaBooking.converters.CategoryToCategoryDTOConverter;
+import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.Response;
 import com.digital.DigitaBooking.models.entities.Category;
 import com.digital.DigitaBooking.models.dtos.CategoryDTO;
@@ -40,16 +41,16 @@ public class CategoryService implements ICategoryService {
     public Category saveCategory(CategoryDTO categoryDTO) {
         Category category = mapper.convertValue(categoryDTO, Category.class);
         Category newCategory = categoryRepository.save(category);
-        return  newCategory;
+        return newCategory;
     }
 
     @Override
-    public CategoryDTO getCategory(Integer id)  {
+    public CategoryDTO getCategory(Integer id) {
 
-            Category category = categoryRepository.findById(id).get();
-            CategoryDTO categoryDTO = null;
-            categoryDTO = categoryConverter.convert(category);
-            return categoryDTO;
+        Category category = categoryRepository.findById(id).get();
+        CategoryDTO categoryDTO = null;
+        categoryDTO = categoryConverter.convert(category);
+        return categoryDTO;
     }
 
     @Override
