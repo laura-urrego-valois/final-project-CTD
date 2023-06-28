@@ -46,12 +46,12 @@ public class ReservationController {
     }
 
     @GetMapping(path = "/byTour/{id}")
-    public ResponseEntity<List<Reservation>> getReservationsByTour(@PathVariable Long id) throws BadRequestException {
+    public ResponseEntity<List<ReservationDTO>> getReservationsByTour(@PathVariable Long id) throws BadRequestException {
         return ResponseEntity.ok(reservationService.getReservationsByTour(id));
     }
 
     @GetMapping(path = "/byUser/{id}")
-    public ResponseEntity<List<Reservation>> getReservationsByUser(@PathVariable Long id) throws BadRequestException {
+    public ResponseEntity<List<ReservationDTO>> getReservationsByUser(@PathVariable Long id) throws BadRequestException {
         return ResponseEntity.ok(reservationService.getReservationsByUser(id));
     }
 
