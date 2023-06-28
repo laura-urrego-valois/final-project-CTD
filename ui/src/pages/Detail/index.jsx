@@ -40,6 +40,8 @@ const Detail = () => {
     return category ? category.categoryName : ""
   }
 
+  const dataCountry = state.countries.find((country) => country.id === itemDetail.countryId)
+
   return (
     <Container>
       <div className="detail">
@@ -50,7 +52,7 @@ const Detail = () => {
           <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <SearchProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
+      <SearchProduct country={dataCountry} itemDetail={itemDetail} />
       {/* //Layout component Gallery */}
       <Gallery dataImage={itemDetail?.images} />
 
@@ -68,7 +70,7 @@ const Detail = () => {
       <Feature feature={itemDetail?.features} />
       <DatesPicker />
       <LocateProduct
-        country={state.countries[itemDetail.countryId]}
+        country={dataCountry}
         itemDetail={itemDetail}
       />
       <Politics />
