@@ -4,15 +4,18 @@ import { Politics } from "../../components/Politics"
 import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import "./booking.css"
 import { Input } from "../../components/Input"
-import { DatesPicker } from "../../components/DatesPicker"
+import { DateRange } from "react-date-range"
 import { Button } from "../../components/Button"
 import { useEffect, useState } from "react"
 import { useGlobalState } from "../../context"
+import { format, parseISO } from "date-fns"
+import { es } from "date-fns/locale"
 
 export const BookingPage = () => {
   const { user, createReservation } = useGlobalState()
   const [bookingDetail, setBookingDetail] = useState({})
   const navigate = useNavigate()
+
   useEffect(() => {
     const booking = JSON.parse(localStorage.getItem("booking"))
     if (booking) {
@@ -20,11 +23,28 @@ export const BookingPage = () => {
     }
   }, [])
 
+  console.log(bookingDetail)
+
+  const [state, setState] = useState([
+    {
+      startDate: bookingDetail?.initialDate,
+      //startDate: parseISO(bookingDetail.initialDate),
+      endDate: bookingDetail?.finalDate,
+      //endDate: parseISO(bookingDetail.finalDate),
+      key: "selection",
+    },
+  ])
+  const handleDatesSelected = (item) => {
+    setState([item.selection])
+  }
+
   const handleBookingClick = async (e) => {
     e.preventDefault()
     const response = await createReservation({
       initialDate: bookingDetail?.initialDate,
+      //  initialDate:   format(state[0]?.initialDate, "yyyy-MM-dd").toString(),
       finalDate: bookingDetail?.finalDate,
+      // finalDate: format(state[0]?.finalDate, "yyyy-MM-dd").toString(),
       startTime: bookingDetail?.startTime,
       idTour: parseInt(bookingDetail?.idTour),
       idUser: parseInt(user?.id),
@@ -32,6 +52,8 @@ export const BookingPage = () => {
 
     !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
+
+  console.log(state[0])
 
   return (
     <Container>
@@ -73,7 +95,15 @@ export const BookingPage = () => {
             />
           </form>
           <div className="booking__calendar">
-            <DatesPicker />
+            <DateRange
+              editableDateInputs={true}
+              onChange={handleDatesSelected}
+              moveRangeOnFirstSelection={false}
+              ranges={state}
+              months={2}
+              direction="horizontal"
+              minDate={new Date()}
+            />
           </div>
           <form className="booking__time">
             <h3>Tu hora</h3>
@@ -81,6 +111,7 @@ export const BookingPage = () => {
               displayLabel="Hora de Inicio"
               label="time"
               type="time"
+              value={bookingDetail?.startTime}
               onChange={(e) => console.log(e.target.value)}
             />
           </form>
@@ -94,7 +125,22 @@ export const BookingPage = () => {
             <Input
               displayLabel="Fecha Inicio"
               label="initialDate"
-              value={bookingDetail?.initialDate}
+              value={
+                bookingDetail?.initialDate &&
+                format(
+                  parseISO(bookingDetail.initialDate),
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: es }
+                )
+              }
+              // value={
+              //   state[0]?.initialDate &&
+              //   format(
+              //     parseISO(state[0].initialDate),
+              //     "EEEE, dd 'de' MMMM 'de' yyyy",
+              //     { locale: es }
+              //   )
+              // }
               onChange={(e) => console.log(e.target.value)}
               type="text"
               disabled
@@ -102,7 +148,14 @@ export const BookingPage = () => {
             <Input
               displayLabel="Fecha Final"
               label="finalDate"
-              value={bookingDetail?.finalDate}
+              value={
+                bookingDetail?.finalDate &&
+                format(
+                  parseISO(bookingDetail.finalDate),
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: es }
+                )
+              }
               onChange={(e) => console.log(e.target.value)}
               type="text"
               disabled
