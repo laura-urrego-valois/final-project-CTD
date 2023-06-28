@@ -46,4 +46,15 @@ public interface ITourRepository extends JpaRepository<Tour, Long> {
     // Esta consulta busca tours en un país específico (countryId) y excluye aquellos que tienen reservas que se
     // superponen con las fechas proporcionadas (initialDate y finalDate).
 
+    @Query(value = "SELECT t.* FROM tour t " +
+            "INNER JOIN country c ON t.country = c.id " +
+            "ORDER BY (6371 * acos(" +
+            "cos(radians(:userLatitude)) * " +
+            "cos(radians(c.latitude)) * " +
+            "cos(radians(c.longitude) - radians(:userLongitude)) + " +
+            "sin(radians(:userLatitude)) * " +
+            "sin(radians(c.latitude)) " +
+            "))", nativeQuery = true)
+    List<Tour> searchToursByProximity(@Param("userLatitude") Double userLatitude, @Param("userLongitude") Double userLongitude);
+
 }

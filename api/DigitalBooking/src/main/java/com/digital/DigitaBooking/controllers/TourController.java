@@ -2,10 +2,7 @@ package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.AWSS3Service;
 import com.digital.DigitaBooking.exceptions.BadRequestException;
-import com.digital.DigitaBooking.models.dtos.ImageDTO;
-import com.digital.DigitaBooking.models.dtos.ImageLoaderDTO;
-import com.digital.DigitaBooking.models.dtos.TourDTO;
-import com.digital.DigitaBooking.models.dtos.UserDTO;
+import com.digital.DigitaBooking.models.dtos.*;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.service.impl.AWSS3ServiceImpl;
 import com.digital.DigitaBooking.services.impl.ImageService;
@@ -123,6 +120,11 @@ public class TourController {
         tourFilter.setCountryId(countryId);
         List<TourDTO> filteredTours = tourService.findToursByCountryAndDates(tourFilter);
         return ResponseEntity.ok(filteredTours);
+    }
+
+    @PostMapping("/filterTourByProximity")
+    public Collection<TourDTO> getToursByProximity(@RequestBody LocationDTO locationDTO) {
+        return tourService.getToursByCountryDistance(locationDTO.getLatitude(), locationDTO.getLongitude());
     }
 
 }

@@ -195,6 +195,17 @@ public class TourService implements ITourService {
     // Convertimos los objetos Tour en objetos TourDTO mediante un stream para recorrer la lista de tours
     // y el método map para aplicar la conversión a cada uno.
 
+    public Set<TourDTO> getToursByCountryDistance(Double latitude, Double longitude){
+        Set<TourDTO> toursDTO = new HashSet<>();
+        List<Tour> tours = tourRepository.searchToursByProximity(latitude,longitude);
+        for (Tour tour :
+                tours) {
+            toursDTO.add(tourConverter.convert(tour));
+
+        }
+        return toursDTO;
+    }
+
     private Counter getPuntuationCounter(Long puntuationId) throws BadRequestException {
         Optional<Counter> optionalCounter = counterRepository.findById(puntuationId);
         if (optionalCounter.isEmpty()) {
