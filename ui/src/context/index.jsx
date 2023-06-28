@@ -58,7 +58,6 @@ export const ContextProvider = ({ children }) => {
     }
   }
   const addCategory = async (newCategoryData) => {
-
     try {
       const formData = new FormData()
       formData.append("file", newCategoryData.categoryImageFile[0])
@@ -145,11 +144,7 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.post(
-        `${BASE_URL}/tours`,
-        formData,
-        config
-      )
+      const response = await axios.post(`${BASE_URL}/tours`, formData, config)
       if (response)
         dispatch({
           type: actions.CREATE_TOUR,
@@ -299,13 +294,15 @@ export const ContextProvider = ({ children }) => {
     }
   }
   const fetchToursByCountry = async (countryId) => {
-    await axios.get(`${BASE_URL}/tours/country/${countryId}`).then((response) => {
-      dispatch({
-        type: actions.SEARCH_BY_COUNTRY,
-        payload: response.data,
-      });
-    })
-  };
+    await axios
+      .get(`${BASE_URL}/tours/country/${countryId}`)
+      .then((response) => {
+        dispatch({
+          type: actions.SEARCH_BY_COUNTRY,
+          payload: response.data,
+        })
+      })
+  }
   const fetchFeature = async () => {
     await axios.get(`${BASE_URL}/features`).then((response) => {
       dispatch({
@@ -358,6 +355,32 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const createReservation = async (newReservation) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/reservations`,
+        newReservation,
+        config
+      )
+      console.log(response)
+      if (response) {
+        Toast("Reserva exitosa", "success")
+        // dispatch({
+        //   type: actions.CREATE_RESERVATION,
+        //   payload: newReservation,
+        // })
+      }
+    } catch (error) {
+      Toast("Error", "error")
+      console.error("Error:", error)
+    }
+  }
+
   const value = {
     state,
     dispatch,
@@ -398,6 +421,8 @@ export const ContextProvider = ({ children }) => {
     addFav,
     // FEATURE
     fetchFeature,
+    // RESERVATION
+    createReservation,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
