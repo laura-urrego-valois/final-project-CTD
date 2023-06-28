@@ -45,10 +45,7 @@ export const AppRoutes = () => {
           <Route path="/booking/:id" element={<BookingPage />} />
           <Route path="/booking-success" element={<BookingSuccessful />} />
           <Route path="/booking-failure" element={<BookingFailure />} />
-          <Route
-            path="/history-reservation"
-            element={<HistoryReservations />}
-          />
+          <Route path="/reservations" element={<HistoryReservations />} />
         </Route>
 
         <Route path="/register" element={<Register />} />
