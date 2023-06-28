@@ -30,10 +30,7 @@ export const BookingPage = () => {
       idUser: parseInt(user?.id),
     })
 
-    if (response) {
-      return navigate("/booking-success")
-    }
-    return navigate("/booking-failure")
+    !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
 
   return (
