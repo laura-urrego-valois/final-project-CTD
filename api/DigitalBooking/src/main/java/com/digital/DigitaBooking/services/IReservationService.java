@@ -16,8 +16,8 @@ public interface IReservationService {
 
     Boolean deleteReservation(Long id) throws BadRequestException;
 
-    List<Reservation> getReservationsByTour(Long id) throws BadRequestException;
+    List<ReservationDTO> getReservationsByTour(Long id) throws BadRequestException;
 
-    List<Reservation> getReservationsByUser(Long id) throws BadRequestException;
+    List<ReservationDTO> getReservationsByUser(Long id) throws BadRequestException;
 
 }
