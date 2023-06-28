@@ -6,7 +6,10 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { Politics } from "../../components/Politics"
 import "./detail.css"
 import { Container } from "../../components/Container"
-import { LocateProduct, SearchProduct } from "../../components/SearchProduct"
+import {
+  // LocateProduct,
+  SearchProduct,
+} from "../../components/SearchProduct"
 import { DatesPicker } from "../../components/DatesPicker"
 
 export const dataGallery = {
@@ -50,7 +53,10 @@ const Detail = () => {
           <BsFillArrowLeftCircleFill />
         </Link>
       </div>
-      <SearchProduct country={state.countries[itemDetail.countryId]} itemDetail={itemDetail} />
+      <SearchProduct
+        country={state.countries[itemDetail.countryId]}
+        itemDetail={itemDetail}
+      />
       {/* //Layout component Gallery */}
       <Gallery dataImage={itemDetail?.images} />
 
@@ -66,11 +72,11 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail?.features} />
-      <DatesPicker />
-      <LocateProduct
+      <DatesPicker tour={itemDetail} />
+      {/* <LocateProduct
         country={state.countries[itemDetail.countryId]}
         itemDetail={itemDetail}
-      />
+      /> */}
       <Politics />
     </Container>
   )
