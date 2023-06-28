@@ -370,15 +370,19 @@ export const ContextProvider = ({ children }) => {
       console.log(response)
       if (response) {
         Toast("Reserva exitosa", "success")
-        // dispatch({
-        //   type: actions.CREATE_RESERVATION,
-        //   payload: newReservation,
-        // })
       }
     } catch (error) {
       Toast("Error", "error")
       console.error("Error:", error)
     }
+  }
+
+  const fetchReservations = async (userId) => {
+    return await axios.get(`${BASE_URL}/reservations/byUser/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
   }
 
   const value = {
@@ -423,6 +427,7 @@ export const ContextProvider = ({ children }) => {
     fetchFeature,
     // RESERVATION
     createReservation,
+    fetchReservations,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>
