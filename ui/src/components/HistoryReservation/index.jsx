@@ -2,14 +2,9 @@ import { useState, useEffect } from "react"
 import "./HistoryReservation.css"
 import { useGlobalState } from "../../context"
 
-// function convertirFecha(originalDate) {
-//   let fecha = originalDate.split("-")
-//   return fecha[2] + "/" + fecha[1] + "/" + fecha[0]
-// }
-
 export const HistoryReservation = () => {
   const [reservations, setReservations] = useState([])
-  const { user, fetchReservations } = useGlobalState()
+  const { user, fetchReservations, fetchTourById, state } = useGlobalState()
 
   useEffect(() => {
     const getReservations = async () => {
@@ -21,7 +16,11 @@ export const HistoryReservation = () => {
     getReservations()
   }, [])
 
-  if (!reservations) return <h3>Cargando...</h3>
+  const getTourName = async (tourId) => {
+    const reservation = state?.tours?.find((item) => item.id == tourId)
+    return reservation ? reservation?.tourName : tourId
+  }
+
   return (
     <div>
       <h2>Mis Reservas</h2>
@@ -40,11 +39,11 @@ export const HistoryReservation = () => {
           <tbody>
             {reservations.map((reservation) => (
               <tr key={reservation?.id}>
-                <td>{reservation?.id}</td>
+                <td>{reservation?.idTour}</td>
+                {/* <td>{getTourName(reservation?.idTour)}</td> */}
                 <td>{reservation?.startTime}</td>
                 <td>{reservation?.finalDate}</td>
                 <td>{reservation?.startTime}</td>
-                {/* Mostrar otros detalles de la reserva */}
               </tr>
             ))}
           </tbody>
