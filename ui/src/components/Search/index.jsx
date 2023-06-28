@@ -70,7 +70,7 @@ export const Search = () => {
 
   const searchTours = async (e) => {
     e.preventDefault();
-    fetchTourCountryDate(country_id, endDate, startDate)
+    fetchTourCountryDate(country_id, startDate, endDate)
   };
 
   return (

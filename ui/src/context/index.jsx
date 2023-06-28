@@ -110,8 +110,8 @@ export const ContextProvider = ({ children }) => {
     })
   }
 
-  const fetchTourCountryDate = async (country_id, endDate, startDate) => {
-    await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${endDate}/${startDate}`).then((response) => {
+  const fetchTourCountryDate = async (country_id, startDate, endDate) => {
+    await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`).then((response) => {
       dispatch({
         type: actions.GET_TOURSCOUNTRYDATE,
         payload: response.data,
