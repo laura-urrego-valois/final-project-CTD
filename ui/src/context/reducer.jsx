@@ -8,6 +8,7 @@ export const actions = {
   CREATE_TOUR: "CREATE_TOUR",
   UPDATE_TOUR: "UPDATE_TOUR",
   REMOVE_TOUR: "REMOVE_TOUR",
+  GET_TOURSCOUNTRYDATE: "GET_TOURSCOUNTRYDATE",
   // CATEGORY ACTIONS
   ADD_CATEGORY: "ADD_CATEGORY",
   UPDATE_CATEGORY: "UPDATE_CATEGORY",
@@ -44,6 +45,11 @@ export const AppReducer = (state, action) => {
       return {
         ...state,
         tours: action.payload,
+      }
+    case actions.GET_TOURSCOUNTRYDATE:
+      return {
+        ...state,
+        toursCountryDate: action.payload,
       }
 
     case actions.GET_BY_ID:
