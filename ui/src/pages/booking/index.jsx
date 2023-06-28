@@ -30,18 +30,10 @@ export const BookingPage = () => {
       idUser: parseInt(user?.id),
     })
 
-    console.log({
-      initialDate: bookingDetail?.initialDate,
-      finalDate: bookingDetail?.finalDate,
-      startTime: bookingDetail?.startTime,
-      idTour: parseInt(bookingDetail?.idTour),
-      idUser: parseInt(user?.id),
-    })
-
     if (response) {
-      navigate("/booking-success")
+      return navigate("/booking-success")
     }
-    navigate("/booking-failure")
+    return navigate("/booking-failure")
   }
 
   return (
@@ -62,6 +54,7 @@ export const BookingPage = () => {
               displayLabel="Nombre"
               label="userFirstName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.userFirstName}
               disabled
             />
@@ -69,6 +62,7 @@ export const BookingPage = () => {
               displayLabel="Apellido"
               label="userLastName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.userLastName}
               disabled
             />
@@ -76,6 +70,7 @@ export const BookingPage = () => {
               displayLabel="Email"
               label="userName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.username}
               disabled
             />
@@ -85,7 +80,12 @@ export const BookingPage = () => {
           </div>
           <form className="booking__time">
             <h3>Tu hora</h3>
-            <Input displayLabel="Hora de Inicio" label="time" type="time" />
+            <Input
+              displayLabel="Hora de Inicio"
+              label="time"
+              type="time"
+              onChange={(e) => console.log(e.target.value)}
+            />
           </form>
         </div>
         <div className="booking__detail">
@@ -98,6 +98,7 @@ export const BookingPage = () => {
               displayLabel="Fecha Inicio"
               label="initialDate"
               value={bookingDetail?.initialDate}
+              onChange={(e) => console.log(e.target.value)}
               type="text"
               disabled
             />
@@ -105,6 +106,7 @@ export const BookingPage = () => {
               displayLabel="Fecha Final"
               label="finalDate"
               value={bookingDetail?.finalDate}
+              onChange={(e) => console.log(e.target.value)}
               type="text"
               disabled
             />
