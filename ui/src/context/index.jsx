@@ -311,15 +311,25 @@ export const ContextProvider = ({ children }) => {
       dispatch({
         type: actions.GET_FEATURES,
         payload: response.data,
-      })
+      });
     })
-  }
+  };
+  const fetchByTours = async (tourId) => {
+    await axios.get(`${BASE_URL}/tours/${tourId}`).then((response) => {
+      console.log("searchTour", response.data)
+      dispatch({
+        type: actions.FETCH_BY_TOURS,
+        payload: response.data,
+      });
+    });
+  };
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
     fetchCountry()
     fetchFeature()
+    fetchByTours()
   }, [])
 
   useEffect(() => {
@@ -374,6 +384,7 @@ export const ContextProvider = ({ children }) => {
     updateTour,
     addTour,
     deleteTour,
+    fetchByTours,
     // AUTHENTICATION
     user,
     setUser,

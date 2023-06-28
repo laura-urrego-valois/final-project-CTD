@@ -20,7 +20,7 @@ export const ListProduct = () => {
   const tours = state?.tours || [];
   const categories = state?.categories || [];
 
-  const { reset, getValues } = useForm();
+  const { reset, watch } = useForm();
   const [editMode, setEditMode] = useState(false);
   const [tourForm, setTourForm] = useState({
     id: '',
@@ -97,14 +97,19 @@ export const ListProduct = () => {
   const currentTours = getCurrentPageItems(tours);
 
   const handleFormSubmit = async (data) => {
+    const newfeatures = watch("features")
+    console.log("hola", newfeatures)
     data.categoryId = parseInt(data.categoryId);
     data.countryId = parseInt(data.countryId);
     const dataF = {
       tourClassification: "Bueno",
       tourAvailability: 0,
+      earliestCheckInHour: "10:00:00",
+      latestCheckInHour: "12:00:00",
+      //featuresId: [1, 2, 3]
     }
     try {
-      const updatedTour = { ...tourForm, ...data, ...dataF, features: getValues("features") };
+      const updatedTour = { ...tourForm, ...data, ...dataF, features: newfeatures };
       console.log("ADDTOUR =>", updatedTour)
 
       if (editMode) {

@@ -49,6 +49,7 @@ export const SearchProduct = ({ itemDetail, country }) => {
 }
 
 export const LocateProduct = ({ country, itemDetail }) => {
+  console.log("country", country)
   useEffect(() => {
     const mapContainer = L.DomUtil.get("map")
     if (mapContainer != null) {
@@ -78,7 +79,7 @@ export const LocateProduct = ({ country, itemDetail }) => {
     <section className="locate">
       <h2 className="locate__title">Ubicación tour</h2>
       <div className="locate__content">
-      <div id="map" className="map-container"></div>
+        <div id="map" className="map-container"></div>
       </div>
     </section>
   )

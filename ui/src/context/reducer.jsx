@@ -24,6 +24,7 @@ export const actions = {
   REMOVE_USER: "REMOVE_USER",
   //SEARCH_BY_COUNTRY
   SEARCH_BY_COUNTRY: "SEARCH_BY_COUNTRY",
+  FETCH_BY_TOURS: "FETCH_BY_TOURS",
   // FAVORITE ACTIONS
   ADD_TO_FAVORITE: "ADD_TO_FAVORITE",
   REMOVE_FROM_FAVORITE: "REMOVE_FROM_FAVORITE",
@@ -214,12 +215,17 @@ export const AppReducer = (state, action) => {
         filterTours: action.payload,
       };
     }
+    case actions.FETCH_BY_TOURS: {
+      return {
+        ...state,
+        searchTours: action.payload,
+      };
+    }
     case actions.ADD_TO_FAVORITE:
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
       }
-
     case actions.REMOVE_FROM_FAVORITE:
       return {
         ...state,
