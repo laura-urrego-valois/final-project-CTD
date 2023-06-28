@@ -110,12 +110,16 @@ export const ContextProvider = ({ children }) => {
   }
 
   const fetchTourCountryDate = async (country_id, startDate, endDate) => {
-    await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`).then((response) => {
-      dispatch({
-        type: actions.GET_TOURSCOUNTRYDATE,
-        payload: response.data,
+    await axios
+      .get(
+        `${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`
+      )
+      .then((response) => {
+        dispatch({
+          type: actions.GET_TOURSCOUNTRYDATE,
+          payload: response.data,
+        })
       })
-    })
   }
 
   const updateTour = async (tourId, updatedData) => {
@@ -179,6 +183,10 @@ export const ContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Error deleting tour:", error)
     }
+  }
+
+  const fetchTourById = async (tourId) => {
+    return await axios.get(`${BASE_URL}/tours/${tourId}`)
   }
 
   const fetchUsers = async () => {
@@ -317,18 +325,18 @@ export const ContextProvider = ({ children }) => {
       dispatch({
         type: actions.GET_FEATURES,
         payload: response.data,
-      });
+      })
     })
-  };
+  }
   const fetchByTours = async (tourId) => {
     await axios.get(`${BASE_URL}/tours/${tourId}`).then((response) => {
       console.log("searchTour", response.data)
       dispatch({
         type: actions.FETCH_BY_TOURS,
         payload: response.data,
-      });
-    });
-  };
+      })
+    })
+  }
 
   useEffect(() => {
     fetchCategories()
@@ -423,6 +431,7 @@ export const ContextProvider = ({ children }) => {
     deleteTour,
     fetchByTours,
     fetchTourCountryDate,
+    fetchTourById,
     // AUTHENTICATION
     user,
     setUser,
