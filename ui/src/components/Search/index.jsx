@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import { Input } from "../../components/Input"
 import { Button } from "../Button"
-//import Location from "../../assets/localizador.svg"
 import Select from 'react-select';
 import Calendar from "../../assets/calendar.svg"
 import "./Search.css"
@@ -9,9 +8,10 @@ import { useEffect, useRef, useState } from "react"
 import { addDays, format } from "date-fns"
 import { useGlobalState } from "../../context"
 import { DateRange } from "react-date-range"
+import { useUserLocationAndSorting } from "./userLocationAndSorting";
 
 export const Search = () => {
-  const { state, fetchToursByCountry } = useGlobalState()
+  const { state, fetchToursByCountry, fetchTourCountryDate } = useGlobalState()
   const [open, setOpen] = useState(false)
   const refOne = useRef(null)
   const [range, setRange] = useState([
@@ -27,25 +27,21 @@ export const Search = () => {
       setOpen(false)
     }
   }
-
   useEffect(() => {
     document.addEventListener("click", handleHide)
   }, [])
 
-  console.log(
-    `${format(range[0].startDate, "dd/MM/yyyy")} a ${format(
-      range[0].endDate,
-      "dd/MM/yyyy"
-    )}`
-  )
-
   const [isClearable, setIsClearable] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const options = state?.countries?.map(({ countryName, id }) => ({
+  //Coordenada del navegador y Ordenar por aproximidad
+  const sortedCountries = useUserLocationAndSorting(state?.countries);
+
+  const options = sortedCountries?.map(({ countryName, id }) => ({
     value: id,
     label: countryName
   }));
+  ///
 
   const handleSelectChange = (selectedOption) => {
     if (selectedOption === null) {
@@ -67,6 +63,16 @@ export const Search = () => {
     }
   }, [selectedOption]);
 
+  // Busqueda pais y fecha
+  const country_id = selectedOption?.value
+  const startDate = format(range[0].startDate, "yyyy-MM-dd");
+  const endDate = format(range[0].endDate, "yyyy-MM-dd");
+
+  const searchTours = async (e) => {
+    e.preventDefault();
+    fetchTourCountryDate(country_id, startDate, endDate)
+  };
+
   return (
     <section className="search">
       <h1 className="search__title">Busca ofertas de experiencia turística</h1>
@@ -80,7 +86,6 @@ export const Search = () => {
           value={selectedOption}
           onChange={handleSelectChange}
         />
-
         <Input
           iconSrc={Calendar}
           placeholder="Check in - Check out"
@@ -107,7 +112,7 @@ export const Search = () => {
           )}
         </div>
 
-        <Button type="primary">Buscar</Button>
+        <Button type="primary" onClick={searchTours}>Buscar</Button>
       </form>
     </section>
   )

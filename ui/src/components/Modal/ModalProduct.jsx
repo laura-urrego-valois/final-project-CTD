@@ -27,7 +27,6 @@ export const ModalProduct = ({
       setValue("tourDescription", tourForm.tourDescription)
       setValue("categoryId", tourForm?.categoryId)
       setValue("tourPrice", tourForm?.tourPrice)
-      setValue("tourScore", tourForm?.tourScore)
       setValue("tourCapacity", tourForm?.tourCapacity)
       setValue("countryId", tourForm?.countryId)
       setValue("features", tourForm?.features || [])
@@ -36,10 +35,9 @@ export const ModalProduct = ({
       setValue("image_url", "")
       setValue("tourDescription", "")
       setValue("categoryId", "")
-      setValue("features", [])
-      setValue("countryId", "")
+      setValue("featuresId", [])
+      setValue("country", "")
       setValue("tourPrice", "")
-      setValue("tourScore", "")
       setValue("tourCapacity", "")
     }
   }, [editMode, tourForm, setValue])
@@ -103,7 +101,7 @@ export const ModalProduct = ({
     label: featureName
   }));
 
-  
+
   return (
     <section className="modal__overlay">
       <div className="modal__content">
@@ -178,7 +176,6 @@ export const ModalProduct = ({
             ))}
           </select>
           <Select
-            name="features"
             defaultValue={optionsFeatures}
             isMulti
             options={options}
@@ -196,7 +193,7 @@ export const ModalProduct = ({
           </select>
           <label htmlFor="price">Precio:</label>
           <input
-            type="text"
+            type="number"
             id="price"
             placeholder="Precio"
             defaultValue={tour?.tourPrice || ""}
@@ -204,19 +201,11 @@ export const ModalProduct = ({
           />
           <label htmlFor="capacity">Capacidad:</label>
           <input
-            type="text"
+            type="number"
             id="capacity"
             placeholder="capacidad"
             defaultValue={tour?.tourCapacity || ""}
             {...register("tourCapacity")}
-          />
-          <label htmlFor="score">Score:</label>
-          <input
-            type="text"
-            id="score"
-            placeholder="puntuación"
-            defaultValue={tour?.tourScore || ""}
-            {...register("tourScore")}
           />
           <Button type="submit">{editMode ? "Guardar" : "Agregar"}</Button>
         </form>
