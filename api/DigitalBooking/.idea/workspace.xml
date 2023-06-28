@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e53d5c86-7ac6-4a11-ad27-338b8faa62af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/LocationDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/config/SecurityConf.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/config/SecurityConf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/controllers/TourController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/controllers/TourController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/models/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/models/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/services/impl/ReservationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/services/impl/ReservationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/TourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ITourRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ITourRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/TourService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,18 +88,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Laura Urrego/Desktop/pruebas/equipo-10/api/DigitalBooking&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Usuario/Desktop/Escritorio/CertifiedTech/Integrador/equipo-10/api/DigitalBooking",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="DigitaBookingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="jbr-17" />

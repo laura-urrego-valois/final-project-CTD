@@ -51,6 +51,7 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/tours/byCategory/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/country/{id}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/country/name/{countryName}").permitAll()
+                                .requestMatchers(HttpMethod.POST,"tours/filterTourByProximity").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tours/filterByCountryAndDates/{countryId}/{initialDate}/{finalDate}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/tours").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/tours/{id}").hasAuthority(ADMIN.name())
