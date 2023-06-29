@@ -2,6 +2,8 @@ package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.CountryDTO;
+import com.digital.DigitaBooking.models.dtos.CountryDistanceDTO;
+import com.digital.DigitaBooking.models.dtos.LocationDTO;
 import com.digital.DigitaBooking.services.impl.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,6 +27,16 @@ public class CountryController {
     public ResponseEntity<?> saveCountry(@RequestBody CountryDTO countryDTO) {
         countryService.saveCountry(countryDTO);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/byDistance")
+    public ResponseEntity<List<CountryDistanceDTO>> searchCountryByDistance(@RequestBody
+    LocationDTO locationDTO){
+        if (locationDTO == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        List<CountryDistanceDTO> countries =  countryService.searchCountryByDistance(locationDTO.getLatitude(), locationDTO.getLongitude());
+        return ResponseEntity.ok(countries);
     }
 
 
