@@ -28,8 +28,6 @@ const Detail = () => {
   }
   const dataCountry = state.countries.find((country) => country.id === itemDetail.countryId)
 
-  const dataCountry = state.countries.find((country) => country.id === itemDetail.countryId)
-
   return (
     <Container>
       <div className="detail">
