@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e53d5c86-7ac6-4a11-ad27-338b8faa62af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/models/dtos/CountryDistanceDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/config/SecurityConf.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/config/SecurityConf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/controllers/CountryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/controllers/CountryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/repositories/ICountryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/repositories/ICountryRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/services/impl/CountryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/digital/DigitaBooking/services/impl/CountryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/config/SecurityConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CountryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/controllers/CountryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ICountryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/ICountryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CountryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/services/impl/CountryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/IReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digital/DigitaBooking/repositories/IReservationRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

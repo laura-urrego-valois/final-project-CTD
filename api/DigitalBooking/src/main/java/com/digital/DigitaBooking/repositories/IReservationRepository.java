@@ -14,6 +14,6 @@ public interface IReservationRepository extends JpaRepository<Reservation, Long>
     @Query(value = "SELECT r.* FROM reservation r WHERE r.id_tour = :tourId", nativeQuery = true)
     List<Reservation> getReservationByTourId(@Param("tourId") Long tourId);
 
-    @Query(value = "SELECT r.* FROM reservation r WHERE r.id_user = :userId", nativeQuery = true)
+    @Query(value = "SELECT r.* FROM reservation r WHERE r.id_user = :userId ORDER BY r.initial_date DESC", nativeQuery = true)
     List<Reservation> getReservationByUserId(@Param("userId") Long userId);
 }
