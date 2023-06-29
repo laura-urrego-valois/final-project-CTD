@@ -14,37 +14,47 @@ import { es } from "date-fns/locale"
 export const BookingPage = () => {
   const { user, createReservation } = useGlobalState()
   const [bookingDetail, setBookingDetail] = useState({})
+  const [state, setState] = useState([
+    {
+      startDate: "",
+      endDate: bookingDetail?.finalDate,
+      key: "selection",
+    }])
+
   const navigate = useNavigate()
 
   useEffect(() => {
     const booking = JSON.parse(localStorage.getItem("booking"))
     if (booking) {
       setBookingDetail(booking)
+      setState([
+        {
+          startDate: parseISO(booking.initialDate),
+          endDate: parseISO(booking.finalDate),
+          key: "selection",
+        },
+      ])
     }
   }, [])
 
-  console.log(bookingDetail)
-
-  const [state, setState] = useState([
-    {
-      startDate: bookingDetail?.initialDate,
-      //startDate: parseISO(bookingDetail.initialDate),
-      endDate: bookingDetail?.finalDate,
-      //endDate: parseISO(bookingDetail.finalDate),
-      key: "selection",
-    },
-  ])
   const handleDatesSelected = (item) => {
-    setState([item.selection])
-  }
+    const startDate = item.selection.startDate;
+    const endDate = item.selection.endDate;
+
+    setBookingDetail((prevBookingDetail) => ({
+      ...prevBookingDetail,
+      initialDate: startDate.toISOString(),
+      finalDate: endDate.toISOString(),
+    }));
+
+    setState([item.selection]);
+  };
 
   const handleBookingClick = async (e) => {
     e.preventDefault()
     const response = await createReservation({
       initialDate: bookingDetail?.initialDate,
-      //  initialDate:   format(state[0]?.initialDate, "yyyy-MM-dd").toString(),
       finalDate: bookingDetail?.finalDate,
-      // finalDate: format(state[0]?.finalDate, "yyyy-MM-dd").toString(),
       startTime: bookingDetail?.startTime,
       idTour: parseInt(bookingDetail?.idTour),
       idUser: parseInt(user?.id),
@@ -52,8 +62,6 @@ export const BookingPage = () => {
 
     !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
-
-  console.log(state[0])
 
   return (
     <Container>
@@ -133,15 +141,7 @@ export const BookingPage = () => {
                   { locale: es }
                 )
               }
-              // value={
-              //   state[0]?.initialDate &&
-              //   format(
-              //     parseISO(state[0].initialDate),
-              //     "EEEE, dd 'de' MMMM 'de' yyyy",
-              //     { locale: es }
-              //   )
-              // }
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => console.log("datelabe", e.target.value)}
               type="text"
               disabled
             />
