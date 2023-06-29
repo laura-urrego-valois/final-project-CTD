@@ -29,6 +29,7 @@
   font-size: 1.8rem;
   color: var(--color-font);
   margin-block: 2rem;
+  
 }
 .admin-menu li:hover, .admin-menu a:hover{
   color: var(--color-primary);

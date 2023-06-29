@@ -60,7 +60,7 @@ export const ListCountry = () => {
   }
 
   const handleDeleteCountry = async (countryId) => {
-     await deleteCountry(countryId)
+    await deleteCountry(countryId)
 
     dispatch({
       type: actions.REMOVE_COUNTRY,
@@ -94,6 +94,7 @@ export const ListCountry = () => {
 
     closeModal()
     reset()
+    window.location.reload()
   }
 
   return (
