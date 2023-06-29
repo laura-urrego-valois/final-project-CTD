@@ -2,6 +2,7 @@ package com.digital.DigitaBooking.services.impl;
 
 import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.CountryDTO;
+import com.digital.DigitaBooking.models.dtos.CountryDistanceDTO;
 import com.digital.DigitaBooking.models.entities.Country;
 import com.digital.DigitaBooking.repositories.ICountryRepository;
 import com.digital.DigitaBooking.services.ICountryService;
@@ -9,10 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CountryService implements ICountryService {
@@ -84,7 +82,22 @@ public class CountryService implements ICountryService {
         }
     }
 
+    public List<CountryDistanceDTO> searchCountryByDistance(Double userLatitude, Double userLongitude){
+        List<Country> countries = countryRepository.searchCountriesByProximity(userLatitude,userLongitude);
+        List<CountryDistanceDTO> countryDistanceDTOList = new ArrayList<>();
+        for(Country country: countries){
+            CountryDistanceDTO countryDistanceDTO = new CountryDistanceDTO();
+            countryDistanceDTO.setId(country.getId());
+            countryDistanceDTO.setCountryName(country.getCountryName());
+            countryDistanceDTOList.add(countryDistanceDTO);
+        }
+        return countryDistanceDTOList;
+    }
+
     private CountryDTO convertCountryToDTO(Country country) {
         return mapper.convertValue(country, CountryDTO.class);
     }
+
+
+
 }

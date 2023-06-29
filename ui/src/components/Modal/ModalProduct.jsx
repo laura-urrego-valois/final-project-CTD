@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form"
 import { Button } from "../Button"
 import { useGlobalState } from "../../context"
 import { GrFormClose } from "react-icons/gr"
-import Select from 'react-select';
 import "./Modal.css"
 
 export const ModalProduct = ({
@@ -92,15 +91,7 @@ export const ModalProduct = ({
     setimages(newImgs)
   }
 
-  const options = state?.features?.map(({ featureName, id }) => ({
-    value: id,
-    label: featureName
-  }));
-  const optionsFeatures = tourForm?.features?.map(({ featureName, id }) => ({
-    value: id,
-    label: featureName
-  }));
-
+  console.log("state", state.features, tourForm?.features)
 
   return (
     <section className="modal__overlay">
@@ -175,14 +166,38 @@ export const ModalProduct = ({
               </option>
             ))}
           </select>
-          <Select
-            defaultValue={optionsFeatures}
-            isMulti
-            options={options}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            {...register("features")}
-          />
+
+
+          <fieldset className="list__feature">
+            <legend>Features</legend>
+            {state?.features.map((feature) => {
+              const checked = watch("features")?.includes(feature.id);
+              return (
+                <div className="" key={feature.id}>
+                  <input
+                    type="checkbox"
+                    name={feature.featureName}
+                    value={feature.featureName}
+                    defaultChecked={checked}
+                    onChange={(e) => {
+                      const { checked } = e.target;
+                      if (checked) {
+                        setValue("features", [...watch("features"), feature.id]);
+                      } else {
+                        setValue(
+                          "features",
+                          watch("features").filter((id) => id !== feature.id)
+                        );
+                      }
+                    }}
+                  />
+                  {feature.featureName}
+                </div>
+              );
+            })}
+          </fieldset>
+
+
           <label htmlFor="countryId">País:</label>
           <select id="countryId" {...register("countryId")}>
             {countries.map((country) => (
