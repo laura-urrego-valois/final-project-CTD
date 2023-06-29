@@ -18,6 +18,24 @@ export const Recommendations = ({ state, tours, title }) => {
 	const filteredToursItemsPerPage = 4; // Elemento por pagina
 	const shuffledToursItemsPerPage = 10; // Elemento por pagina
 
+	//Score:
+	const score = {
+		Malo: 3,
+		Aceptable: 5,
+		Satisfactorio: 6,
+		Bueno: 8,
+		MuyBueno: 9,
+		Excelente: 10
+	};
+
+	function getScore(classification) {
+		if (Object.prototype.hasOwnProperty.call(score, classification)) {
+			return score[classification];
+		} else {
+			return "Invalid classification";
+		}
+	}
+
 	const renderTours = (toursToRender, itemsPerPage) => {
 		return toursToRender
 			.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -30,7 +48,7 @@ export const Recommendations = ({ state, tours, title }) => {
 					imageSrc={tour.images[0]?.imageUrl}
 					classification={tour.tourClassification}
 					category={getCategoryName(tour.categoryId)}
-					score={tour.tourScore}
+					score={getScore(tour.tourClassification)}
 				/>
 
 			));

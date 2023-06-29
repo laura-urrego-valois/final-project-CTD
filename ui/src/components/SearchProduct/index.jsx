@@ -14,6 +14,25 @@ export const SearchProduct = ({ itemDetail, country }) => {
   const handleShare = () => {
     setIsModalOpen(true)
   }
+
+  //score
+  const score = {
+    Malo: 3,
+    Aceptable: 5,
+    Satisfactorio: 6,
+    Bueno: 8,
+    MuyBueno: 9,
+    Excelente: 10
+  };
+
+  function getScore(classification) {
+    if (Object.prototype.hasOwnProperty.call(score, classification)) {
+      return score[classification];
+    } else {
+      return "Invalid classification";
+    }
+  }
+
   return (
     <Fragment>
       <ModalShareProduct
@@ -41,7 +60,7 @@ export const SearchProduct = ({ itemDetail, country }) => {
               <BsStar />
             </p>
           </div>
-          <p className="detail__rating-score">{itemDetail?.tourScore}</p>
+          <p className="detail__rating-score">{getScore(itemDetail?.tourClassification)}</p>
         </div>
       </div>
     </Fragment>
@@ -49,7 +68,6 @@ export const SearchProduct = ({ itemDetail, country }) => {
 }
 
 export const LocateProduct = ({ country, itemDetail }) => {
-  console.log("country", country)
   useEffect(() => {
     const mapContainer = L.DomUtil.get("map")
     if (mapContainer != null) {

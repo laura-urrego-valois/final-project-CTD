@@ -1,5 +1,7 @@
 import './SidebarHeader.css'
+
 export const SidebarHeader = () => {
+
   return (
     <div className="sidebar__header">
       <img
@@ -10,7 +12,7 @@ export const SidebarHeader = () => {
         <h5 className="">
           <a className="" href="#">Jone Doe</a>
         </h5>
-        <p className="">Lorem ipsum dolor sit amet consectetur.</p>
+        <p className="">Administrador digital de experiencia</p>
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ import { AppReducer, actions } from "./reducer"
 import axios from "axios"
 import jwt_decode from "jwt-decode"
 import { Toast } from "../utils/Toast"
+import Swal from "sweetalert2"
 
 export const BASE_URL =
   // import.meta.env.VITE_API_URL ||
@@ -63,7 +64,6 @@ export const ContextProvider = ({ children }) => {
       const formData = new FormData()
       formData.append("file", newCategoryData.categoryImageFile[0])
       formData.append("Category", JSON.stringify(newCategoryData))
-      console.log("peticion", formData)
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -111,12 +111,26 @@ export const ContextProvider = ({ children }) => {
   }
 
   const fetchTourCountryDate = async (country_id, startDate, endDate) => {
-    await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`).then((response) => {
-      dispatch({
-        type: actions.GET_TOURSCOUNTRYDATE,
-        payload: response.data,
-      })
-    })
+    try {
+      const response = await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`);
+      const data = response.data;
+
+      if (data.length === 0) {
+        Swal.fire({
+          title: 'Sin datos',
+          text: 'No se encontraron tours para las fechas seleccionadas.',
+          icon: 'info',
+          confirmButtonColor: '#6D9886',
+        });
+      } else {
+        dispatch({
+          type: actions.GET_TOURSCOUNTRYDATE,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.error("Error search tour:", error)
+    }
   }
 
   const updateTour = async (tourId, updatedData) => {
