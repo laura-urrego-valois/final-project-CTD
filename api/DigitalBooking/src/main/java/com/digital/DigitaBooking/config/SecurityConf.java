@@ -87,6 +87,7 @@ public class SecurityConf {
                                 .requestMatchers(HttpMethod.GET, "/countries").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/countries/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/countries").hasAnyAuthority(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST,"countries/byDistance").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/countries/{id}").hasAnyAuthority(ADMIN.name())
                                 // Rutas para reservas
