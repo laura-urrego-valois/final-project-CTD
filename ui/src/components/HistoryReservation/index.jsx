@@ -1,62 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import "./HistoryReservation.css";
-
-function convertirFecha(originalDate) {
-  let fecha = originalDate.split("-");
-  return fecha[2] + "/" + fecha[1] + "/" + fecha[0];
-
-}
+import { useState, useEffect } from "react"
+import "./HistoryReservation.css"
+import { useGlobalState } from "../../context"
 
 export const HistoryReservation = () => {
-    const reservas = [
-        {
-            "id" : 4,
-            "tourName": "Maldivas",
-            "reservationDate": "2023-05-13",
-            "initialDate": "2023-07-04",
-            "finalDate": "2023-07-10"
-        },
-        {
-            "id" : 7,
-            "tourName": "Guayana",
-            "reservationDate": "2023-05-11",
-            "initialDate": "2023-07-06",
-            "finalDate": "2023-07-16"
-        },
-        {
-            "id" : 10,
-            "tourName": "Berlin",
-            "reservationDate": "2023-05-01",
-            "initialDate": "2023-07-24",
-            "finalDate": "2023-07-30"
-        }
-    ];
+  const [reservations, setReservations] = useState([])
+  const { user, fetchReservations, state } = useGlobalState()
 
-    return (
+  useEffect(() => {
+    const getReservations = async () => {
+      if (user) {
+        const data = await fetchReservations(user.id)
+        setReservations(data.data)
+      }
+    }
+    getReservations()
+  }, [])
+
+  const getTourName = (tourId) => {
+    if (state?.tours && state?.tours.length > 0) {
+      const reservation = state.tours.find((item) => item.id == tourId);
+      return reservation ? reservation.tourName : "";
+    }
+    return "";
+  };
+  console.log("reserva", reservations)
+
+  return (
     <div>
       <h2>Mis Reservas</h2>
-      <table id="reservationsTable">
-        <thead>
-          <tr>
-            <th>Tour</th>
-            <th>Fecha Reservación</th>
-            <th>Fecha de uso</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservas.map(reserva => (
-            <tr key={reserva.id}>
-              <td>{reserva.tourName}</td>
-              <td>{convertirFecha(reserva.reservationDate)}</td>
-              <td>{convertirFecha(reserva.initialDate)} - {convertirFecha(reserva.finalDate)}</td>
-              {/* Mostrar otros detalles de la reserva */}
+      {reservations?.length === 0 ? (
+        <h3>Buscando reservas</h3>
+      ) : (
+        <table id="reservationsTable">
+          <thead>
+            <tr>
+              <th>Tour</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Final</th>
+              <th>Hora</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      
-  </div>
-    );
+          </thead>
+          <tbody>
+            {reservations?.map((reservation) => (
+              <tr key={reservation?.id}>
+                <td>{getTourName(reservation?.idTour)}</td>
+                <td>{reservation?.initialDate}</td>
+                <td>{reservation?.finalDate}</td>
+                <td>{reservation?.startTime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
 }
-
-

@@ -9,6 +9,7 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
   const [form, setForm] = useState(initialState)
   const [errors, setErrors] = useState({})
   const navigate = useNavigate()
+  const booking = JSON.parse(localStorage.getItem("booking"))
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -103,7 +104,10 @@ export const useForm = (initialState, validateForm, urlParam, redirectTo) => {
             showConfirmButton: false,
           })
           setForm(initialState)
-          navigate(redirectTo)
+          booking
+            ? navigate(`/booking/${booking?.idTour}`)
+            : navigate(redirectTo)
+
           window.location.reload()
         })
         .catch((err) => {

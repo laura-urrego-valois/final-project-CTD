@@ -57,6 +57,10 @@ export const User = () => {
             <Button onClick={handleButtonClick}>Panel</Button>
           )}
 
+          {user.role == "USER" && (
+            <Button onClick={() => navigate("/reservations")}>Reservas</Button>
+          )}
+
           <Button type="primary" onClick={handleButtonClickFav}>
             Favoritos
           </Button>

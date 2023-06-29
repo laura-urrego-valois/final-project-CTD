@@ -1,12 +1,10 @@
-import { Container } from "../../components/Container";
+import { Container } from "../../components/Container"
 import { HistoryReservation } from "../../components/HistoryReservation"
 
 export const HistoryReservations = () => {
-	return (
-		<>
-			<Container>
-				<HistoryReservation />
-			</Container>
-		</>
-	);
-};
+  return (
+    <Container>
+      <HistoryReservation />
+    </Container>
+  )
+}
