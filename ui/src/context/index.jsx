@@ -166,11 +166,7 @@ export const ContextProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.post(
-        `${BASE_URL}/tours`,
-        formData,
-        config
-      )
+      const response = await axios.post(`${BASE_URL}/tours`, formData, config)
       if (response)
         dispatch({
           type: actions.CREATE_TOUR,
@@ -196,6 +192,10 @@ export const ContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Error deleting tour:", error)
     }
+  }
+
+  const fetchTourById = async (tourId) => {
+    return await axios.get(`${BASE_URL}/tours/${tourId}`)
   }
 
   const fetchUsers = async () => {
@@ -320,30 +320,32 @@ export const ContextProvider = ({ children }) => {
     }
   }
   const fetchToursByCountry = async (countryId) => {
-    await axios.get(`${BASE_URL}/tours/country/${countryId}`).then((response) => {
-      dispatch({
-        type: actions.SEARCH_BY_COUNTRY,
-        payload: response.data,
-      });
-    })
-  };
+    await axios
+      .get(`${BASE_URL}/tours/country/${countryId}`)
+      .then((response) => {
+        dispatch({
+          type: actions.SEARCH_BY_COUNTRY,
+          payload: response.data,
+        })
+      })
+  }
   const fetchFeature = async () => {
     await axios.get(`${BASE_URL}/features`).then((response) => {
       dispatch({
         type: actions.GET_FEATURES,
         payload: response.data,
-      });
+      })
     })
-  };
+  }
   const fetchByTours = async (tourId) => {
     await axios.get(`${BASE_URL}/tours/${tourId}`).then((response) => {
       console.log("searchTour", response.data)
       dispatch({
         type: actions.FETCH_BY_TOURS,
         payload: response.data,
-      });
-    });
-  };
+      })
+    })
+  }
 
   useEffect(() => {
     fetchCategories()
@@ -390,6 +392,36 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const createReservation = async (newReservation) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.post(
+        `${BASE_URL}/reservations`,
+        newReservation,
+        config
+      )
+      console.log(response)
+      if (response) {
+        Toast("Reserva exitosa", "success")
+      }
+    } catch (error) {
+      Toast("Error", "error")
+      console.error("Error:", error)
+    }
+  }
+
+  const fetchReservations = async (userId) => {
+    return await axios.get(`${BASE_URL}/reservations/byUser/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  }
+
   const value = {
     state,
     dispatch,
@@ -408,6 +440,7 @@ export const ContextProvider = ({ children }) => {
     deleteTour,
     fetchByTours,
     fetchTourCountryDate,
+    fetchTourById,
     // AUTHENTICATION
     user,
     setUser,
@@ -432,6 +465,9 @@ export const ContextProvider = ({ children }) => {
     addFav,
     // FEATURE
     fetchFeature,
+    // RESERVATION
+    createReservation,
+    fetchReservations,
   }
   return (
     <ContextGlobal.Provider value={value}>{children}</ContextGlobal.Provider>

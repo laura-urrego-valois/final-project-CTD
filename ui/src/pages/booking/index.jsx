@@ -4,21 +4,51 @@ import { Politics } from "../../components/Politics"
 import { BsFillArrowLeftCircleFill } from "react-icons/bs"
 import "./booking.css"
 import { Input } from "../../components/Input"
-import { DatesPicker } from "../../components/DatesPicker"
+import { DateRange } from "react-date-range"
 import { Button } from "../../components/Button"
 import { useEffect, useState } from "react"
 import { useGlobalState } from "../../context"
+import { format, parseISO } from "date-fns"
+import { es } from "date-fns/locale"
 
 export const BookingPage = () => {
   const { user, createReservation } = useGlobalState()
   const [bookingDetail, setBookingDetail] = useState({})
+  const [state, setState] = useState([
+    {
+      startDate: "",
+      endDate: bookingDetail?.finalDate,
+      key: "selection",
+    }])
+
   const navigate = useNavigate()
+
   useEffect(() => {
     const booking = JSON.parse(localStorage.getItem("booking"))
     if (booking) {
       setBookingDetail(booking)
+      setState([
+        {
+          startDate: parseISO(booking.initialDate),
+          endDate: parseISO(booking.finalDate),
+          key: "selection",
+        },
+      ])
     }
   }, [])
+
+  const handleDatesSelected = (item) => {
+    const startDate = item.selection.startDate;
+    const endDate = item.selection.endDate;
+
+    setBookingDetail((prevBookingDetail) => ({
+      ...prevBookingDetail,
+      initialDate: startDate.toISOString(),
+      finalDate: endDate.toISOString(),
+    }));
+
+    setState([item.selection]);
+  };
 
   const handleBookingClick = async (e) => {
     e.preventDefault()
@@ -30,18 +60,7 @@ export const BookingPage = () => {
       idUser: parseInt(user?.id),
     })
 
-    console.log({
-      initialDate: bookingDetail?.initialDate,
-      finalDate: bookingDetail?.finalDate,
-      startTime: bookingDetail?.startTime,
-      idTour: parseInt(bookingDetail?.idTour),
-      idUser: parseInt(user?.id),
-    })
-
-    if (response) {
-      navigate("/booking-success")
-    }
-    navigate("/booking-failure")
+    !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
 
   return (
@@ -62,6 +81,7 @@ export const BookingPage = () => {
               displayLabel="Nombre"
               label="userFirstName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.userFirstName}
               disabled
             />
@@ -69,6 +89,7 @@ export const BookingPage = () => {
               displayLabel="Apellido"
               label="userLastName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.userLastName}
               disabled
             />
@@ -76,16 +97,31 @@ export const BookingPage = () => {
               displayLabel="Email"
               label="userName"
               type="text"
+              onChange={(e) => console.log(e.target.value)}
               value={user?.username}
               disabled
             />
           </form>
           <div className="booking__calendar">
-            <DatesPicker />
+            <DateRange
+              editableDateInputs={true}
+              onChange={handleDatesSelected}
+              moveRangeOnFirstSelection={false}
+              ranges={state}
+              months={2}
+              direction="horizontal"
+              minDate={new Date()}
+            />
           </div>
           <form className="booking__time">
             <h3>Tu hora</h3>
-            <Input displayLabel="Hora de Inicio" label="time" type="time" />
+            <Input
+              displayLabel="Hora de Inicio"
+              label="time"
+              type="time"
+              value={bookingDetail?.startTime}
+              onChange={(e) => console.log(e.target.value)}
+            />
           </form>
         </div>
         <div className="booking__detail">
@@ -97,14 +133,30 @@ export const BookingPage = () => {
             <Input
               displayLabel="Fecha Inicio"
               label="initialDate"
-              value={bookingDetail?.initialDate}
+              value={
+                bookingDetail?.initialDate &&
+                format(
+                  parseISO(bookingDetail.initialDate),
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: es }
+                )
+              }
+              onChange={(e) => console.log("datelabe", e.target.value)}
               type="text"
               disabled
             />
             <Input
               displayLabel="Fecha Final"
               label="finalDate"
-              value={bookingDetail?.finalDate}
+              value={
+                bookingDetail?.finalDate &&
+                format(
+                  parseISO(bookingDetail.finalDate),
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: es }
+                )
+              }
+              onChange={(e) => console.log(e.target.value)}
               type="text"
               disabled
             />

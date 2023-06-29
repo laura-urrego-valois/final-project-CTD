@@ -22,6 +22,7 @@ import { CountryList } from "../pages/countryList"
 import { UserList } from "../pages/userList"
 import { useGlobalState } from "../context"
 import { Favorites } from "../pages/favorites"
+import { BookingPage } from "../pages/booking"
 
 export const AppRoutes = () => {
   const { user } = useGlobalState()
@@ -40,16 +41,17 @@ export const AppRoutes = () => {
           <Route path="/category-list" element={<CategoryList />} />
           <Route path="/country-list" element={<CountryList />} />
           <Route path="/user-list" element={<UserList />} />
+
+          <Route path="/booking/:id" element={<BookingPage />} />
+          <Route path="/booking-success" element={<BookingSuccessful />} />
+          <Route path="/booking-failure" element={<BookingFailure />} />
+          <Route path="/reservations" element={<HistoryReservations />} />
         </Route>
 
         <Route path="/register" element={<Register />} />
         <Route path="/register-success" element={<Success />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-
-        <Route path="/booking-success" element={<BookingSuccessful />} />
-        <Route path="/booking-failure" element={<BookingFailure />} />
-        <Route path="/history-reservation" element={<HistoryReservations />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
