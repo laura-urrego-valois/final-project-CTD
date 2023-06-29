@@ -4,7 +4,7 @@ import { useGlobalState } from "../../context"
 
 export const HistoryReservation = () => {
   const [reservations, setReservations] = useState([])
-  const { user, fetchReservations, fetchTourById, state } = useGlobalState()
+  const { user, fetchReservations, state } = useGlobalState()
 
   useEffect(() => {
     const getReservations = async () => {
@@ -16,15 +16,19 @@ export const HistoryReservation = () => {
     getReservations()
   }, [])
 
-  const getTourName = async (tourId) => {
-    const reservation = state?.tours?.find((item) => item.id == tourId)
-    return reservation ? reservation?.tourName : tourId
-  }
+  const getTourName = (tourId) => {
+    if (state?.tours && state?.tours.length > 0) {
+      const reservation = state.tours.find((item) => item.id == tourId);
+      return reservation ? reservation.tourName : "";
+    }
+    return "";
+  };
+  console.log("reserva", reservations)
 
   return (
     <div>
       <h2>Mis Reservas</h2>
-      {reservations.length === 0 ? (
+      {reservations?.length === 0 ? (
         <h3>Buscando reservas</h3>
       ) : (
         <table id="reservationsTable">
@@ -37,11 +41,10 @@ export const HistoryReservation = () => {
             </tr>
           </thead>
           <tbody>
-            {reservations.map((reservation) => (
+            {reservations?.map((reservation) => (
               <tr key={reservation?.id}>
-                <td>{reservation?.idTour}</td>
-                {/* <td>{getTourName(reservation?.idTour)}</td> */}
-                <td>{reservation?.startTime}</td>
+                <td>{getTourName(reservation?.idTour)}</td>
+                <td>{reservation?.initialDate}</td>
                 <td>{reservation?.finalDate}</td>
                 <td>{reservation?.startTime}</td>
               </tr>
