@@ -1,9 +1,11 @@
 package com.digital.DigitaBooking.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ScoreRequest {
 

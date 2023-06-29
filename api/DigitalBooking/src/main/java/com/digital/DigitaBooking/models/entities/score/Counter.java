@@ -2,16 +2,13 @@ package com.digital.DigitaBooking.models.entities.score;
 
 import com.digital.DigitaBooking.models.entities.Tour;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@AllArgsConstructor
 @Entity
 @Table
-@AllArgsConstructor
 public class Counter {
 
     @Id
@@ -28,13 +25,11 @@ public class Counter {
     private int fourStars;
     private int fiveStars;
 
-    //Constructor
     public Counter(Tour tour) {
         this.tour = tour;
         this.average = 0.0;
     }
 
-    //Methods
     public Counter() {
         this.average = 0.0;
     }

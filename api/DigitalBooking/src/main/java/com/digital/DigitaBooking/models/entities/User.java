@@ -17,9 +17,9 @@ import java.util.*;
 @Builder
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Table
 public class User implements UserDetails {
 
@@ -71,14 +71,17 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Role role;
 
-    public boolean isUserAlreadyVoted(User user, Long counterId) {
+    public boolean isUserAlreadyVoted(Long counterId) {
         for (Score score : scores) {
-            if (score.getCounter().getId() == counterId) {
+            if (score.getCounter().getId().equals(counterId)) {
                 return true;
             }
         }
         return false;
     }
+
+    // El objetivo del método es determinar si un usuario ha votado en un contador específico, utilizando una
+    // iteración sobre una colección de objetos Score y verificando la coincidencia del identificador de contador.
 
     public void addReservation(Reservation res) {
 

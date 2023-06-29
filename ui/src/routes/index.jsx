@@ -15,7 +15,7 @@ import { SignUp } from "../pages/signUp"
 import { User } from "../pages/user"
 import { BookingSuccessful } from "../pages/bookingSuccessful"
 import { BookingFailure } from "../pages/bookingFailure"
-
+import { HistoryReservations } from "../pages/historyReservations"
 
 import ProtectedRoutes from "./ProtectedRoutes"
 import { CountryList } from "../pages/countryList"
@@ -49,7 +49,8 @@ export const AppRoutes = () => {
 
         <Route path="/booking-success" element={<BookingSuccessful />} />
         <Route path="/booking-failure" element={<BookingFailure />} />
-        
+        <Route path="/history-reservation" element={<HistoryReservations />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

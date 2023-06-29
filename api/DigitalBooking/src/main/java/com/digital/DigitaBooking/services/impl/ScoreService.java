@@ -18,12 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class ScoreService implements IScoreService {
 
-    @Autowired
     private IScoreRepository scoreRepository;
 
-    @Autowired
     private ICounterRepository counterRepository;
 
+    @Autowired
+    public ScoreService(IScoreRepository scoreRepository, ICounterRepository counterRepository) {
+        this.scoreRepository = scoreRepository;
+        this.counterRepository = counterRepository;
+    }
 
     @Override
     public Score saveScore(ScoreDTO scoreDTO, User user) throws BadRequestException {
@@ -35,14 +38,13 @@ public class ScoreService implements IScoreService {
         if (idIsAlreadyAsigned) {
             throw new BadRequestException("El voto ya tiene un ID asignado.");
         }
-        Counter scoreInDatabase = getScore(scoreDTO.getScoreId());
         boolean invalidValue = scoreDTO.getValue() > 5 || scoreDTO.getValue() < 1;
         if (invalidValue) {
             throw new BadRequestException("El valor del voto no es válido, debe ser un valor entre 1 y 5.");
         }
         boolean alreadyVoted = userAlreadyVotedOn(user, scoreDTO.getScoreId());
         if (alreadyVoted) {
-            throw new BadRequestException("El usuario ya ha realizado una votación para este tour.");
+            throw new BadRequestException("El usuario " + user + " ya ha realizado una votación para este tour.");
         }
 
         Counter counter = getCounterById(scoreDTO.getScoreId());
@@ -68,7 +70,7 @@ public class ScoreService implements IScoreService {
 
     private boolean userAlreadyVotedOn(User user, Long counterId) {
         for (Score score : user.getScores()) {
-            if (score.getCounter().getId() == counterId) {
+            if (score.getCounter().getId().equals(counterId)) {
                 return true;
             }
         }

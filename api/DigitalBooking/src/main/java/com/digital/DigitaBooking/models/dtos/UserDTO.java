@@ -1,6 +1,7 @@
 package com.digital.DigitaBooking.models.dtos;
 
-import com.digital.DigitaBooking.models.entities.Tour;
+import com.digital.DigitaBooking.exceptions.BadRequestException;
+import com.digital.DigitaBooking.models.entities.User;
 import com.digital.DigitaBooking.models.entities.score.Score;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -8,7 +9,9 @@ import lombok.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
@@ -22,6 +25,26 @@ public class UserDTO {
     private Double longitude;
     private List<ScoreDTO> scoreList;
 
+
+    public UserDTO(User user) throws BadRequestException {
+        if (user != null) {
+            this.id = user.getId();
+            this.userName = user.getUsername();
+            this.userFirstName = user.getUserFirstName();
+            this.userLastName = user.getUserLastName();
+            this.scoreList = convertScoreListToDTO(user.getScores());
+        } else {
+            throw new BadRequestException("El usuario no existe");
+        }
+    }
+
+    public UserDTO(Long id, String userName, String userFirstName, String userLastName, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.password = password;
+    }
 
     private List<ScoreDTO> convertScoreListToDTO(List<Score> scores) {
 

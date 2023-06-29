@@ -108,6 +108,15 @@ export const ContextProvider = ({ children }) => {
     })
   }
 
+  const fetchTourCountryDate = async (country_id, startDate, endDate) => {
+    await axios.get(`${BASE_URL}/tours/filterByCountryAndDates/${country_id}/${startDate}/${endDate}`).then((response) => {
+      dispatch({
+        type: actions.GET_TOURSCOUNTRYDATE,
+        payload: response.data,
+      })
+    })
+  }
+
   const updateTour = async (tourId, updatedData) => {
     try {
       const config = {
@@ -308,15 +317,26 @@ export const ContextProvider = ({ children }) => {
       dispatch({
         type: actions.GET_FEATURES,
         payload: response.data,
-      })
+      });
     })
-  }
+  };
+  const fetchByTours = async (tourId) => {
+    await axios.get(`${BASE_URL}/tours/${tourId}`).then((response) => {
+      console.log("searchTour", response.data)
+      dispatch({
+        type: actions.FETCH_BY_TOURS,
+        payload: response.data,
+      });
+    });
+  };
 
   useEffect(() => {
     fetchCategories()
     fetchTours()
+    fetchTourCountryDate()
     fetchCountry()
     fetchFeature()
+    fetchByTours()
   }, [])
 
   useEffect(() => {
@@ -371,6 +391,8 @@ export const ContextProvider = ({ children }) => {
     updateTour,
     addTour,
     deleteTour,
+    fetchByTours,
+    fetchTourCountryDate,
     // AUTHENTICATION
     user,
     setUser,

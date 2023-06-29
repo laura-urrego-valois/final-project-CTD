@@ -1,5 +1,6 @@
 package com.digital.DigitaBooking.services.impl;
 
+import com.digital.DigitaBooking.converters.ReservationToReservationDTO;
 import com.digital.DigitaBooking.exceptions.BadRequestException;
 import com.digital.DigitaBooking.models.dtos.ReservationDTO;
 import com.digital.DigitaBooking.models.entities.Reservation;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -30,6 +28,9 @@ public class ReservationService implements IReservationService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ReservationToReservationDTO reservationToReservationDTO;
 
     @Override
     public Reservation saveReservation(ReservationDTO reservationDTO) throws BadRequestException {
@@ -120,7 +121,7 @@ public class ReservationService implements IReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByTour(Long id) throws BadRequestException {
+    public List<ReservationDTO> getReservationsByTour(Long id) throws BadRequestException {
         if (id == null) {
             throw new BadRequestException("El ID del tour es nulo.");
         }
@@ -131,12 +132,16 @@ public class ReservationService implements IReservationService {
         }
         List<Reservation> results = reservationRepository.getReservationByTourId(id);
         setUsersAsNull(results);
-        return results;
+        List<ReservationDTO> reservations = new ArrayList<>();
+        for(Reservation reservation: results){
+            reservations.add(reservationToReservationDTO.convert(reservation));
+        }
+        return reservations;
     }
     // El objetivo de este método es obtener una lista de reservas asociadas a un tour específico.
 
     @Override
-    public List<Reservation> getReservationsByUser(Long id) throws BadRequestException {
+    public List<ReservationDTO> getReservationsByUser(Long id) throws BadRequestException {
         if (id == null) {
             throw new BadRequestException("El ID del usuario es nulo.");
         }
@@ -145,8 +150,12 @@ public class ReservationService implements IReservationService {
         } catch (Exception e) {
             throw new BadRequestException("El ID del usuario no corresponde con un usuario almacenado en la base de datos.");
         }
+        List<ReservationDTO> reservations = new ArrayList<>();
         List<Reservation> results = reservationRepository.getReservationByUserId(id);
-        return results;
+        for(Reservation reservation: results){
+            reservations.add(reservationToReservationDTO.convert(reservation));
+        }
+        return reservations;
     }
 
     private void setUsersAsNull(List<Reservation> reservations) {

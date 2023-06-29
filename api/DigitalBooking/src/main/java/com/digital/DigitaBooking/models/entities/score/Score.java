@@ -4,17 +4,13 @@ import com.digital.DigitaBooking.models.entities.User;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table
-@AllArgsConstructor
-@NoArgsConstructor
 public class Score {
 
     @Id

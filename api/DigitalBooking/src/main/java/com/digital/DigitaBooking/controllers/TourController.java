@@ -2,10 +2,7 @@ package com.digital.DigitaBooking.controllers;
 
 import com.digital.DigitaBooking.AWSS3Service;
 import com.digital.DigitaBooking.exceptions.BadRequestException;
-import com.digital.DigitaBooking.models.dtos.ImageDTO;
-import com.digital.DigitaBooking.models.dtos.ImageLoaderDTO;
-import com.digital.DigitaBooking.models.dtos.TourDTO;
-import com.digital.DigitaBooking.models.dtos.UserDTO;
+import com.digital.DigitaBooking.models.dtos.*;
 import com.digital.DigitaBooking.models.entities.Tour;
 import com.digital.DigitaBooking.service.impl.AWSS3ServiceImpl;
 import com.digital.DigitaBooking.services.impl.ImageService;
@@ -116,7 +113,6 @@ public class TourController {
     }
 
     @GetMapping(path = "/filterByCountryAndDates/{countryId}/{initialDate}/{finalDate}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<TourDTO>> filterByCountryAndDates(@PathVariable Integer countryId, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date initialDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date finalDate) throws BadRequestException {
         TourFilter tourFilter = new TourFilter();
         tourFilter.setInitialDate(initialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -124,6 +120,11 @@ public class TourController {
         tourFilter.setCountryId(countryId);
         List<TourDTO> filteredTours = tourService.findToursByCountryAndDates(tourFilter);
         return ResponseEntity.ok(filteredTours);
+    }
+
+    @PostMapping("/filterTourByProximity")
+    public Collection<TourDTO> getToursByProximity(@RequestBody LocationDTO locationDTO) {
+        return tourService.getToursByCountryDistance(locationDTO.getLatitude(), locationDTO.getLongitude());
     }
 
 }
