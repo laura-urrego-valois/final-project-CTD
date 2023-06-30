@@ -322,10 +322,18 @@ export const ContextProvider = ({ children }) => {
     await axios
       .get(`${BASE_URL}/tours/country/${countryId}`)
       .then((response) => {
-        dispatch({
-          type: actions.SEARCH_BY_COUNTRY,
-          payload: response.data,
-        })
+        if (countryId > 0 && response.data.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: 'El país no cuenta con tours.',
+            confirmButtonColor: '#6D9886',
+          });
+        } else {
+          dispatch({
+            type: actions.SEARCH_BY_COUNTRY,
+            payload: response.data,
+          })
+        }
       })
   }
   const fetchFeature = async () => {
