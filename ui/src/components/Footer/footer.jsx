@@ -19,7 +19,7 @@ const Footer = () => {
           <a rel="noreferrer" target="_blank">
             <img
               className="footer_logo"
-              src="../src/assets/logodb.png"
+              src="https://c3-e10-digitalbooking-imagenes.s3.us-east-2.amazonaws.com/footersvg-ft.svg"
               alt="isologodigitalbooking"
             />
           </a>

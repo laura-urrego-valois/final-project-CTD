@@ -55,7 +55,9 @@ export const DatesPicker = ({ tour }) => {
           direction="horizontal"
           minDate={new Date()}
         />
-        <Button onClick={handleClick}>Reservar</Button>
+        <div className="dates__button">
+          <Button onClick={handleClick}>Reservar</Button>
+        </div>
       </div>
     </section>
   )

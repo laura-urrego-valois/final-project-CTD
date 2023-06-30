@@ -405,7 +405,6 @@ export const ContextProvider = ({ children }) => {
         newReservation,
         config
       )
-      console.log(response)
       if (response) {
         Toast("Reserva exitosa", "success")
       }

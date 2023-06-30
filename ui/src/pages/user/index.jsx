@@ -23,7 +23,7 @@ export const User = () => {
 
   return (
     <Container>
-      <h1>Perfil</h1>
+      <h1 className="user__title">Perfil</h1>
 
       {user && (
         <section className="user__section">

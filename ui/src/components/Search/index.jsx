@@ -9,9 +9,10 @@ import { addDays, format } from "date-fns"
 import { useGlobalState } from "../../context"
 import { DateRange } from "react-date-range"
 import { useUserLocationAndSorting } from "./userLocationAndSorting";
+import axios from "axios";
 
 export const Search = () => {
-  const { state, fetchToursByCountry, fetchTourCountryDate } = useGlobalState()
+  const { state, user, fetchToursByCountry, fetchTourCountryDate } = useGlobalState()
   const [open, setOpen] = useState(false)
   const refOne = useRef(null)
   const [range, setRange] = useState([
@@ -37,10 +38,34 @@ export const Search = () => {
   //Coordenada del navegador y Ordenar por aproximidad
   const sortedCountries = useUserLocationAndSorting(state?.countries);
 
-  const options = sortedCountries?.map(({ countryName, id }) => ({
-    value: id,
-    label: countryName
-  }));
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    if (user?.latitude && user?.longitude) {
+      const config = {
+        latitude: user.latitude,
+        longitude: user.longitude,
+      };
+      const url = "http://localhost:8000/countries/byDistance";
+      axios.post(url, config).then((response) => {
+        const newOptions = response.data.map(({ countryName, id }) => ({
+          value: id,
+          label: countryName,
+        }));
+        setSelectedOption(null);
+        setIsClearable(false);
+        setOptions(newOptions);
+      });
+    } else {
+      const options = sortedCountries?.map(({ countryName, id }) => ({
+        value: id,
+        label: countryName,
+      }));
+      setSelectedOption(null);
+      setIsClearable(false);
+      setOptions(options);
+    }
+  }, [user, sortedCountries]);
   ///
 
   const handleSelectChange = (selectedOption) => {
@@ -74,6 +99,13 @@ export const Search = () => {
       fetchTourCountryDate(country_id, startDate, endDate);
     }
   };
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      fontFamily: 'Popins, roboto',
+      border: "none"
+    }),
+  };
 
   return (
     <section className="search">
@@ -87,6 +119,7 @@ export const Search = () => {
           options={options}
           value={selectedOption}
           onChange={handleSelectChange}
+          styles={customStyles}
         />
         <Input
           iconSrc={Calendar}

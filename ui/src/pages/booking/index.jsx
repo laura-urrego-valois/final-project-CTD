@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import { useGlobalState } from "../../context"
 import { format, parseISO } from "date-fns"
 import { es } from "date-fns/locale"
+import { useMediaQuery } from "react-responsive";
 
 export const BookingPage = () => {
   const { user, createReservation } = useGlobalState()
@@ -62,6 +63,9 @@ export const BookingPage = () => {
 
     !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  const direction = isMobile ? "vertical" : "horizontal";
 
   return (
     <Container>
@@ -109,9 +113,52 @@ export const BookingPage = () => {
               moveRangeOnFirstSelection={false}
               ranges={state}
               months={2}
-              direction="horizontal"
+              direction={direction}
               minDate={new Date()}
             />
+          </div>
+        </div>
+        <div className="booking__content">
+          <div className="booking__detail">
+            <h4>Detalle de la reserva</h4>
+            <img src={bookingDetail?.tourImage} />
+            <h4>{bookingDetail?.tourName}</h4>
+            <p>Precio: ${bookingDetail?.tourPrice}USD</p>
+            <form>
+              <Input
+                displayLabel="Fecha Inicio"
+                label="initialDate"
+                value={
+                  bookingDetail?.initialDate &&
+                  format(
+                    parseISO(bookingDetail.initialDate),
+                    "EEEE, dd 'de' MMMM 'de' yyyy",
+                    { locale: es }
+                  )
+                }
+                onChange={(e) => console.log("datelabe", e.target.value)}
+                type="text"
+                disabled
+              />
+              <Input
+                displayLabel="Fecha Final"
+                label="finalDate"
+                value={
+                  bookingDetail?.finalDate &&
+                  format(
+                    parseISO(bookingDetail.finalDate),
+                    "EEEE, dd 'de' MMMM 'de' yyyy",
+                    { locale: es }
+                  )
+                }
+                onChange={(e) => console.log(e.target.value)}
+                type="text"
+                disabled
+              />
+              <Button type="primary" onClick={(e) => handleBookingClick(e)}>
+                Reservar
+              </Button>
+            </form>
           </div>
           <form className="booking__time">
             <h3>Tu hora</h3>
@@ -122,47 +169,6 @@ export const BookingPage = () => {
               value={bookingDetail?.startTime}
               onChange={(e) => console.log(e.target.value)}
             />
-          </form>
-        </div>
-        <div className="booking__detail">
-          <h4>Detalle de la reserva</h4>
-          <img src={bookingDetail?.tourImage} />
-          <h4>{bookingDetail?.tourName}</h4>
-          <p>Precio: ${bookingDetail?.tourPrice}USD</p>
-          <form>
-            <Input
-              displayLabel="Fecha Inicio"
-              label="initialDate"
-              value={
-                bookingDetail?.initialDate &&
-                format(
-                  parseISO(bookingDetail.initialDate),
-                  "EEEE, dd 'de' MMMM 'de' yyyy",
-                  { locale: es }
-                )
-              }
-              onChange={(e) => console.log("datelabe", e.target.value)}
-              type="text"
-              disabled
-            />
-            <Input
-              displayLabel="Fecha Final"
-              label="finalDate"
-              value={
-                bookingDetail?.finalDate &&
-                format(
-                  parseISO(bookingDetail.finalDate),
-                  "EEEE, dd 'de' MMMM 'de' yyyy",
-                  { locale: es }
-                )
-              }
-              onChange={(e) => console.log(e.target.value)}
-              type="text"
-              disabled
-            />
-            <Button type="primary" onClick={(e) => handleBookingClick(e)}>
-              Reservar
-            </Button>
           </form>
         </div>
       </section>
