@@ -116,8 +116,7 @@ export const ContextProvider = ({ children }) => {
 
       if (data.length === 0) {
         Swal.fire({
-          title: 'Sin datos',
-          text: 'No se encontraron tours para las fechas seleccionadas.',
+          title: 'No se encontraron tours para las fechas seleccionadas.',
           icon: 'info',
           confirmButtonColor: '#6D9886',
         });
