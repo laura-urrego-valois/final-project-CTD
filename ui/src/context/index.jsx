@@ -121,6 +121,15 @@ export const ContextProvider = ({ children }) => {
           confirmButtonColor: '#6D9886',
         });
       } else {
+
+        const searchTour = {
+          isSearch: true,
+          startDate: startDate,
+          endDate: endDate,
+          country_id: country_id
+        };
+        localStorage.setItem('searchTour', JSON.stringify(searchTour));
+
         dispatch({
           type: actions.GET_TOURSCOUNTRYDATE,
           payload: data,

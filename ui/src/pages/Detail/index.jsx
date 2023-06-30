@@ -48,6 +48,7 @@ const Detail = () => {
   const dataCountry = state.countries.find(
     (country) => country.id === itemDetail.countryId
   )
+  console.log("busqueda1", state.toursCountryDate)
 
   return (
     <Container>
@@ -75,7 +76,7 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail?.features} />
-      <DatesPicker tour={itemDetail} />
+      <DatesPicker tour={itemDetail} searchDate={state.toursCountryDate} />
       <LocateProduct country={dataCountry} itemDetail={itemDetail} />
       <Politics />
     </Container>
