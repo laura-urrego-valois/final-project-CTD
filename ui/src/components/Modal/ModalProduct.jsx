@@ -168,7 +168,7 @@ export const ModalProduct = ({
           </select>
 
 
-          <fieldset className="list__feature">
+          {/*           <fieldset className="list__feature">
             <legend>Features</legend>
             {state?.features.map((feature) => {
               const checked = watch("features")?.includes(feature.id);
@@ -195,7 +195,7 @@ export const ModalProduct = ({
                 </div>
               );
             })}
-          </fieldset>
+          </fieldset> */}
 
 
           <label htmlFor="countryId">País:</label>

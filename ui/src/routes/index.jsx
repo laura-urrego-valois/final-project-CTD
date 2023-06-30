@@ -31,7 +31,7 @@ export const AppRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/detalle/:id" element={<Detail />} />
+        <Route path="/detalle/:id/*" element={<Detail />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/user" element={<User />} />

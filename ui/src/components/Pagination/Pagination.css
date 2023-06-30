@@ -8,7 +8,6 @@
   margin: 0 .5rem;
   border: none;
   border-radius: .5rem;
-  cursor: pointer;
 }
 .page-number.active {
   background-color: var(--color-primary);

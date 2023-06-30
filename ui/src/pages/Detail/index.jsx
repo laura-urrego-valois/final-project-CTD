@@ -8,6 +8,7 @@ import "./detail.css"
 import { Container } from "../../components/Container"
 import { LocateProduct, SearchProduct } from "../../components/SearchProduct"
 import { DatesPicker } from "../../components/DatesPicker"
+import { useEffect } from "react"
 
 export const dataGallery = {
   galleryImage: [
@@ -30,6 +31,10 @@ export const feature = [
 ]
 
 const Detail = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   let { id } = useParams()
   const { state } = useGlobalState()
   const { categories, tours } = state
