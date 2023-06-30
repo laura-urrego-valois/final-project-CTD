@@ -19,12 +19,13 @@
 .footer__content {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 .footer p {
   margin-block: 0.5rem;
 }
 .footer_logo {
-  width: 70%;
+  width: 3rem ;
 }
 
 .social-media {

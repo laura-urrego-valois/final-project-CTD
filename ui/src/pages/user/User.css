@@ -1,3 +1,10 @@
+.user__section{
+  overflow-y: scroll;
+  padding-bottom: 6rem;
+}
+.user__title{
+  margin-block: 1rem;
+}
 .user__section img {
   max-width: 200px;
   border-radius: 50%;
@@ -23,4 +30,10 @@
 .user__section button {
   max-width: 100px;
   margin: 10px;
+}
+@media (min-width: 768px){
+  .user__section{
+    overflow-y: none;
+    padding-bottom: 2rem;
+  }
 }

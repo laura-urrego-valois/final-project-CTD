@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Button } from "../Button"
 import { Link, useNavigate } from "react-router-dom"
 import "./header.css"
-import logo2 from "../../assets/logo2.png"
 import BurgerButton from "../BurgerButton/BurgerButton"
 import Swal from "sweetalert2"
 import { useGlobalState } from "../../context"
@@ -35,7 +34,7 @@ const Header = () => {
     <header>
       <div className="header_logo">
         <Link to="/" className="link">
-          <img src={logo2} alt="Logo" />
+          <img src="https://c3-e10-digitalbooking-imagenes.s3.us-east-2.amazonaws.com/header-svg.svg" alt="Logo" />
         </Link>
         <span>Vive la aventura</span>
       </div>

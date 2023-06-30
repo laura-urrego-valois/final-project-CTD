@@ -23,11 +23,10 @@ export const HistoryReservation = () => {
     }
     return "";
   };
-  console.log("reserva", reservations)
 
   return (
-    <div>
-      <h2>Mis Reservas</h2>
+    <section className="reservations__content">
+      <h1>Mis Reservas</h1>
       {reservations?.length === 0 ? (
         <h3>Buscando reservas</h3>
       ) : (
@@ -37,7 +36,7 @@ export const HistoryReservation = () => {
               <th>Tour</th>
               <th>Fecha Inicio</th>
               <th>Fecha Final</th>
-              <th>Hora</th>
+              <th>Hora - checkin (24h)</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +51,6 @@ export const HistoryReservation = () => {
           </tbody>
         </table>
       )}
-    </div>
+    </section>
   )
 }

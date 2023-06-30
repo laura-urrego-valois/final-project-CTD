@@ -46,7 +46,6 @@ export const SearchProduct = ({ itemDetail, country }) => {
           <MdOutlineLocationOn /> {country?.countryName}
           <AiOutlineShareAlt onClick={handleShare} />
         </h3>
-        <span>{`Lat: ${country?.latitude} Long: ${country?.longitude}`}</span>
         <div className="detail__rating-container">
           <div className="detail__rating-content">
             <p className="detail__rating-classification">
@@ -78,7 +77,13 @@ export const LocateProduct = ({ country, itemDetail }) => {
       attribution: "© OpenStreetMap",
     })
 
-    const countryMarker = L.marker([country.latitude, country.longitude])
+    const customIcon = L.icon({
+      iconUrl: 'https://www.iconpacks.net/icons/2/free-camping-location-icon-2958-thumb.png',
+      iconSize: [40, 40],
+      iconAnchor: [16, 32],
+    });
+
+    const countryMarker = L.marker([country.latitude, country.longitude], { icon: customIcon })
       .bindPopup(
         `<b>${itemDetail.tourName}</b><br>${itemDetail.tourDescription}`
       )
