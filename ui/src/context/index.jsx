@@ -116,12 +116,20 @@ export const ContextProvider = ({ children }) => {
 
       if (data.length === 0) {
         Swal.fire({
-          title: 'Sin datos',
-          text: 'No se encontraron tours para las fechas seleccionadas.',
+          title: 'No se encontraron tours para las fechas seleccionadas.',
           icon: 'info',
           confirmButtonColor: '#6D9886',
         });
       } else {
+
+        const searchTour = {
+          isSearch: true,
+          startDate: startDate,
+          endDate: endDate,
+          country_id: country_id
+        };
+        localStorage.setItem('searchTour', JSON.stringify(searchTour));
+
         dispatch({
           type: actions.GET_TOURSCOUNTRYDATE,
           payload: data,
@@ -154,7 +162,6 @@ export const ContextProvider = ({ children }) => {
   }
 
   const addTour = async (newTourData) => {
-    console.log("ADDTour", newTourData)
     const formData = new FormData()
     for (let i = 0; i < newTourData.toursImageFile.length; i++) {
       formData.append("files", newTourData.toursImageFile[i])
@@ -324,10 +331,18 @@ export const ContextProvider = ({ children }) => {
     await axios
       .get(`${BASE_URL}/tours/country/${countryId}`)
       .then((response) => {
-        dispatch({
-          type: actions.SEARCH_BY_COUNTRY,
-          payload: response.data,
-        })
+        if (countryId > 0 && response.data.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: 'El país no cuenta con tours.',
+            confirmButtonColor: '#6D9886',
+          });
+        } else {
+          dispatch({
+            type: actions.SEARCH_BY_COUNTRY,
+            payload: response.data,
+          })
+        }
       })
   }
   const fetchFeature = async () => {

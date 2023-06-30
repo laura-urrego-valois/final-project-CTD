@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 4rem;
+  padding-inline: 1.5rem;
 }
 .dates__button{
   text-align: center;

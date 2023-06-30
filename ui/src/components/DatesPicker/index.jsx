@@ -1,12 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { DateRange } from "react-date-range"
 import "./dates.css"
 import { Button } from "../Button"
 import { useNavigate } from "react-router"
 import { useGlobalState } from "../../context"
-import { format } from "date-fns"
+import { format, addDays } from "date-fns"
 
-export const DatesPicker = ({ tour }) => {
+export const DatesPicker = ({ tour, searchDate }) => {
   const { user } = useGlobalState()
   const navigate = useNavigate()
   const [state, setState] = useState([
@@ -41,6 +41,22 @@ export const DatesPicker = ({ tour }) => {
     }
     return navigate("/login")
   }
+  useEffect(() => {
+    if (searchDate) {
+      const searchDateTours = JSON.parse(localStorage.getItem("searchTour"));
+
+      const formattedStartDate = new Date(searchDateTours.startDate);
+      const formattedEndDate = new Date(searchDateTours.endDate);
+
+      const formattedSearchDateTours = {
+        ...searchDateTours,
+        startDate: addDays(formattedStartDate, 1),
+        endDate: addDays(formattedEndDate, 1),
+        key: "selection",
+      };
+      setState([formattedSearchDateTours]);
+    }
+  }, [searchDate]);
 
   return (
     <section className="dates">

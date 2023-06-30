@@ -10,7 +10,6 @@ import { useEffect, useState } from "react"
 import { useGlobalState } from "../../context"
 import { format, parseISO } from "date-fns"
 import { es } from "date-fns/locale"
-import { useMediaQuery } from "react-responsive";
 
 export const BookingPage = () => {
   const { user, createReservation } = useGlobalState()
@@ -63,9 +62,26 @@ export const BookingPage = () => {
 
     !response ? navigate("/booking-success") : navigate("/booking-failure")
   }
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [direction, setDirection] = useState("horizontal");
 
-  const direction = isMobile ? "vertical" : "horizontal";
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setDirection("vertical");
+      } else {
+        setDirection("horizontal");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
 
   return (
     <Container>

@@ -45,7 +45,7 @@ export const Recommendations = ({ state, tours, title }) => {
 					id={tour.id}
 					title={tour.tourName}
 					description={tour.tourDescription}
-					imageSrc={tour.images[0]?.imageUrl}
+					imageSrc={tour?.images[0]?.imageUrl}
 					classification={tour.tourClassification}
 					category={getCategoryName(tour.categoryId)}
 					score={getScore(tour.tourClassification)}
