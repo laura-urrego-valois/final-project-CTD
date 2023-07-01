@@ -8,6 +8,7 @@ import "./detail.css"
 import { Container } from "../../components/Container"
 import { LocateProduct, SearchProduct } from "../../components/SearchProduct"
 import { DatesPicker } from "../../components/DatesPicker"
+import { useEffect } from "react"
 
 export const dataGallery = {
   galleryImage: [
@@ -30,6 +31,10 @@ export const feature = [
 ]
 
 const Detail = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   let { id } = useParams()
   const { state } = useGlobalState()
   const { categories, tours } = state
@@ -43,6 +48,7 @@ const Detail = () => {
   const dataCountry = state.countries.find(
     (country) => country.id === itemDetail.countryId
   )
+  console.log("busqueda1", state.toursCountryDate)
 
   return (
     <Container>
@@ -70,7 +76,7 @@ const Detail = () => {
         </div>
       </section>
       <Feature feature={itemDetail?.features} />
-      <DatesPicker tour={itemDetail} />
+      <DatesPicker tour={itemDetail} searchDate={state.toursCountryDate} />
       <LocateProduct country={dataCountry} itemDetail={itemDetail} />
       <Politics />
     </Container>
