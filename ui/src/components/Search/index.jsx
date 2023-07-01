@@ -46,7 +46,7 @@ export const Search = () => {
         latitude: user.latitude,
         longitude: user.longitude,
       };
-      const url = "http://localhost:8000/countries/byDistance";
+      const url = "http://3.133.208.24:8000/countries/byDistance";
       axios.post(url, config).then((response) => {
         const newOptions = response.data.map(({ countryName, id }) => ({
           value: id,
