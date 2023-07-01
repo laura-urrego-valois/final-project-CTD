@@ -106,7 +106,7 @@ export const ListProduct = () => {
       tourAvailability: 0,
       earliestCheckInHour: "10:00:00",
       latestCheckInHour: "12:00:00",
-      //featuresId: [1, 2, 3]
+      featuresId: [1, 2, 3]
     }
     try {
       const updatedTour = { ...tourForm, ...data, ...dataF, features: newfeatures };
@@ -136,7 +136,7 @@ export const ListProduct = () => {
       closeModal();
       reset();
 
-      //window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error("Error adding/updating tour:", error);
       Swal.fire("Error", "Se ha producido un error al guardar el tour.", "error");
