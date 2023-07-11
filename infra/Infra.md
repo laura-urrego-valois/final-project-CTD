@@ -1,6 +1,5 @@
 # Infra documentation
 
-
 ### Infrastructure diagram
 
 ![](https://i.postimg.cc/5t2gSXGD/disen-odered.jpg)
