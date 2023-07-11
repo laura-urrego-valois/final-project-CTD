@@ -12,12 +12,6 @@ The deliverable for the First Sprint for databases is to create a MySQL database
 
 In order to accomplish the above, we followed the following steps:
 
-The connection to the remote database corresponding to our team has been established, in order to review the database the credentials are provided below:
-
-Database endpoint --> db.ctd.academy:3306
-User: 0523TDPRON2C03LAED1021PT_GRUPO10
-Password: ooBuaf6k
-
 Once the proper connection to the database was established, we defined the structure of the "Category" table, including the column names and their respective data types.
 
 ![](https://i.postimg.cc/D0rjyRZ3/creaci-n-tablas.png)
