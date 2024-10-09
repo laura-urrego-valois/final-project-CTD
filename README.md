@@ -63,20 +63,3 @@ Testing:
 Jest.js, Postman, React Testing Library, Selenium IDE
 
 <img src="https://github.com/devicons/devicon/blob/master/icons/jest/jest-plain.svg" alt="Jest" width="50"><img src="https://github.com/devicons/devicon/blob/master/icons/selenium/selenium-original.svg" alt="Selenium" width="50">
-
-## Project roles:
-• Juan Pablo Nárvaez | Backend
-
-• Laura Urrego | Backend - Databases
-
-• Jose Caicedo | Frontend
-
-• Karina Vargas | Frontend
-
-• Diego Marulanda | Frontend - Management
-
-• Jeraldinne Molleda | Infrastructure - Frontend
-
-• Sofia Ayala | Testing - Frontend
-
-• Eliana Zanelli | Testing - Frontend
